@@ -1,0 +1,30 @@
+#language-archive{
+    div.source {
+        margin-bottom: 15px;
+        margin-right: 25px;
+        border-bottom: 1px solid #eee;
+        position: relative;
+
+        span.info {
+            a.title {
+                font-size: 15px;
+            }
+
+            span.description {
+                font-size: 13px;
+                margin-bottom: 5px;
+            }
+
+            span.meta {
+                position: absolute;
+                bottom: 0;
+                font-size: 11px;                    
+                width: 100%;
+
+                span.date {
+
+                }
+            }
+        }
+    }
+}

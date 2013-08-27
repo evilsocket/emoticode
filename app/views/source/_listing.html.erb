@@ -1,0 +1,40 @@
+<% 
+    show_views ||= false 
+    desc_cut   ||= 100
+%>
+<li>
+<div class="source">
+    <span class="author">
+        <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile">
+            <img class="avatar" src="<%= source.user.avatar %>"/>
+            <%= source.user.username %>
+        </a>
+    </span>
+    <span class="info">
+        <%= link_to source.title, source_with_language_path(language_name: source.language.name, source_name: source.name ), { :class => 'title' } %>
+        <span class="description"><%= truncate source.description, :length => desc_cut %></span>
+        <span class="meta">
+            Posted as <%= link_to source.language.title, language_archive_path(source.language.name), { :class => 'language' } %>
+            <span class="date">
+                <% if show_views %>
+                    with <%= source.views %> views
+                <% else %>
+                    on <%= Time.at(source.created_at).to_date %>
+                <% end %>
+            </span>
+          
+            &bull;
+
+            <% if signed_in? %>
+              <% if @current_user.favorite? source %>
+                <%= link_to 'Unfav :(', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", method: :post, remote: true  %>
+              <% else %>
+                <%= link_to 'Fav It!', favorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", method: :post, remote: true  %>
+              <% end %>
+            <% else %>
+                <%= link_to_function 'Fav It!', 'showLoginModal()' %>
+            <% end %>
+        </span>
+    </span>
+</div>
+</li>

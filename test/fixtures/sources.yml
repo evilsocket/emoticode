@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  private: 1
+  title: MyText
+  name: MyText
+  description: MyText
+  created_at: 2013-08-22 14:58:48
+  text: MyText
+  views: 1
+
+two:
+  private: 1
+  title: MyText
+  name: MyText
+  description: MyText
+  created_at: 2013-08-22 14:58:48
+  text: MyText
+  views: 1

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= page_title %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <% metas.each do |meta| %>
+    <meta <% meta.each { |attr,value| %><%= attr %>="<%= value %>" <% } %>/>
+  <% end %>
+</head>
+<body>
+<nav id="navbar">
+    <ul>
+        <li><%= link_to 'Home', root_path %></li>
+        <% @languages.popular.take(15).each do |language| %>
+            <li> 
+                <%= navbar_language_link language %>
+            </li>
+        <% end %>
+        <li id="show-all-langs">
+            <a href="#" onclick="return false;">All &raquo;</a>
+            <div id="all-langs">
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <% done = 0 %>
+                        <% @languages.each_with_index do |language,i| %>
+                            <% done += 1 %>
+                            <td>
+                                <%= link_to language.title, language_archive_path(language.name) %>
+                                <span><%= language.sources.count %></span>
+                            </td>
+                            <% if i > 0 && ( i + 1 ) % 4 == 0 %>
+                                </tr>
+                            <% end %>
+                        <% end %>
+                        <% left = ( done % 4 )
+                        if left 
+                            ( 4 - left ).times { %><td></td><% }
+                            %> </tr> <%
+                        end
+                        %>
+                </table>
+            </div>
+        </li>
+    </ul> 
+</nav>
+<nav id="sub-navbar">
+    <div class="inner">
+        <ul>
+            <% 
+                linkset = if signed_in?
+                [ 
+                    link_to( 'Add Snippet', source_new_path ),
+                    link_to( 'Profile',     user_profile_path(username: @current_user.username ) ),
+                    '<a href="/settings">Settings</a>'.html_safe,
+                    link_to( 'Logout',      sign_out_path, :method => :delete )
+                ]
+                          else
+                [
+                    link_to_function( 'Add Snippet', 'showLoginModal()' ),
+                    link_to( 'Login',       sign_in_path ),
+                    link_to( 'Register',    sign_up_path )
+                ]
+                end
+            %>
+
+            <% linkset.each do |link| %>
+                <li><%= link %></li>
+                <li>&bull;</li>
+            <% end %>
+
+            <% @pages.each do |page| %>
+                <li><%= link_to page.title, page_show_path(page: page.name) %></li>
+            <% end %>
+        </ul>
+    </div>
+</nav>
+
+<div id="wrapper">
+<%= yield %>
+</div>
+
+<footer id="footer">
+   <p>
+    	Copyright &copy; EmotiCODE - A collaborative source code snippets aggregator and search engine.
+    	 
+    	<br/>
+    	Powered by <strong><a href="http://gibson-db.in/" title="Gibson Cache Server">Gibson Cache Server</a></strong>
+    </p> 
+</footer>
+</body>
+</html>

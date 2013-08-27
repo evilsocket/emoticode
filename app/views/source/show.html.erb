@@ -1,0 +1,4 @@
+<h1><%= @source.title %></h1>
+<p>Author: <%= link_to @source.user.username, user_profile_path(username:@source.user.username) %></p>
+<p><%=raw description(@source) %></p>
+<%=raw highlight(@source) %>

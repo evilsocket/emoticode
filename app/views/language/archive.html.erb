@@ -1,0 +1,19 @@
+<section id="language-archive">
+  <div class="huge-column">
+    <h1><%= @language.title %> Snippets Archive</h1>
+
+    <ul>
+      <% @sources.each do |source| %>
+        <%= render :partial => "source/listing", :locals => { :source => source, :desc_cut => 300 } %>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= render :partial => 'layouts/sidebar', :locals => { with_heading: true } %>
+</section>
+
+<br style="clear:both"/>
+
+<section class="pager">
+  <%= will_paginate @sources %>
+</section>

@@ -1,0 +1,5 @@
+$('#fav-<%= @favorite.source_id %>')
+.attr( 'href', "<%= favorite_path( id: @favorite.source_id, format: :js ) %>" )
+.text( 'Fav It!' );
+
+

@@ -1,0 +1,27 @@
+<div id="sidebar">
+  <% if with_heading %>
+    <div class="heading">
+      <h3>Latest Users</h3>
+    </div>
+  <% end %>
+  <ul class="avatars">
+    <% @users.each do |user| %>
+      <li>
+    <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile">
+      <img class="avatar" src="<%= user.avatar %>"/>
+    </a>
+    </li> 
+  <% end %>
+</ul>
+
+  <br style="clear:both"/>
+  <div class="heading">
+    <h3>Popular Keywords</h3>
+  </div>
+  <div class="cloud">
+    <% tag_cloud(@cloud).each do |v,cloud| %>
+      <% tag,size,count = cloud %>
+    <%= link_to tag.value, search_path(what: tag.name), { :style => "font-size: #{size}px", :title => "The keyword #{tag.value} has #{count} elements." } %> 
+  <% end %>
+  </div>
+</div>   
