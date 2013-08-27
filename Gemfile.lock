@@ -30,6 +30,12 @@ GEM
     arel (4.0.0)
     atomic (1.1.13)
     builder (3.1.4)
+    capistrano (2.15.5)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -42,6 +48,7 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     hashie (2.0.5)
+    highline (1.6.19)
     hike (1.2.3)
     httpauth (0.2.0)
     i18n (0.6.5)
@@ -54,7 +61,6 @@ GEM
     jquery-ui-rails (4.0.4)
       jquery-rails
       railties (>= 3.1.0)
-    json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
     mail (2.5.4)
@@ -66,6 +72,13 @@ GEM
     multi_json (1.7.9)
     multipart-post (1.2.0)
     mysql2 (0.3.13)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.8)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     oauth2 (0.8.1)
@@ -103,16 +116,11 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.0)
-    rdoc (3.12.2)
-      json (~> 1.4)
     sass (3.2.10)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
-    sdoc (0.3.20)
-      json (>= 1.1.3)
-      rdoc (~> 3.10)
     seed_dump (0.6.0)
     sprockets (2.10.0)
       hike (~> 1.2)
@@ -143,6 +151,7 @@ PLATFORMS
 
 DEPENDENCIES
   albino
+  capistrano
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
@@ -154,7 +163,6 @@ DEPENDENCIES
   puma
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
-  sdoc
   seed_dump
   turbolinks
   uglifier (>= 1.3.0)

@@ -27,7 +27,6 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 
 - [x] Home
 - [x] Language Listings
-- [ ] RSS Feeds ( global, per language, per user, per group )
 - [ ] **New!** Language Discussion Groups
 - [ ] **New!** Most Active Users Rankings ( per language )
 - [ ] User Profiles
@@ -35,11 +34,18 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Source Code View
 - [x] Embeddable Source Code
 - [ ] Source Code Create
-- [ ] Source Code Insert
+- [ ] Source Code Update
 - [ ] Source Code Delete
 - [ ] Source Comment System
 - [ ] Source Related
 - [ ] Search Engine
+
+### Feeds
+
+- [ ] Global
+- [ ] Per language feed
+- [ ] User profile feed
+- [ ] Group feed
 
 ### Cron Jobs
 

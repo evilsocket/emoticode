@@ -1,50 +1,22 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
+gem 'mysql2'                   # mysql adapter
+gem 'sass-rails', '~> 4.0.0'   # scss
+gem 'uglifier', '>= 1.3.0'     # uglify js in production
+gem 'coffee-rails', '~> 4.0.0' # cofee script
+gem 'jquery-rails'             # jquery
+gem 'jquery-ui-rails'          # jquery-ui
+gem 'turbolinks'               # turbolinks
+gem 'jbuilder', '~> 1.2'       # json api
+gem "albino"                   # syntax highlight
+gem "nokogiri"                 # syntax -> html
+gem 'will_paginate', '~> 3.0'  # pagination
+gem 'omniauth'                 # social auth
+gem 'omniauth-facebook'        # facebook connect
+gem 'puma'                     # rack server
 
-gem 'seed_dump'
-gem 'mysql2'
-
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
-
-# gem "coderay", "~> 1.0.9"
-gem "albino"
-gem "nokogiri"
-gem 'will_paginate', '~> 3.0'
-gem 'omniauth'
-gem 'omniauth-facebook'
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+group :developement do
+  gem 'capistrano' # deploy
+  gem 'seed_dump'  # create seeds.rb from existing db
 end
-
-gem 'jquery-ui-rails'
-
-gem 'puma'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
