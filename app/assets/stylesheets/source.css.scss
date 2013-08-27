@@ -1,3 +1,38 @@
 // Place all the styles related to the source controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#source {
+    #publisher {
+        margin: 20px 20px 0;
+
+        span.author {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+
+            img.avatar {
+                display: block;
+                margin: 0 auto 5px auto;
+            }
+
+            a {
+                color: #333;
+            }
+        }
+
+        span.info {
+            display: block; 
+            width: 100%;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 11px;
+        }
+    }
+
+    p {
+        margin-top: -15px;
+padding-bottom: 15px;
+border-bottom: 1px solid #eee;
+    }
+}

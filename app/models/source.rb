@@ -6,4 +6,12 @@ class Source < ActiveRecord::Base
   
   default_scope :order => "created_at DESC"
   scope :popular, :order => 'views DESC'
+
+  def path
+    "/#{language.name}/#{name}.html"
+  end
+
+  def url
+    "http://www.emoticode.net#{path}"
+  end
 end

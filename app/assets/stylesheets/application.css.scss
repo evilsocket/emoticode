@@ -1,4 +1,5 @@
 //= require_self
+//= require jquery.ui.all
 //= require_tree .
 @import "variables";
 
@@ -29,6 +30,11 @@ img.avatar {
     height: 50px;
 }
 
+div.dialog {
+    min-width: 800px;
+    display: block;
+}
+
 .pagination {
     background: #f1f1f1;
     border: 1px solid #e5e5e5;
@@ -42,7 +48,7 @@ img.avatar {
 
     a {
         text-decoration: none;
-        color: black; 
+
     }
 
     a:hover, a:focus {
@@ -68,14 +74,28 @@ img.avatar {
     }
 }
 
+div.small-column {
+    width: 10%;
+    float: left;
+}
+
 div.big-column {
     width: 40%;
+    float: left;
+}
+
+div.medium-column {
+    width: 70%;
     float: left;
 }
 
 div.huge-column {
     width: 80%;
     float: left;
+}
+
+#sidebar {
+    float: right;
 }
 
 div.source {

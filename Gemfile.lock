@@ -51,6 +51,9 @@ GEM
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (4.0.4)
+      jquery-rails
+      railties (>= 3.1.0)
     json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
@@ -81,6 +84,8 @@ GEM
       omniauth (~> 1.0)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
+    puma (2.5.1)
+      rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -141,10 +146,12 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
+  jquery-ui-rails
   mysql2
   nokogiri
   omniauth
   omniauth-facebook
+  puma
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
   sdoc

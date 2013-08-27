@@ -12,13 +12,23 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require turbolinks
 //= require_tree .
+
 Cufon.replace('span#motto', {fontFamily: 'Gabriola', hover:true});
 Cufon.replace('#heading > h1', {fontFamily: 'Copse', hover:true})
 
 function showLoginModal(){
     alert( 'TODO: showLoginModal' );
+}
+
+function dialog(title,data){
+    return $('<div class="dialog"><div class="title">' + title + '</div><div class="content">' + data + '</div></div>')
+}
+
+function showEmbedDialog(url){
+    dialog('Embed Me!', '<textarea id="embed-text" style="font: normal 12px/16px Consolas,Menlo,monospace;height: 200px;margin: 0;width: 515px;"><script type="text/javascript" src="' + url + '"></script></textarea>').dialog();
 }
 
 $( function(){

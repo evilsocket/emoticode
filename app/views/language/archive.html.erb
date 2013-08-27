@@ -4,7 +4,7 @@
 
     <ul>
       <% @sources.each do |source| %>
-        <%= render :partial => "source/listing", :locals => { :source => source, :desc_cut => 300 } %>
+        <%= render :partial => "source/listing", :locals => { :source => source, :desc_cut => 300, :show_views => true } %>
       <% end %>
     </ul>
   </div>
