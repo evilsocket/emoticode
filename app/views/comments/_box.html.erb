@@ -1,0 +1,31 @@
+<div id="comments">
+  <h2>Comments</h2>
+
+  <div class="create">
+    <span class="errors"></span>
+
+    <% if signed_in? %>
+      <%= form_for @comment, :remote => true do |f| %>
+        <%= f.hidden_field :parent_id,        as: :hidden %>
+        <%= f.hidden_field :commentable_type, as: :hidden, :value => object.commentable_type %>
+        <%= f.hidden_field :commentable_id,   as: :hidden, :value => object.id %>
+        <%= f.text_area :content, { :placeholder => 'Leave a message ...' } %>
+        <%= f.submit "Comment", :data => { :disable_with => 'Sending ...' }, :class => 'pure-button pure-button-primary' %>
+      <% end %>
+    <% else %>
+      <%= link_to 'Login', sign_in_path %> or <%= link_to 'Register', sign_up_path %> to comment.
+    <% end %>
+  </div>
+
+  <% if object.comments.empty? == false %>
+  <ul class="root">
+  <% nested_comments(object).each do |comment| %>
+    <%= render :partial => "comments/listing", :locals => { :comment => comment } %>
+  <% end %>
+  </ul>
+  <% else %>
+    <em>Nothing to see here :/</em>
+  <% end %>
+
+  <br style="clear:both"/>
+</div>

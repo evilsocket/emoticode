@@ -1,9 +1,10 @@
 class SessionsController < ApplicationController
-  def facebook_connect
-    auth_hash = request.env['omniauth.auth']
+  # TODO: Facebook connect
+  # def facebook_connect
+  #   auth_hash = request.env['omniauth.auth']
 
-    render :text => auth_hash.inspect
-  end
+  #   render :text => auth_hash.inspect
+  # end
 
   def create
     @user = User.authenticate( params[:session][:who], params[:session][:password] )

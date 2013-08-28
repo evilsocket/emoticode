@@ -42,4 +42,9 @@ EmoticodeRails::Application.routes.draw do
     # TODO
     get 'search/:what' => :search, as: :search, constraints: { what: Patterns::ROUTE_PATTERN }
   end
+
+  resource :comments
+  # controller :comment do
+  #   post 'comment/:id' => :reply, as: :source_comment_reply, constraints: { id: Patterns::ID_PATTERN, to_id: Patterns::ID_PATTERN }
+  # end
 end

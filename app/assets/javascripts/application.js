@@ -31,6 +31,12 @@ function showEmbedDialog(url){
     dialog('Embed Me!', '<textarea id="embed-text" style="font: normal 12px/16px Consolas,Menlo,monospace;height: 200px;margin: 0;width: 515px;"><script type="text/javascript" src="' + url + '"></script></textarea>').dialog();
 }
 
+function replyToComment( id, username ){
+    $('#comments form #comment_parent_id').val(id);
+    $('#comments form input[type="submit"]').val('Reply');
+    $('#comments form textarea').attr( 'placeholder', 'Leave a reply to ' + username + ' ...' ).focus();
+}
+
 $( function(){
     $('#show-all-langs').hover( 
     function(){

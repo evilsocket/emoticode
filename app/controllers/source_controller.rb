@@ -8,6 +8,7 @@ class SourceController < ApplicationController
     .where(sources: { name: params[:source_name] })
     .first!
     @cloud = @source.tags.to_a.shuffle
+    @comment = Comment.new
   end
 
   def raw

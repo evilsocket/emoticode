@@ -5,6 +5,7 @@ class FavoriteController < ApplicationController
     respond_to do |format|
       format.html { redirect_to '/' }
       format.js { 
+        # TODO: Refactor with Favorite model validators!
         favorite = Favorite.where( :user => @current_user ).where( :source_id => params[:id] ).first
         source = Source.find_by_id( params[:id] )
 

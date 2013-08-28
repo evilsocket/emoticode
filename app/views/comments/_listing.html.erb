@@ -1,0 +1,21 @@
+<li id="comment-<%= comment.id %>" class="comment">
+  <span class="author">
+    <a href="<%= user_profile_path(username:comment.user.username) %>" title="<%= comment.user.username %> profile">
+        <img class="avatar" src="<%= comment.user.avatar %>"/>
+        <%= truncate comment.user.username, :length => 15 %>
+    </a>
+  </span>
+
+  <span class="content">
+    <%=raw comment.content %>
+
+    <span class="meta">
+      <%= time_ago_in_words( Time.at(comment.created_at) ) %> ago &bull; <%= link_to_function 'Reply', "replyToComment( #{comment.id}, '#{comment.user.username}' )" %> 
+    </span>
+    <ul>
+    <% comment.children.each do |child| %>
+      <%= render :partial => "comments/listing", :locals => { :comment => child } %>
+    <% end %>
+    </ul>
+  </span>
+</li>

@@ -1,6 +1,6 @@
 module SourceHelper
   def description(source)
-    if source.description.nil?
+    if source.description.nil? or source.description.strip.empty?
       '<em>No description :/</em>'.html_safe
     else
     strip_tags( source.description.strip )

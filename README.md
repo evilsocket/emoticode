@@ -43,8 +43,16 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 ### Comments
 
 - [x] Show
-- [ ] New
-- [ ] Reply
+- [x] New
+- [x] Reply
+
+### Mailers
+
+- [ ] User Confirmation Token
+- [ ] User Registration
+- [ ] Comment to source
+- [ ] Comment to profile
+- [ ] Comment reply
 
 ### Javascripts
 
