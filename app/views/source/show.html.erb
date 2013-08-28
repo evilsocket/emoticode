@@ -33,7 +33,7 @@
 
         &bull;
 
-        <%= link_to_function 'Embed', "showEmbedDialog('#{@source.url}')" %>
+        <%= link_to_function 'Embed', "$('#embed').modal();" %>
       </span>
     </div>
   </div>  
@@ -48,3 +48,7 @@
 
   <%= render :partial => 'layouts/sidebar', :locals => { with_heading: true } %>
 </section>
+
+<%= modal_dialog 'embed', 'Embed Me!' do %>
+  <textarea><script type="text/javascript" src="<%= @source.url.gsub /\.html$/, '.js' %>"></script></textarea>
+<% end %>

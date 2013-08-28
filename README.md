@@ -57,7 +57,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 ### Javascripts
 
 - [ ] Login modal
-- [ ] Embed modal
+- [x] Embed modal
 
 ### Feeds
 

@@ -1,0 +1,18 @@
+document.open();
+document.writeln('<div class="snipt-embed" onmouseover="document.getElementById(\'emoticode-<%= @hash %>}\').style.display = \'block\';return false;" onmouseout="document.getElementById(\'emoticode-<%= @hash %>\').style.display = \'none\';return false;" style="position: relative;">');
+<% @code.each_line do |line| %>
+  <% 
+    line = line.strip
+    unless line.empty? 
+  %>
+document.writeln('<%=raw line.gsub "'", %q(\\\') %>')
+  <% end %>
+<% end %>
+document.writeln('<div style="background-color: rgb(17, 17, 17); color: rgb(208, 208, 208); float: right;'+
+'padding: 5px 10px; border-top-left-radius: 5px; border-bottom-right-radius: 5px; ' +
+'font-style: normal; font-variant: normal; font-weight: normal; font-size: 11px; ' +
+'line-height: normal; font-family: Arial, sans-serif; display: none; position: absolute; ' +
+'bottom: 0px; right: 0px;" id="emoticode-<%= @hash %>">code hosted by <a href="<%= @source.url %>" ' +
+'style="color: #0084FF; text-decoration: none;">emoticode.net</a></div>');
+document.writeln('</div>');
+document.close();

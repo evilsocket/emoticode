@@ -6,7 +6,6 @@ gem 'sass-rails', '~> 4.0.0'   # scss
 gem 'uglifier', '>= 1.3.0'     # uglify js in production
 gem 'coffee-rails', '~> 4.0.0' # cofee script
 gem 'jquery-rails'             # jquery
-gem 'jquery-ui-rails'          # jquery-ui
 gem 'turbolinks'               # turbolinks
 gem 'jbuilder', '~> 1.2'       # json api
 gem "albino"                   # syntax highlight

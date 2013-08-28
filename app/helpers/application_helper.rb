@@ -95,6 +95,15 @@ module ApplicationHelper
     ]
   end 
 
+  def modal_dialog( id, title )
+    content_tag :div, :class => 'dialog', :id => id do
+      content_tag( :div, :class => 'title' ) { title } +
+      content_tag( :div, :class => 'content' ) do
+        yield
+      end
+    end 
+  end
+
   def tag_cloud( tags, min_size = 9, max_size = 20 )
     min_occurs = tags.map(&:sources_count).min
     max_occurs = tags.map(&:sources_count).max

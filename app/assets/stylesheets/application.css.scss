@@ -1,5 +1,4 @@
 //= require_self
-//= require jquery.ui.all
 //= require_tree .
 @import "variables";
 
@@ -36,8 +35,38 @@ ul.avatars {
 }
 
 div.dialog {
-    min-width: 800px;
-    display: block;
+    display: none;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+
+    div.title {
+        padding: 3px 6px;
+        border: 1px solid #ddd;
+        border-bottom: 1px solid #ccc;
+        background-color: #e1e1e1;
+        background-image: -moz-linear-gradient(#f8f8f8, #e1e1e1);
+        background-image: -webkit-linear-gradient(#f8f8f8, #e1e1e1);
+        background-image: linear-gradient(#f8f8f8, #e1e1e1);
+        background-repeat: repeat-x;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+
+    div.content {
+        padding: 10px;
+    }
+}
+
+#simplemodal-container a.modalCloseImg {
+    background:url(/assets/x.png) no-repeat;
+    width:25px;
+    height:29px;
+    display:inline;
+    z-index:3200;
+    position:absolute;
+    top:-15px;
+    right:-18px;
+    cursor:pointer;
 }
 
 .pagination {
