@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "variables";
 
+div.medium-column {
+    width: 69%;
+}
+
 #source {
     #publisher {
         margin: 20px 20px 0;
