@@ -9,7 +9,7 @@ EmoticodeRails::Application.routes.draw do
     delete 'sign_out' => :destroy, as: :sign_out
   end
 
-  get '/auth/:provider/callback' => 'sessions#facebook_connect'
+  get '/auth/:provider/callback' => 'sessions#create'
 
   controller :favorite do
     post 'fav/:id'   => :make,    as: :favorite,   constraints: { id: Patterns::ID_PATTERN }

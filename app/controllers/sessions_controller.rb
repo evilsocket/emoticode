@@ -1,14 +1,13 @@
 class SessionsController < ApplicationController
-
-  def facebook_connect
-    omniauth = request.env['omniauth.auth']
-    @user = User.omniauth(omniauth)
-    # TODO: Check if it's a new user and send temporary password
-    process_user
-  end
-
   def create
-    @user = User.authenticate( params[:session][:who], params[:session][:password] )
+    omniauth = request.env['omniauth.auth']
+    if omniauth
+      @user = User.omniauth(omniauth)
+      # TODO: Check if it's a new user and send temporary password
+    else
+      @user = User.authenticate( params[:session][:who], params[:session][:password] )
+    end
+
     process_user
   end
 

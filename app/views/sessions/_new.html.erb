@@ -1,6 +1,7 @@
 <%= modal_dialog 'login', 'Sign In' do %>
   <div class="connect">
-    <%= link_to image_tag('/assets/facebook-connect-big.png'), '/auth/facebook', :title => 'Login with Facebook' %> 
+    <%= link_to 'Facebook Connect', '/auth/facebook', :title => 'Login with your Facebook account.', :class => 'pure-button pure-button-primary' %> 
+    <%= link_to 'Github Connect',   '/auth/github',   :title => 'Login with your Github account.',   :class => 'pure-button pure-button-primary' %>
   </div>
   <%= form_for :session, :url => sign_in_path, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
     <fieldset class="pure-group">

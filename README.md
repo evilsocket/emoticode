@@ -18,7 +18,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Logout
 - [x] Ajax Favorites Controller
 - [x] Authentication with Facebook
-- [ ] **New!** Authentication with Github
+- [x] **New!** Authentication with Github
 - [ ] Registration
 - [ ] Profile Settings
 - [ ] Ratings Ajax Controller
