@@ -1,0 +1,17 @@
+<%= modal_dialog 'login', 'Sign In' do %>
+  <div class="connect">
+    <a href="#">
+      <img src="/assets/facebook-connect-big.png"/>
+    </a>
+  </div>
+  <%= form_for :session, :url => sign_in_path, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
+    <fieldset class="pure-group">
+      <%= f.text_field :who, :placeholder => 'Username / Email' %>
+      <%= f.password_field :password, :placeholder => 'Password' %>
+    </fieldset>
+
+    <a href="#">Password Recovery</a>
+
+    <%= f.submit "Sign in", :class => 'pure-button pure-button-primary' %>
+  <% end %>
+<% end %> 

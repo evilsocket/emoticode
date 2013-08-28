@@ -19,7 +19,7 @@ Cufon.replace('span#motto', {fontFamily: 'Gabriola', hover:true});
 Cufon.replace('#heading > h1', {fontFamily: 'Copse', hover:true})
 
 function showLoginModal(){
-    alert( 'TODO: showLoginModal' );
+    $('#login').modal(); 
 }
 
 function replyToComment( id, username ){

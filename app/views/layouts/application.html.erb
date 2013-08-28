@@ -77,6 +77,10 @@
     </div>
 </nav>
 
+<% unless signed_in? %>
+  <%= render :partial => "sessions/new" %>
+<% end %>
+
 <div id="wrapper">
 <%= yield %>
 </div>

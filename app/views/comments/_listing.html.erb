@@ -10,7 +10,7 @@
     <%=raw comment.content %>
 
     <span class="meta">
-      <%= time_ago_in_words( Time.at(comment.created_at) ) %> ago &bull; <%= link_to_function 'Reply', "replyToComment( #{comment.id}, '#{comment.user.username}' )" %> 
+      <%= time_ago_in_words( Time.at(comment.created_at) ) %> ago &bull; <%= link_to_function 'Reply', signed_in? ? "replyToComment( #{comment.id}, '#{comment.user.username}' )" : 'showLoginModal()' %> 
     </span>
     <ul>
     <% comment.children.each do |child| %>
