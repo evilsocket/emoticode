@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
     :conditions => [ 'commentable_type = ?', COMMENTABLE_TYPES[:source] ]
 
   validates_presence_of  :commentable_id,   :user_id, :content
-  validates_inclusion_of :commentable_type, :in => COMMENTABLE_TYPES.values
+  validates_inclusion_of :commentable_type, :in => COMMENTABLE_TYPES.values.freeze
   validate               :commentable_exists
   validate               :parent_null_or_exists
 

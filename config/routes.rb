@@ -1,5 +1,4 @@
 EmoticodeRails::Application.routes.draw do
-  get "comment/new"
   root 'home#index' 
 
   controller :sessions do
@@ -10,9 +9,7 @@ EmoticodeRails::Application.routes.draw do
     delete 'sign_out' => :destroy, as: :sign_out
   end
 
-  # TODO
-  # match '/auth/:provider/callback', :to => 'sessions#facebook_connect', via:'get'
-  # match '/auth/failure', :to => 'sessions#failure'
+  get '/auth/:provider/callback' => 'sessions#facebook_connect'
 
   controller :favorite do
     post 'fav/:id'   => :make,    as: :favorite,   constraints: { id: Patterns::ID_PATTERN }
@@ -44,7 +41,4 @@ EmoticodeRails::Application.routes.draw do
   end
 
   resource :comments
-  # controller :comment do
-  #   post 'comment/:id' => :reply, as: :source_comment_reply, constraints: { id: Patterns::ID_PATTERN, to_id: Patterns::ID_PATTERN }
-  # end
 end

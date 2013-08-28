@@ -1,15 +1,26 @@
 class SessionsController < ApplicationController
-  # TODO: Facebook connect
-  # def facebook_connect
-  #   auth_hash = request.env['omniauth.auth']
 
-  #   render :text => auth_hash.inspect
-  # end
+  def facebook_connect
+    omniauth = request.env['omniauth.auth']
+    @user = User.omniauth(omniauth)
+    # TODO: Check if it's a new user and send temporary password
+    process_user
+  end
 
   def create
     @user = User.authenticate( params[:session][:who], params[:session][:password] )
+    process_user
+  end
 
-    if @user.nil?
+  def destroy
+    sign_out
+    redirect_to root_url
+  end 
+
+  private
+
+  def process_user
+    if @user.nil? or !@user.valid?
       flash[:warning] = 'Invalid username/password'
       render :template => 'sessions/new', :status => :unauthorized
     else
@@ -17,10 +28,5 @@ class SessionsController < ApplicationController
       redirect_to root_url
     end
   end
-
-  def destroy
-    sign_out
-    redirect_to root_url
-  end 
 end
 

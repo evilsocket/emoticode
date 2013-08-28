@@ -15,8 +15,9 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 ### Userbase
 
 - [x] Login
+- [x] Logout
 - [x] Ajax Favorites Controller
-- [ ] Authentication with Facebook ( almost done )
+- [x] Authentication with Facebook
 - [ ] **New!** Authentication with Github
 - [ ] Registration
 - [ ] Profile Settings
@@ -50,6 +51,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 
 - [ ] User Confirmation Token
 - [ ] User Registration
+- [ ] User temp password for social connect
 - [ ] Comment to source
 - [ ] Comment to profile
 - [ ] Comment reply
