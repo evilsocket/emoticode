@@ -2,6 +2,7 @@
 *.rdb
 *.sql
 *.swp
+*.swo
 *~
 .bundle
 .sass-cache/
