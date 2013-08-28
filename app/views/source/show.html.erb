@@ -42,6 +42,19 @@
     <h1><%= @source.title %></h1>
     <p><%=raw description(@source) %></p>
     <%=raw highlight(@source) %>
+    
+    <div id="comments">
+      <h2>Comments</h2>
+      <% if @source.comments.empty? == false %>
+      <ul class="root">
+      <% nested_comments(@source).each do |comment| %>
+        <%= render :partial => "comment/listing", :locals => { :comment => comment } %>
+      <% end %>
+      </ul>
+      <% else %>
+        <em>Nothing to see here :/</em>
+      <% end %>
+    </div>
   </div>
 
   <%= render :partial => 'layouts/sidebar', :locals => { with_heading: true } %>

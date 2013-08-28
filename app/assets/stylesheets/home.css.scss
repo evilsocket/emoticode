@@ -13,22 +13,19 @@ ul.avatars {
     }
 }
 
-$gradient_from: #38ae6f;
-$gratient_to: #32a266;
-
 #heading {
     height: 200px;
     padding: 25px 0 80px;
     font-size: 30px;
 
     background: #38ae6f;
-    background: -moz-linear-gradient(45deg, $gradient_from 0%, $gratient_to 100%);
-    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,$gradient_from), color-stop(100%,$gratient_to));
-    background: -webkit-linear-gradient(45deg, $gradient_from 0%,$gratient_to 100%);
-    background: -o-linear-gradient(45deg, $gradient_from 0%,$gratient_to 100%);
-    background: -ms-linear-gradient(45deg, $gradient_from 0%,$gratient_to 100%);
-    background: linear-gradient(45deg, $gradient_from 0%,$gratient_to 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#$gradient_from', endColorstr='$gratient_to',GradientType=1 );
+    background: -moz-linear-gradient(45deg, $gradient_from 0%, $gradient_to 100%);
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,$gradient_from), color-stop(100%,$gradient_to));
+    background: -webkit-linear-gradient(45deg, $gradient_from 0%,$gradient_to 100%);
+    background: -o-linear-gradient(45deg, $gradient_from 0%,$gradient_to 100%);
+    background: -ms-linear-gradient(45deg, $gradient_from 0%,$gradient_to 100%);
+    background: linear-gradient(45deg, $gradient_from 0%,$gradient_to 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#$gradient_from', endColorstr='$gradient_to',GradientType=1 );
 
     color: white;
     border-bottom: 1px solid #DDDDDD;
@@ -113,7 +110,7 @@ $gratient_to: #32a266;
     float: right;
 
     div.heading {
-        border-bottom: 2px solid $gratient_to; 
+        border-bottom: 2px solid $gradient_to; 
         margin-bottom: 10px;
 
         h3 {

@@ -36,9 +36,15 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [ ] Source Code Create
 - [ ] Source Code Update
 - [ ] Source Code Delete
-- [ ] Source Comment System
 - [ ] Source Related
 - [ ] Search Engine
+- [ ] Sitemap
+
+### Comments
+
+- [x] Show
+- [ ] New
+- [ ] Reply
 
 ### Feeds
 
@@ -52,8 +58,24 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [ ] Publish to Social Networks
 - [ ] Update source views with Analytics API
 
+### Static Pages
+
+- [ ] 404
+- [ ] 500
+- [ ] robots.txt
+
+### SEO
+
+- [ ] Rich Snippets ( google authoring )
+- [x] Links auto title
+- [x] Heading meta: keywords, descriptions, og:* ( with pagination )
+- [ ] Hn reordering
+- [ ] General checkup
+
 ### Graphics / Layout
 
+- [ ] New Logo
+- [ ] Per language og:image ?
 - [ ] Everything's needed :P
 
 ## License

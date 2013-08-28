@@ -11,20 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130827131249) do
+ActiveRecord::Schema.define(version: 20130827222854) do
 
   create_table "comments", force: true do |t|
-    t.integer "object_type",                          null: false
-    t.integer "object_id",                            null: false
+    t.integer "object_type",                        null: false
+    t.integer "object_id",                          null: false
     t.integer "parent_id"
     t.integer "user_id"
-    t.integer "status",                               null: false
-    t.string  "author"
-    t.string  "email"
-    t.integer "notification", limit: 1,  default: 1,  null: false
-    t.text    "content",                              null: false
-    t.string  "ip",           limit: 15, default: "", null: false
-    t.integer "created_at",                           null: false
+    t.integer "notification", limit: 1, default: 1, null: false
+    t.text    "content",                            null: false
+    t.integer "created_at",                         null: false
   end
 
   add_index "comments", ["created_at"], name: "created_at", using: :btree
@@ -32,7 +28,6 @@ ActiveRecord::Schema.define(version: 20130827131249) do
   add_index "comments", ["object_type", "object_id"], name: "object_type", using: :btree
   add_index "comments", ["parent_id"], name: "parent_id", using: :btree
   add_index "comments", ["parent_id"], name: "parent_id_2", using: :btree
-  add_index "comments", ["status"], name: "status", using: :btree
   add_index "comments", ["user_id"], name: "user_id", using: :btree
 
   create_table "favorites", force: true do |t|

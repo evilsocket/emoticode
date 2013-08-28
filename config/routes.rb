@@ -1,4 +1,5 @@
 EmoticodeRails::Application.routes.draw do
+  get "comment/new"
   root 'home#index' 
 
   controller :sessions do

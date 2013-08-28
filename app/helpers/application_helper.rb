@@ -112,4 +112,23 @@ module ApplicationHelper
   def signed_in?
     !@current_user.nil?
   end
+
+
+  def nested_comments(object)
+    comments = object.comments.order('created_at DESC')
+    threads  = comments.select { |c| c.parent_id.nil? }
+    nested   = threads.map { |root| group_comments root, comments }
+  end
+
+  private 
+
+  def group_comments( parent, comments )
+    comments.each do |comment|
+      if parent.id == comment.parent_id
+        parent.children << group_comments( comment, comments )
+      end
+    end
+
+    parent
+  end
 end

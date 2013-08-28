@@ -1,6 +1,7 @@
 // Place all the styles related to the source controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
 
 #source {
     #publisher {
@@ -32,7 +33,67 @@
 
     p {
         margin-top: -15px;
-padding-bottom: 15px;
-border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
     }
-}
+
+    #comments {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 150px;
+        padding-top: 20px;
+
+        h2 {
+            border-bottom: 2px solid $gradient_to; 
+            padding-bottom: 10px; 
+            font-size: 14px;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.root {
+            margin-left: -15px;
+        }
+    }
+
+    li.comment {
+        clear: both;    
+        width:  100%;
+        margin: 15px;
+        padding-top: 15px;
+        font-size: 13px;
+
+        span.author {
+            display: block;
+            width: 70px;
+            float: left;
+            height: 75px;
+            text-align: center;
+            font-size: 11px;
+            margin-right: 5px;
+
+            img.avatar {
+                display: block;
+                margin: 0 auto 5px auto;
+            }
+
+            a {
+                color: #333;
+            }
+        }
+
+        span.content {
+            display:block;
+            margin-left: 15px;
+
+            .meta {
+                display: block;
+                font-size: 10px;
+                color: #ccc;
+            }   
+        }
+    }
+} 
