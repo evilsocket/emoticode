@@ -46,6 +46,11 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [ ] New
 - [ ] Reply
 
+### Javascripts
+
+- [ ] Login modal
+- [ ] Embed modal
+
 ### Feeds
 
 - [ ] Global
