@@ -1,11 +1,2 @@
-<h1>Sign in</h1>
-<%= form_for :session, :url => sign_in_path, :html => { :class => 'pure-f' } do |f| %>
-  <fieldset>
-    <%= f.label :who, 'Username/Email' %>
-    <%= f.text_field :who, :size => 25 %>
-    <%= f.label :password, 'Password' %>
-    <%= f.password_field :password, :size => 25 %>
-    <%= f.submit "Sign in", :data => {:disable_with => 'Logging in ...'} %>
-  </fieldset>
-<% end %>
+<%= render :partial => 'sessions/new', :locals => { modal: false } %>
 

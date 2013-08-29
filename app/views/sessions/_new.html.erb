@@ -1,8 +1,24 @@
-<%= modal_dialog 'login', 'Sign In' do %>
+<% 
+    modal = true if local_assigns[:modal].nil?
+
+    helper, args, logos_size = if modal
+                                 [ method( :modal_dialog ), [ 'login', 'Sign In' ], '-m' ]
+                               else
+                                 [ method( :content_tag ), [ :div, :class => 'login' ], '' ]
+                               end
+%>
+<%= helper.call *args do %>
+  <% if !modal %><h1>Sign In</h1><% end %>
   <div class="connect">
-    <%= link_to 'Facebook Connect', '/auth/facebook', :title => 'Login with your Facebook account.', :class => 'pure-button pure-button-primary' %> 
-    <%= link_to 'Github Connect',   '/auth/github',   :title => 'Login with your Github account.',   :class => 'pure-button pure-button-primary' %>
+    <ul>
+      <% [ 'facebook', 'github' ].each do |provider| %>
+      <li>
+      <%= link_to image_tag("/assets/omniauth/#{provider}#{logos_size}.png"), "/auth/#{provider}", :title => "Login with your #{provider.capitalize} account." %>
+      </li>
+      <% end %>
+    </ul>
   </div>
+
   <%= form_for :session, :url => sign_in_path, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
     <fieldset class="pure-group">
       <%= f.text_field :who, :placeholder => 'Username / Email' %>

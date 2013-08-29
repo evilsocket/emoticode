@@ -93,5 +93,15 @@
     	Powered by <strong><a href="http://gibson-db.in/" title="Gibson Cache Server">Gibson Cache Server</a></strong>
     </p> 
 </footer>
+
+<% if flash[:alert] %>
+  <% error = flash[:alert] # make flash visible inside the yield'ed block %>
+  <%= modal_dialog 'flash', 'Alert' do %>
+    <%= error %>
+  <% end %> 
+
+  <script>$(function(){ $('#flash').modal(); });</script>
+<% end %>
+
 </body>
 </html>

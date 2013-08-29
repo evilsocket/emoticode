@@ -1,6 +1,6 @@
 <% 
-    show_views ||= false 
-    desc_cut   ||= 100
+    show_views = false if local_assigns[:show_views].nil?  
+    desc_cut   = 100 if local_assigns[:desc_cut].nil? 
 %>
 <li>
 <div class="source">
