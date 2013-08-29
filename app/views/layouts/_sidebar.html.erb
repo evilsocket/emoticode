@@ -12,15 +12,29 @@
     </a>
     </li> 
   <% end %>
-</ul>
+  </ul>
 
   <br style="clear:both"/>
+
+  <% if !local_assigns[:source].nil? && source.related %>
+    <div class="heading">
+      <h3>Related Sources</h3>
+    </div>
+    <ul class="related">
+    <% source.related.each do |related| %>
+      <li>
+        <%= link_to related.title, source_with_language_path(language_name: related.language.name, source_name: related.name ) %>
+      </li>
+    <% end %>
+    </ul>
+  <% end %>
+
   <div class="heading">
     <h3>Cloud</h3>
   </div>
   <div class="cloud">
-    <% tag_cloud(@cloud).each do |v,cloud| %>
-      <% tag,size,count = cloud %>
+  <% tag_cloud(@cloud).each do |v,cloud| %>
+    <% tag,size,count = cloud %>
     <%= link_to tag.value, search_path(what: tag.name), { :style => "font-size: #{size}px", :title => "The keyword #{tag.value} has #{count} elements." } %> 
   <% end %>
   </div>

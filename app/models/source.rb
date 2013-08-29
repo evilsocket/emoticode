@@ -21,4 +21,17 @@ class Source < ActiveRecord::Base
   def commentable_type
     Comment::COMMENTABLE_TYPES[:source]
   end
+
+  def related( limit = 5 )
+    Rails.cache.fetch "#{limit}_related_sources_of_#{id}", :expires_in => 24.hours do
+      Source
+      .where( 'sources.id != ?', id )
+      .joins(:links)
+      .where( 'links.tag_id IN ( ? )', links.map(&:tag_id) )
+      .order( '( COUNT(links.id) * links.weight ) DESC' )
+      .group( 'links.source_id, sources.name' )
+      .limit( limit )
+      .all
+    end
+  end
 end
