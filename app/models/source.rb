@@ -10,6 +10,8 @@ class Source < ActiveRecord::Base
   default_scope :order => "created_at DESC"
   scope :popular, :order => 'views DESC'
 
+  self.per_page = 10
+
   def path
     "/#{language.name}/#{name}.html"
   end

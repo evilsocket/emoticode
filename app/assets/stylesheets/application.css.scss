@@ -113,6 +113,36 @@ div.dialog {
     cursor:pointer;
 }
 
+#sidebar {
+    width: 20%;
+    float: right;
+
+    div.heading {
+        border-bottom: 2px solid $gradient_to; 
+        margin-bottom: 10px;
+
+        h3 {
+            height: 10px;
+        }
+    }
+
+    div.orange {
+        border-bottom: 2px solid orange;
+    }
+
+    div.red {
+        border-bottom: 2px solid #aa4643;
+    }
+
+    div.blue {
+        border-bottom: 2px solid #4572a7;
+    }
+
+    div.cloud {
+        text-align: justify;
+    }
+}
+
 .pagination {
     background: #f1f1f1;
     border: 1px solid #e5e5e5;
@@ -390,4 +420,96 @@ body {
             font-weight: normal;
         }
     }
-}
+}#comments {
+        width: 100%;
+        margin-bottom: 150px;
+        padding-top: 20px;
+
+        h2 {
+            border-bottom: 2px solid $gradient_to; 
+            padding-bottom: 10px; 
+            font-size: 14px;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.root {
+            margin-left: -15px;
+        }
+    }
+
+    li.comment {
+        clear: both;    
+        width:  100%;
+        margin: 15px;
+        padding-top: 15px;
+        font-size: 13px;
+
+        span.author {
+            display: block;
+            width: 70px;
+            float: left;
+            height: 75px;
+            text-align: center;
+            font-size: 11px;
+            margin-right: 5px;
+
+            img.avatar {
+                display: block;
+                margin: 0 auto 5px auto;
+            }
+
+            a {
+                color: #333;
+            }
+        }
+
+        span.content {
+            display:block;
+            margin-left: 15px;
+
+            .meta {
+                display: block;
+                font-size: 10px;
+                color: #ccc;
+            }   
+        }
+    }
+
+    div.create {
+        margin-bottom: 20px;
+
+        span.errors {
+            color: red;
+            font-weight: bold;
+        }
+
+        form {
+            width: 100%;
+
+            textarea {
+                cursor: text;
+                resize: none;
+                display: block;
+                width: 97.6%;
+                border: 3px solid #ddd;
+                padding: 6px 10px 8px;
+                margin: 0;
+                min-height: 40px;
+                height: auto;
+                line-height: 1.4;
+                overflow-y: scroll;
+                border-radius: 4px;
+            }
+
+            input[type="submit"] {
+                display: block;
+                float: right;
+                margin-top: 5px;
+            }
+        }   
+    }
+

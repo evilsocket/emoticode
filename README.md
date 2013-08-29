@@ -31,7 +31,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Language Listings
 - [ ] **New!** Language Discussion Groups
 - [ ] **New!** Most Active Users Rankings ( per language )
-- [ ] User Profiles
+- [x] User Profiles
 - [ ] User Badges
 - [x] Source Code View
 - [x] Embeddable Source Code

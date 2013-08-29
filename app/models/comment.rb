@@ -48,7 +48,7 @@ class Comment < ActiveRecord::Base
       if commentable_type == COMMENTABLE_TYPES[:source]
         Source.find( commentable_id )
       elsif commentable_type == COMMENTABLE_TYPES[:profile]
-        User.find( commentable_id )
+        Profile.find( commentable_id )
       else
         raise ActiveRecord::RecordNotFound
       end

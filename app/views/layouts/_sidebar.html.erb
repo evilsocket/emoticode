@@ -1,6 +1,6 @@
 <div id="sidebar">
   <% if with_heading %>
-    <div class="heading">
+    <div class="heading blue">
       <h3>Latest Users</h3>
     </div>
   <% end %>
@@ -17,7 +17,7 @@
   <br style="clear:both"/>
 
   <% if !local_assigns[:source].nil? && source.related %>
-    <div class="heading">
+    <div class="heading orange">
       <h3>Related Sources</h3>
     </div>
     <ul class="related">
@@ -29,7 +29,7 @@
     </ul>
   <% end %>
 
-  <div class="heading">
+  <div class="heading red">
     <h3>Cloud</h3>
   </div>
   <div class="cloud">

@@ -1,15 +1,18 @@
 <% 
-    show_views = false if local_assigns[:show_views].nil?  
-    desc_cut   = 100 if local_assigns[:desc_cut].nil? 
+    show_views  = false if local_assigns[:show_views].nil?  
+    desc_cut    = 100 if local_assigns[:desc_cut].nil? 
+    with_author = true if local_assigns[:with_author].nil?
 %>
 <li>
 <div class="source">
+    <% if with_author %>
     <span class="author">
         <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile">
             <img class="avatar" src="<%= source.user.avatar %>"/>
             <%= truncate source.user.username, :length => 15 %>
         </a>
     </span>
+    <% end %>
     <span class="info">
         <%= link_to source.title, source_with_language_path(language_name: source.language.name, source_name: source.name ), { :class => 'title' } %>
         <span class="description">

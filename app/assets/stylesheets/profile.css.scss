@@ -1,3 +1,120 @@
 // Place all the styles related to the profile controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#profile {
+    #publisher {
+        margin: 20px 10px 0;
+
+        span.user {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+
+            img.avatar {
+                display: block;
+                margin: 0 auto 5px auto;
+            }
+
+            a {
+                color: #333;
+            }
+        }
+
+        span.info {
+            display: block; 
+            width: 100%;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        span.auths {
+            display: block; 
+            width: 100%;
+            margin-top: 5px;
+            text-align: center;
+            font-size: 11px;
+
+            img {
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            }
+        }
+    }
+
+    #sources {
+        border-top: 1px solid #eee;
+        margin-bottom: 50px;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            display: block;
+
+            div.source {
+                height: 55px;
+            }
+        }
+    }
+
+    #sidebar {
+        div.rating {
+            text-align: center;
+            font-size: 12px;
+            color: #aaa;
+
+            div.stars {
+                unicode-bidi: bidi-override;
+                direction: rtl;
+                font-size: 30px;
+                margin-top: 20px;
+
+                span {
+                    color: black;
+                    display: inline-block;
+                    position: relative;
+                    width: 1.1em;
+                    cursor: pointer;
+                    font-size: 28px;
+                }
+
+                span:hover:before,
+                span:hover ~ span:before {
+                    content: "\2605";
+                    position: absolute;
+                }
+            }
+        }
+
+        div.languages {
+            ul {
+                margin: 0;
+                padding: 0;
+                display: block;
+
+                li {
+                    display: block;
+                    margin-bottom: 3px;
+
+                    div.bar {
+                        width: 100%;
+                        position: relative;
+
+                        div.percentage {
+                            background-color: #D2E6FC;
+                            text-align: center;
+                            height: 15px;
+
+                            span {
+                                display: inline-block;
+                                position: absolute;
+                                width: 100%;
+                                left: 0;
+                                font-size: 11px;
+                            }
+                        }
+                    }
+                }
+            }
+        }   
+    }
+}

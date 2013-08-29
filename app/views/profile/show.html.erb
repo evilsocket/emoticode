@@ -1,2 +1,108 @@
-<h1><%= @user.username %></h1>
-<p><%=raw @user.profile.aboutme %></p>
+<section id="profile">
+  <div class="small-column">
+    <div id="publisher">
+      <span class="user">
+        <img class="avatar" src="<%= @user.avatar %>"/>
+      </a>
+      </span>
+      <span class="info">
+        <% if @user.created_at.nil? or @user.created_at == 0 %>
+          Registered from day one<br/>
+        <% else %>
+          Registered <%= time_ago_in_words( Time.at(@user.created_at) ) %> ago<br/>
+        <% end %>
+        <% if @user.last_seen_at.nil? %>
+          Never logged in :(<br/>
+        <% else %>
+          Logged <%= time_ago_in_words( Time.at(@user.last_seen_at) ) %> ago<br/>
+        <% end %>
+        Published <%= @user.sources.count %> <%= 'source'.pluralize( @user.sources.count ) %>
+      </span>
+      <span class="auths">
+        <%= link_to image_tag("/assets/icons/rss-s.png"), user_feed_path(:username=>@user.username), :title => "#{@user.username} RSS feed." %>
+        <% @user.authorizations.each do |auth| %>
+          <%= link_to image_tag("/assets/icons/#{auth.provider}-s.png"), auth.url, :target => '_blank', :title => "Visit #{@user.username} #{auth.provider.capitalize} profile." %>
+        <% end %>
+        <% unless @user.profile.gplus.nil? or @user.profile.gplus.strip.empty? %>
+          <%= link_to image_tag("/assets/icons/googleplus-s.png"), "#{@user.profile.gplus}?rel=author", :title => "Visit #{@user.username} Google+ profile." %>
+        <% end %>
+      </span>
+    </div>
+  </div>  
+
+  <div class="medium-column">
+    <h1><%= @user.username %></h1>
+    <p>
+      <% unless @user.profile.aboutme.nil? or @user.profile.aboutme.empty? %>
+        <%= @user.profile.aboutme %>
+      <% else %>
+        <em>Nothing to see here :/</em>
+      <% end %>
+    </p>  
+    <% unless @user.profile.website.nil? or @user.profile.website.strip.empty? %>
+      <p><%= link_to @user.profile.website, @user.profile.website, :target => '_blank', :rel => 'nofollow' %></p>
+    <% end %>
+
+    <%= render :partial => 'comments/box', :locals => { object: @user.profile, heading: "Leave a message to #{@user.username}" } %>
+
+    <div id="sources">
+      <% sources = @user.sources.page( params[:page] ) %>
+      <h2>Sources</h2>
+      <% if sources.any? %>
+        <ul>
+          <% sources.each do |source| %>
+            <%= render :partial => "source/listing", :locals => { :source => source, :with_author => false } %>
+          <% end %>
+        </ul>
+
+        <br style="clear:both;"/>
+        <section class="pager">
+          <%= will_paginate sources %>
+        </section>
+      <% else %>
+        <em>Nothing posted yet :/</em>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div id="sidebar">
+    <div class="heading blue">
+      <h3>Rate Me!</h3>
+    </div>
+    <div class="rating">
+      <%= @user.username %> has an average rating of 92%
+      <div class="stars">
+        <span class="5">☆</span>
+        <span class="4">☆</span>
+        <span class="3">☆</span>
+        <span class="2">☆</span>
+        <span class="1">☆</span>
+      </div>
+    </div>
+
+    <div class="heading orange">
+      <h3>Languages</h3>  
+    </div>
+    <div class="languages">
+      <% stats = @user.language_statistics %>
+      <% unless stats.empty? %>
+        <ul>
+          <% stats.each do |language,perc| %>
+            <li>
+              <div class="bar">
+                <div class="percentage" style="width: <%= perc %>%">
+                  <span><%= link_to language.title, language_archive_path( :name => language.name ) %> ( <%= perc %> % )</span>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <em>Nothing posted yet :/</em>
+      <% end %>
+    </div>
+
+  </div>   
+  
+</section>

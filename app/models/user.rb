@@ -94,6 +94,31 @@ class User < ActiveRecord::Base
     end
   end
 
+  def language_statistics
+    total_hits = 0
+    stats      = {}
+  
+    # loop by language instead of looping by source
+    # since a user could have a huge number of entries,
+    # but languages number is known ( and lower ).
+    Language.all.each do |language|
+      count = language.sources.where( :user_id => id ).count
+      stats[language] ||= 0
+      stats[language] +=  count
+      total_hits += count
+    end
+
+    stats.each do |language,hits|
+      if hits > 0  
+        stats[language] = ( ( hits * 100.0 ) / total_hits ).round 1
+      else
+        stats.delete language
+      end
+    end
+
+    stats.sort_by(&:last).reverse
+  end
+
   private
 
   def self.update_omniauth_profile( auth, user, profile )

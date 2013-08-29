@@ -32,7 +32,8 @@ EmoticodeRails::Application.routes.draw do
   end
 
   controller :profile do
-    get 'profile/:username' => :show, as: :user_profile, constraints: { username: Patterns::ROUTE_PATTERN }
+    get 'profile/:username'      => :show, as: :user_profile, constraints: { username: Patterns::ROUTE_PATTERN }
+    get 'profile/:username/feed' => :feed, as: :user_feed, constraints: { username: Patterns::ROUTE_PATTERN }
   end
 
   controller :search do
