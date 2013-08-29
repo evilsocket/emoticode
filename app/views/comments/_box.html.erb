@@ -18,13 +18,11 @@
   </div>
 
   <% if object.comments.empty? == false %>
-  <ul class="root">
-  <% nested_comments(object).each do |comment| %>
-    <%= render :partial => "comments/listing", :locals => { :comment => comment } %>
-  <% end %>
-  </ul>
-  <% else %>
-    <em>Nothing to see here :/</em>
+    <ul class="root">
+    <% nested_comments(object).each do |comment| %>
+      <%= render :partial => "comments/listing", :locals => { :comment => comment } %>
+    <% end %>
+    </ul>
   <% end %>
 
   <br style="clear:both"/>

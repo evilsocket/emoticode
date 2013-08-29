@@ -36,10 +36,13 @@ class User < ActiveRecord::Base
     # at least the email is required to sign in an existing user
     if auth && auth['info'] && auth['info']['email'] 
       user = User.find_by_email( auth['info']['email'] )
+
       # new incoming user ^_^ 
       if user.nil? 
         # we need the nickname now
         if auth['info']['nickname']
+
+          email        = auth['info']['email']
           username     = auth['info']['nickname']
           tmp_password = (0...10).map{65.+(rand(25)).chr}.join    
           salt         = self.random_salt
@@ -48,13 +51,14 @@ class User < ActiveRecord::Base
             username: username, 
             email: email, 
             salt: salt,
-            password_hash: self.hash_password( user.salt, tmp_password ),
+            password_hash: self.hash_password( salt, tmp_password ),
             status: STATUSES[:confirmed], 
             level: LEVELS[:subscriber]
           })
 
-          # TODO: Save token and avatar if available
           profile = Profile.create({ user: user })
+          
+          update_omniauth_profile( auth, user, profile )
         end
       # existing user
       else 
@@ -62,7 +66,7 @@ class User < ActiveRecord::Base
         user.status = STATUSES[:confirmed]
         user.save
 
-        # TODO: Refresh profile token
+        update_omniauth_profile( auth, user, user.profile )
       end
 
       user
@@ -88,4 +92,40 @@ class User < ActiveRecord::Base
       "/assets/avatars/default.png"
     end
   end
+
+  private
+
+  def self.update_omniauth_profile( auth, user, profile )
+
+    # save facebook token and user id
+    if auth['provider'] == 'facebook'
+      if auth['credentials'] && auth['credentials']['token']
+        profile.fb_access_token = auth['credentials']['token']
+      end
+
+      profile.fb_user_id = auth['uid']
+    end
+
+    # fetch avatar
+    if profile.avatar == 0 && auth['info']['image']
+      begin
+        require 'open-uri'
+
+        image_path = File.join Dir.pwd, "app/assets/images/avatars/#{user.id}.png"
+
+        open( image_path, 'wb' ) do |file|
+          file << open( auth['info']['image'] ).read
+        end
+
+        # TODO: Avatar resizing.
+
+        profile.avatar = 1
+      rescue
+
+      end
+    end
+
+    profile.save!
+  end
+
 end
