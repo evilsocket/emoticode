@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130829020557) do
+ActiveRecord::Schema.define(version: 20130829184219) do
+
+  create_table "authorizations", force: true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "handle"
+  end
 
   create_table "comments", force: true do |t|
     t.integer "commentable_type", null: false
@@ -64,18 +74,15 @@ ActiveRecord::Schema.define(version: 20130829020557) do
   add_index "pages", ["name"], name: "name", using: :btree
 
   create_table "profiles", force: true do |t|
-    t.integer "user_id",                                      null: false
+    t.integer "user_id",                                 null: false
     t.integer "dd"
     t.integer "mm"
     t.integer "yy"
-    t.integer "newsletter",      limit: 1,        default: 1, null: false
-    t.text    "aboutme",         limit: 16777215
+    t.integer "newsletter", limit: 1,        default: 1, null: false
+    t.text    "aboutme",    limit: 16777215
     t.string  "website"
     t.string  "gplus"
-    t.string  "fb_user_id"
-    t.string  "fb_access_token"
-    t.integer "avatar",          limit: 1,        default: 0, null: false
-    t.string  "github"
+    t.integer "avatar",     limit: 1,        default: 0, null: false
   end
 
   add_index "profiles", ["user_id"], name: "user_id", using: :btree

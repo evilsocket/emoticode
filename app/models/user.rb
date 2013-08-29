@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   
   has_many :sources
   has_many :favorites
+  has_many :authorizations
   has_one  :profile
 
   LEVELS   = { :admin => 1, 
@@ -96,20 +97,27 @@ class User < ActiveRecord::Base
   private
 
   def self.update_omniauth_profile( auth, user, profile )
-
-    # save facebook token and user id
-    if auth['provider'] == 'facebook'
-      if auth['credentials'] && auth['credentials']['token']
-        profile.fb_access_token = auth['credentials']['token']
-      end
-
-      profile.fb_user_id = auth['uid']
-
-    elsif auth['provider'] == 'github'
-      profile.github = auth['info']['nickname']
+    # first of all, check if the user already has an authorization
+    # with the given provider
+    authorization = Authorization.find_by_provider_and_uid( auth["provider"], auth["uid"] )
+    if authorization
+      # update data 
+      authorization.token  = auth['credentials']['token'] unless !auth['credentials'] or !auth['credentials']['token']
+      authorization.handle = auth['info']['nickname'] unless !auth['info']['nickname'] 
+      authorization.uid    = auth['uid']
+      authorization.save!
+    else
+      # create the new authorization object
+      authorization = Authorization.create({
+        :provider => auth['provider'],
+        :user_id  => user.id,
+        :token    => ( auth['credentials'] && auth['credentials']['token'] ) ? auth['credentials']['token'] : nil,
+        :handle   => auth['info']['nickname'] ? auth['info']['nickname'] : nil,
+        :uid      => auth['uid']
+      })
     end
 
-    # fetch avatar
+    # if user still has no avatar, fetch it from auth info if available
     if profile.avatar == 0 && auth['info']['image']
       begin
         image_path = File.join Dir.pwd, "app/assets/images/avatars/#{user.id}.png"
@@ -120,9 +128,9 @@ class User < ActiveRecord::Base
       rescue
 
       end
-    end
 
-    profile.save!
+      profile.save!
+    end
   end
 
 end
