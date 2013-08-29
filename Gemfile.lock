@@ -1,6 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    RubyInline (3.12.2)
+      ZenTest (~> 4.3)
+    ZenTest (4.9.3)
     actionmailer (4.0.0)
       actionpack (= 4.0.0)
       mail (~> 2.5.3)
@@ -47,6 +50,10 @@ GEM
     execjs (2.0.1)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
+    fastimage (1.5.0)
+    fastimage_resize (2.0.3)
+      RubyInline (>= 3.8.2)
+      fastimage (>= 1.2.9)
     hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.3)
@@ -153,6 +160,7 @@ DEPENDENCIES
   albino
   capistrano
   coffee-rails (~> 4.0.0)
+  fastimage_resize
   jbuilder (~> 1.2)
   jquery-rails
   mysql2

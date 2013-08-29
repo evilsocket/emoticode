@@ -104,20 +104,17 @@ class User < ActiveRecord::Base
       end
 
       profile.fb_user_id = auth['uid']
+
+    elsif auth['provider'] == 'github'
+      profile.github = auth['info']['nickname']
     end
 
     # fetch avatar
     if profile.avatar == 0 && auth['info']['image']
       begin
-        require 'open-uri'
-
         image_path = File.join Dir.pwd, "app/assets/images/avatars/#{user.id}.png"
 
-        open( image_path, 'wb' ) do |file|
-          file << open( auth['info']['image'] ).read
-        end
-
-        # TODO: Avatar resizing.
+        FastImage.resize( auth['info']['image'], 50, 50, :outfile => image_path )
 
         profile.avatar = 1
       rescue

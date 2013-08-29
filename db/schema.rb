@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828134800) do
+ActiveRecord::Schema.define(version: 20130829020557) do
 
   create_table "comments", force: true do |t|
     t.integer "commentable_type", null: false
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20130828134800) do
     t.string  "fb_user_id"
     t.string  "fb_access_token"
     t.integer "avatar",          limit: 1,        default: 0, null: false
+    t.string  "github"
   end
 
   add_index "profiles", ["user_id"], name: "user_id", using: :btree
