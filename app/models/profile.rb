@@ -7,5 +7,9 @@ class Profile < ActiveRecord::Base
   def commentable_type
     Comment::COMMENTABLE_TYPES[:profile]
   end
+
+  def path
+    "/profile/#{user.username}"
+  end
 end
 

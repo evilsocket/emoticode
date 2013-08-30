@@ -16,10 +16,30 @@ class Comment < ActiveRecord::Base
   validate               :parent_null_or_exists
 
   before_save            :parse_content
-    
+  
+  # this is needed for nesting comments in ApplicationHelper
   def children
     @children ||= []
     @children
+  end
+
+  def url
+    base = "http://www.emoticode.net"
+    case commentable_type
+    when COMMENTABLE_TYPES[:source]
+      "#{base}#{Source.find( commentable_id ).path}#comments"
+    when COMMENTABLE_TYPES[:profile]
+      "#{base}#{Profile.find( commentable_id ).path}#comments" 
+    end
+  end
+
+  def commentable_user
+    case commentable_type
+    when COMMENTABLE_TYPES[:source]
+      Source.find( commentable_id ).user
+    when COMMENTABLE_TYPES[:profile]
+      Profile.find( commentable_id ).user 
+    end
   end
 
   protected

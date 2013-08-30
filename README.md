@@ -52,9 +52,9 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 
 - [x] User Registration
 - [x] User temp password for social connect
-- [ ] Comment to source
-- [ ] Comment to profile
-- [ ] Comment reply
+- [x] Comment to source
+- [x] Comment to profile
+- [x] Comment reply
 
 ### Javascripts
 

@@ -16,4 +16,20 @@ class UserMailer < ActionMailer::Base
 
     mail( to: @user.email, subject: 'Welcome to EmotiCODE' )
   end
+
+  def comment_email(from,to,url)
+    @from = from
+    @user = to
+    @url  = url
+
+    mail( to: @user.email, subject: 'Comment on EmotiCODE' )
+  end
+
+  def comment_reply_email(from,to,url)
+    @from = from
+    @user = to
+    @url  = url
+
+    mail( to: @user.email, subject: 'Comment reply on EmotiCODE' )
+  end
 end
