@@ -46,11 +46,21 @@ class User < ActiveRecord::Base
     find_by_sql([ 'SELECT * FROM users WHERE ( username = ? OR email = ? ) AND MD5( CONCAT( salt, ? ) ) = password_hash AND status = ? ', who, who, password, STATUSES[:confirmed] ]).first 
   end
 
+  def self.find_by_confirmation_token( token )
+    find_by_sql([ 'SELECT * FROM users WHERE MD5( CONCAT( id, email, username, salt, password_hash ) )  = ? ', token ]).first
+  end
+
   def self.activate(token)
-    user = find_by_sql([ 'SELECT * FROM users WHERE MD5( CONCAT( id, email, username, salt, password_hash ) )  = ? AND status = ? ', token, STATUSES[:unconfirmed] ]).first
-    unless user.nil?
-      user.status = STATUSES[:confirmed]
-      user.save!
+    # search user by token
+    user = self.find_by_confirmation_token(token)
+    unless user.nil? 
+      # should be unconfirmed yet
+      if user.status == STATUSES[:unconfirmed]
+        user.status = STATUSES[:confirmed]
+        user.save!
+      else
+        user = nil
+      end
     end
     user
   end

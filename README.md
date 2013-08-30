@@ -21,7 +21,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] **New!** Authentication with Github
 - [x] Profile Settings
 - [x] Registration
-- [ ] Password Recovery
+- [x] Password Recovery
 - [ ] Ratings Ajax Controller
 - [ ] **New!** Custom Homepage
 

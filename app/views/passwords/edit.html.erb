@@ -1,0 +1,21 @@
+<div id="passwords">
+  <h1>Change Your Password</h1>
+  <p>Welcome back <strong><%= @user.username %></strong>!</p>
+   <%= form_for :password, :url => recovery_path, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
+      <% if flash[:error] %>
+        <p class="error"><%= flash[:error] %></p>
+      <% end %>
+      <fieldset class="pure-group">
+        <%= f.label :password, 'Please enter your new password:' %>
+        <%= f.password_field :password, :placeholder => 'Password' %>
+        <%= f.password_field :password_confirmation, :placeholder => 'Confirmation' %>
+      </fieldset>
+
+      <br/>
+      <br/>
+      <%= f.submit "Change Password", :class => 'pure-button pure-button-primary' %>
+  <% end %>
+</div>
+
+
+

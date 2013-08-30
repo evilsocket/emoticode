@@ -1,0 +1,20 @@
+<div id="passwords">
+  <h1>Password Recovery</h1>
+  <%= form_for :password, :url => passwords_path, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+    <% end %>
+    <%= f.label :email, 'Please enter your email address:' %>
+    <%= f.text_field :email, :placeholder => 'Email' %>
+
+    <br/>
+    <br/>
+    <center>
+      <%= recaptcha_tags %>
+    </center>
+    <br/>
+
+    <%= f.submit "Recovery", :class => 'pure-button pure-button-primary' %>
+  <% end %>
+</div>
+

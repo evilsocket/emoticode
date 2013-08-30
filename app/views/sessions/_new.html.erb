@@ -32,7 +32,7 @@
       <%= f.password_field :password, :placeholder => 'Password' %>
     </fieldset>
 
-    <a href="#">Password Recovery</a>
+    <%= link_to "Password Recovery", new_passwords_path %>
     <% if modal %>
       <%= link_to "Register", sign_up_path %>
     <% end %>

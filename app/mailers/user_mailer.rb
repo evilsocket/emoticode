@@ -32,4 +32,10 @@ class UserMailer < ActionMailer::Base
 
     mail( to: @user.email, subject: 'Comment reply on EmotiCODE' )
   end
+
+  def password_reset_email(user)
+    @user = user
+
+    mail( to: @user.email, subject: 'Password Reset on EmotiCODE' )
+  end
 end
