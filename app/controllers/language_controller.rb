@@ -15,7 +15,7 @@ class LanguageController < ApplicationController
           shuffle!
       end
     else
-      redirect_to status:404
+      render_404 
     end
   end
 end

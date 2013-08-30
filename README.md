@@ -75,9 +75,9 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 
 ### Static Pages
 
-- [ ] 404
-- [ ] 500
-- [ ] robots.txt
+- [x] 404
+- [x] 500
+- [x] robots.txt
 
 ### SEO
 
