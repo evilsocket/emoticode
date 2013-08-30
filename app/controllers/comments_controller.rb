@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   def create  
     respond_to do |format|
       format.js {
-        @comment = Comment.new params.require(:comment).permit( :parent_id, :commentable_type, :commentable_id, :content )
+        @comment = Comment.new comment_params
         @comment.user_id = @current_user.id
         if @comment.save
           if @comment.parent_id.nil?
@@ -15,5 +15,11 @@ class CommentsController < ApplicationController
         end
       }
     end
+  end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit( :parent_id, :commentable_type, :commentable_id, :content )
   end
 end

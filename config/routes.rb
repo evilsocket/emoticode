@@ -36,9 +36,10 @@ EmoticodeRails::Application.routes.draw do
   end
 
   controller :profile do
-    get 'profile/settings'       => :settings, as: :user_settings
-    get 'profile/:username'      => :show,     as: :user_profile, constraints: { username: Patterns::ROUTE_PATTERN }
-    get 'profile/:username/feed' => :feed,     as: :user_feed, constraints: { username: Patterns::ROUTE_PATTERN }
+    get   'profile/edit'           => :edit, as: :user_settings
+    patch 'profile/update'         => :update
+    get   'profile/:username'      => :show, as: :user_profile, constraints: { username: Patterns::ROUTE_PATTERN }
+    get   'profile/:username/feed' => :feed, as: :user_feed, constraints: { username: Patterns::ROUTE_PATTERN }
   end
 
   controller :search do

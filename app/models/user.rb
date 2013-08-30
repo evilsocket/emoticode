@@ -17,25 +17,30 @@ class User < ActiveRecord::Base
   }
 
   validates :email, presence: true, 
-                    format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
-                    uniqueness: { case_sensitive: false }
+    format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
+    uniqueness: { case_sensitive: false }
 
   validates :username, presence: true, 
-                       format: { with: Patterns::ROUTE_PATTERN },
-                       uniqueness: { case_sensitive: false },
-                       length: { :minimum => 5, :maximum => 255 }
+    format: { with: Patterns::ROUTE_PATTERN },
+    uniqueness: { case_sensitive: false },
+    length: { :minimum => 5, :maximum => 255 }
 
   validates :password, presence: { :on => :create },
-                       length: { :minimum => 5, :maximum => 255, :allow_nil => true },
-                       confirmation: true
+    length: { :minimum => 5, :maximum => 255, :allow_nil => true },
+    confirmation: true
 
-  validates_inclusion_of    :level,    :in => LEVELS.values.freeze
-  validates_inclusion_of    :status,   :in => STATUSES.values.freeze
+  validates_inclusion_of :level,  :in => LEVELS.values.freeze
+  validates_inclusion_of :status, :in => STATUSES.values.freeze
 
-  attr_accessor :password, :password_confirmation
+  validates_associated          :profile 
+  accepts_nested_attributes_for :profile, update_only: true
+
+  attr_accessor :password, :password_confirmation, :avatar_upload
 
   before_create :create_salt
   before_create :create_hashed_password
+  before_update :update_hashed_password
+  before_update :update_avatar
 
   def self.authenticate(who, password)
     find_by_sql([ 'SELECT * FROM users WHERE ( username = ? OR email = ? ) AND MD5( CONCAT( salt, ? ) ) = password_hash AND status = ? ', who, who, password, STATUSES[:confirmed] ]).first 
@@ -71,7 +76,7 @@ class User < ActiveRecord::Base
             status: STATUSES[:confirmed], 
             level: LEVELS[:subscriber]
           })
-        
+
           if user.valid?
             profile = Profile.create({ user: user })
 
@@ -145,9 +150,30 @@ class User < ActiveRecord::Base
   def create_salt
     self.salt = (0...5).map{65.+(rand(25)).chr}.join
   end
-  
+
   def create_hashed_password
     self.password_hash = Digest::MD5.hexdigest( self.salt + self.password )
+  end
+
+  def update_hashed_password
+    unless self.password.nil?
+      self.password_hash = Digest::MD5.hexdigest( self.salt + self.password )
+    end
+  end
+
+  def update_avatar
+    unless self.avatar_upload.nil?
+      begin
+        path = File.join Dir.pwd, "app/assets/images/avatars/#{id}.png"
+
+        FastImage.resize( avatar_upload.tempfile, 50, 50, :outfile => path )
+
+        profile.avatar = 1
+      rescue
+        self.errors.add( :avatar_upload, " not a valid image file." )
+        false
+      end
+    end
   end
 
   def self.update_omniauth_profile( auth, user, profile )
