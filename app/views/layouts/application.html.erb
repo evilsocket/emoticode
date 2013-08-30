@@ -79,6 +79,10 @@
   <%= render :partial => "sessions/new" %>
 <% end %>
 
+<% if current_page? root_url %>
+  <%= render :partial => 'home/heading' %>
+<% end %>
+
 <div id="wrapper">
 <%= yield %>
 </div>
