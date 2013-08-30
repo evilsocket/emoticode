@@ -46,8 +46,8 @@
     <%= render :partial => 'comments/box', :locals => { object: @user.profile, heading: "Leave a message to #{@user.username}" } %>
 
     <div id="sources">
-      <% sources = @user.sources.page( params[:page] ) %>
-      <h2>Sources</h2>
+      <% sources = @user.sources.where( :private => false ).page( params[:page] ) %>
+      <h2>Publie Sources</h2>
       <% if sources.any? %>
         <ul>
           <% sources.each do |source| %>

@@ -30,7 +30,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Home
 - [x] Language Listings
 - [ ] **New!** Language Discussion Groups
-- [ ] **New!** Most Active Users Rankings ( per language )
+- [x] **New!** Most Active Users Rankings ( per language )
 - [x] User Profiles
 - [ ] User Badges
 - [x] Source Code View

@@ -1,10 +1,85 @@
 #language-archive{
+
+    #podium {
+        width: 380px;
+        height: 230px;
+        margin: 0 auto 50px;
+        border-bottom: 1px solid #eee;
+        text-align: center;
+        position: relative;
+
+        div.bar {
+            width: 100px;
+            position: absolute;
+            bottom: 0;
+
+            div.user {
+                margin-top: -75px;
+                display: block;
+                text-align: center;
+                font-size: 12px;
+
+                img.avatar {
+                    display: block;
+                    margin: 0 auto 2px auto;
+                }
+
+                a {
+                    color: #333;
+                }
+
+            }
+
+            span {
+                display: block;
+                color: white;
+                font-weight: 800;
+                text-shadow: 1px 1px #555;
+            }
+        }
+
+        div.first {
+            background-color: #EDDA74;
+            height: 120px;
+            left: 140px;
+
+            span {
+                font-size: 110px;
+            }
+        }
+
+        div.second {
+            background-color: #C0C0C0;
+            height: 80px;
+            left: 20px;
+
+            span {
+                font-size: 75px;
+            }
+        }
+
+        div.third {
+            background-color: #CD7F32;
+            height: 40px;
+            left: 260px;
+
+            span {
+                font-size: 39px;                
+            }
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
     div.source {
         margin-bottom: 15px;
         margin-right: 25px;
         position: relative;
         width: 85%;
-        
+
         span.info {
             a.title {
                 font-size: 15px;

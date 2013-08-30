@@ -2,6 +2,28 @@
   <div class="huge-column">
     <h1><%= @language.title %> Snippets Archive</h1>
 
+    <% if @podium and @podium.count > 0 %>
+      <% 
+        first, second, third = @podium 
+        @podium = { :second => [ second, 2 ], :first => [ first, 1 ], :third => [ third, 3 ] }
+      %>
+      <div id="podium">
+        <h3>Most Active Users</h3>
+        <% @podium.each do |position,(user,number)| %>
+          <div class="bar <%= position %>">
+          <% if user %>
+          <div class="user">
+            <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile">
+              <img class="avatar" src="<%= user.avatar %>"/>
+              <%= truncate user.username, :length => 15 %>
+            </a>
+          </div>
+          <% end %>
+          <span><%= number %></span>
+        </div>
+        <% end %>
+      </div>
+    <% end %>
     <ul>
       <% @sources.each do |source| %>
         <%= render :partial => "source/listing", :locals => { :source => source, :desc_cut => 300, :show_views => true } %>

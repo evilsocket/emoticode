@@ -3,6 +3,7 @@ class LanguageController < ApplicationController
     @language = @languages.select { |l| l.name == params[:name] }.first
     if @language
       @sources = @language.sources.where( :private => false ).page( params[:page] )
+      @podium  = @language.most_active_users
       @cloud   = Rails.cache.fetch 'shuffled_cloud_with_70_items_for_' + @language.name, :expires_in => 24.hours do 
         Tag.
           joins(:sources).
