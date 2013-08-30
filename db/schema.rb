@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130830041314) do
+ActiveRecord::Schema.define(version: 20130830094348) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 20130830041314) do
     t.integer "created_at",                           null: false
     t.integer "updated_at"
     t.integer "last_seen_at"
+    t.integer "is_bot",                   default: 0
   end
 
   add_index "users", ["created_at"], name: "created_at", using: :btree
