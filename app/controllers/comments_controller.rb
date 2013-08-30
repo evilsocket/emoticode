@@ -8,9 +8,9 @@ class CommentsController < ApplicationController
         @comment.user_id = @current_user.id
         if @comment.save
           if @comment.parent_id.nil?
-            UserMailer.comment_email( @current_user, @comment.commentable_user, @comment.url ).deliver
+            UserMailer.comment_email( @current_user, @comment.commentable.user, @comment.commentable.url ).deliver
           else
-            UserMailer.comment_reply_email( @current_user, @comment.commentable_user, @comment.url ).deliver
+            UserMailer.comment_reply_email( @current_user, @comment.commentable.user, @comment.commentable.url ).deliver
           end
         end
       }

@@ -11,5 +11,9 @@ class Profile < ActiveRecord::Base
   def path
     "/profile/#{user.username}"
   end
+
+  def url
+    "http://www.emoticode.net#{path}"
+  end
 end
 

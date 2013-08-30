@@ -5,6 +5,11 @@ class Comment < ActiveRecord::Base
     # more to come :)
   }
 
+  COMMENTABLE_CLASSES = {
+    1 => 'Source',
+    2 => 'Profile'
+  }
+
   belongs_to :user
   belongs_to :source, 
     :foreign_key => :commentable_id, 
@@ -23,23 +28,8 @@ class Comment < ActiveRecord::Base
     @children
   end
 
-  def url
-    base = "http://www.emoticode.net"
-    case commentable_type
-    when COMMENTABLE_TYPES[:source]
-      "#{base}#{Source.find( commentable_id ).path}#comments"
-    when COMMENTABLE_TYPES[:profile]
-      "#{base}#{Profile.find( commentable_id ).path}#comments" 
-    end
-  end
-
-  def commentable_user
-    case commentable_type
-    when COMMENTABLE_TYPES[:source]
-      Source.find( commentable_id ).user
-    when COMMENTABLE_TYPES[:profile]
-      Profile.find( commentable_id ).user 
-    end
+  def commentable
+    Kernel.const_get( COMMENTABLE_CLASSES[ commentable_type ] ).find( commentable_id )
   end
 
   protected
@@ -65,13 +55,7 @@ class Comment < ActiveRecord::Base
   def commentable_exists
     begin
 
-      if commentable_type == COMMENTABLE_TYPES[:source]
-        Source.find( commentable_id )
-      elsif commentable_type == COMMENTABLE_TYPES[:profile]
-        Profile.find( commentable_id )
-      else
-        raise ActiveRecord::RecordNotFound
-      end
+      commentable
 
     rescue ActiveRecord::RecordNotFound
       errors.add( :commentable_id, " references to an invalid object." )
