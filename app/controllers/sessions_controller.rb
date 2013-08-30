@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
       render :template => 'sessions/new', :status => :unauthorized
     else
       sign_in(@user)
-      redirect_to root_url
+      redirect_to request.referer || root_url
     end
   end
 end
