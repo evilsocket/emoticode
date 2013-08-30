@@ -29,11 +29,15 @@ function replyToComment( id, username ){
 }
 
 $( function(){
-    $('#show-all-langs').hover( 
-    function(){
-        $('#all-langs').show();
-    },
-    function(){
-        $('#all-langs').hide();
-    });
+    $button = $('#show-all-langs');
+    $menu = $('#all-langs');
+
+    $button.hover( 
+        function(){
+            $menu.css( 'left', $button.offset().left - $menu.outerWidth() + $button.outerWidth() ).show();
+        },
+        function(){
+            $menu.hide();
+        }
+    );
 });
