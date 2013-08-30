@@ -1,4 +1,6 @@
 class UserController < ApplicationController
+  before_filter :not_authenticated!
+
   def new
     @user = User.new
   end

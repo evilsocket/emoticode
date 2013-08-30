@@ -1,5 +1,5 @@
 class SourceController < ApplicationController
-  before_filter :authenticate!, only: [ :new, :create ]
+  before_filter :authenticate!, only: [ :new, :raw, :create ]
 
   def show
     @source = source_by_params

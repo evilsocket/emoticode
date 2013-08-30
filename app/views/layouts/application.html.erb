@@ -53,7 +53,7 @@
                 [ 
                     link_to( 'Add Snippet', source_new_path ),
                     link_to( 'Profile',     user_profile_path(username: @current_user.username ) ),
-                    '<a href="/settings">Settings</a>'.html_safe,
+                    link_to( 'Settings',    user_settings_path ),
                     link_to( 'Logout',      sign_out_path, :method => :delete )
                 ]
                           else
@@ -65,11 +65,9 @@
                 end
             %>
 
-            <% linkset.each do |link| %>
-                <li><%= link %></li>
-                <li>&bull;</li>
-            <% end %>
-
+            <%=raw linkset.map { |link| "<li>#{link}</li>" }.join '<li>&bull;</li>' %>
+        </ul>
+        <ul class="right">
             <% @pages.each do |page| %>
                 <li><%= link_to page.title, page_show_path(page: page.name) %></li>
             <% end %>

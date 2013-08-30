@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_filter :not_authenticated!, :except => [:destroy]
+  
   def create
     omniauth = request.env['omniauth.auth']
     if omniauth

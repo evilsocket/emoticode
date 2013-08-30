@@ -35,9 +35,13 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  private
+  protected
 
   def authenticate!
     redirect_to sign_in_url, error: 'You dont have enough permissions to be here' unless @current_user
+  end
+
+  def not_authenticated!
+    redirect_to root_url, error: 'Already authenticated.' unless !@current_user    
   end
 end
