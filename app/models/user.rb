@@ -37,26 +37,6 @@ class User < ActiveRecord::Base
   before_create :create_salt
   before_create :create_hashed_password
 
-  def create_salt
-    self.salt = (0...5).map{65.+(rand(25)).chr}.join
-  end
-  
-  def create_hashed_password
-    self.password_hash = Digest::MD5.hexdigest( self.salt + self.password )
-  end
-
-  def confirmation_token
-    Digest::MD5.hexdigest( "#{id}#{email}#{username}#{salt}#{password_hash}" )
-  end
-
-  def self.random_salt
-    (0...5).map{65.+(rand(25)).chr}.join
-  end
-
-  def self.hash_password( salt, password )
-    Digest::MD5.hexdigest( salt.to_s + password.to_s ) 
-  end
-
   def self.authenticate(who, password)
     find_by_sql([ 'SELECT * FROM users WHERE ( username = ? OR email = ? ) AND MD5( CONCAT( salt, ? ) ) = password_hash AND status = ? ', who, who, password, STATUSES[:confirmed] ]).first 
   end
@@ -73,30 +53,30 @@ class User < ActiveRecord::Base
   def self.omniauth(auth)
     # at least the email is required to sign in an existing user
     if auth && auth['info'] && auth['info']['email'] 
-      user = User.find_by_email( auth['info']['email'] )
+      user         = User.find_by_email( auth['info']['email'] )
+      tmp_password = nil
 
       # new incoming user ^_^ 
       if user.nil? 
         # we need the nickname now
         if auth['info']['nickname']
-
-          email        = auth['info']['email']
-          username     = auth['info']['nickname']
-          tmp_password = (0...10).map{65.+(rand(25)).chr}.join    
-          salt         = self.random_salt
+          # generate a temporary password
+          tmp_password = (0...8).map{65.+(rand(25)).chr}.join
 
           user = User.create({ 
-            username: username, 
-            email: email, 
-            salt: salt,
-            password_hash: self.hash_password( salt, tmp_password ),
+            username: auth['info']['nickname'], 
+            email: auth['info']['email'], 
+            password: tmp_password,
+            password_confirmation: tmp_password,
             status: STATUSES[:confirmed], 
             level: LEVELS[:subscriber]
           })
+        
+          if user.valid?
+            profile = Profile.create({ user: user })
 
-          profile = Profile.create({ user: user })
-
-          update_omniauth_profile( auth, user, profile )
+            update_omniauth_profile( auth, user, profile )
+          end
         end
         # existing user
       else 
@@ -107,12 +87,16 @@ class User < ActiveRecord::Base
         update_omniauth_profile( auth, user, user.profile )
       end
 
-      user
+      [ user, tmp_password ]
     end
   end
 
   def is_admin?
     level == LEVELS[:admin]
+  end
+
+  def confirmation_token
+    Digest::MD5.hexdigest( "#{id}#{email}#{username}#{salt}#{password_hash}" )
   end
 
   def favorite?(source)
@@ -157,6 +141,14 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def create_salt
+    self.salt = (0...5).map{65.+(rand(25)).chr}.join
+  end
+  
+  def create_hashed_password
+    self.password_hash = Digest::MD5.hexdigest( self.salt + self.password )
+  end
 
   def self.update_omniauth_profile( auth, user, profile )
     # first of all, check if the user already has an authorization

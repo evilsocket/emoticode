@@ -8,4 +8,12 @@ class UserMailer < ActionMailer::Base
 
     mail( to: @user.email, subject: 'EmotiCODE Account Confirmation' )
   end
+
+  def omniauth_confirmation_email(user,provider,password)
+    @user     = user
+    @provider = provider
+    @password = password
+
+    mail( to: @user.email, subject: 'Welcome to EmotiCODE' )
+  end
 end

@@ -20,7 +20,11 @@
   </div>
 
   <%= form_for :session, :url => sign_in_path, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
-    <% if flash[:error] %>
+    <% if @user %>
+      <% @user.errors.full_messages.each do |msg| %>
+        <p class="error"><%= msg %></p>
+      <% end %>
+    <% elsif flash[:error] %>
       <p class="error"><%= flash[:error] %></p>
     <% end %>
     <fieldset class="pure-group">

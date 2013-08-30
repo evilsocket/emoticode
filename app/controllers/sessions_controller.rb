@@ -2,8 +2,12 @@ class SessionsController < ApplicationController
   def create
     omniauth = request.env['omniauth.auth']
     if omniauth
-      @user = User.omniauth(omniauth)
-      # TODO: Check if it's a new user and send temporary password
+      @user, temporary_password = User.omniauth(omniauth)
+      # this is a first time user, send him its temporary password
+      unless @user.nil? or !@user.valid? or temporary_password.nil?
+        UserMailer.omniauth_confirmation_email( @user, omniauth['provider'], temporary_password ).deliver
+        flash[:alert] = 'A temporary password has been sent to your email address.'
+      end
     else
       @user = User.authenticate( params[:session][:who], params[:session][:password] )
     end
