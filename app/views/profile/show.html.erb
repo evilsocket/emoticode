@@ -47,7 +47,7 @@
 
     <div id="sources">
       <% sources = @user.sources.where( :private => false ).page( params[:page] ) %>
-      <h2>Publie Sources</h2>
+      <h2>Public Sources</h2>
       <% if sources.any? %>
         <ul>
           <% sources.each do |source| %>
