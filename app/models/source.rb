@@ -20,6 +20,14 @@ class Source < ActiveRecord::Base
     "http://www.emoticode.net#{path}"
   end
 
+  def description!
+    if !description.nil? && !description.empty?
+      description
+    else
+      title
+    end
+  end
+
   def commentable_type
     Comment::COMMENTABLE_TYPES[:source]
   end

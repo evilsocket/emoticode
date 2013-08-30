@@ -63,9 +63,9 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 
 ### Feeds
 
-- [ ] Global
-- [ ] Per language feed
-- [ ] User profile feed
+- [x] Global
+- [x] Per language feed
+- [x] User profile feed
 - [ ] Group feed
 
 ### Cron Jobs
