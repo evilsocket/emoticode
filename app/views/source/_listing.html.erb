@@ -8,7 +8,7 @@
     <% if with_author %>
     <span class="author">
         <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile">
-            <img class="avatar" src="<%= source.user.avatar %>"/>
+            <%= avatar_tag source.user %>
             <%= truncate source.user.username, :length => 15 %>
         </a>
     </span>

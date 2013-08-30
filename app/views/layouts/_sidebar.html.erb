@@ -8,7 +8,7 @@
     <% @users.each do |user| %>
       <li>
     <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile">
-      <img class="avatar" src="<%= user.avatar %>"/>
+      <%= avatar_tag user %>
     </a>
     </li> 
   <% end %>

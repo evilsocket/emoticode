@@ -1,8 +1,8 @@
 <li id="comment-<%= comment.id %>" class="comment">
   <span class="author">
     <a href="<%= user_profile_path(username:comment.user.username) %>" title="<%= comment.user.username %> profile">
-        <img class="avatar" src="<%= comment.user.avatar %>"/>
-        <%= truncate comment.user.username, :length => 15 %>
+      <%= avatar_tag comment.user %>
+      <%= truncate comment.user.username, :length => 15 %>
     </a>
   </span>
 

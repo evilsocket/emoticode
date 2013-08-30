@@ -22,3 +22,4 @@ db/seeds.rb
 .DS_Store
 */.DS_Store
 app/assets/images/avatars/*.png
+public/assets/

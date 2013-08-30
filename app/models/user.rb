@@ -124,9 +124,9 @@ class User < ActiveRecord::Base
 
   def avatar
     if profile.avatar?
-      "/assets/avatars/#{id}.png"
+      "avatars/#{id}.png"
     else
-      "/assets/avatars/default.png"
+      "avatars/default.png"
     end
   end
 

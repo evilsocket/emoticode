@@ -14,7 +14,7 @@
           <% if user %>
           <div class="user">
             <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile">
-              <img class="avatar" src="<%= user.avatar %>"/>
+              <%= avatar_tag user %>
               <%= truncate user.username, :length => 15 %>
             </a>
           </div>

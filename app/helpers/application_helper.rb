@@ -122,6 +122,9 @@ module ApplicationHelper
     !@current_user.nil?
   end
 
+  def avatar_tag(user)
+    image_tag user.avatar, :class => 'avatar', :alt => "#{user.username} avatar."
+  end
 
   def nested_comments(object)
     # select every comment for this object

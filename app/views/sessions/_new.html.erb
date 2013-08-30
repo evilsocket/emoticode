@@ -13,7 +13,7 @@
     <ul>
       <% [ 'facebook', 'github' ].each do |provider| %>
       <li>
-      <%= link_to image_tag("/assets/icons/#{provider}#{logos_size}.png"), "/auth/#{provider}", :title => "Login with your #{provider.capitalize} account." %>
+      <%= link_to image_tag("icons/#{provider}#{logos_size}.png"), "/auth/#{provider}", :title => "Login with your #{provider.capitalize} account." %>
       </li>
       <% end %>
     </ul>

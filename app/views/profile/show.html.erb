@@ -2,7 +2,7 @@
   <div class="small-column">
     <div id="publisher">
       <span class="user">
-        <img class="avatar" src="<%= @user.avatar %>"/>
+        <%= avatar_tag @user %>
       </a>
       </span>
       <span class="info">
@@ -19,12 +19,12 @@
         Published <%= @user.sources.count %> <%= 'source'.pluralize( @user.sources.count ) %>
       </span>
       <span class="auths">
-        <%= link_to image_tag("/assets/icons/rss-s.png"), user_feed_path(:username=>@user.username), :title => "#{@user.username} RSS feed." %>
+        <%= link_to image_tag("icons/rss-s.png"), user_feed_path(:username=>@user.username), :title => "#{@user.username} RSS feed." %>
         <% @user.authorizations.each do |auth| %>
-          <%= link_to image_tag("/assets/icons/#{auth.provider}-s.png"), auth.url, :target => '_blank', :title => "Visit #{@user.username} #{auth.provider.capitalize} profile." %>
+          <%= link_to image_tag("icons/#{auth.provider}-s.png"), auth.url, :target => '_blank', :title => "Visit #{@user.username} #{auth.provider.capitalize} profile." %>
         <% end %>
         <% unless @user.profile.gplus.nil? or @user.profile.gplus.strip.empty? %>
-          <%= link_to image_tag("/assets/icons/googleplus-s.png"), "#{@user.profile.gplus}?rel=author", :title => "Visit #{@user.username} Google+ profile." %>
+          <%= link_to image_tag("icons/googleplus-s.png"), "#{@user.profile.gplus}?rel=author", :title => "Visit #{@user.username} Google+ profile." %>
         <% end %>
       </span>
     </div>
