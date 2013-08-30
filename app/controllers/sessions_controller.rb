@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
   def process_user
     if @user.nil? or !@user.valid?
-      flash[:alert] = 'Invalid username/password'
+      flash[:error] = 'Invalid username/password'
       render :template => 'sessions/new', :status => :unauthorized
     else
       sign_in(@user)

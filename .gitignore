@@ -17,6 +17,7 @@ server/
 tmp/
 tags
 config/initializers/omniauth.rb
+config/initializers/recaptcha.rb
 db/seeds.rb
 .DS_Store
 */.DS_Store

@@ -20,13 +20,18 @@
   </div>
 
   <%= form_for :session, :url => sign_in_path, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+    <% end %>
     <fieldset class="pure-group">
       <%= f.text_field :who, :placeholder => 'Username / Email' %>
       <%= f.password_field :password, :placeholder => 'Password' %>
     </fieldset>
 
     <a href="#">Password Recovery</a>
-
+    <% if modal %>
+      <%= link_to "Register", sign_up_path %>
+    <% end %>
     <%= f.submit "Sign in", :class => 'pure-button pure-button-primary' %>
   <% end %>
 <% end %> 

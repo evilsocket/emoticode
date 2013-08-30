@@ -4,9 +4,13 @@ EmoticodeRails::Application.routes.draw do
   controller :sessions do
     get    'sign_in'  => :new,     as: :sign_in
     post   'sign_in'  => :create
-    get    'sign_up'  => :new,     as: :sign_up
-    post   'sign_up'  => :create
     delete 'sign_out' => :destroy, as: :sign_out
+  end
+
+  controller :user do
+    get  'sign_up'        => :new,     as: :sign_up
+    post 'sign_up'        => :create
+    get  'confirm/:token' => :confirm, as: :confirm, constraints: { token: Patterns::CONFIRMATION_TOKEN_PATTERN } 
   end
 
   get '/auth/:provider/callback' => 'sessions#create'
@@ -32,8 +36,9 @@ EmoticodeRails::Application.routes.draw do
   end
 
   controller :profile do
-    get 'profile/:username'      => :show, as: :user_profile, constraints: { username: Patterns::ROUTE_PATTERN }
-    get 'profile/:username/feed' => :feed, as: :user_feed, constraints: { username: Patterns::ROUTE_PATTERN }
+    get 'profile/settings'       => :settings, as: :user_settings
+    get 'profile/:username'      => :show,     as: :user_profile, constraints: { username: Patterns::ROUTE_PATTERN }
+    get 'profile/:username/feed' => :feed,     as: :user_feed, constraints: { username: Patterns::ROUTE_PATTERN }
   end
 
   controller :search do

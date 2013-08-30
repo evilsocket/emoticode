@@ -14,6 +14,7 @@ gem 'will_paginate', '~> 3.0'     # pagination
 gem 'omniauth'                    # social auth
 gem 'omniauth-facebook'           # facebook connect
 gem "omniauth-github", "~> 1.1.1" # github connect
+gem "recaptcha", :require => "recaptcha/rails"
 gem 'fastimage_resize'            # avatar resizing
 gem 'puma'                        # rack server
 

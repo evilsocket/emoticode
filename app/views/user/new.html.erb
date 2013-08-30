@@ -1,0 +1,31 @@
+<div id="register">
+  <h1>Sign Up</h1>
+  <div class="connect">
+    <ul>
+      <% [ 'facebook', 'github' ].each do |provider| %>
+      <li>
+      <%= link_to image_tag("/assets/icons/#{provider}.png"), "/auth/#{provider}", :title => "Signup with your #{provider.capitalize} account." %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= form_for @user, :url => sign_up_path, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
+    <% @user.errors.full_messages.each do |msg| %>
+      <p class="error"><%= msg %></p>
+    <% end %>
+    <fieldset class="pure-group">
+      <%= f.text_field :username, :placeholder => 'Username' %>
+      <%= f.text_field :email, :placeholder => 'Email' %>
+      <%= f.password_field :password, :placeholder => 'Password' %>
+      <%= f.password_field :password_confirmation, :placeholder => 'Confirmation' %>
+    </fieldset>
+
+    <center>
+    <%= recaptcha_tags %>
+    </center>
+    <br/>
+
+    <%= f.submit "Sign Up", :class => 'pure-button pure-button-primary' %>
+  <% end %>
+</div>

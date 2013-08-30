@@ -20,7 +20,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Authentication with Facebook
 - [x] **New!** Authentication with Github
 - [ ] Profile Settings
-- [ ] Registration
+- [x] Registration
 - [ ] Password Recovery
 - [ ] Ratings Ajax Controller
 - [ ] **New!** Custom Homepage
@@ -50,8 +50,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 
 ### Mailers
 
-- [ ] User Confirmation Token
-- [ ] User Registration
+- [x] User Registration
 - [ ] User temp password for social connect
 - [ ] Comment to source
 - [ ] Comment to profile

@@ -35,7 +35,7 @@ module ApplicationHelper
                  elsif @language
                    "#{@language.title} Snippets | #{base_title}"
 
-                 elsif @user
+                 elsif @user and !@user.new_record?
                    "#{@user.username} | #{base_title}"
 
                  else
@@ -66,7 +66,7 @@ module ApplicationHelper
       description = "#{@language.title} Snippets from EmotiCODE, a #{@language.title} code snippet search engine but mostly a place where developers can find help for what they need and contribute with their own contents."
       keywords    = "#{@language.title} snippets, #{@language.title} code, #{@language.title} codes, #{@language.title} code snippets, #{@language.title} snippet archive" 
 
-    elsif @user
+    elsif @user and !@user.new_record?
       description = "#{@user.username} EmotiCODE Profile"
 
     end

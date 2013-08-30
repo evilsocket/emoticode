@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   scope :latest, :order => 'created_at DESC' 
-  
+
   has_many :sources
   has_many :favorites
   has_many :authorizations
@@ -10,16 +10,44 @@ class User < ActiveRecord::Base
                :editor => 2, 
                :subscriber => 3 
   }
-  STATUSES = { :not_confirmed => 1, 
-               :confirmed     => 2,
-               :banned        => 3,
-               :deleted       => 4
+  STATUSES = { :unconfirmed => 1, 
+               :confirmed   => 2,
+               :banned      => 3,
+               :deleted     => 4
   }
 
-  validates_uniqueness_of :username, :email
-  validates_format_of     :email,    :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  validates_inclusion_of  :level,    :in => LEVELS.values.freeze
-  validates_inclusion_of  :status,   :in => STATUSES.values.freeze
+  validates :email, presence: true, 
+                    format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
+                    uniqueness: { case_sensitive: false }
+
+  validates :username, presence: true, 
+                       format: { with: Patterns::ROUTE_PATTERN },
+                       uniqueness: { case_sensitive: false },
+                       length: { :minimum => 5, :maximum => 255 }
+
+  validates :password, presence: { :on => :create },
+                       length: { :minimum => 5, :maximum => 255, :allow_nil => true },
+                       confirmation: true
+
+  validates_inclusion_of    :level,    :in => LEVELS.values.freeze
+  validates_inclusion_of    :status,   :in => STATUSES.values.freeze
+
+  attr_accessor :password, :password_confirmation
+
+  before_create :create_salt
+  before_create :create_hashed_password
+
+  def create_salt
+    self.salt = (0...5).map{65.+(rand(25)).chr}.join
+  end
+  
+  def create_hashed_password
+    self.password_hash = Digest::MD5.hexdigest( self.salt + self.password )
+  end
+
+  def confirmation_token
+    Digest::MD5.hexdigest( "#{id}#{email}#{username}#{salt}#{password_hash}" )
+  end
 
   def self.random_salt
     (0...5).map{65.+(rand(25)).chr}.join
@@ -31,6 +59,15 @@ class User < ActiveRecord::Base
 
   def self.authenticate(who, password)
     find_by_sql([ 'SELECT * FROM users WHERE ( username = ? OR email = ? ) AND MD5( CONCAT( salt, ? ) ) = password_hash AND status = ? ', who, who, password, STATUSES[:confirmed] ]).first 
+  end
+
+  def self.activate(token)
+    user = find_by_sql([ 'SELECT * FROM users WHERE MD5( CONCAT( id, email, username, salt, password_hash ) )  = ? AND status = ? ', token, STATUSES[:unconfirmed] ]).first
+    unless user.nil?
+      user.status = STATUSES[:confirmed]
+      user.save!
+    end
+    user
   end
 
   def self.omniauth(auth)
@@ -58,10 +95,10 @@ class User < ActiveRecord::Base
           })
 
           profile = Profile.create({ user: user })
-          
+
           update_omniauth_profile( auth, user, profile )
         end
-      # existing user
+        # existing user
       else 
         # confirm user if not yet confirmed
         user.status = STATUSES[:confirmed]
@@ -97,7 +134,7 @@ class User < ActiveRecord::Base
   def language_statistics
     total_hits = 0
     stats      = {}
-  
+
     # loop by language instead of looping by source
     # since a user could have a huge number of entries,
     # but languages number is known ( and lower ).
