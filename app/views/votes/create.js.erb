@@ -1,0 +1,5 @@
+<% if @vote.valid? %>
+  alert( 'Thank you for voting!' );
+<% else %>
+  alert( "<%= @vote.errors.full_messages.last.html_safe %>" );
+<% end %>

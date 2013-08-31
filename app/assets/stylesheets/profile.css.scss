@@ -68,19 +68,44 @@
                 font-size: 30px;
                 margin-top: 20px;
 
-                span {
+                form {
+                    display: inline;
+
+                    a {
+                        background: transparent;
+                        border: none;
+                        color: black;
+                        display: inline-block;
+                        position: relative;
+                        cursor: pointer;
+                        font-size: 29px;
+                        text-decoration: none;    
+                    }
+
+                    a:hover:before,
+                    a:hover ~ a:before {
+                        content: "\2605";
+                        position: absolute;
+                        text-decoration: none;
+                    }
+                }
+
+                a {
+                    background: transparent;
+                    border: none;
                     color: black;
                     display: inline-block;
                     position: relative;
-                    width: 1.1em;
                     cursor: pointer;
-                    font-size: 28px;
+                    font-size: 29px;
+                    text-decoration: none;    
                 }
 
-                span:hover:before,
-                span:hover ~ span:before {
+                a:hover:before,
+                a:hover ~ a:before {
                     content: "\2605";
                     position: absolute;
+                    text-decoration: none;
                 }
             }
         }

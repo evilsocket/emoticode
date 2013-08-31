@@ -71,13 +71,20 @@
       <h3>Rate Me!</h3>
     </div>
     <div class="rating">
-      <%= @user.username %> has an average rating of 92%
+      <%= @user.username %> has an average rating of <%= ( @user.rating.average * 100 ).round 1 %>%
       <div class="stars">
-        <span class="5">☆</span>
-        <span class="4">☆</span>
-        <span class="3">☆</span>
-        <span class="2">☆</span>
-        <span class="1">☆</span>
+        <% rating_stars( @user.rating ).each_with_index do |star,n| %>
+          <% if signed_in? %>
+          <%= form_for Vote.new, :remote => true do |f| %>
+            <%= f.hidden_field :rating_id, as: :hidden, :value => @user.rating.id %>
+            <%= f.hidden_field :vote,      as: :hidden, :value => 5 - n %>
+            <%= f.submit id: "submit_#{n}", style: 'display: none;' %>
+            <%= link_to_function star.html_safe, "$('#submit_#{n}').click(); return false;" %>
+          <% end %>
+          <% else %>
+            <%= link_to_function star.html_safe, 'showLoginModal()' %>            
+          <% end %>
+        <% end %>
       </div>
     </div>
 

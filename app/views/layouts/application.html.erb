@@ -8,6 +8,7 @@
   <% metas.each do |meta| %>
     <meta <% meta.each { |attr,value| %><%= attr %>="<%= value %>" <% } %>/>
   <% end %>
+  <%= auto_discovery_link_tag(:rss, "http://emoticode.net/") %>
 </head>
 <body>
 <nav id="navbar">

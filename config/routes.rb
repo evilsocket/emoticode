@@ -1,4 +1,6 @@
 EmoticodeRails::Application.routes.draw do
+  get "votes/new"
+  get "ratings/create"
   root 'home#index' 
 
   controller :sessions do
@@ -32,8 +34,9 @@ EmoticodeRails::Application.routes.draw do
   end
 
   resource :comments
-  resource :passwords, :only => [:new, :create]
+  resource :votes
 
+  resource :passwords, :only => [:new, :create]
   controller :passwords do
     get  'recovery/:token' => :edit, as: :recovery, constraints: { token: Patterns::CONFIRMATION_TOKEN_PATTERN } 
     post 'recovery/:token' => :update, constraints: { token: Patterns::CONFIRMATION_TOKEN_PATTERN } 

@@ -114,6 +114,10 @@ class User < ActiveRecord::Base
     Digest::MD5.hexdigest( "#{id}#{email}#{username}#{salt}#{password_hash}" )
   end
 
+  def rating
+    Rating.find_or_create_by_rateable_type_and_rateable_id( Rating::RATEABLE_TYPES[:user], id )
+  end
+
   def favorite?(source)
     @favorites ||= favorites.all
     @favorites.each do |fav| 

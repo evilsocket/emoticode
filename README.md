@@ -22,7 +22,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Profile Settings
 - [x] Registration
 - [x] Password Recovery
-- [ ] Ratings Ajax Controller
+- [x] Ratings Ajax Controller
 - [ ] **New!** Custom Homepage
 
 ### Pages

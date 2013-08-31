@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130830094348) do
+ActiveRecord::Schema.define(version: 20130831171809) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -83,36 +83,19 @@ ActiveRecord::Schema.define(version: 20130830094348) do
 
   add_index "profiles", ["user_id"], name: "user_id", using: :btree
 
-  create_table "rating_votes", force: true do |t|
-    t.integer "rating_id",            null: false
-    t.integer "user_id"
-    t.string  "user_ip",   limit: 15
-    t.float   "value",                null: false
-    t.integer "timestamp",            null: false
-  end
-
-  add_index "rating_votes", ["rating_id"], name: "rating_id", using: :btree
-  add_index "rating_votes", ["timestamp"], name: "timestamp", using: :btree
-  add_index "rating_votes", ["user_id"], name: "user_id", using: :btree
-  add_index "rating_votes", ["user_ip"], name: "user_ip", using: :btree
-
   create_table "ratings", force: true do |t|
-    t.integer "object_type", limit: 1, null: false
-    t.integer "object_id",             null: false
-    t.integer "type",        limit: 1, null: false
-    t.integer "visibility",  limit: 1
-    t.string  "data"
+    t.integer "rateable_type", limit: 1, null: false
+    t.integer "rateable_id",             null: false
     t.integer "votes"
     t.float   "average"
-    t.integer "created_at",            null: false
+    t.integer "created_at",              null: false
   end
 
   add_index "ratings", ["average"], name: "average", using: :btree
   add_index "ratings", ["created_at"], name: "created_at", using: :btree
-  add_index "ratings", ["object_id"], name: "object_id", using: :btree
-  add_index "ratings", ["object_type", "object_id"], name: "object_type_2", using: :btree
-  add_index "ratings", ["object_type"], name: "object_type", using: :btree
-  add_index "ratings", ["visibility"], name: "visibility", using: :btree
+  add_index "ratings", ["rateable_id"], name: "object_id", using: :btree
+  add_index "ratings", ["rateable_type", "rateable_id"], name: "object_type_2", using: :btree
+  add_index "ratings", ["rateable_type"], name: "object_type", using: :btree
   add_index "ratings", ["votes"], name: "votes", using: :btree
 
   create_table "social_cron", force: true do |t|
@@ -175,5 +158,16 @@ ActiveRecord::Schema.define(version: 20130830094348) do
   add_index "users", ["password_hash"], name: "hash", using: :btree
   add_index "users", ["status"], name: "status", using: :btree
   add_index "users", ["username", "email"], name: "username", unique: true, using: :btree
+
+  create_table "votes", force: true do |t|
+    t.integer "rating_id",  null: false
+    t.integer "user_id"
+    t.float   "value",      null: false
+    t.integer "created_at", null: false
+  end
+
+  add_index "votes", ["created_at"], name: "timestamp", using: :btree
+  add_index "votes", ["rating_id"], name: "rating_id", using: :btree
+  add_index "votes", ["user_id"], name: "user_id", using: :btree
 
 end
