@@ -9,6 +9,7 @@
 _site/
 bench/
 bin/
+config/secrets.yml
 config/database.yml
 db/*.sqlite3
 log/*.log
@@ -23,3 +24,4 @@ db/seeds.rb
 */.DS_Store
 app/assets/images/avatars/*.png
 public/assets/
+

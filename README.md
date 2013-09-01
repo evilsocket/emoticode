@@ -72,7 +72,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 ### Cron Jobs
 
 - [ ] Publish to Social Networks
-- [ ] Update source views with Analytics API
+- [x] Update source views with Analytics API
 
 ### Static Pages
 
