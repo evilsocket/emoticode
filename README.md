@@ -1,4 +1,4 @@
-# EmotiCODE v2.0
+# EmotiCODE v2.0 [![Code Climate](https://codeclimate.com/github/evilsocket/emoticode.png)](https://codeclimate.com/github/evilsocket/emoticode)
 
 This is the code repository for v2.0 of [emoticode.net](http://www.emoticode.net/) which is going to be published as soon as it will be finished.  
 It's a complete rewrite of the original website, which was written in PHP, in **Ruby on Rails** using MySQL
