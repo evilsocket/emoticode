@@ -1,0 +1,37 @@
+title:
+    default: emoticode - Snippets and Source Code Search Engine
+   
+description:
+    default: EmotiCODE is a code snippet search engine but mostly a place where developers can find help for what they need and contribute with their own contents.
+    language: All %s Snippets from EmotiCODE, a %s code snippet search engine but mostly a place where developers can find help for what they need and contribute with their own contents.
+    user: EmotiCODE %s Profile
+    search: Searching for %s inside EmotiCODE, a source code snippet search engine but mostly a place where developers can find help for what they need and contribute with their own contents.
+
+keywords:
+    default: emoticode, snippets, code snippets, source, source code, programming, programmer, %s
+    language: Every %s snippets, %s code, %s codes, %s code snippets, %s snippet archive
+
+default:
+- :charset: utf-8
+- :property: og:locale
+  :content: en_US
+- :property: og:site_name
+  :content: emoticode
+- :property: og:image
+  :content: http://www.emoticode.net/assets/style/logo-200.png?v=2.1
+- :property: fb_app_id
+  :content: '541383999216397'
+- :property: fb:app_id
+  :content: '541383999216397'
+- :property: og:url
+  :content: http://www.emoticode.net/
+- :name: language
+  :content: en
+- :name: robots
+  :content: noodp,noydr
+- :name: alexaVerifyID
+  :content: esKfarSO5NWalbJaefzTwaUzso
+- :name: msvalidate.01
+  :content: 9C2A48C8F5733D97CD13C5EB3699308D
+- :name: google-site-verification
+  :content: Uy9LP869XtH59q7mfCgyOd4CS5XifoRgROn0wJ8d8MU

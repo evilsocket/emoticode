@@ -48,7 +48,6 @@ module ApplicationHelper
 
   def page_title
     base_title = 'emoticode'
-    subtitle   = 'Snippets and Source Code Search Engine'
 
     page_title = if @source and !@source.new_record?
                    "#{@source.language.title} - #{@source.title} | #{base_title}"
@@ -63,7 +62,7 @@ module ApplicationHelper
                    "Search '#{@phrase}' | #{base_title}"
 
                  else
-                   "#{base_title} - #{subtitle}"
+                   Rails.application.config.seo['title']['default'] 
                  end
 
     if params[:page].to_i > 1 
@@ -74,9 +73,11 @@ module ApplicationHelper
   end
 
   def metas
+    seo = Rails.application.config.seo
+
     title       = page_title
-    description = "EmotiCODE is a code snippet search engine but mostly a place where developers can find help for what they need and contribute with their own contents."
-    keywords    = "emoticode, snippets, code snippets, source, source code, programming, programmer, #{@languages.map(&:title).join(', ')}"
+    description = seo['description']['default']
+    keywords    = seo['keywords']['default'] % @languages.map(&:title).join(', ')
 
     if @source and !@source.new_record?
       keywords    = @source.tags.map(&:value).join(', ')
@@ -87,14 +88,14 @@ module ApplicationHelper
                     end
 
     elsif @language
-      description = "#{@language.title} Snippets from EmotiCODE, a #{@language.title} code snippet search engine but mostly a place where developers can find help for what they need and contribute with their own contents."
-      keywords    = "#{@language.title} snippets, #{@language.title} code, #{@language.title} codes, #{@language.title} code snippets, #{@language.title} snippet archive" 
+      description = seo['description']['language'] % @language.title, @language.title
+      keywords    = seo['keywords']['language'] % @language.title, @language.title, @language.title, @language.title, @language.title
 
     elsif @user and !@user.new_record?
-      description = "#{@user.username} EmotiCODE Profile"
+      description = seo['description']['user'] % @user.username
 
     elsif @phrase
-      description = "Searching for #{@phrase} inside EmotiCODE, a source code snippet search engine but mostly a place where developers can find help for what they need and contribute with their own contents." 
+      description = seo['description']['search'] % @phrase
 
     end
 
@@ -102,23 +103,11 @@ module ApplicationHelper
       description << " ( Page #{params[:page]} )"
     end
 
-    [
-      { charset: 'utf-8' },
-      { property: 'og:locale', content: 'en_US' },
-      { property: 'og:site_name', content: 'emoticode' },
-      { property: 'og:image', content:'http://www.emoticode.net/assets/style/logo-200.png?v=2.1' },
+    seo['default'] + [
       { property: 'og:description', content: description },
-      { property: 'fb_app_id', content: '541383999216397' },
-      { property: 'fb:app_id', content: '541383999216397' },
-      { property: 'og:url', content: 'http://www.emoticode.net/' },
-      { name: 'language', content: 'en' },
       { name: 'title', content: title },
       { name: 'description', content: description },
       { name: 'keywords', content: keywords },
-      { name: 'robots', content: 'noodp,noydr' },
-      { name: 'alexaVerifyID', content: 'esKfarSO5NWalbJaefzTwaUzso' },
-      { name: 'msvalidate.01', content: '9C2A48C8F5733D97CD13C5EB3699308D' },
-      { name: 'google-site-verification', content: 'Uy9LP869XtH59q7mfCgyOd4CS5XifoRgROn0wJ8d8MU' }
     ]
   end 
 
@@ -132,14 +121,21 @@ module ApplicationHelper
   end
 
   def tag_cloud( tags, min_size = 9, max_size = 20 )
-    log_min_occurs = Math.log( tags.map(&:sources_count).min )
-    log_max_occurs = Math.log( tags.map(&:sources_count).max )
-    log_delta      = log_max_occurs - log_min_occurs
+    min, max = tags.map(&:sources_count).minmax
+    log_min = Math.log( min )
+    log_max = Math.log( max )
+    log_delta = log_max - log_min
+    size_delta = max_size - min_size
     cloud = {}
 
     tags.each do |tag|
-      weight = ( Math.log(tag.sources_count) - log_min_occurs ) / log_delta
-      size   = weight.nan? ? min_size : min_size + ( ( max_size - min_size ) * weight ).round
+      weight = ( Math.log(tag.sources_count) - log_min ) / log_delta
+      size = if weight.nan?
+               min_size
+             else
+               min_size + ( size_delta * weight ).round
+             end
+      
       cloud[tag.value] = [ tag, size, tag.sources_count ]
     end
 
