@@ -40,7 +40,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Source Code Delete
 - [x] Source Related
 - [ ] Search Engine
-- [ ] Sitemap
+- [x] Sitemap
 
 ### Comments
 

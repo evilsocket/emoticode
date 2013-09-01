@@ -1,7 +1,11 @@
 EmoticodeRails::Application.routes.draw do
-  get "votes/new"
-  get "ratings/create"
   root 'home#index' 
+
+  controller :sitemaps do
+    get 'sitemap_index'          => :index,     as: :sitemap_index
+    get 'sitemap_snippets-:page' => :snippets,  as: :sitemap_snippets, constraints: { page: Patterns::ID_PATTERN }
+    get 'sitemap_languages'      => :languages, as: :sitemap_languages
+  end
 
   controller :sessions do
     get    'sign_in'  => :new,     as: :sign_in
