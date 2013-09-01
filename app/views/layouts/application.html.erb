@@ -69,6 +69,19 @@
             %>
 
             <%=raw linkset.map { |link| "<li>#{link}</li>" }.join '<li>&bull;</li>' %>
+
+            <% if signed_in? and @current_user.is_admin? %>
+              <li>&bull;</li>
+              <li>
+                <div style="float:left;">
+                  <script id="_wauura">var _wau = _wau || []; _wau.push(["small", "25cdcldn25dq", "ura"]);
+                  (function() {var s=document.createElement("script"); s.async=true;
+                  s.src="http://widgets.amung.us/small.js";
+                  document.getElementsByTagName("head")[0].appendChild(s);
+                  })();</script>
+                </div>
+              </li>
+            <% end %>
         </ul>
         <ul class="right">
           <%=raw @pages.map { |page| "<li>#{ link_to(page.title, page_show_path(page: page.name) ) }</li>" }.join '<li>&bull;</li>' %>
@@ -89,12 +102,11 @@
 </div>
 
 <footer id="footer">
-   <p>
-    	Copyright &copy; EmotiCODE - A collaborative source code snippets aggregator and search engine.
-    	 
-    	<br/>
-    	Powered by <strong><a href="http://gibson-db.in/" title="Gibson Cache Server">Gibson Cache Server</a></strong>
-    </p> 
+  <p>
+    Copyright &copy; EmotiCODE - A collaborative source code snippets aggregator and search engine.
+    <br/>
+    Powered by <strong><a href="http://gibson-db.in/" title="Gibson Cache Server">Gibson Cache Server</a></strong>
+  </p> 
 </footer>
 
 <% if flash[:alert] %>

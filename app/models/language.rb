@@ -5,7 +5,7 @@ class Language < ActiveRecord::Base
   scope :popular, -> { order('sources_count DESC') }
 
   def most_active_users( limit = 3 )
-    Rails.cache.fetch "most_#{limit}_active_user_for_language_#{id}", :expires_in => 24.hours do 
+    Rails.cache.fetch "stats_of_#{limit}_users_for_language_#{id}", :expires_in => 24.hours do 
       User.
         joins(:sources).
         select('users.*, COUNT(sources.id) AS hits').
@@ -13,9 +13,9 @@ class Language < ActiveRecord::Base
         where( 'sources.private = 0' ).
         where( 'users.is_bot = 0' ).
         group('users.id').
-        order('hits DESC').
+        order('COUNT(sources.id) DESC').
         limit( limit ).
-        load
+        to_a
     end
   end
 end
