@@ -4,6 +4,8 @@
       <h3>Latest Users</h3>
     </div>
   <% end %>
+
+  <% cache "last_users_#{User.count}" do %>
   <ul class="avatars">
     <% @users.each do |user| %>
       <li>
@@ -11,8 +13,9 @@
       <%= avatar_tag user %>
     </a>
     </li> 
-  <% end %>
+    <% end %>
   </ul>
+  <% end %>
 
   <br style="clear:both"/>
 

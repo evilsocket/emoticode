@@ -1,6 +1,6 @@
 class FavoriteController < ApplicationController
   before_filter :authenticate!
-
+  
   def make
     respond_to do |format|
       format.html { redirect_to '/' }

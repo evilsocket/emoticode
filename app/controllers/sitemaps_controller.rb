@@ -25,8 +25,9 @@ class SitemapsController < ApplicationController
   def snippets
     respond_to do |format|
       format.xml {
+        @page    = params[:page]
         @pages   = if params[:page].to_i == 1 then Page.all else [] end
-        @sources = Source.where(:private => false).paginate( :page => params[:page], :per_page => ITEMS_PER_PAGE )
+        @sources = Source.where(:private => false).joins(:language).paginate( :page => params[:page], :per_page => ITEMS_PER_PAGE )
       }
     end
   end

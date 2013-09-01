@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # protect from CSRF attacks
   protect_from_forgery with: :exception
   # initialize instance variables that are globals to the whole app
-  before_filter :initialize_globals
+  before_filter :create_globals
   # if a RecordNotFound exception is raised, automatically render the 404 page
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
@@ -10,14 +10,14 @@ class ApplicationController < ActionController::Base
     render :file => 'public/404.html', :status => :not_found, :layout => false
   end
 
-  def initialize_globals
+  def create_globals
     @languages    = Language.all
     @pages        = Page.all
     @users        = User.where( :status => User::STATUSES[:confirmed] ).joins(:profile).order('created_at DESC').limit(20) 
     @current_user = User.find_by_id( session[:id] )
     if @current_user.nil? == false
       @current_user.last_seen_at = Time.now
-      @current_user.save
+      @current_user.save(:validate => false)
     end
   end
 
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
     @current_user = user
     @current_user.last_login = Time.now
     @current_user.last_login_ip = request.remote_ip
-    @current_user.save
+    @current_user.save(:validate => false)
 
     session[:id] = @current_user.id
   end

@@ -1,8 +1,11 @@
 <% 
-    show_views  = false if local_assigns[:show_views].nil?  
-    desc_cut    = 100 if local_assigns[:desc_cut].nil? 
-    with_author = true if local_assigns[:with_author].nil?
+  show_views  = false if local_assigns[:show_views].nil?  
+  desc_cut    = 100 if local_assigns[:desc_cut].nil? 
+  with_author = true if local_assigns[:with_author].nil?
+
+  cache "source_listibg_#{show_views}_#{desc_cut}_#{with_author}_#{source.id}_#{@current_user.id rescue 0}" do
 %>
+
 <li>
 <div class="source">
     <% if with_author %>
@@ -49,3 +52,4 @@
     </span>
 </div>
 </li>
+<% end %>

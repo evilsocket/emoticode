@@ -119,11 +119,7 @@ class User < ActiveRecord::Base
   end
 
   def favorite?(source)
-    @favorites ||= favorites.load
-    @favorites.each do |fav| 
-      return true unless fav.source != source
-    end
-    false
+    Favorite.where( :user_id => self.id, :source_id => source.id ).any?
   end
 
   def avatar
@@ -135,28 +131,30 @@ class User < ActiveRecord::Base
   end
 
   def language_statistics
-    total_hits = 0
-    stats      = {}
+    Rails.cache.fetch "user_#{self.id}_stats_#{self.sources.count}" do
+      total_hits = 0
+      stats      = {}
 
-    # loop by language instead of looping by source
-    # since a user could have a huge number of entries,
-    # but languages number is known ( and lower ).
-    Language.all.each do |language|
-      count = language.sources.where( :user_id => id ).count
-      stats[language] ||= 0
-      stats[language] +=  count
-      total_hits += count
-    end
-
-    stats.each do |language,hits|
-      if hits > 0  
-        stats[language] = ( ( hits * 100.0 ) / total_hits ).round 1
-      else
-        stats.delete language
+      # loop by language instead of looping by source
+      # since a user could have a huge number of entries,
+      # but languages number is known ( and lower ).
+      Language.all.each do |language|
+        count = language.sources.where( :user_id => id ).count
+        stats[language] ||= 0
+        stats[language] +=  count
+        total_hits += count
       end
-    end
 
-    stats.sort_by(&:last).reverse
+      stats.each do |language,hits|
+        if hits > 0  
+          stats[language] = ( ( hits * 100.0 ) / total_hits ).round 1
+        else
+          stats.delete language
+        end
+      end
+
+      stats.sort_by(&:last).reverse
+    end
   end
 
   private

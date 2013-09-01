@@ -19,6 +19,7 @@
                 <%= navbar_language_link language %>
             </li>
         <% end %>
+        <% cache "all_langs_#{Source.count}" do %>
         <li id="show-all-langs">
             <a href="#" onclick="return false;">All &raquo;</a>
             <div id="all-langs">
@@ -43,7 +44,8 @@
                         %>
                 </table>
             </div>
-        </li>
+          </li>
+        <% end %>
     </ul> 
 </nav>
 <nav id="sub-navbar">
