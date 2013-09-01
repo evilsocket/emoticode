@@ -48,6 +48,9 @@ module ApplicationHelper
                  elsif @user and !@user.new_record?
                    "#{@user.username} | #{base_title}"
 
+                 elsif @phrase
+                   "Search '#{@phrase}' | #{base_title}"
+
                  else
                    "#{base_title} - #{subtitle}"
                  end
@@ -78,6 +81,9 @@ module ApplicationHelper
 
     elsif @user and !@user.new_record?
       description = "#{@user.username} EmotiCODE Profile"
+
+    elsif @phrase
+      description = "Searching for #{@phrase} inside EmotiCODE, a source code snippet search engine but mostly a place where developers can find help for what they need and contribute with their own contents." 
 
     end
 

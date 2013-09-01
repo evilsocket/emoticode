@@ -33,8 +33,7 @@ EmoticodeRails::Application.routes.draw do
   end
 
   controller :search do
-    # TODO
-    get 'search/:what' => :search, as: :search, constraints: { what: Patterns::ROUTE_PATTERN }
+    get 'search(/:what)' => :search, as: :search
   end
 
   resource :comments

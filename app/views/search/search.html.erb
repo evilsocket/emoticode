@@ -1,0 +1,23 @@
+<section id="search-archive">
+  <div class="huge-column">
+    <h1>Search for "<%= @phrase %>"</h1>
+    <% if @sources.any? %>
+    <ul>
+      <% @sources.each do |source| %>
+        <%= render :partial => "source/listing", :locals => { :source => source, :desc_cut => 300, :show_views => true } %>
+      <% end %>
+    </ul>
+    <% else %>
+      <em>Nothing found.</em>
+    <% end %>
+  </div>
+
+  <%= render :partial => 'layouts/sidebar', :locals => { with_heading: true } %>
+</section>
+
+<br style="clear:both"/>
+
+<section class="pager">
+  <%= will_paginate @sources %>
+</section>
+

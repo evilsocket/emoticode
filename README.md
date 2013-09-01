@@ -39,7 +39,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Source Code Update
 - [x] Source Code Delete
 - [x] Source Related
-- [ ] Search Engine
+- [x] Search Engine
 - [x] Sitemap
 
 ### Comments

@@ -1,0 +1,41 @@
+#search-archive{
+    h1 {
+        padding-left: 0.4em;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    div.source {
+        margin-bottom: 15px;
+        margin-right: 25px;
+        position: relative;
+        width: 85%;
+
+        span.info {
+            a.title {
+                font-size: 13px;
+            }
+
+            span.description {
+                font-size: 13px;
+                margin-bottom: 5px;
+            }
+
+            span.meta {
+                position: absolute;
+                bottom: 0;
+                float:right;
+                font-size: 11px;                    
+                text-align: right;
+
+                span.date {
+
+                }
+            }
+        }
+    }
+}
+

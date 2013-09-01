@@ -20,6 +20,22 @@ class Source < ActiveRecord::Base
 
   self.per_page = 10
 
+  def self.search( phrase, langs )
+    base = self
+      .joins(:tags)
+      .select( sanitize_sql_array(['sources.*, MATCH(sources.title) AGAINST ( ? IN BOOLEAN MODE ) as title_score, MATCH(sources.description) AGAINST ( ? IN BOOLEAN MODE ) AS desc_score', phrase, phrase]) )
+      .where([ "( MATCH(sources.title) AGAINST ( ? IN BOOLEAN MODE ) OR MATCH(sources.description) AGAINST ( ? IN BOOLEAN MODE ) ) OR tags.value IN ( ? )", phrase, phrase, phrase.split(/\s/) ])
+
+
+    unless langs.empty?
+      base = base.where([ "sources.language_id IN ( ? )", langs.map(&:id) ])
+    end
+
+    base
+      .order( 'title_score DESC, desc_score DESC' )
+      .group( 'sources.id' )
+  end
+
   def path
     "/#{language.name}/#{name}.html"
   end

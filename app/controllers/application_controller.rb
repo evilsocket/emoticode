@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   # a method to fetch languages by their names without performing a
   # new query since all languages are loaded as globals
-  def langs_by_names(*names)
+  def langs_by_names(names)
     @languages.select { |lang| names.include? lang.name.to_sym }
   end
 
