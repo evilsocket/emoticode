@@ -132,12 +132,13 @@ module ApplicationHelper
   end
 
   def tag_cloud( tags, min_size = 9, max_size = 20 )
-    min_occurs = tags.map(&:sources_count).min
-    max_occurs = tags.map(&:sources_count).max
+    log_min_occurs = Math.log( tags.map(&:sources_count).min )
+    log_max_occurs = Math.log( tags.map(&:sources_count).max )
+    log_delta      = log_max_occurs - log_min_occurs
     cloud = {}
 
     tags.each do |tag|
-      weight = ( Math.log(tag.sources_count) - Math.log(min_occurs) ) / ( Math.log(max_occurs) - Math.log(min_occurs) )
+      weight = ( Math.log(tag.sources_count) - log_min_occurs ) / log_delta
       size   = weight.nan? ? min_size : min_size + ( ( max_size - min_size ) * weight ).round
       cloud[tag.value] = [ tag, size, tag.sources_count ]
     end

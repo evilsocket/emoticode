@@ -1,12 +1,13 @@
 class HomeController < ApplicationController
   def index
-    @recent  = Source.where( :private => false ).joins(:language,:user => :profile).page( params[:page] )
-    @popular = Source.where( :private => false ).joins(:language,:user => :profile).where( 'sources.created_at >= ?', Time.now.to_i - 3600 * 24 * 60 ).popular.page( params[:page] )
-    @cloud   = Rails.cache.fetch 'shuffled_cloud_with_70_items', :expires_in => 24.hours do 
+    base  = Source.where( :private => false ).joins(:language,:user => :profile)
+
+    @recent  = base.page( params[:page] )
+    @popular = base.where( 'sources.created_at >= ?', 2.months.ago.to_i ).popular.page( params[:page] )
+    @cloud   = Rails.cache.fetch '70_shuffled_tags_by_sources_count_and_weight', :expires_in => 1.week do 
       Tag.
         joins(:sources).
         group( 'tags.id' ).
-        where( 'sources.language_id NOT IN ( ? )', langs_by_names( :css, :html, :javascript, :actionscript, 'actionscript-3' ).map(&:id) ).
         order( 'sources_count DESC, weight DESC' ).
         limit( 70 ).
         to_a.
