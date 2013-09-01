@@ -35,9 +35,9 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [ ] User Badges
 - [x] Source Code View
 - [x] Embeddable Source Code
-- [ ] Source Code Create
-- [ ] Source Code Update
-- [ ] Source Code Delete
+- [x] Source Code Create
+- [x] Source Code Update
+- [x] Source Code Delete
 - [x] Source Related
 - [ ] Search Engine
 - [ ] Sitemap

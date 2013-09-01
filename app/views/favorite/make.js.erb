@@ -1,4 +1,4 @@
 $('#fav-<%= @favorite.source_id %>')
 .attr( 'href', "<%= unfavorite_path( id: @favorite.source_id, format: :js ) %>" )
-.text( 'Unfav :(' );
+.html( '<i class="icon-thumbs-down"></i> Unfav' );
 

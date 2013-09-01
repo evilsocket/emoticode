@@ -4,6 +4,16 @@ module ApplicationHelper
     super
   end
 
+  def link_icon_to( body, icon, url, attrs = {} )
+    attrs =  { :title => body, :class => 'iconic' }.merge(attrs)    
+    link_to "<i class=\"icon-#{icon}\"></i> #{body}".html_safe, url, attrs
+  end
+
+  def link_icon_to_function( body, icon, js, attrs = {} )
+    attrs = { :class => 'iconic' }.merge(attrs)
+    link_to_function "<i class=\"icon-#{icon}\"></i> #{body}".html_safe, js, attrs
+  end
+
   def navbar_language_link( language )
     # if we are not under a specific language archive, obtain current 
     # language from the current shown source if any
@@ -29,7 +39,7 @@ module ApplicationHelper
     base_title = 'emoticode'
     subtitle   = 'Snippets and Source Code Search Engine'
 
-    page_title = if @source
+    page_title = if @source and !@source.new_record?
                    "#{@source.language.title} - #{@source.title} | #{base_title}"
 
                  elsif @language
@@ -54,7 +64,7 @@ module ApplicationHelper
     description = "EmotiCODE is a code snippet search engine but mostly a place where developers can find help for what they need and contribute with their own contents."
     keywords    = "emoticode, snippets, code snippets, source, source code, programming, programmer, #{@languages.map(&:title).join(', ')}"
 
-    if @source
+    if @source and !@source.new_record?
       keywords    = @source.tags.map(&:value).join(', ')
       description = if !@source.description.nil? && !@source.description.empty?
                       @source.description

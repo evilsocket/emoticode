@@ -21,6 +21,11 @@ a:hover {
     text-decoration: underline;
 }
 
+a.iconic {
+    text-decoration: none;
+    color: #888;
+}
+
 img.avatar {
     border-radius: 50%;
     border: 3px solid white;
@@ -30,10 +35,18 @@ img.avatar {
 }
 
 p.error {
-    color: red;
-    padding: 0;
-    margin: 0;
+color: #b94a48;
+background-color: #f2dede;
+border-color: #eed3d7;
+    margin: 2px;
     font-size: 12px;
+    padding: 3px;
+    padding: 8px 35px 8px 14px;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+border: 1px solid #fbeed5;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
 }
 
 ul.avatars {

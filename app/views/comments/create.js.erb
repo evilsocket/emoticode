@@ -1,9 +1,9 @@
 <% if @comment.valid? %>
   window.location.reload();  
 <% else %>
-  list = $('<ul></ul>');
+  list = '';
   <% @comment.errors.messages.each do |field,errors| %>
-    $('<li><%= field.to_s.capitalize %> <%= errors[0] %></li>').appendTo(list);
+    list += '<p class="error"><%= field.to_s.capitalize %> <%= errors[0] %></p>';
   <% end %>
 
   $('span.errors').html(list);

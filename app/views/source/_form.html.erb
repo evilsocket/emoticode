@@ -1,0 +1,25 @@
+<div id="source-<%= action %>">
+  <%= form_for source, :url => {:controller => 'source', :action => action }, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
+    <% source.errors.full_messages.each do |msg| %>
+      <p class="error"><%= msg %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <% flash[:error].each do |error| %>
+        <p class="error"><%= error %></p>
+      <% end %>
+    <% end %>
+
+    <div class="head">
+      <%= collection_select( :source, :language_id, @languages, :id, :title ) %>
+      <%= f.text_field :title, :placeholder => 'Title', :class => 'title' %>
+      <%= f.check_box(:private) %>
+      <%= f.label(:private, "Mark as Private") %>
+    </div>
+
+    <%= f.text_area :description, :placeholder => 'Description', :class => 'description' %>
+
+    <%= f.text_area :text, :placeholder => 'Code', :class => 'code' %>
+     
+    <%= f.submit "Save", :class => 'pure-button pure-button-primary' %>
+  <% end %>
+</div>
