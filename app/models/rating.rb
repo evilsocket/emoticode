@@ -10,13 +10,8 @@ class Rating < ActiveRecord::Base
     2 => 'User'
   }
 
-  belongs_to :source, 
-    :foreign_key => :rateable_id, 
-    :conditions => [ 'rateable_type = ?', RATEABLE_TYPES[:source] ]
-
-  belongs_to :profile,
-    :foreign_key => :rateable_id, 
-    :conditions => [ 'rateable_type = ?', RATEABLE_TYPES[:profile] ]
+  belongs_to :source,  -> { where rateable_type: RATEABLE_TYPES[:source] }, :foreign_key => :rateable_id
+  belongs_to :profile, -> { where rateable_type: RATEABLE_TYPES[:profile] }, :foreign_key => :rateable_id
 
   validates_presence_of  :rateable_id
   validates_inclusion_of :rateable_type, :in => RATEABLE_TYPES.values.freeze

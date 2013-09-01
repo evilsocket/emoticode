@@ -3,12 +3,12 @@ class Source < ActiveRecord::Base
   belongs_to :user
   has_many   :links
   has_many   :tags, :through => :links
-  has_many   :comments, 
-    :foreign_key => :commentable_id, 
-    :conditions => [ 'commentable_type = ?', Comment::COMMENTABLE_TYPES[:source] ]
+  has_many   :comments, -> { where commentable_type: Comment::COMMENTABLE_TYPES[:source] }, :foreign_key => :commentable_id
+  has_one    :rating, -> { where rateable_type: Rating::RATEABLE_TYPES[:source] }, :foreign_key => :rateable_id
+  
 
-  default_scope :order => "created_at DESC"
-  scope :popular, :order => 'views DESC'
+  default_scope -> { order('created_at DESC') }
+  scope :popular, -> { order('views DESC') }
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { :minimum => 5, :maximum => 255 }
   validates :text, presence: true, length: { :minimum => 25 }
@@ -65,7 +65,7 @@ class Source < ActiveRecord::Base
       .order( '( COUNT(links.id) * links.weight ) DESC' )
       .group( 'links.source_id, sources.name' )
       .limit( limit )
-      .all
+      .load
     end
   end
 

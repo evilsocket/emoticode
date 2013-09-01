@@ -29,7 +29,7 @@
                             <% done += 1 %>
                             <td>
                                 <%= link_to language.title, language_archive_path(language.name) %>
-                                <span><%= language.sources.count %></span>
+                                <span><%= language.sources_count %></span>
                             </td>
                             <% if i > 0 && ( i + 1 ) % 4 == 0 %>
                                 </tr>
@@ -103,6 +103,19 @@
 
   <script>$(function(){ $('#flash').modal(); });</script>
 <% end %>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38685018-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 
 </body>
 </html>

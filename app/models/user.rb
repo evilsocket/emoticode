@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  scope :latest, :order => 'created_at DESC' 
+  scope :latest, -> { order('created_at DESC') }
 
   has_many :sources
   has_many :favorites
@@ -115,11 +115,11 @@ class User < ActiveRecord::Base
   end
 
   def rating
-    Rating.find_or_create_by_rateable_type_and_rateable_id( Rating::RATEABLE_TYPES[:user], id )
+    Rating.find_or_create_by( :rateable_type => Rating::RATEABLE_TYPES[:user], :rateable_id => id )
   end
 
   def favorite?(source)
-    @favorites ||= favorites.all
+    @favorites ||= favorites.load
     @favorites.each do |fav| 
       return true unless fav.source != source
     end

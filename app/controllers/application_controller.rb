@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def initialize_globals
     @languages    = Language.all
     @pages        = Page.all
-    @users        = User.where( :status => User::STATUSES[:confirmed] ).order('created_at DESC').limit(20) 
+    @users        = User.where( :status => User::STATUSES[:confirmed] ).joins(:profile).order('created_at DESC').limit(20) 
     @current_user = User.find_by_id( session[:id] )
     if @current_user.nil? == false
       @current_user.last_seen_at = Time.now

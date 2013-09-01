@@ -11,9 +11,7 @@ class Comment < ActiveRecord::Base
   }
 
   belongs_to :user
-  belongs_to :source, 
-    :foreign_key => :commentable_id, 
-    :conditions => [ 'commentable_type = ?', COMMENTABLE_TYPES[:source] ]
+  belongs_to :source, -> { where commentable_type: COMMENTABLE_TYPES[:source] }, :foreign_key => :commentable_id
 
   validates_presence_of  :commentable_id,   :user_id, :content
   validates_inclusion_of :commentable_type, :in => COMMENTABLE_TYPES.values.freeze
