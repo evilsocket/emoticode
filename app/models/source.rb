@@ -8,7 +8,9 @@ class Source < ActiveRecord::Base
   
 
   default_scope -> { order('created_at DESC') }
+  scope :public, -> { where( :private => false ) }
   scope :popular, -> { order('views DESC') }
+  scope :with_user_profile, -> { joins(:user => :profile) }
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { :minimum => 5, :maximum => 255 }
   validates :text, presence: true, length: { :minimum => 25 }

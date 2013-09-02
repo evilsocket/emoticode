@@ -6,14 +6,9 @@ class UserController < ApplicationController
   end
 
   def create
-    @user = User.create({ 
-      username: params[:user][:username], 
-      email: params[:user][:email], 
-      password: params[:user][:password],
-      password_confirmation: params[:user][:password_confirmation],
-      status: User::STATUSES[:unconfirmed], 
-      level: User::LEVELS[:subscriber]
-    })
+    params[:user] = params[:user].merge :status => User::STATUSES[:unconfirmed], :level => User::LEVELS[:subscriber]
+
+    @user = User.new( user_params )
 
     if verify_recaptcha( :model => @user, :message => 'Invalid captcha.' ) and @user.save
       Profile.create({ user: @user })
@@ -38,5 +33,11 @@ class UserController < ApplicationController
       sign_in(@user)
       redirect_to user_settings_url 
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit( :username, :email, :password, :password_confirmation, :status, :level )
   end
 end

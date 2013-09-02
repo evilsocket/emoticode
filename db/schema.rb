@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130901005650) do
+ActiveRecord::Schema.define(version: 20130902203413) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -84,11 +84,11 @@ ActiveRecord::Schema.define(version: 20130901005650) do
   add_index "profiles", ["user_id"], name: "user_id", using: :btree
 
   create_table "ratings", force: true do |t|
-    t.integer "rateable_type", limit: 1, null: false
-    t.integer "rateable_id",             null: false
-    t.integer "votes"
-    t.float   "average"
-    t.integer "created_at",              null: false
+    t.integer "rateable_type", limit: 1,               null: false
+    t.integer "rateable_id",                           null: false
+    t.integer "votes",                   default: 0
+    t.float   "average",                 default: 0.0
+    t.integer "created_at",                            null: false
   end
 
   add_index "ratings", ["average"], name: "average", using: :btree

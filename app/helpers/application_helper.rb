@@ -121,22 +121,25 @@ module ApplicationHelper
   end
 
   def tag_cloud( tags, min_size = 9, max_size = 20 )
-    min, max = tags.map(&:sources_count).minmax
-    log_min = Math.log( min )
-    log_max = Math.log( max )
-    log_delta = log_max - log_min
-    size_delta = max_size - min_size
     cloud = {}
+    
+    unless tags.empty?
+      min, max = tags.map(&:sources_count).minmax
+      log_min = Math.log( min )
+      log_max = Math.log( max )
+      log_delta = log_max - log_min
+      size_delta = max_size - min_size
 
-    tags.each do |tag|
-      weight = ( Math.log(tag.sources_count) - log_min ) / log_delta
-      size = if weight.nan?
-               min_size
-             else
-               min_size + ( size_delta * weight ).round
-             end
-      
-      cloud[tag.value] = [ tag, size, tag.sources_count ]
+      tags.each do |tag|
+        weight = ( Math.log(tag.sources_count) - log_min ) / log_delta
+        size = if weight.nan?
+                 min_size
+               else
+                 min_size + ( size_delta * weight ).round
+               end
+        
+        cloud[tag.value] = [ tag, size, tag.sources_count ]
+      end
     end
 
     cloud

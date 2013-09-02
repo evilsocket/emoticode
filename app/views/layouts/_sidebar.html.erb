@@ -60,13 +60,15 @@
     </ul>
   <% end %>
 
+  <% unless @cloud.empty? %>
   <div class="heading red">
     <h3>Cloud</h3>
   </div>
   <div class="cloud">
-  <% tag_cloud(@cloud).each do |v,cloud| %>
-    <% tag,size,count = cloud %>
-    <%= link_to tag.value, search_path(what: tag.name), { :style => "font-size: #{size}px", :title => "The keyword #{tag.value} has #{count} elements." } %> 
-  <% end %>
+    <% tag_cloud(@cloud).each do |v,cloud| %>
+      <% tag,size,count = cloud %>
+      <%= link_to tag.value, search_path(what: tag.name), { :style => "font-size: #{size}px", :title => "The keyword #{tag.value} has #{count} elements." } %> 
+    <% end %>
   </div>
+  <% end %>
 </div>   
