@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
     find_by_sql([ 'SELECT * FROM users WHERE MD5( CONCAT( id, email, username, salt, password_hash ) )  = ? ', token ]).first
   end
 
+  def self.get_random_password( length = 8 )
+    (0...length).map{65.+(rand(25)).chr}.join
+  end 
+
   def self.activate(token)
     # search user by token
     user = self.find_by_confirmation_token(token)
@@ -67,40 +71,38 @@ class User < ActiveRecord::Base
 
   def self.omniauth(auth)
     # at least the email is required to sign in an existing user
-    if auth && auth['info'] && auth['info']['email'] 
-      user         = User.find_by_email( auth['info']['email'] )
+    info = auth['info']
+    if auth && info && info['email'] 
+      user         = User.find_by_email( info['email'] )
       tmp_password = nil
+      profile      = nil
 
       # new incoming user ^_^ 
       if user.nil? 
         # we need the nickname now
-        if auth['info']['nickname']
+        if info['nickname']
           # generate a temporary password
-          tmp_password = (0...8).map{65.+(rand(25)).chr}.join
+          tmp_password = self.get_random_password
 
           user = User.create({ 
-            username: auth['info']['nickname'], 
-            email: auth['info']['email'], 
+            username: info['nickname'], 
+            email: info['email'], 
             password: tmp_password,
             password_confirmation: tmp_password,
             status: STATUSES[:confirmed], 
             level: LEVELS[:subscriber]
           })
 
-          if user.valid?
-            profile = Profile.create({ user: user })
-
-            update_omniauth_profile( auth, user, profile )
-          end
+          profile = Profile.create({ user: user }) unless !user.valid?
         end
         # existing user
       else 
         # confirm user if not yet confirmed
         user.status = STATUSES[:confirmed]
         user.save
-
-        update_omniauth_profile( auth, user, user.profile )
       end
+
+      update_omniauth_profile( auth, user, profile ) unless profile.nil?
 
       [ user, tmp_password ]
     end
