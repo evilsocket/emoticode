@@ -97,14 +97,13 @@ class Source < ActiveRecord::Base
 
   def self.update_pageviews_with_analytics!
     Rails.logger.level = 1
-
     Rails.logger.info "********* GOOGLE ANALYTICS PAGE VIEWS UPDATER STARTED *********"
-
     Rails.logger.info "Logging into Analytics account ..."
-    Garb::Session.login( Rails.application.config.secrets['Google']['username'], Rails.application.config.secrets['Google']['password'] )
 
-    Rails.logger.info "Searching profile ..."
-    profile = Garb::Management::Profile.all.detect {|p| p.web_property_id == Rails.application.config.secrets['Google']['profile'] }
+    google = Rails.application.config.secrets['Google']
+
+    Garb::Session.login( google['username'], google['password'] )
+    profile = Garb::Management::Profile.all.detect {|p| p.web_property_id == google['profile'] }
 
     Rails.logger.info "Start updating."
 

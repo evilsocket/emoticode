@@ -88,8 +88,8 @@ module ApplicationHelper
                     end
 
     elsif @language
-      description = seo['description']['language'] % @language.title, @language.title
-      keywords    = seo['keywords']['language'] % @language.title, @language.title, @language.title, @language.title, @language.title
+      description = seo['description']['language'] % [ @language.title, @language.title ]
+      keywords    = seo['keywords']['language'] % [ @language.title, @language.title, @language.title, @language.title, @language.title ]
 
     elsif @user and !@user.new_record?
       description = seo['description']['user'] % @user.username
