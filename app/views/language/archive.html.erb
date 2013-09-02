@@ -1,4 +1,5 @@
 <section id="language-archive">
+  <% cache "language_sources_#{Source.where(:language_id => @language.id).public.count}_#{params[:page]}" do %>   
   <div class="huge-column">
     <h1>
       <%= link_to image_tag('icons/rss-s.png'), language_feed_path(:language => @language.name ), :title => "#{@language.title} RSS feed." %>
@@ -33,6 +34,7 @@
       <% end %>
     </ul>
   </div>
+  <% end %>
 
   <%= render :partial => 'layouts/sidebar', :locals => { with_heading: true } %>
 </section>

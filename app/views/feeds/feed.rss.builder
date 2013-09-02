@@ -1,4 +1,4 @@
-cache "feed_#{Source.count}" do
+cache "feed_#{Source.public.count}" do
   xml.instruct! :xml, :version => "1.0" 
   xml.rss :version => "2.0" do
     xml.channel do

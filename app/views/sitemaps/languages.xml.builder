@@ -1,4 +1,4 @@
-cache "sitemap_languages_#{Source.count}" do
+cache "sitemap_languages_#{Source.public.count}" do
 
   xml.urlset(xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9") do
     @languages.each do |language|

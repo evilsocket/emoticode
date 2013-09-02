@@ -1,4 +1,4 @@
-cache "sitemap_index_#{@pages}_#{Source.count}" do
+cache "sitemap_index_#{@pages}_#{Source.public.count}" do
   xml.sitemapindex(xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9") do
     (1..@pages).each do |page|
       xml.sitemap do

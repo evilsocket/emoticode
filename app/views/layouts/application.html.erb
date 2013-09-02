@@ -11,43 +11,46 @@
   <%= auto_discovery_link_tag(:rss, "http://emoticode.net/") %>
 </head>
 <body>
+<% cache "navbar_#{Source.public.count}_#{request.fullpath.parameterize}" do %>
 <nav id="navbar">
-    <ul>
-        <li><%= link_to 'Home', root_path %></li>
-        <% @languages.popular.take(15).each do |language| %>
-            <li> 
-                <%= navbar_language_link language %>
-            </li>
-        <% end %>
-        <% cache "all_langs_#{Source.count}" do %>
-        <li id="show-all-langs">
-            <a href="#" onclick="return false;">All &raquo;</a>
-            <div id="all-langs">
-                <table width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <% done = 0 %>
-                        <% @languages.each_with_index do |language,i| %>
-                            <% done += 1 %>
-                            <td>
-                                <%= link_to language.title, language_archive_path(language.name) %>
-                                <span><%= language.sources_count %></span>
-                            </td>
-                            <% if i > 0 && ( i + 1 ) % 4 == 0 %>
-                                </tr>
-                            <% end %>
-                        <% end %>
-                        <% left = ( done % 4 )
-                        if left 
-                            ( 4 - left ).times { %><td></td><% }
-                            %> </tr> <%
-                        end
-                        %>
-                </table>
-            </div>
+  <ul>
+      <li><%= link_to 'Home', root_path %></li>
+      <% @languages.popular.take(15).each do |language| %>
+          <li> 
+              <%= navbar_language_link language %>
           </li>
-        <% end %>
-    </ul> 
+      <% end %>
+      <% cache "all_langs_#{Source.public.count}" do %>
+      <li id="show-all-langs">
+          <a href="#" onclick="return false;">All &raquo;</a>
+          <div id="all-langs">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                      <% done = 0 %>
+                      <% @languages.each_with_index do |language,i| %>
+                          <% done += 1 %>
+                          <td>
+                              <%= link_to language.title, language_archive_path(language.name) %>
+                              <span><%= language.sources_count %></span>
+                          </td>
+                          <% if i > 0 && ( i + 1 ) % 4 == 0 %>
+                              </tr>
+                          <% end %>
+                      <% end %>
+                      <% left = ( done % 4 )
+                      if left 
+                          ( 4 - left ).times { %><td></td><% }
+                          %> </tr> <%
+                      end
+                      %>
+              </table>
+          </div>
+        </li>
+      <% end %>
+  </ul> 
 </nav>
+<% end %>
+<% cache "sub_navbar_#{signed_in? ? @current_user.id : 0}_#{Page.count}" do %>
 <nav id="sub-navbar">
     <div class="inner">
         <ul>
@@ -88,6 +91,7 @@
         </ul>
     </div>
 </nav>
+<% end %>
 
 <% unless signed_in? %>
   <%= render :partial => "sessions/new" %>
