@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20130902203413) do
 
   add_index "social_cron", ["last_posted_source_id"], name: "last_posted_source_id", using: :btree
 
-  create_table "sources", force: true do |t|
+  create_table "sources", force: true, :options => "ENGINE=MyISAM" do |t|
     t.integer "user_id"
     t.integer "language_id"
     t.integer "private",     limit: 1,          default: 0, null: false
