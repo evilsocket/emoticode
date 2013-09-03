@@ -150,7 +150,7 @@ module ApplicationHelper
   end
 
   def avatar_tag(user)
-    image_tag user.avatar, :class => 'avatar', :alt => "#{user.username} avatar."
+    image_tag image_url(user.avatar), :class => 'avatar', :alt => "#{user.username} avatar."
   end
 
   def nested_comments(object)

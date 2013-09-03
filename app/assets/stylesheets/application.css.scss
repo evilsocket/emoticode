@@ -98,7 +98,7 @@ div.social {
         }       
 
         li.fb {
-            background-image: url(/assets/hp-ico-fb.png);
+            background-image: asset-data-url('hp-ico-fb.png');
             div {
                 padding-top: 5px;
                 padding-bottom: 4px;
@@ -106,7 +106,7 @@ div.social {
         }
 
         li.tw {
-            background-image: url(/assets/hp-ico-tw.png);
+            background-image: asset-data-url('hp-ico-tw.png');
             div {
                 padding-top: 5px;
                 padding-bottom: 2px;
@@ -115,7 +115,7 @@ div.social {
         }
 
         li.po {
-            background-image: url(/assets/hp-ico-po.png);
+            background-image: asset-data-url('hp-ico-po.png');
             div {
                 padding-top: 4px;
                 padding-bottom: 1px;
@@ -125,7 +125,7 @@ div.social {
 
         li.rss {
             font: 11px/30px arial;
-            background-image: url(/assets/hp-ico-rss.png);
+            background-image: asset-data-url('hp-ico-rss.png');
             border-bottom: 0 none;
 
             a {
@@ -179,7 +179,7 @@ div.social {
 }
 
 #simplemodal-container a.modalCloseImg {
-    background:url(/assets/x.png) no-repeat;
+    background:asset-data-url('x.png') no-repeat;
     width:25px;
     height:29px;
     display:inline;
