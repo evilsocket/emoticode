@@ -14,10 +14,13 @@ set :branch, "master"
  
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
- 
+
+after "deploy:setup", "deploy:create_release_dir"
 after "deploy", "deploy:cleanup"
  
 namespace :deploy do
+  secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/development.sphinx.conf' ]
+
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
     task command, roles: :app, except: {no_release: true} do
@@ -25,8 +28,9 @@ namespace :deploy do
     end
   end
  
-
-  secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/development.sphinx.conf' ]
+  task :create_release_dir, :except => {:no_release => true} do
+    run "mkdir -p #{fetch :releases_path}"
+  end
 
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
