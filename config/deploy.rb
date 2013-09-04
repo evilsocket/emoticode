@@ -1,6 +1,5 @@
 # Load RVM's capistrano plugin.    
 require "rvm/capistrano"
-require 'fileutils'
 
 set :rvm_ruby_string, '2.0.0'
 set :rvm_type, :user  # Don't use system-wide RVM
@@ -39,7 +38,7 @@ namespace :deploy do
 
     secrets.each do |secret|
       if File.directory? secret
-        FileUtils.cp_r(secret), "#{shared_path}/#{secret}"
+        run "cp -rf #{secret} #{shared_path}/#{secret}"
       else
         put File.read(secret), "#{shared_path}/#{secret}"
       end
