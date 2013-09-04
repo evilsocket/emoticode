@@ -1,21 +1,20 @@
 <section id="home">
-  <% cache "home_sources_#{Source.public.count}_#{params[:page]}" do %>
-    <div class="big-column">
-      <ul>
-        <% @recent.each do |source| %>
-          <%= render :partial => "source/listing", :locals => { :source => source } %>
-      <% end %>
-      </ul>
-    </div>
-    <div class="big-column">
-      <ul>
-        <% @popular.each do |source| %>
-          <%= render :partial => "source/listing", :locals => { :source => source, :show_views => true } %>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-    
+
+  <div class="big-column">
+    <ul>
+      <% @recent.each do |source| %>
+        <%= render :partial => "source/listing", :locals => { :source => source } %>
+    <% end %>
+    </ul>
+  </div>
+  <div class="big-column">
+    <ul>
+      <% @popular.each do |source| %>
+        <%= render :partial => "source/listing", :locals => { :source => source, :show_views => true } %>
+    <% end %>
+    </ul>
+  </div>
+
   <%= render :partial => 'layouts/sidebar', :locals => { with_heading: false } %>
 </section>
 

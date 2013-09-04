@@ -24,6 +24,6 @@ config/*.sphinx.conf
 db/seeds.rb
 .DS_Store
 */.DS_Store
-app/assets/images/avatars/*.png
+public/avatars/*.png
 public/assets/
 db/sphinx

@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_confirmation_token( token )
-    find_by_sql([ 'SELECT * FROM users WHERE MD5( CONCAT( id, email, username, salt, password_hash ) )  = ? ', token ]).first
+    self.where( 'MD5( CONCAT( id, email, username, salt, password_hash ) )  = ?', token ).first
   end
 
   def self.get_random_password( length = 8 )
@@ -130,9 +130,9 @@ class User < ActiveRecord::Base
 
   def avatar
     if profile.avatar?
-      "avatars/#{id}.png"
+      "/avatars/#{id}.png"
     else
-      "avatars/default.png"
+      "/avatars/default.png"
     end
   end
 
@@ -179,14 +179,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def set_avatar_file(file)
+    path = File.join Dir.pwd, "public/avatars/#{id}.png"
+
+    FastImage.resize( file, 50, 50, :outfile => path )
+
+    profile.avatar = 1
+  end
+
   def update_avatar
     unless self.avatar_upload.nil?
       begin
-        path = File.join Dir.pwd, "app/assets/images/avatars/#{id}.png"
-
-        FastImage.resize( avatar_upload.tempfile, 50, 50, :outfile => path )
-
-        profile.avatar = 1
+        set_avatar_file avatar_upload.tempfile
       rescue
         self.errors.add( :avatar_upload, " not a valid image file." )
         false
@@ -218,11 +222,7 @@ class User < ActiveRecord::Base
     # if user still has no avatar, fetch it from auth info if available
     if profile.avatar == 0 && auth['info']['image']
       begin
-        image_path = File.join Dir.pwd, "app/assets/images/avatars/#{user.id}.png"
-
-        FastImage.resize( auth['info']['image'], 50, 50, :outfile => image_path )
-
-        profile.avatar = 1
+        set_avatar_file auth['info']['image']
       rescue
 
       end
