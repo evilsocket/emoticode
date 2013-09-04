@@ -18,8 +18,6 @@ pkg/
 server/
 tmp/
 tags
-config/initializers/omniauth.rb
-config/initializers/recaptcha.rb
 config/*.sphinx.conf
 db/seeds.rb
 .DS_Store

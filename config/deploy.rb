@@ -26,7 +26,7 @@ namespace :deploy do
   end
  
 
-  secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/development.sphinx.conf', 'config/initializers/omniauth.rb', 'config/initializers/recaptcha.rb' ]
+  secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/development.sphinx.conf' ]
 
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
