@@ -38,7 +38,7 @@ namespace :deploy do
 
     secrets.each do |secret|
       if File.directory? secret
-        run "cp -rf #{secret} #{shared_path}/#{secret}"
+        run "mkdir -p #{shared_path}/#{secret}"
       else
         put File.read(secret), "#{shared_path}/#{secret}"
       end
