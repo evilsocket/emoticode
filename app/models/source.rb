@@ -55,14 +55,6 @@ class Source < ActiveRecord::Base
     end
   end
 
-  # Google Analytics
-  class PageViews
-    extend Garb::Model
-
-    metrics :pageviews
-    dimensions :page_path
-  end
-
   # normal find_each does not use given order but uses id asc
   def self.find_each_with_order(options={})
     raise "offset is not yet supported" if options[:offset]
@@ -78,43 +70,6 @@ class Source < ActiveRecord::Base
       batch.each{|x| yield x }
 
       break if batch.size < limit
-    end
-  end
-
-  def self.update_pageviews_with_analytics!
-    Rails.logger.level = 1
-    Rails.logger.info "********* GOOGLE ANALYTICS PAGE VIEWS UPDATER STARTED *********"
-    Rails.logger.info "Logging into Analytics account ..."
-
-    google = Rails.application.config.secrets['Google']
-
-    Garb::Session.login( google['username'], google['password'] )
-    profile = Garb::Management::Profile.all.detect {|p| p.web_property_id == google['profile'] }
-
-    Rails.logger.info "Start updating."
-
-    Source.order('created_at DESC').find_each_with_order do |source|
-      if source.update_page_views!(profile)
-        Rails.logger.info "Updated '#{source.path}' with #{source.views} views."
-      else
-        Rails.logger.error "Error updating '#{source.path} ."
-      end
-    end
-
-    Rails.logger.info "DONE"
-  end
-
-  def update_page_views!(profile)
-     results = PageViews.results( profile, :filters => {
-        :page_path.eql => self.path
-      }, 
-      :start_date => Time.at( self.created_at ), 
-      :end_date => Time.now 
-    ).first
-
-    unless results.nil?
-      self.views = results.pageviews
-      save
     end
   end
 
