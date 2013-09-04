@@ -1,5 +1,6 @@
 # Load RVM's capistrano plugin.    
 require "rvm/capistrano"
+require 'fileutils'
 
 set :rvm_ruby_string, '2.0.0'
 set :rvm_type, :user  # Don't use system-wide RVM
@@ -22,7 +23,7 @@ ssh_options[:forward_agent] = true
 after "deploy", "deploy:cleanup"
  
 namespace :deploy do
-  secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/development.sphinx.conf' ]
+  secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/development.sphinx.conf', 'public/avatars' ]
 
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
@@ -37,7 +38,11 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/config"
 
     secrets.each do |secret|
-      put File.read(secret), "#{shared_path}/#{secret}"
+      if File.directory? secret
+        FileUtils.cp_r(secret), "#{shared_path}/#{secret}"
+      else
+        put File.read(secret), "#{shared_path}/#{secret}"
+      end
     end
 
     puts "Now edit the config files in #{shared_path}."
