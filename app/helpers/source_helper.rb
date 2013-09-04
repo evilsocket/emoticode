@@ -10,7 +10,12 @@ module SourceHelper
   end
 
   def highlight(source)
-    Rails.cache.fetch "highlighted_source_#{source.id}", :expires_in => 7.days do
+    Rails.cache.fetch "#{source.id}_highlighted_source", :expires_in => 7.days do
+      if source.language.syntax == 'php'
+        if source.text[0].strip != '<'
+          source.text = "<?php\n" + source.text
+        end 
+      end
       code = Albino.colorize source.text, source.language.syntax
       code.empty? ? "<pre>#{h(source.text)}</pre>" : code
     end
