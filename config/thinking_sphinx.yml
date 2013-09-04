@@ -1,0 +1,17 @@
+development:
+  mem_limit: 128M
+  morphology: stem_en
+  indexed_models:
+    - Source
+
+test:
+  mem_limit: 128M
+  morphology: stem_en
+  indexed_models:
+    - Source
+
+production:
+  mem_limit: 128M
+  morphology: stem_en
+  indexed_models:
+    - Source
