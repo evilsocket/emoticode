@@ -1,10 +1,15 @@
 class ProfileController < ApplicationController
-  before_filter :authenticate!, :except => [:show]
+  before_filter :authenticate!, :except => [:show, :badge]
   before_filter :skip_password_attribute, only: :update
 
   def show
     @user = User.find_by_username!( params[:username] )
     @comment = Comment.new
+  end
+
+  def badge
+    @user = User.find_by_username!( params[:username] )
+    render :layout => false
   end
 
   def edit

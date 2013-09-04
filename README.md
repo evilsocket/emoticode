@@ -23,16 +23,14 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Registration
 - [x] Password Recovery
 - [x] Ratings Ajax Controller
-- [ ] **New!** Custom Homepage
 
 ### Pages
 
 - [x] Home
 - [x] Language Listings
-- [ ] **New!** Language Discussion Groups
 - [x] **New!** Most Active Users Rankings ( per language )
 - [x] User Profiles
-- [ ] User Badges
+- [x] User Badges
 - [x] Source Code View
 - [x] Embeddable Source Code
 - [x] Source Code Create
@@ -67,7 +65,6 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Per language feed
 - [x] User profile feed
 - [x] Random Feed
-- [ ] Group feed
 
 ### Cron Jobs
 
@@ -93,6 +90,12 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [ ] New Logo
 - [ ] Per language og:image ?
 - [ ] Everything's needed :P
+
+## Future Release Tasks
+
+- [ ] **New!** Custom User Homepage
+- [ ] **New!** Language Discussion Groups
+- [ ] Group feed
 
 ## License
 

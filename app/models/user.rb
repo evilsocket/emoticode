@@ -108,6 +108,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def favorite_by_others 
+    Favorite.joins(:source).where('sources.user_id = ?', self.id ).count
+  end
+
   def is_admin?
     level == LEVELS[:admin]
   end

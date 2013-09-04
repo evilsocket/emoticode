@@ -88,6 +88,19 @@
       </div>
     </div>
 
+    <% if signed_in? and @user == @current_user %>
+      <div class="heading">
+        <h3>Get Your Badge!</h3>
+      </div>        
+      <span class="badge">
+       <%= link_to_function "Show Embed Code", "$('#badge').modal();" %> 
+      </span>
+      <%= modal_dialog 'badge', 'Get Your Badge!' do %>
+        <textarea><iframe src="<%= user_badge_url(:username => @user.username) %>" height="350" frameborder="0" ></iframe></textarea>
+        <iframe src="<%= user_badge_url(:username => @user.username) %>" height="350" frameborder="0" ></iframe>
+      <% end %>
+    <% end %>
+
     <div class="heading orange">
       <h3>Languages</h3>  
     </div>

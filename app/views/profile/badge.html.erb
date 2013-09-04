@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= page_title %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <% metas.each do |meta| %>
+    <meta <% meta.each { |attr,value| %><%= attr %>="<%= value %>" <% } %>/>
+  <% end %>
+  <link href="/badge.css" rel="stylesheet">
+  <base target="_parent" />
+</head>
+<body style="background-color: transparent !important;">
+
+<div id="badge">
+    <div class="summary">
+      <a href="<%= user_profile_url(:username => @user.username) %>" class="account-summary">
+        <div class="content">
+          <div class="account-group js-mini-current-user">
+            <img class="avatar" src="<%= image_url( @user.avatar ) %>" alt="<%= @user.username %>" width="32">
+            <b class="fullname"><%= @user.username %></b>
+            <small class="metadata">
+                View my EmotiCODE profile.
+            </small>
+          </div>
+        </div>
+      </a>  
+    </div>
+ 
+    <div class="profile-stats-container">
+        <ul class="stats js-mini-profile-stats">
+        <li>
+          <a href="<%= user_profile_url(:username => @user.username) %>">
+            <strong><%= @user.sources.count %></strong> Snippets
+          </a>
+        </li>
+        <li>
+          <a href="<%= user_profile_url(:username => @user.username) %>">
+            <strong><%= @user.favorite_by_others %></strong> FAVS
+          </a>
+        </li>
+        <li>
+          <a href="<%= user_profile_url(:username => @user.username) %>">
+            <strong><%= ( @user.rating.average * 100 ).round 1 %>%</strong> RATING
+          </a>
+        </li>
+        </ul>
+    </div>
+    
+    <div class="profile-latest">
+      <ul class="latest">
+        <% @user.sources.limit(5).each do |source| %>
+          <li>
+            <div class="snippet-container">
+              <div class="icons">
+                <i class="icon-eye-open" title="<%= source.views %> views"></i>
+                <small><%= source.views %></small>
+              </div>
+              <div class="snippet">
+                <%= link_to source.title, source_with_language_url(language_name: source.language.name, source_name: source.name), :class => 'title' %>
+                <span class="language">
+                  <%= source.language.title %>
+                </span>
+                <span class="author">
+                  <%= Time.at( source.created_at ).strftime('%d %b %Y') %>
+                </span>
+              </div>
+            </div> 
+          </li>
+        <% end %>
+      </ul>            
+    </div>
+</div>
+</body>
+</html>
