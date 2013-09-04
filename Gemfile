@@ -18,6 +18,7 @@ gem "recaptcha", :require => "recaptcha/rails"
 gem 'fastimage_resize'            # avatar resizing
 gem "garb", "~> 0.9.1"            # google analytics api
 gem 'whenever', :require => false # cron jobs with ease
+gem 'thinking-sphinx', '~> 3.0.2' # sphinx ftw
 
 gem 'unicorn'
 
