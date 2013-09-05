@@ -82,7 +82,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [ ] Rich Snippets ( google authoring )
 - [x] Links auto title
 - [x] Heading meta: keywords, descriptions, og:* ( with pagination )
-- [ ] Hn reordering
+- [x] Hn reordering
 - [ ] General checkup
 
 ### Graphics / Layout
