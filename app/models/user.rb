@@ -100,6 +100,8 @@ class User < ActiveRecord::Base
         # confirm user if not yet confirmed
         user.status = STATUSES[:confirmed]
         user.save
+
+        profile = user.profile
       end
 
       update_omniauth_profile( auth, user, profile ) unless profile.nil?

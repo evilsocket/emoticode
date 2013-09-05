@@ -53,6 +53,7 @@ namespace :deploy do
       run "rm -rf #{release_path}/#{secret}"
       run "ln -nfs #{shared_path}/#{secret} #{release_path}/#{secret}"
     end
+    run "cd #{release_path} && rake rails:update:bin"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
  
@@ -65,4 +66,21 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
+end
+
+namespace :rails do
+  desc "Remote console"
+  task :console, :roles => :app do
+    run_interactively "bundle exec rails console #{rails_env}"
+  end
+
+  desc "Remote dbconsole"
+  task :dbconsole, :roles => :app do
+    run_interactively "bundle exec rails dbconsole #{rails_env}"
+  end
+end
+
+def run_interactively(command, server=nil)
+  server ||= find_servers_for_task(current_task).first
+  exec %Q(ssh #{server.host} -t 'cd #{current_path} && #{command}')
 end
