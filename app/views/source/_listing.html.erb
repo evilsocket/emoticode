@@ -3,7 +3,17 @@
   desc_cut    = 100 if local_assigns[:desc_cut].nil? 
   with_author = true if local_assigns[:with_author].nil?
 
-  cache "source_listibg_#{show_views}_#{desc_cut}_#{with_author}_#{source.id}_#{@current_user.id rescue 0}_#{@current_user.favorite?(source) rescue 0}" do
+  cache_key = [
+    show_views,
+    desc_cut,
+    with_author,
+    source.id,
+    @current_user.id rescue 0,
+    @current_user.favorite?(source) rescue 0,
+    source.updated_at
+  ]
+
+  cache "source_listing_#{cache_key.map(:to_s).join '_'}" do
 %>
 
 <li>
