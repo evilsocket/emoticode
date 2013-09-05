@@ -2,26 +2,6 @@
   show_views  = false if local_assigns[:show_views].nil?  
   desc_cut    = 100 if local_assigns[:desc_cut].nil? 
   with_author = true if local_assigns[:with_author].nil?
-
-  if signed_in?
-    is_favorite = @current_user.favorite? source
-    current_user_id = @current_user.id
-  else
-    is_favorite = 0
-    current_user_id = 0
-  end
-
-  cache_key = [
-    show_views,
-    desc_cut,
-    with_author,
-    source.id,
-    current_user_id,
-    is_favorite,
-    source.updated_at
-  ]
-
-  cache "source_listing_#{cache_key.map(:to_s).join '_'}" do
 %>
 
 <li>
@@ -58,7 +38,7 @@
             &bull;
 
             <% if signed_in? %>
-              <% if is_favorite %>
+              <% if @current_user.favorite?(source) %>
                 <%= link_icon_to 'Unfav', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", method: :post, remote: true  %>
               <% else %>
                 <%= link_icon_to 'Fav It!', 'thumbs-up', favorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", method: :post, remote: true  %>
@@ -70,4 +50,3 @@
     </span>
 </div>
 </li>
-<% end %>
