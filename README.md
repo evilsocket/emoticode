@@ -68,7 +68,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 
 ### Cron Jobs
 
-- [ ] Publish to Social Networks ( fb: https://github.com/arsduo/koala - twitter: https://github.com/sferik/twitter )
+- [x] Publish to Social Networks
 - [x] Update source views with Analytics API
 
 ### Static Pages
