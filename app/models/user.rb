@@ -224,9 +224,9 @@ class User < ActiveRecord::Base
     # if user still has no avatar, fetch it from auth info if available
     if profile.avatar == 0 && auth['info']['image']
       begin
-        set_avatar_file auth['info']['image']
+        user.send :set_avatar_file, auth['info']['image']
       rescue
-
+        
       end
 
       profile.save!
