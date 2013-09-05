@@ -1,10 +1,21 @@
 <div id="sidebar">
+  <% unless local_assigns[:source].nil? %>
+    <div class="heading orange">
+      <h3>Share</h3>
+    </div>
+    <div class="share">
+      <%= link_to image_tag("icons/facebook.png"),   "http://www.facebook.com/sharer.php?u=#{request.original_url}", { :target => '_blank', :title => 'Share on Facebook' } %>
+      <%= link_to image_tag("icons/twitter.png"),    "http://twitter.com/home?status=#{request.original_url}", { :target => '_blank', :title => 'Post to Twitter' } %>
+      <%= link_to image_tag("icons/googleplus.png"), "https://plus.google.com/share?url=#{request.original_url}", { :target => '_blank', :title => 'Post to Google+' } %>
+      <%= link_to image_tag("icons/delicious.png"),  "http://del.icio.us/post?url=#{request.original_url}", { :target => '_blank', :title => 'Post to Delicious' } %>
+    </div>
+  <% end %>
+
   <% if with_heading %>
     <div class="heading blue">
       <h3>Latest Users</h3>
     </div>
   <% end %>
-
   <% cache "last_users_#{User.count}" do %>
   <ul class="avatars">
     <% @users.each do |user| %>
@@ -19,6 +30,7 @@
 
   <br style="clear:both"/>
 
+  <% if local_assigns[:source].nil? %>
   <div class="heading">
     <h3>Be Social!</h3>
   </div>
@@ -42,8 +54,8 @@
         <a href="http://feeds.feedburner.com/emoticode" title="Subscribe to our Feeds!">Subscribe to our Feeds</a>
       </li>
     </ul>
-  
   </div>
+  <% end %>
 
   <br style="clear:both"/>
   

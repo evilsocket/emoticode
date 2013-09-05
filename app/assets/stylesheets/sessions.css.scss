@@ -5,25 +5,6 @@
     div.login {
         width: 60%;
         margin: 0 auto;
-        div.connect {
-            padding: 0 0 20px 0;
-            border-bottom: 1px solid #ddd;
-            height: 50px;
-
-            ul {
-                padding: 0;
-                display: block;
-
-                li {
-                    float: left;
-                    margin-right: 5px;
-
-                    img {
-                        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-                    }
-                }
-            }
-        }    
 
         form {
             margin-top: 15px;

@@ -9,16 +9,9 @@
 %>
 <%= helper.call *args do %>
   <% if !modal %><h1>Sign In</h1><% end %>
-  <div class="connect">
-    <ul>
-      <% [ 'facebook', 'github' ].each do |provider| %>
-      <li>
-      <%= link_to image_tag("icons/#{provider}#{logos_size}.png"), "/auth/#{provider}", :title => "Login with your #{provider.capitalize} account." %>
-      </li>
-      <% end %>
-    </ul>
-  </div>
 
+  <%= render :partial => 'sessions/connect' %>
+  
   <%= form_for :session, :url => sign_in_path, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
     <% if @user %>
       <% @user.errors.full_messages.each do |msg| %>

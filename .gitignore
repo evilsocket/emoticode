@@ -23,4 +23,5 @@ db/seeds.rb
 .DS_Store
 */.DS_Store
 public/assets/
+public/avatars/*.png
 db/sphinx

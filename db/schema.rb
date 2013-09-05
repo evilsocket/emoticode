@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130902203413) do
+ActiveRecord::Schema.define(version: 20130905201706) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -106,16 +106,17 @@ ActiveRecord::Schema.define(version: 20130902203413) do
 
   add_index "social_cron", ["last_posted_source_id"], name: "last_posted_source_id", using: :btree
 
-  create_table "sources", force: true, :options => "ENGINE=MyISAM" do |t|
+  create_table "sources", force: true do |t|
     t.integer "user_id"
     t.integer "language_id"
-    t.integer "private",     limit: 1,          default: 0, null: false
-    t.string  "name",                                       null: false
-    t.string  "title",                                      null: false
+    t.integer "private",     limit: 1,          default: 0,     null: false
+    t.string  "name",                                           null: false
+    t.string  "title",                                          null: false
     t.text    "description"
-    t.integer "created_at",                                 null: false
-    t.text    "text",        limit: 2147483647,             null: false
+    t.integer "created_at",                                     null: false
+    t.text    "text",        limit: 2147483647,                 null: false
     t.integer "views",                          default: 0
+    t.boolean "socialized",                     default: false
   end
 
   add_index "sources", ["description"], name: "search_index_2", type: :fulltext

@@ -66,7 +66,9 @@
                 [
                     link_to_function( 'Add Snippet', 'showLoginModal()' ),
                     link_to( 'Login',       sign_in_path ),
-                    link_to( 'Register',    sign_up_path )
+                    link_to( 'Register',    sign_up_path ),
+                    link_icon_to( 'Connect with Facebook', 'facebook', "/auth/facebook", { :title => "Login with your Facebook account." }),
+                    link_icon_to( 'Connect with GitHub', 'github', "/auth/github", { :title => "Login with your Github account." })
                 ]
                 end
             %>
@@ -134,9 +136,6 @@
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
 <script type="text/javascript">
-  // load socialize ASAP
-  Socialite.load();
-
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-38685018-1']);
   _gaq.push(['_trackPageview']);

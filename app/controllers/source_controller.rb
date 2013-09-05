@@ -71,6 +71,7 @@ class SourceController < ApplicationController
       Source.find params[:id]
     else
       Source
+      .joins(:language)
       .where(languages: { name: params[:language_name] })
       .where(sources: { name: params[:source_name] })
       .first!

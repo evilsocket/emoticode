@@ -48,43 +48,6 @@
           <%= link_icon_to_function "Embed", "expand", "$('#embed').modal();" %>
         </li>
       </ul>
-
-      <div id="share">
-        <a class="socialite twitter-share" href="http://twitter.com/share" data-url="<%= @source.url %>" data-count="vertical" data-width="60" rel="nofollow" target="_blank">
-          Share on Twitter
-        </a> 
-        <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=<%= @source.url %>" class="socialite googleplus-one" data-size="tall" data-href="<%= @source.url %>" rel="nofollow" target="_blank">
-          Share on Google+
-        </a>
-        <a href="http://www.facebook.com/sharer.php?u=<%= @source.url %>&amp;t=<%= @source.title %>" class="socialite facebook-like" data-href="<%= @source.url %>" data-send="false" data-layout="box_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank">
-        Share on Facebook
-        </a>
-      </div>
-
-      <script>
-        // handle scrolling for share bar
-        $(function () {
-
-          var msie6 = $.browser == 'msie' && $.browser.version < 7;
-          
-          if (!msie6) {
-            var top = $('#share').offset().top;
-            $(window).scroll(function (event) {
-              // what the y position of the scroll is
-              var y = $(this).scrollTop();
-              
-              // whether that's below the starting position
-              if (y >= top) {
-                // if so, ad the fixed class
-                $('#share').addClass('fixed');
-              } else {
-                // otherwise remove it
-                $('#share').removeClass('fixed');
-              }
-            });
-          }  
-        });
-    </script>
     </div>
   </div>  
 

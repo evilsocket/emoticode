@@ -1,0 +1,7 @@
+<ul class="connect">
+  <% [ 'facebook', 'github' ].each do |provider| %>
+    <li>
+      <%= link_icon_to "Connect with #{provider.capitalize}", provider, "/auth/#{provider}", { :class => "#{provider}-button pure-button pure-button-primary", :title => "Login with your #{provider.capitalize} account." } %>
+    </li>
+  <% end %> 
+</ul>

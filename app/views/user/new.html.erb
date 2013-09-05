@@ -1,14 +1,7 @@
 <div id="register">
   <h1>Sign Up</h1>
-  <div class="connect">
-    <ul>
-      <% [ 'facebook', 'github' ].each do |provider| %>
-      <li>
-      <%= link_to image_tag("icons/#{provider}.png"), "/auth/#{provider}", :title => "Signup with your #{provider.capitalize} account." %>
-      </li>
-      <% end %>
-    </ul>
-  </div>
+
+  <%= render :partial => 'sessions/connect' %>
 
   <%= form_for @user, :url => sign_up_path, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
     <% @user.errors.full_messages.each do |msg| %>
