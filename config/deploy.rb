@@ -50,6 +50,7 @@ namespace :deploy do
  
   task :symlink_config, roles: :app do
     secrets.each do |secret|
+      run "rm -rf #{release_path}/#{secret}"
       run "ln -nfs #{shared_path}/#{secret} #{release_path}/#{secret}"
     end
   end
