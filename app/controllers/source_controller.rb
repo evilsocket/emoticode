@@ -67,11 +67,14 @@ class SourceController < ApplicationController
   end
 
   def source_by_params
-    Source
-    .joins(:language)
-    .where(languages: { name: params[:language_name] })
-    .where(sources: { name: params[:source_name] })
-    .first!
+    if params[:id]
+      Source.find params[:id]
+    else
+      Source
+      .where(languages: { name: params[:language_name] })
+      .where(sources: { name: params[:source_name] })
+      .first!
+    end
   end
 
   def source_params

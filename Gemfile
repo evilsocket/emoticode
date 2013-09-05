@@ -20,9 +20,12 @@ gem "garb", "~> 0.9.1"            # google analytics api
 gem 'whenever', :require => false # cron jobs with ease
 gem 'thinking-sphinx', '~> 3.0.2' # sphinx ftw
 
+# social features
+gem "koala", "~> 1.7.0rc1"
+gem "twitter", "~> 4.8.1"
+
+# server side
 gem 'unicorn'
 
-group :developement do
-  gem 'capistrano' # deploy
-  gem 'seed_dump'  # create seeds.rb from existing db
-end
+# deploy
+gem 'capistrano'

@@ -30,6 +30,10 @@ class Source < ActiveRecord::Base
     "http://www.emoticode.net#{path}"
   end
 
+  def short_url
+    "http://www.emoticode.net/source/#{id}"    
+  end
+
   def description!
     if !description.nil? && !description.empty?
       description

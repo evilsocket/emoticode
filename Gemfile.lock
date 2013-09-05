@@ -28,6 +28,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.5)
     albino (1.3.3)
       posix-spawn (>= 0.3.6)
     arel (4.0.0)
@@ -75,6 +76,10 @@ GEM
     jwt (0.1.8)
       multi_json (>= 1.5)
     kgio (2.8.0)
+    koala (1.7.0rc1)
+      addressable
+      faraday
+      multi_json
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -139,7 +144,7 @@ GEM
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
-    seed_dump (0.6.0)
+    simple_oauth (0.2.0)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -164,6 +169,10 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (1.3.0)
       coffee-rails
+    twitter (4.8.1)
+      faraday (~> 0.8, < 0.10)
+      multi_json (~> 1.0)
+      simple_oauth (~> 0.2)
     tzinfo (0.3.37)
     uglifier (2.2.1)
       execjs (>= 0.3.0)
@@ -188,6 +197,7 @@ DEPENDENCIES
   garb (~> 0.9.1)
   jbuilder (~> 1.2)
   jquery-rails
+  koala (~> 1.7.0rc1)
   mysql2
   nokogiri
   omniauth
@@ -196,9 +206,9 @@ DEPENDENCIES
   rails (= 4.0.0)
   recaptcha
   sass-rails (~> 4.0.0)
-  seed_dump
   thinking-sphinx (~> 3.0.2)
   turbolinks
+  twitter (~> 4.8.1)
   uglifier (>= 1.3.0)
   unicorn
   whenever
