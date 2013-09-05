@@ -4,7 +4,7 @@ class FacebookClient
     @graph = Koala::Facebook::API.new @config['token']
   end   
 
-  def post( title, url, image )
+  def post( title, url, image = 'http://www.emoticode.net/assets/style/logo-200.png' )
     @graph.put_connections @config['page_id'], 'feed', :message => title, :picture => image, :link => url
   end
 end
