@@ -8,8 +8,8 @@
     desc_cut,
     with_author,
     source.id,
-    @current_user.id rescue 0,
-    @current_user.favorite?(source) rescue 0,
+    @current_user.id unless @current_user.nil?,
+    @current_user.favorite?(source) unless @current_user.nil?,
     source.updated_at
   ]
 
