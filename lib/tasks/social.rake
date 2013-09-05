@@ -7,7 +7,7 @@ namespace :social do
     twitter  = TwitterClient.new
     facebook = FacebookClient.new
 
-    Source.public.order('RANDOM()').limit(2).each do |source|
+    Source.public.order('RAND()').limit(2).each do |source|
       begin
         puts "Posting #{source.title} ..."
 

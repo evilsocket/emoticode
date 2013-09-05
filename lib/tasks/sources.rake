@@ -39,9 +39,4 @@ namespace :sources do
 
     Rails.logger.info "DONE"
   end
-
-  desc "TODO"
-  task social_post: :environment do
-  end
-
 end
