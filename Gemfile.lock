@@ -138,6 +138,8 @@ GEM
     rake (10.1.0)
     recaptcha (0.3.5)
     riddle (1.5.8)
+    rvm-capistrano (1.5.0)
+      capistrano (>= 2.15.4)
     safe_yaml (0.9.5)
     sass (3.2.10)
     sass-rails (4.0.0)
@@ -205,6 +207,7 @@ DEPENDENCIES
   omniauth-github (~> 1.1.1)
   rails (= 4.0.0)
   recaptcha
+  rvm-capistrano
   sass-rails (~> 4.0.0)
   thinking-sphinx (~> 3.0.2)
   turbolinks
