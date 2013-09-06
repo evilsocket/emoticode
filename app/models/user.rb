@@ -118,6 +118,10 @@ class User < ActiveRecord::Base
     level == LEVELS[:admin]
   end
 
+  def is_connected?(provider)
+    authorizations.where(:provider => provider).any?
+  end
+
   def confirmation_token
     Digest::MD5.hexdigest( "#{id}#{email}#{username}#{salt}#{password_hash}" )
   end
