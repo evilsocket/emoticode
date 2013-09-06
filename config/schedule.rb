@@ -9,3 +9,7 @@ end
 every 5.minutes do
   rake 'social:publish_new'
 end
+
+every 2.days do
+  rake 'ts:rebuild'
+end
