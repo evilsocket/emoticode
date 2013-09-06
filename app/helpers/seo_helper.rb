@@ -9,7 +9,7 @@ module SeoHelper
     end
   end
 
-  def make_seo
+  def default_seo
     seo = DeepStruct.new Rails.application.config.seo
 
     # prepare defaults
@@ -17,6 +17,12 @@ module SeoHelper
     seo.description = paged seo.default.description
     seo.keywords    = seo.default.keywords % @languages.map(&:title).join(', ')
     seo.metas       = seo.default.metas
+
+    seo
+  end
+
+  def make_seo
+    seo = self.default_seo
 
     # let the caller put custom data 
     yield seo
