@@ -56,7 +56,12 @@
 
     #sources {
         border-top: 1px solid #eee;
-        margin-bottom: 50px;
+
+        h2 {
+            border-bottom: 2px solid #aa4643;
+            padding-bottom: 10px;
+            font-size: 14px;
+        }
 
         ul {
             margin: 0;

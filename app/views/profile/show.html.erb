@@ -43,26 +43,25 @@
       <p><%= link_to @user.profile.website, @user.profile.website, :target => '_blank', :rel => 'nofollow' %></p>
     <% end %>
 
-    <%= render :partial => 'comments/box', :locals => { object: @user.profile, heading: "Leave a message to #{@user.username}" } %>
-
     <div id="sources">
-      <% sources = @user.sources.where( :private => false ).page( params[:page] ) %>
-      <h2>Public Sources</h2>
-      <% if sources.any? %>
+      <h2><i class="icon-file"></i> Public Sources</h2>
+      <% if @sources.any? %>
         <ul>
-          <% sources.each do |source| %>
+          <% @sources.each do |source| %>
             <%= render :partial => "source/listing", :locals => { :source => source, :with_author => false } %>
           <% end %>
         </ul>
 
         <br style="clear:both;"/>
         <section class="pager">
-          <%= will_paginate sources %>
+          <%= will_paginate @sources %>
         </section>
       <% else %>
         <em>Nothing posted yet :/</em>
       <% end %>
     </div>
+
+    <%= render :partial => 'comments/box', :locals => { object: @user.profile, heading: "Leave a message to #{@user.username}" } %>
 
   </div>
 

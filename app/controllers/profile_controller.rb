@@ -3,7 +3,8 @@ class ProfileController < ApplicationController
   before_filter :skip_password_attribute, only: :update
 
   def show
-    @user = User.find_by_username!( params[:username] )
+    @user    = User.find_by_username!( params[:username] )
+    @sources = @user.sources.where( :private => false ).paginate(:page => params[:page], :per_page => 5 )
     @comment = Comment.new
   end
 
