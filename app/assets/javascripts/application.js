@@ -12,8 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
+
+$(document).ready(function($) {
+    console.log('readyyyy!');
+    $button = $('#show-all-langs');
+    $menu = $('#all-langs');
+
+    $button.hover( 
+        function(){
+            $menu.css( 'left', $button.offset().left - $menu.outerWidth() + $button.outerWidth() ).show();
+        },
+        function(){
+            $menu.hide();
+        }
+    );
+});
 
 Cufon.replace('span#motto', {fontFamily: 'Gabriola', hover:true});
 Cufon.replace('#heading > h1', {fontFamily: 'Copse', hover:true})
@@ -27,17 +41,3 @@ function replyToComment( id, username ){
     $('#comments form input[type="submit"]').val('Reply');
     $('#comments form textarea').attr( 'placeholder', 'Leave a reply to ' + username + ' ...' ).focus();
 }
-
-$( function(){
-    $button = $('#show-all-langs');
-    $menu = $('#all-langs');
-
-    $button.hover( 
-        function(){
-            $menu.css( 'left', $button.offset().left - $menu.outerWidth() + $button.outerWidth() ).show();
-        },
-        function(){
-            $menu.hide();
-        }
-    );
-});

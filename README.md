@@ -71,6 +71,10 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 - [x] Publish to Social Networks
 - [x] Update source views with Analytics API
 
+### Rake Tasks
+
+- [ ] Legacy database importer
+
 ### Static Pages
 
 - [x] 404
@@ -79,7 +83,6 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 
 ### SEO
 
-- [ ] Rich Snippets ( google authoring )
 - [x] Links auto title
 - [x] Heading meta: keywords, descriptions, og:* ( with pagination )
 - [x] Hn reordering
