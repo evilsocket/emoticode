@@ -27,6 +27,8 @@ EmoticodeRails::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.action_controller.include_all_helpers = false
+
   # Make unicorn log to STDOUT in dev mode
   config.logger = Logger.new(STDOUT)
   config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')

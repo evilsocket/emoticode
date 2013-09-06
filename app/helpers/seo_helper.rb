@@ -1,60 +1,34 @@
 module SeoHelper
-  def page_title
-    base_title = 'emoticode'
+  require 'deepstruct'
 
-    page_title = if @source and !@source.new_record?
-                   "#{@source.language.title} - #{@source.title} | #{base_title}"
-
-                 elsif @language
-                   "#{@language.title} Snippets | #{base_title}"
-
-                 elsif @user and !@user.new_record?
-                   "#{@user.username} | #{base_title}"
-
-                 elsif @phrase
-                   "Search '#{@phrase}' | #{base_title}"
-
-                 else
-                   Rails.application.config.seo['title']['default'] 
-                 end
-
-    if params[:page].to_i > 1 
-      page_title << " ( Page #{params[:page]} )"
+  def paged(s)
+    if params[:page].to_i > 1
+      "#{s} ( Page #{params[:page]} )"
+    else
+      s
     end
-
-    page_title
   end
 
-  def metas
-    seo = Rails.application.config.seo
+  def make_seo
+    seo = DeepStruct.new Rails.application.config.seo
 
-    title       = page_title
-    description = seo['description']['default']
-    keywords    = seo['keywords']['default'] % @languages.map(&:title).join(', ')
+    # prepare defaults
+    seo.title       = page_title || paged( seo.default.title )
+    seo.description = paged seo.default.description
+    seo.keywords    = seo.default.keywords % @languages.map(&:title).join(', ')
+    seo.metas       = seo.default.metas
 
-    if @source and !@source.new_record?
-      keywords    = @source.tags.map(&:value).join(', ')
-      description = @source.description! title
-    elsif @language
-      description = seo['description']['language'] % Array.new( 2, @language.title )
-      keywords    = seo['keywords']['language'] % Array.new( 5, @language.title )
-    elsif @user and !@user.new_record?
-      description = seo['description']['user'] % @user.username
-    elsif @phrase
-      description = seo['description']['search'] % @phrase
-    end
+    # let the caller put custom data 
+    yield seo
 
-    if params[:page].to_i > 1 
-      description << " ( Page #{params[:page]} )"
-    end
-
-    seo['default'] + [
-      { property: 'og:description', content: description },
-      { name: 'title', content: title },
-      { name: 'description', content: description },
-      { name: 'keywords', content: keywords },
+    # return compiled list of meta tags
+    seo.metas + [
+      { property: 'og:description', content: seo.description },
+      { name: 'title', content: seo.title },
+      { name: 'description', content: seo.description },
+      { name: 'keywords', content: seo.keywords },
     ]
-  end 
+  end
 
   def link_to_source(source, attrs = {})
     attrs =  { 

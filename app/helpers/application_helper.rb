@@ -5,6 +5,16 @@ module ApplicationHelper
   include SeoHelper
   include LinkHelper
 
+  def page_title
+    paged "emoticode - Snippets and Source Code Search Engine"
+  end
+
+  def metas
+    make_seo do |seo|
+      # default metas ^^
+    end
+  end
+
   def navbar_language_link( language )
     # if we are not under a specific language archive, obtain current 
     # language from the current shown source if any

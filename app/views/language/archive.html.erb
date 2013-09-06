@@ -3,7 +3,7 @@
   <div class="huge-column">
     <h1>
       <%= link_to image_tag('icons/rss-s.png'), language_feed_path(:language => @language.name ), :title => "#{@language.title} RSS feed." %>
-      <%= @language.title %> Snippets Archive
+      <%= paged "#{@language.title} Snippets Archive" %>
     </h1>
 
     <% if @podium and @podium.count > 0 %>

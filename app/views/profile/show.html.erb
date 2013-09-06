@@ -31,7 +31,7 @@
   </div>  
 
   <div class="medium-column">
-    <h1><%= @user.username %></h1>
+    <h1><%= paged @user.username %></h1>
     <p>
       <% unless @user.profile.aboutme.nil? or @user.profile.aboutme.empty? %>
         <%= @user.profile.aboutme %>
