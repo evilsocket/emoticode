@@ -34,11 +34,11 @@ class Source < ActiveRecord::Base
     "http://www.emoticode.net/source/#{id}"    
   end
 
-  def description!
+  def description!( default = nil )
     if !description.nil? && !description.empty?
       description
     else
-      title
+      default || title
     end
   end
 

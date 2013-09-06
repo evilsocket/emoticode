@@ -11,7 +11,7 @@
   <%= auto_discovery_link_tag(:rss, "http://emoticode.net/") %>
 </head>
 <body>
-<% cache "navbar_#{Source.public.count}_#{request.fullpath.parameterize}" do %>
+<% cache "main_navbar_#{Source.public.count}_#{request.fullpath.parameterize}" do %>
 <nav id="navbar">
   <ul>
       <li><%= link_to 'Home', root_path %></li>
@@ -30,7 +30,7 @@
                       <% @languages.each_with_index do |language,i| %>
                           <% done += 1 %>
                           <td>
-                              <%= link_to language.title, language_archive_path(language.name) %>
+                              <%= link_to_language language %>
                               <span><%= language.sources_count %></span>
                           </td>
                           <% if i > 0 && ( i + 1 ) % 4 == 0 %>

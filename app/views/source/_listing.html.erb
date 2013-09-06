@@ -15,7 +15,7 @@
     </span>
     <% end %>
     <span class="info">
-        <%= link_to source.title, source_with_language_path(language_name: source.language.name, source_name: source.name ), { :class => 'title' } %>
+        <%= link_to_source source, :class => 'title' %>
         <span class="description">
           <%= if source.description.nil? or source.description.strip.empty?
                 '<em>No description :/</em>'.html_safe
@@ -25,7 +25,7 @@
           %>
         </span>
         <span class="meta">
-            Posted into <%= link_to source.language.title, language_archive_path(source.language.name), { :class => 'language' } %>
+            Posted into <%= link_to_language source.language, :class => 'language' %>
           <span class="date">
             &bull; 
             <% if show_views %>

@@ -1,29 +1,9 @@
+require 'seo_helper'
+require 'link_helper'
+
 module ApplicationHelper
-  # I hate those deprecation warnings -.-
-  def link_to_function(name, *args, &block)
-    html_options = args.extract_options!.symbolize_keys
-
-    function = block_given? ? update_page(&block) : args[0] || ''
-    onclick = "#{"#{html_options[:onclick]}; " if html_options[:onclick]}#{function}; return false;"
-    href = html_options[:href] || '#'
-
-    content_tag(:a, name, html_options.merge(:href => href, :onclick => onclick))
-  end
-
-  def link_to( body, url, attrs = {})
-    attrs =  { :title => body }.merge(attrs)
-    super
-  end
-
-  def link_icon_to( body, icon, url, attrs = {} )
-    attrs =  { :title => body, :class => 'iconic' }.merge(attrs)    
-    link_to "<i class=\"icon-#{icon}\"></i> #{body}".html_safe, url, attrs
-  end
-
-  def link_icon_to_function( body, icon, js, attrs = {} )
-    attrs = { :class => 'iconic' }.merge(attrs)
-    link_to_function "<i class=\"icon-#{icon}\"></i> #{body}".html_safe, js, attrs
-  end
+  include SeoHelper
+  include LinkHelper
 
   def navbar_language_link( language )
     # if we are not under a specific language archive, obtain current 
@@ -35,7 +15,7 @@ module ApplicationHelper
               {}
             end
 
-    link_to language.title, language_archive_path(language.name), attrs
+    link_to_language language, attrs
   end
 
   def tag_with_class_if( tag, clazz, condition, attributes = {}, &block )
@@ -45,71 +25,6 @@ module ApplicationHelper
 
     content_tag( tag, attributes, &block )
   end
-
-  def page_title
-    base_title = 'emoticode'
-
-    page_title = if @source and !@source.new_record?
-                   "#{@source.language.title} - #{@source.title} | #{base_title}"
-
-                 elsif @language
-                   "#{@language.title} Snippets | #{base_title}"
-
-                 elsif @user and !@user.new_record?
-                   "#{@user.username} | #{base_title}"
-
-                 elsif @phrase
-                   "Search '#{@phrase}' | #{base_title}"
-
-                 else
-                   Rails.application.config.seo['title']['default'] 
-                 end
-
-    if params[:page].to_i > 1 
-      page_title << " ( Page #{params[:page]} )"
-    end
-
-    page_title
-  end
-
-  def metas
-    seo = Rails.application.config.seo
-
-    title       = page_title
-    description = seo['description']['default']
-    keywords    = seo['keywords']['default'] % @languages.map(&:title).join(', ')
-
-    if @source and !@source.new_record?
-      keywords    = @source.tags.map(&:value).join(', ')
-      description = if !@source.description.nil? && !@source.description.empty?
-                      @source.description
-                    else
-                      title
-                    end
-
-    elsif @language
-      description = seo['description']['language'] % [ @language.title, @language.title ]
-      keywords    = seo['keywords']['language'] % [ @language.title, @language.title, @language.title, @language.title, @language.title ]
-
-    elsif @user and !@user.new_record?
-      description = seo['description']['user'] % @user.username
-
-    elsif @phrase
-      description = seo['description']['search'] % @phrase
-
-    end
-
-    if params[:page].to_i > 1 
-      description << " ( Page #{params[:page]} )"
-    end
-
-    seo['default'] + [
-      { property: 'og:description', content: description },
-      { name: 'title', content: title },
-      { name: 'description', content: description },
-      { name: 'keywords', content: keywords },
-    ]
-  end 
 
   def modal_dialog( id, title )
     content_tag :div, :class => 'dialog', :id => id do

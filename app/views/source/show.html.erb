@@ -9,7 +9,7 @@
       </span>
 
       <span class="info">
-        Posted into <%= link_to @source.language.title, language_archive_path(@source.language.name), { :class => 'language' } %> 
+        Posted into <%= link_to_language @source.language, :class => 'language' %> 
         <br/>
         <%= time_ago_in_words( Time.at(@source.created_at) ) %> ago
         <br/> 
