@@ -36,8 +36,9 @@ module ApplicationHelper
     content_tag( tag, attributes, &block )
   end
 
-  def modal_dialog( id, title )
-    content_tag :div, :class => 'dialog', :id => id do
+  def modal_dialog( id, title, attrs = {} )
+    attrs = { :class => 'dialog', :id => id }.merge(attrs)
+    content_tag :div, attrs do
       content_tag( :div, :class => 'title' ) { title } +
       content_tag( :div, :class => 'content' ) do
         yield

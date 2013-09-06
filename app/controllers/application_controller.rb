@@ -13,11 +13,15 @@ class ApplicationController < ActionController::Base
   def create_globals
     @languages    = Language.all
     @pages        = Page.all
-    @users        = User.where( :status => User::STATUSES[:confirmed] ).joins(:profile).order('created_at DESC').limit(20) 
+    @users        = User.where( :status => User::STATUSES[:confirmed] ).joins(:profile).order('created_at DESC').limit(20)
+    @show_joinus  = false
     @current_user = User.find_by_id( session[:id] )
     if @current_user.nil? == false
       @current_user.last_seen_at = Time.now
       @current_user.save(:validate => false)
+    elsif cookies[:joinus].nil?
+      @show_joinus = true
+      cookies[:joinus] = { :value => "1", :expires => Time.now + 604800 }
     end
   end
 

@@ -147,5 +147,14 @@
   })();
 </script>
 
+<% if @show_joinus %>
+  <%= modal_dialog 'joinus', 'Join us on Google+ and Facebook', :style => 'width:530px; height: 450px;' do %>
+    <div class="g-plus" data-width="500" data-href="//plus.google.com/105672627985088123672" data-rel="publisher"></div>
+    <br/>
+    <div class="fb-like-box" data-href="http://www.facebook.com/pages/EmotiCODE/475488679182886" data-width="500" data-show-faces="true" data-stream="false" data-header="false"></div>
+  <% end %>
+  <script>$(function(){$('#joinus').modal();})</script>
+<% end %>
+
 </body>
 </html>

@@ -15,7 +15,6 @@
 //= require_tree .
 
 $(document).ready(function($) {
-    console.log('readyyyy!');
     $button = $('#show-all-langs');
     $menu = $('#all-langs');
 
