@@ -29,6 +29,3 @@ gem 'unicorn'
 # deploy
 gem 'capistrano'
 gem 'rvm-capistrano'
-
-# monitoring
-gem 'newrelic_rpm'
