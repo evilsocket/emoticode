@@ -4,6 +4,7 @@
   with_author = true if local_assigns[:with_author].nil?
 %>
 
+<% cache_if( !signed_in?, "source_listing_#{show_views}_#{desc_cut}_#{with_author}_#{source.id}" ) do %>
 <li>
 <div class="source">
     <% if with_author %>
@@ -50,3 +51,4 @@
     </span>
 </div>
 </li>
+<% end %>

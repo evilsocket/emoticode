@@ -15,6 +15,14 @@ module ApplicationHelper
     end
   end
 
+  def cache_if(condition, name = {}, &block)
+    if condition
+      cache(name, &block)
+    else
+      yield
+    end
+  end
+
   def navbar_language_link( language )
     # if we are not under a specific language archive, obtain current 
     # language from the current shown source if any

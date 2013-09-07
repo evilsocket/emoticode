@@ -55,7 +55,7 @@
     <h1><%= @source.title %></h1>
     <p class="description"><%=raw description(@source) %></p>
     <%=raw highlight(@source) %>
-    
+
     <%= render :partial => 'comments/box', :locals => { object: @source } %>
   </div>
 
