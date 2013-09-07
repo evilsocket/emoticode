@@ -96,8 +96,9 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 
 ## Future Release Tasks
 
-- [ ] **New!** Custom User Homepage
-- [ ] **New!** Language Discussion Groups
+- [ ] Custom User Homepage
+- [ ] Postable tutorials ( markdown + multiple attached sources )  
+- [ ] Language Discussion Groups
 - [ ] Group feed
 
 ## License
