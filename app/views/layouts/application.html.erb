@@ -9,6 +9,7 @@
     <meta <% meta.each { |attr,value| %><%= attr %>="<%= value %>" <% } %>/>
   <% end %>
   <%= auto_discovery_link_tag(:rss, "http://emoticode.net/") %>
+  <link rel="shortcut icon" href="/favicon.png">
 </head>
 <body>
 <% cache "main_navbar_#{Source.public.count}_#{request.fullpath.parameterize}" do %>
