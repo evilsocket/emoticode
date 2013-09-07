@@ -9,7 +9,7 @@ default:
         - :property: og:site_name
           :content: emoticode
         - :property: og:image
-          :content: http://www.emoticode.net/assets/style/logo-200.png?v=2.1
+          :content: http://www.emoticode.net/logo-200.png
         - :property: fb_app_id
           :content: '541383999216397'
         - :property: fb:app_id
