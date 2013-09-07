@@ -20,9 +20,15 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup"
- 
+after "deploy:symlink", "deploy:update_crontab"
+
 namespace :deploy do
   secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/development.sphinx.conf', 'public/avatars' ]
+
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :db do
+    run "cd #{release_path} && whenever --update-crontab #{application}"
+  end
 
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
