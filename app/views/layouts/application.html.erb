@@ -75,13 +75,6 @@
             %>
 
             <%=raw linkset.map { |link| "<li>#{link}</li>" }.join '<li>&bull;</li>' %>
-
-            <% if signed_in? and @current_user.is_admin? %>
-              <li>&bull;</li>
-              <li>
-
-              </li>
-            <% end %>
         </ul>
         <ul class="right">
           <%=raw @pages.map { |page| "<li>#{ link_to(page.title, page_show_path(page: page.name) ) }</li>" }.join '<li>&bull;</li>' %>
