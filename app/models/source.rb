@@ -5,12 +5,19 @@ class Source < ActiveRecord::Base
   has_many   :tags, :through => :links
   has_many   :comments, -> { where commentable_type: Comment::COMMENTABLE_TYPES[:source] }, :foreign_key => :commentable_id
   has_one    :rating, -> { where rateable_type: Rating::RATEABLE_TYPES[:source] }, :foreign_key => :rateable_id
-  
 
   default_scope -> { order('created_at DESC') }
   scope :public, -> { where( :private => false ) }
   scope :popular, -> { order('views DESC') }
+  scope :by_links, -> { order( '( COUNT(links.id) * links.weight ) DESC' ).group( 'links.source_id, sources.name' ) }
+
   scope :with_user_profile, -> { joins(:user => :profile) }
+  scope :with_similar_links, ->(source) {
+      where( 'sources.id != ?', source.id )
+      .joins(:links)
+      .where( 'links.tag_id IN ( ? )', source.links.map(&:tag_id) )
+      .by_links
+  }
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { :minimum => 5, :maximum => 255 }
   validates :text, presence: true, length: { :minimum => 25 }
@@ -48,14 +55,7 @@ class Source < ActiveRecord::Base
 
   def related( limit = 5 )
     Rails.cache.fetch "#{limit}_related_sources_of_#{id}", :expires_in => 24.hours do
-      Source
-      .where( 'sources.id != ?', id )
-      .joins(:links)
-      .where( 'links.tag_id IN ( ? )', links.map(&:tag_id) )
-      .order( '( COUNT(links.id) * links.weight ) DESC' )
-      .group( 'links.source_id, sources.name' )
-      .limit( limit )
-      .load
+      Source.with_similar_links(self).limit( limit ).load
     end
   end
 
@@ -94,47 +94,35 @@ class Source < ActiveRecord::Base
     self.name = name
   end
 
-  def lexical_analysis!
+  def tokenize
     analysis = {}
     base     = 0.5
-
     # extract meaningful identifiers of at least 4 characters and at most 50, with a css 
     # class starting with a 'n' or a 'v'.
     # ( pygments/token.py )
     tokens = Albino.colorize( text, language.syntax ).scan( /<span\s+class="[nv][^"]*">([^<]{4,50})<\/span>/im ).map(&:first)
-
     # remove tokens when they are formed by a repetition ( ex. 'aaaaaaaaaa' or '___' )
     tokens.reject! { |token| token.gsub( token[0], '' ).empty? }
     # build a lower case version
     lowerized = tokens.map { |token| token.downcase }
-
     # build the analysis map where each token weight
     # is given by the formula:
     #
     #   base_weight + 0.3 * ( occurrences(token) - 1 )
     tokens.each do |token|
-      unless analysis.has_key? token
-        analysis[token] = base + 0.3 * ( lowerized.count( token.downcase ) - 1 )
-      end
+      analysis[token] ||= base * 0.3 * ( lowerized.count( token.downcase ) - 1 )
     end
+  end
 
-    # save to db
-    analysis.each do |token,weight|
+  def lexical_analysis!    
+    # save tokenization db
+    self.send(:tokenize).each do |token,weight|
       tag_name = token.parameterize
-
       # create the tag if it doesn't exist yet
-      tag = Tag.find_by_name tag_name
-
-      if tag.nil?
-        tag = Tag.create( :name => tag_name, :value => token )
-      end
-
+      tag = Tag.find_by_name tag_name || Tag.create( :name => tag_name, :value => token )
       # create a link with this source if not already present
-      link = Link.find_by_source_id_and_tag_id( id, tag.id )
-      
-      if link.nil?
-        Link.create( :source_id => id, :tag_id => tag.id, :weight => weight )
-      end
+      link = Link.find_by_source_id_and_tag_id( id, tag.id ) || 
+             Link.create( :source_id => id, :tag_id => tag.id, :weight => weight )
     end 
   end
 
