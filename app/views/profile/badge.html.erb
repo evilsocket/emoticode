@@ -30,21 +30,21 @@
  
     <div class="profile-stats-container">
         <ul class="stats js-mini-profile-stats">
-        <li>
-          <a href="<%= user_profile_url(:username => @user.username) %>">
-            <strong><%= @user.sources.count %></strong> Snippets
-          </a>
-        </li>
-        <li>
-          <a href="<%= user_profile_url(:username => @user.username) %>">
-            <strong><%= @user.favorite_by_others %></strong> FAVS
-          </a>
-        </li>
-        <li>
-          <a href="<%= user_profile_url(:username => @user.username) %>">
-            <strong><%= ( @user.rating.average * 100 ).round 1 %>%</strong> RATING
-          </a>
-        </li>
+          <li>
+            <a href="<%= user_profile_url(:username => @user.username) %>">
+              <strong><%= @user.sources.count %></strong> Snippets
+            </a>
+          </li>
+          <li>
+            <a href="<%= user_profile_url(:username => @user.username) %>">
+              <strong><%= @user.favorite_by_others %></strong> FAVS
+            </a>
+          </li>
+          <li>
+            <a href="<%= user_profile_url(:username => @user.username) %>">
+              <strong><%= ( @user.rating.average * 100 ).round 1 %>%</strong> RATING
+            </a>
+          </li>
         </ul>
     </div>
     
