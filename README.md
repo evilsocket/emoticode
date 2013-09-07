@@ -1,101 +1,23 @@
 # EmotiCODE v2.0 [![Code Climate](https://codeclimate.com/github/evilsocket/emoticode.png)](https://codeclimate.com/github/evilsocket/emoticode)
 
-This is the code repository for v2.0 of [emoticode.net](http://www.emoticode.net/) which is going to be published as soon as it will be finished.  
+This is the code repository for [emoticode.net](http://www.emoticode.net/).  
 It's a complete rewrite of the original website, which was written in PHP, in **Ruby on Rails** using MySQL
-as DBMS ( maybe I will switch to PostgreSQL ) and all the Rails magic.  
+as DBMS and all the Rails magic.  
 I've started this new version to learn Rails advanced concepts, but I'm still a new comer in this world so if you find any bug or bad practice please feel free to open an issue here on GitHub.  
 
-  
-**This is still unfinished software!** This is a screenshot of how's going so far:  
+## About
 
-![home screenshot](https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-ash3/1277986_10151782308454223_758956804_o.jpg)
+EmotiCODE is a collaborative source code snippets aggregator and search engine but mostly a place where developers can find the answers they are searching for and contribute with their own 
+contents to help others with the same needs.  
+The main concept behind emoticode is "as a developer i own a lot to people publishing source codes, snippets and guides on the internet, the less i can do is do my best to help the internet back", 
+therefore we encourage people to register ( the process is pretty straightforward ) and post every bit of code they have/use/find on the internet, because even the smallest three-line-snippet could 
+solve someone else problems while developing a project ... you never know :)
 
-## Roadmap
-
-### Userbase
-
-- [x] Login
-- [x] Logout
-- [x] Ajax Favorites Controller
-- [x] Authentication with Facebook
-- [x] **New!** Authentication with Github
-- [x] Profile Settings
-- [x] Registration
-- [x] Password Recovery
-- [x] Ratings Ajax Controller
-
-### Pages
-
-- [x] Home
-- [x] Language Listings
-- [x] **New!** Most Active Users Rankings ( per language )
-- [x] User Profiles
-- [x] User Badges
-- [x] Source Code View
-- [x] Embeddable Source Code
-- [x] Source Code Create
-- [x] Source Code Update
-- [x] Source Code Delete
-- [x] Source Related
-- [x] Search Engine
-- [x] Sitemap
-
-### Comments
-
-- [x] Show
-- [x] New
-- [x] Reply
-
-### Mailers
-
-- [x] User Registration
-- [x] User temp password for social connect
-- [x] Comment to source
-- [x] Comment to profile
-- [x] Comment reply
-
-### Javascripts
-
-- [x] Login modal
-- [x] Embed modal
-
-### Feeds
-
-- [x] Global
-- [x] Per language feed
-- [x] User profile feed
-- [x] Random Feed
-
-### Cron Jobs
-
-- [x] Publish to Social Networks
-- [x] Update source views with Analytics API
-
-### Rake Tasks
-
-- [x] Legacy database importer
-
-### Static Pages
-
-- [x] 404
-- [x] 500
-- [x] robots.txt
-
-### SEO
-
-- [x] Links auto title
-- [x] Heading meta: keywords, descriptions, og:* ( with pagination )
-- [x] Hn reordering
-- [ ] General checkup
-
-### Graphics / Layout
+## Future Tasks
 
 - [ ] New Logo
 - [ ] Per language og:image ?
 - [ ] Everything's needed :P
-
-## Future Release Tasks
-
 - [ ] Custom User Homepage
 - [ ] Postable tutorials ( markdown + multiple attached sources )  
 - [ ] Language Discussion Groups
