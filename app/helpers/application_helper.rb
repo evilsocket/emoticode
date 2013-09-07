@@ -77,7 +77,7 @@ module ApplicationHelper
 
   def avatar_tag(user)
     content_tag :figure, { :class => 'avatar' } do
-      image_tag image_url(user.avatar), :alt => "#{user.username} avatar."
+      image_tag image_url(user.avatar), :onerror => "this.src='#{image_url("/avatars/default.png")}';", :alt => "#{user.username} avatar."
     end
   end
 

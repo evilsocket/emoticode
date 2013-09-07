@@ -63,21 +63,38 @@ ul.avatars {
 div.dialog {
     display: none;
     background: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,0,0,0.3);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+    outline: none;
 
     div.title {
-        color: #9da0a4;
-        background-color: #e1e1e1;
-        background-image: -moz-linear-gradient(#f8f8f8, #e1e1e1);
-        background-image: -webkit-linear-gradient(#f8f8f8, #e1e1e1);
-        background-image: linear-gradient(#f8f8f8, #e1e1e1);
-        background-repeat: repeat-x;
-        padding: 9px 15px;
-        border-bottom: 1px solid #eee;
         line-height: 30px;
         text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 700;
+        color: #39434c;
+        font-size: 18px;
+        border-bottom: 1px solid #8a9ba6;
+        overflow: hidden;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        -moz-border-radius-top-left: 3px;
+        -moz-border-radius-top-right: 3px;
+        background: white;
+        background-image: linear-gradient(top,white 50%,#e2e2e2 100%);
+        background-image: -o-linear-gradient(top,white 50%,#e2e2e2 100%);
+        background-image: -moz-linear-gradient(top,white 50%,#e2e2e2 100%);
+        background-image: -webkit-linear-gradient(top,white 50%,#e2e2e2 100%);
+        background-image: -ms-linear-gradient(top,white 50%,#e2e2e2 100%);
     }
 
     div.content {
@@ -169,7 +186,7 @@ ul.connect {
     display: table;
     table-layout: fixed;
     width: 100%;
-   
+
     li {
         display: table-cell;
         padding-right: 10px;
