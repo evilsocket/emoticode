@@ -27,7 +27,8 @@ class User < ActiveRecord::Base
 
   validates :password, presence: { :on => :create },
     length: { :minimum => 5, :maximum => 255, :allow_nil => true },
-    confirmation: true
+    confirmation: true,
+    :unless => "!validations_to_skip.nil? and validations_to_skip.include?('password')"
 
   validates_inclusion_of :level,  :in => LEVELS.values.freeze
   validates_inclusion_of :status, :in => STATUSES.values.freeze
@@ -35,7 +36,7 @@ class User < ActiveRecord::Base
   validates_associated          :profile 
   accepts_nested_attributes_for :profile, update_only: true
 
-  attr_accessor :password, :password_confirmation, :avatar_upload
+  attr_accessor :password, :password_confirmation, :avatar_upload, :validations_to_skip
 
   before_create :create_salt
   before_create :create_hashed_password
@@ -176,7 +177,9 @@ class User < ActiveRecord::Base
   end
 
   def create_hashed_password
-    self.password_hash = Digest::MD5.hexdigest( self.salt + self.password )
+    unless self.password.nil?
+      self.password_hash = Digest::MD5.hexdigest( self.salt + self.password )
+    end
   end
 
   def update_hashed_password

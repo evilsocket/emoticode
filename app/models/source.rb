@@ -110,8 +110,10 @@ class Source < ActiveRecord::Base
     #
     #   base_weight + 0.3 * ( occurrences(token) - 1 )
     tokens.each do |token|
-      analysis[token] ||= base * 0.3 * ( lowerized.count( token.downcase ) - 1 )
+      analysis[token] ||= base * 0.3 * lowerized.count( token.downcase ) 
     end
+
+    analysis
   end
 
   def lexical_analysis!    
@@ -119,7 +121,7 @@ class Source < ActiveRecord::Base
     self.send(:tokenize).each do |token,weight|
       tag_name = token.parameterize
       # create the tag if it doesn't exist yet
-      tag = Tag.find_by_name tag_name || Tag.create( :name => tag_name, :value => token )
+      tag = Tag.find_by_name(tag_name) || Tag.create( :name => tag_name, :value => token )
       # create a link with this source if not already present
       link = Link.find_by_source_id_and_tag_id( id, tag.id ) || 
              Link.create( :source_id => id, :tag_id => tag.id, :weight => weight )

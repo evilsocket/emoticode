@@ -73,7 +73,7 @@ I've started this new version to learn Rails advanced concepts, but I'm still a 
 
 ### Rake Tasks
 
-- [ ] Legacy database importer
+- [x] Legacy database importer
 
 ### Static Pages
 
