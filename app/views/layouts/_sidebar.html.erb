@@ -5,7 +5,7 @@
     </div>
     <div class="share">
       <%= link_to image_tag("icons/facebook.png"),   "http://www.facebook.com/sharer.php?u=#{request.original_url}", { :target => '_blank', :title => 'Share on Facebook' } %>
-      <%= link_to image_tag("icons/twitter.png"),    "http://twitter.com/home?status=#{request.original_url}", { :target => '_blank', :title => 'Post to Twitter' } %>
+      <%= link_to image_tag("icons/twitter.png"),    "http://twitter.com/home?status=#{source.language.title} - #{source.title} #{request.original_url}", { :target => '_blank', :title => 'Post to Twitter' } %>
       <%= link_to image_tag("icons/googleplus.png"), "https://plus.google.com/share?url=#{request.original_url}", { :target => '_blank', :title => 'Post to Google+' } %>
       <%= link_to image_tag("icons/delicious.png"),  "http://del.icio.us/post?url=#{request.original_url}", { :target => '_blank', :title => 'Post to Delicious' } %>
     </div>
