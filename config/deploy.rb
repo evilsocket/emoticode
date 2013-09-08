@@ -1,7 +1,7 @@
 # Load RVM's capistrano plugin.    
 require "rvm/capistrano"
-# Add Bundler integration to capistrano
-require 'bundler/capistrano'  
+# Bundler support
+require 'bundler/capistrano'
 
 set :rvm_ruby_string, '2.0.0'
 set :rvm_type, :user  # Don't use system-wide RVM
