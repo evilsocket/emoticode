@@ -140,10 +140,20 @@
 </script>
 
 <% if @show_joinus %>
-  <%= modal_dialog 'joinus', 'Join us on Google+ and Facebook', :style => 'width:530px; height: 450px;' do %>
-    <div class="g-plus" data-width="500" data-href="//plus.google.com/105672627985088123672" data-rel="publisher"></div>
-    <br/>
-    <div class="fb-like-box" data-href="http://www.facebook.com/pages/EmotiCODE/475488679182886" data-width="500" data-show-faces="true" data-stream="false" data-header="false"></div>
+  <%= modal_dialog 'joinus', 'Join Us!', :style => 'width:530px; height: 450px;' do %>
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="50%">
+          <div class="g-plus" data-width="230" data-href="//plus.google.com/105672627985088123672" data-rel="publisher"></div>
+          <br/>
+          <div class="fb-like-box" data-href="http://www.facebook.com/pages/EmotiCODE/475488679182886" data-width="230" data-show-faces="true" data-stream="false" data-header="false"></div>                    
+        </td>
+        <td>
+          <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/EmotiCodeDotNet" data-widget-id="376735076983111681">Tweets di @EmotiCodeDotNet</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </td>
+      </tr>
+    </table>
   <% end %>
   <script>$(function(){$('#joinus').modal();})</script>
 <% end %>
