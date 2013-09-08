@@ -28,13 +28,13 @@ module SeoHelper
     yield seo
 
     # return compiled list of meta tags
-    seo.metas + [
+    [
       { property: 'og:title', content: seo.title },
       { property: 'og:description', content: seo.description },
       { name: 'title', content: seo.title },
       { name: 'description', content: seo.description },
       { name: 'keywords', content: seo.keywords },
-    ]
+    ] + seo.metas
   end
 
   def link_to_source(source, attrs = {})
