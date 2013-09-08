@@ -29,8 +29,8 @@ EmoticodeRails::Application.routes.draw do
   controller :profile do
     get   'profile/edit'           => :edit, as: :user_settings
     patch 'profile/update'         => :update
-    get   'profile/:username'      => :show, as: :user_profile, constraints: { username: Patterns::ROUTE_PATTERN }
-    get   'badge/:username'        => :badge, as: :user_badge, constraints: { username: Patterns::ROUTE_PATTERN }
+    get   'profile/:username'      => :show, as: :user_profile, constraints: { username: Patterns::USERNAME_PATTERN }
+    get   'badge/:username'        => :badge, as: :user_badge, constraints: { username: Patterns::USERNAME_PATTERN }
   end
 
   controller :search do
@@ -49,7 +49,7 @@ EmoticodeRails::Application.routes.draw do
   controller :feeds do
     get 'feed'                   => :feed,     as: :feed
     get 'feed/:language'         => :language, as: :language_feed, constraints: { language: Patterns::ROUTE_PATTERN }
-    get 'profile/:username/feed' => :user,     as: :user_feed, constraints: { username: Patterns::ROUTE_PATTERN }
+    get 'profile/:username/feed' => :user,     as: :user_feed, constraints: { username: Patterns::USERNAME_PATTERN }
     get 'randomfeed'             => :random,   as: :random_feed
   end
 
