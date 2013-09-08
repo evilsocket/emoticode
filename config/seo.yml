@@ -8,6 +8,8 @@ default:
           :content: en_US
         - :property: og:site_name
           :content: emoticode
+        - :property: og:type
+          :content: article
         - :property: og:image
           :content: http://www.emoticode.net/logo-200.png
         - :property: fb_app_id

@@ -29,6 +29,7 @@ module SeoHelper
 
     # return compiled list of meta tags
     seo.metas + [
+      { property: 'og:title', content: seo.title },
       { property: 'og:description', content: seo.description },
       { name: 'title', content: seo.title },
       { name: 'description', content: seo.description },
