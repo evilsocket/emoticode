@@ -14,8 +14,6 @@ default:
           :content: http://www.emoticode.net/logo-200.png
         - :property: fb:app_id
           :content: '541383999216397'
-        - :property: og:url
-          :content: http://www.emoticode.net/
         - :name: language
           :content: en
         - :name: robots
