@@ -15,7 +15,9 @@ namespace :sources do
 
     google = Rails.application.config.secrets['Google']
 
-    Garb::Session.login( google['username'], google['password'] )
+    Garb::Session.api_key = google['api_key']
+    Garb::Session.login google['username'], google['password'] 
+
     profile = Garb::Management::Profile.all.detect {|p| p.web_property_id == google['profile'] }
 
     Rails.logger.info "Start updating."

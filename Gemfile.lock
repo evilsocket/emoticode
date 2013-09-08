@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/Sija/garb.git
+  revision: 3dff408078bb2b5652ceeedd186c29dc3c438ac5
+  specs:
+    garb (0.9.7)
+      activesupport (>= 2.2)
+      multi_json (>= 1.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -48,8 +56,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    crack (0.4.1)
-      safe_yaml (~> 0.9.0)
     erubis (2.7.0)
     execjs (2.0.1)
     faraday (0.8.8)
@@ -58,9 +64,6 @@ GEM
     fastimage_resize (2.0.3)
       RubyInline (>= 3.8.2)
       fastimage (>= 1.2.9)
-    garb (0.9.1)
-      activesupport (>= 2.2.0)
-      crack (>= 0.1.6)
     hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.3)
@@ -140,7 +143,6 @@ GEM
     riddle (1.5.8)
     rvm-capistrano (1.5.0)
       capistrano (>= 2.15.4)
-    safe_yaml (0.9.5)
     sass (3.2.10)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -194,7 +196,7 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 4.0.0)
   fastimage_resize
-  garb (~> 0.9.1)
+  garb!
   jbuilder (~> 1.2)
   jquery-rails
   koala (~> 1.7.0rc1)
