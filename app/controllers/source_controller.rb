@@ -4,8 +4,12 @@ class SourceController < ApplicationController
 
   def show
     @source = source_by_params
-    @cloud = @source.tags.to_a.shuffle
-    @comment = Comment.new
+    if params[:id]
+      redirect_to source_with_language_url( :language_name => @source.language.name, :source_name => @source.name )
+    else      
+      @cloud = @source.tags.to_a.shuffle
+      @comment = Comment.new
+    end
   end
 
   def raw
