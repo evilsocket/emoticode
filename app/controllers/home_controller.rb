@@ -6,9 +6,8 @@ class HomeController < ApplicationController
     @popular = base.where( 'sources.created_at >= ?', 2.months.ago.to_i ).popular.page( params[:page] )
     @cloud   = Rails.cache.fetch '70_shuffled_tags_by_sources_count_and_weight', :expires_in => 1.week do 
       Tag.
-        joins(:sources).
-        group( 'tags.id' ).
-        order( 'sources_count DESC, weight DESC' ).
+        with_sources.
+        popular.
         limit( 70 ).
         to_a.
         shuffle!

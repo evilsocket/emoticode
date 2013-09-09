@@ -1,13 +1,15 @@
 class FeedsController < ApplicationController
   def feed
-    @sources = Source.where(:private => false).order('created_at DESC').limit(50) 
+    @cached  = "feed_#{Source.public.count}"
+    @sources = Source.public.limit(50) 
     render_feed
   end
 
   def language
     @language = @languages.select { |l| l.name == params[:language] }.first
     if @language 
-      @sources = Source.where(:private => false).where(:language => @language).order('created_at DESC').limit(50) 
+      @cached  = "language_feed_#{@language.sources.public.count}"        
+      @sources = @language.sources.public.limit(50) 
       render_feed
     else
       render_404
@@ -17,7 +19,8 @@ class FeedsController < ApplicationController
   def user
     @user = User.find_by_username( params[:username] )
     if @user
-      @sources = Source.where(:private => false).where(:user_id => @user.id).order('created_at DESC').limit(50) 
+      @cached  = "user_feed_#{@user.sources.public.count}"
+      @sources = @user.sources.public.order('created_at DESC').limit(50) 
       render_feed
     else
       render_404
@@ -25,7 +28,8 @@ class FeedsController < ApplicationController
   end
 
   def random
-    @sources = Source.where(:private => false).order('RAND()').limit(5) 
+    @sources = Source.where(:private => false).order('RAND()').limit(5)
+    @cached  = nil
     render_feed 
   end
 
