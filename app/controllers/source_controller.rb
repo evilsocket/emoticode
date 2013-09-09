@@ -20,9 +20,6 @@ class SourceController < ApplicationController
   def embed
     @source = source_by_params
     @hash   = Digest::MD5.hexdigest( @source.name )
-    @code = Albino.colorize @source.text, @source.language.syntax
-    @code = @code.empty? ? "<pre>#{h(@source.text)}</pre>" : @code
-
     render :partial => 'source/embed.js'
   end
 
