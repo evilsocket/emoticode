@@ -1,0 +1,10 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+    <ShortName>EmotiCODE</ShortName>
+    <Description>Search EmotiCODE</Description>
+    <Url type="text/html" method="get" template="http://www.emoticode.net/search/?what={searchTerms}"/>
+    <Image height="16" width="16" type="image/png">
+        http://www.emoticode.net/favicon.png
+    </Image>
+    <moz:SearchForm>http://www.emoticode.net/</moz:SearchForm>
+    <Url type="application/opensearchdescription+xml" rel="self" template="http://www.emoticode.net/opensearch.xml"/>
+</OpenSearchDescription>

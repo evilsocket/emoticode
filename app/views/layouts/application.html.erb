@@ -9,6 +9,7 @@
     <meta <% meta.each { |attr,value| %><%= attr %>="<%= value %>" <% } %>/>
   <% end %>
   <link rel="shortcut icon" href="/favicon.png">
+  <link rel="search" type="application/opensearchdescription+xml" href="http://www.emoticode.net/opensearch.xml" title="EmotiCODE Search"/>
 </head>
 <body>
 <% cache "main_navbar_#{Source.public.count}_#{request.fullpath.parameterize}" do %>
