@@ -1,6 +1,6 @@
 document.open();
 document.writeln('<div class="snipt-embed" onmouseover="document.getElementById(\'emoticode-<%= @hash %>}\').style.display = \'block\';return false;" onmouseout="document.getElementById(\'emoticode-<%= @hash %>\').style.display = \'none\';return false;" style="position: relative;">');
-<% highlight(@source.text).each_line do |line| %>
+<% highlight(@source).each_line do |line| %>
   <% 
     line = line.strip
     unless line.empty? 
