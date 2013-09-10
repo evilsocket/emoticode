@@ -71,6 +71,13 @@ class User < ActiveRecord::Base
   end
 
   def self.omniauth(auth)
+    begin
+      # use default facebook graph avatar if not available from auth info
+      if auth['provider'] == 'facebook'
+        auth['info']['image'] ||= "http://graph.facebook.com/#{auth['uid']}/picture?type=large"
+      end
+    rescue; end
+
     # at least the email is required to sign in an existing user
     info = auth['info']
     if auth && info && info['email'] 
