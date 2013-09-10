@@ -11,7 +11,7 @@ default:
         - :property: og:type
           :content: article
         - :property: og:image
-          :content: http://www.emoticode.net/logo-200.png
+          :content: http://www.emoticode.net/logo_2.0_200.png
         - :property: fb:app_id
           :content: '541383999216397'
         - :name: language
