@@ -505,18 +505,19 @@ body {
 
             li.home {
                 padding-left: 0.5em;
+                margin-top: -3px;
 
                 a {
                     display: block;
                     text-indent: -99999px;
-                    background: url(/home_sprite.png) 0 0 no-repeat;
-                    width: 25px;
-                    background-size: 25px auto;
+                    background: url(/navbar_home_sprite.png) 0 0 no-repeat;
+                    width: 30px;
+                    background-size: 30px auto;
                     padding-right: 0.01em;
                 }
 
                 a:hover {
-                    background-position-y: -25px;
+                    background-position-y: -30px;
                 }
             }
 
