@@ -458,12 +458,12 @@ body {
 
                 a:hover
                 {
-                    background: #383838;
+                    color: #888888;
                 }
 
                 a:active
                 {
-                    background: #484848;
+                    color: #484848;
                 }
 
                 a.current:after {
@@ -510,7 +510,7 @@ body {
                 a {
                     display: block;
                     text-indent: -99999px;
-                    background: url(/navbar_home_sprite.png) 0 0 no-repeat;
+                    background: url(/home.png) 0 0 no-repeat;
                     width: 30px;
                     background-size: 30px auto;
                     padding-right: 0.01em;
