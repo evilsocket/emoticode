@@ -3,7 +3,7 @@ class SearchController < ApplicationController
 
   def search
     @phrase  = Riddle::Query.escape(params[:what])
-    @sources = Source.search( @phrase, :star => true, :with => { :private => false } ).page( params[:page] )
+    @sources = Source.search( @phrase, :star => true ).page( params[:page] )
 
     begin
       @cloud = @sources.map { |s| s.tags }.flatten.sort { |a,b| a.sources_count <=> b.sources_count }[1..70].shuffle
