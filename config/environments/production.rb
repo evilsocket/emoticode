@@ -89,4 +89,6 @@ EmoticodeRails::Application.configure do
 
   # disable view logging
   config.action_view.logger = nil
+  # and cache store too
+  ActiveSupport::Cache::Store.logger = nil
 end
