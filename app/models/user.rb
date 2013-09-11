@@ -6,21 +6,21 @@ class User < ActiveRecord::Base
   has_many :authorizations
   has_one  :profile
 
-  LEVELS   = { :admin => 1, 
-               :editor => 2, 
-               :subscriber => 3 
+  LEVELS   = { :admin => 1,
+               :editor => 2,
+               :subscriber => 3
   }
-  STATUSES = { :unconfirmed => 1, 
+  STATUSES = { :unconfirmed => 1,
                :confirmed   => 2,
                :banned      => 3,
                :deleted     => 4
   }
 
-  validates :email, presence: true, 
+  validates :email, presence: true,
     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
     uniqueness: { case_sensitive: false }
 
-  validates :username, presence: true, 
+  validates :username, presence: true,
     format: { with: Patterns::ROUTE_PATTERN },
     uniqueness: { case_sensitive: false },
     length: { :minimum => 5, :maximum => 255 }
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   validates_inclusion_of :level,  :in => LEVELS.values.freeze
   validates_inclusion_of :status, :in => STATUSES.values.freeze
 
-  validates_associated          :profile 
+  validates_associated          :profile
   accepts_nested_attributes_for :profile, update_only: true
 
   attr_accessor :password, :password_confirmation, :avatar_upload, :validations_to_skip
@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   before_update :update_avatar
 
   def self.authenticate(who, password)
-    find_by_sql([ 'SELECT * FROM users WHERE ( username = ? OR email = ? ) AND MD5( CONCAT( salt, ? ) ) = password_hash AND status = ? ', who, who, password, STATUSES[:confirmed] ]).first 
+    find_by_sql([ 'SELECT * FROM users WHERE ( username = ? OR email = ? ) AND MD5( CONCAT( salt, ? ) ) = password_hash AND status = ? ', who, who, password, STATUSES[:confirmed] ]).first
   end
 
   def self.find_by_confirmation_token( token )
@@ -53,12 +53,12 @@ class User < ActiveRecord::Base
 
   def self.get_random_password( length = 8 )
     (0...length).map{65.+(rand(25)).chr}.join
-  end 
+  end
 
   def self.activate(token)
     # search user by token
     user = self.find_by_confirmation_token(token)
-    unless user.nil? 
+    unless user.nil?
       # should be unconfirmed yet
       if user.status == STATUSES[:unconfirmed]
         user.status = STATUSES[:confirmed]
@@ -71,47 +71,40 @@ class User < ActiveRecord::Base
   end
 
   def self.omniauth(auth)
-    begin
-      # use default facebook graph avatar if not available from auth info
-      if auth['provider'] == 'facebook'
-        auth['info']['image'] ||= "http://graph.facebook.com/#{auth['uid']}/picture?type=large"
-      end
-    rescue; end
-
     # at least the email is required to sign in an existing user
     info = auth['info']
-    if auth && info && info['email'] 
+    if auth && info && info['email']
       user         = User.find_by_email( info['email'] )
       tmp_password = nil
       profile      = nil
 
-      # new incoming user ^_^ 
-      if user.nil? 
+      # new incoming user ^_^
+      if user.nil?
         # we need the nickname now
         if info['nickname']
           # generate a temporary password
           tmp_password = self.get_random_password
 
-          counter  = 2 
-          nickname = info['nickname']
+          counter  = 2
+          nickname = info['nickname'].parameterize
           while User.find_by_username(nickname).nil? == false
             nickname = "#{info['nickname']}-#{counter}"
             counter += 1
-          end 
+          end
 
-          user = User.create({ 
-            username: nickname, 
-            email: info['email'], 
+          user = User.create({
+            username: nickname,
+            email: info['email'],
             password: tmp_password,
             password_confirmation: tmp_password,
-            status: STATUSES[:confirmed], 
+            status: STATUSES[:confirmed],
             level: LEVELS[:subscriber]
           })
 
           profile = Profile.create({ user: user }) unless !user.valid?
         end
         # existing user
-      else 
+      else
         # confirm user if not yet confirmed
         user.status = STATUSES[:confirmed]
         user.save
@@ -125,7 +118,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def favorite_by_others 
+  def favorite_by_others
     Favorite.joins(:source).where('sources.user_id = ?', self.id ).count
   end
 
@@ -173,7 +166,7 @@ class User < ActiveRecord::Base
       end
 
       stats.each do |language,hits|
-        if hits > 0  
+        if hits > 0
           stats[language] = ( ( hits * 100.0 ) / total_hits ).round 1
         else
           stats.delete language
@@ -226,9 +219,9 @@ class User < ActiveRecord::Base
     # with the given provider
     authorization = Authorization.find_by_provider_and_uid( auth["provider"], auth["uid"] )
     if authorization
-      # update data 
+      # update data
       authorization.token  = auth['credentials']['token'] unless !auth['credentials'] or !auth['credentials']['token']
-      authorization.handle = auth['info']['nickname'] unless !auth['info']['nickname'] 
+      authorization.handle = auth['info']['nickname'] unless !auth['info']['nickname']
       authorization.uid    = auth['uid']
       authorization.save!
     else
@@ -242,12 +235,19 @@ class User < ActiveRecord::Base
       })
     end
 
+    begin
+      # use default facebook graph avatar if not available from auth info
+      if auth['provider'] == 'facebook'
+        auth['info']['image'] ||= "http://graph.facebook.com/#{auth['uid']}/picture?type=large"
+      end
+    rescue; end
+
     # if user still has no avatar, fetch it from auth info if available
     if profile.avatar == 0 && auth['info']['image']
       begin
         user.send :set_avatar_file, auth['info']['image']
       rescue
-        
+
       end
 
       profile.save!

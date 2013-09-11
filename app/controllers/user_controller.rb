@@ -7,6 +7,7 @@ class UserController < ApplicationController
 
   def create
     params[:user] = params[:user].merge :status => User::STATUSES[:unconfirmed], :level => User::LEVELS[:subscriber]
+    params[:user][:username] = params[:user][:username].parameterize
 
     @user = User.new( user_params )
 
@@ -27,11 +28,11 @@ class UserController < ApplicationController
 
     @user = User.activate( params[:token] )
     if @user.nil?
-      flash[:alert] = 'Invalid confirmation token.'      
+      flash[:alert] = 'Invalid confirmation token.'
       redirect_to root_url
     else
       sign_in(@user)
-      redirect_to user_settings_url 
+      redirect_to user_settings_url
     end
   end
 
