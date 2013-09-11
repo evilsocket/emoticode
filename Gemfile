@@ -18,6 +18,7 @@ gem 'fastimage_resize'            # avatar resizing
 gem "garb", :git => 'git://github.com/Sija/garb.git'            # google analytics api
 gem 'whenever', :require => false # cron jobs with ease
 gem 'thinking-sphinx', '~> 3.0.2' # sphinx ftw
+gem "charon", "~> 1.0.0"          # check for spammers
 
 # social features
 gem "koala", "~> 1.7.0rc1"
