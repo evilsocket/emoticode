@@ -126,6 +126,10 @@ class User < ActiveRecord::Base
     level == LEVELS[:admin]
   end
 
+  def is_banned?
+    status == STATUSES[:banned]
+  end
+
   def is_connected?(provider)
     authorizations.where(:provider => provider).any?
   end

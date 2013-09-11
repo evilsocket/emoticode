@@ -1,5 +1,6 @@
 class ProfileController < ApplicationController
   before_filter :authenticate!, :except => [:show, :badge]
+  before_filter :admin!, only: [ :destroy, :ban, :unban ]  
   before_filter :skip_password_attribute, only: :update
 
   def show
@@ -25,7 +26,33 @@ class ProfileController < ApplicationController
     end
   end
 
+  def ban
+    @user.status = User::STATUSES[:banned]
+    @user.save!
+    redirect_to user_profile_url :username => @user.username    
+  end
+
+  def unban
+    @user.status = User::STATUSES[:confirmed]
+    @user.save!
+    redirect_to user_profile_url :username => @user.username    
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to root_url
+  end
+
   private
+
+  def admin!
+    @user = User.find( params[:id] )
+    if @user.nil?
+      render_404
+    elsif @current_user.is_admin? == false
+      render_404
+    end
+  end
 
   def user_params
     params.require(:user).permit(:username, :avatar_upload, :password, :password_confirmation, :profile_attributes => [ :aboutme, :website, :gplus ])

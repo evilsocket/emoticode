@@ -17,6 +17,11 @@
           Logged <%= time_ago_in_words( Time.at(@user.last_seen_at) ) %> ago<br/>
         <% end %>
         Published <%= @user.sources.count %> <%= 'source'.pluralize( @user.sources.count ) %>
+        <% if @user.is_banned? %>
+          <p style="color: red;">
+            <strong>- BANNED -</strong>
+          </p>
+        <% end %>
       </span>
       <span class="auths">
         <%= link_to image_tag("icons/rss-s.png"), user_feed_path(:username=>@user.username), :title => "#{@user.username} RSS feed." %>
@@ -27,6 +32,20 @@
           <%= link_to image_tag("icons/googleplus-s.png"), "#{@user.profile.gplus}?rel=author", :title => "Visit #{@user.username} Google+ profile." %>
         <% end %>
       </span>
+
+      <% if signed_in? and @current_user.is_admin? %>
+        <br/>
+        <center>
+          <%= link_icon_to 'Delete', 'trash', user_delete_path(@user), :class => 'pure-button pure-button-red', :style => 'width: 60%', :data => { :confirm => 'Are you sure?' } %>
+          <br/>
+          <br/>
+          <% if @user.is_banned? %>
+            <%= link_icon_to 'Unban', 'ban-circle', user_unban_path(@user), :class => 'pure-button pure-button-green', :style => 'width: 60%', :data => { :confirm => 'Are you sure?' } %>               
+          <% else %>
+            <%= link_icon_to 'Ban', 'ban-circle', user_ban_path(@user), :class => 'pure-button pure-button-blue', :style => 'width: 60%', :data => { :confirm => 'Are you sure?' } %>   
+          <% end %>
+        </center>
+      <% end %>
     </div>
   </div>  
 

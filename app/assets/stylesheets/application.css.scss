@@ -55,6 +55,31 @@ p.error {
     border-radius: 4px;
 }
 
+.pure-button-green,
+.pure-button-red,
+.pure-button-orange,
+.pure-button-blue {
+    color: white !important;
+    border-radius: 4px !important;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;
+}
+
+.pure-button-green {
+    background-color: rgb(28, 184, 65) !important;
+}
+
+.pure-button-red {
+    background-color: rgb(202, 60, 60) !important;
+}
+
+.pure-button-orange {
+    background-color: rgb(223, 117, 20) !important;
+}
+
+.pure-button-blue {
+    background-color: rgb(66, 184, 221) !important; 
+}
+
 ul.avatars {
     margin: 0;
     padding: 0;
