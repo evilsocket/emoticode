@@ -9,7 +9,7 @@ namespace :social do
 
   desc "Publish new contents on Twitter and Facebook"
   task publish_new: :environment do
-    post Source.where(:socialized => false).limit(20) 
+    post Source.where(:socialized => false).limit(20)
   end
 
   def post(sources)
@@ -21,7 +21,7 @@ namespace :social do
         puts "Posting #{source.title} ..."
 
         facebook.post source.title, source.url
-        twitter.post source.title, source.short_url, [ source.language.name.gsub(/\-/,''), 'snippet' ] 
+        twitter.post "#{source.language.title} - #{source.title}", source.short_url, [ source.language.name.gsub(/\-/,''), 'snippet' ]
 
         source.socialized = true
         source.save!
