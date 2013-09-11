@@ -1,5 +1,5 @@
 EmoticodeRails::Application.routes.draw do
-  root 'home#index' 
+  root 'home#index'
 
   controller :sitemaps do
     get 'sitemap_index'          => :index,     as: :sitemap_index
@@ -16,7 +16,7 @@ EmoticodeRails::Application.routes.draw do
   controller :user do
     get  'sign_up'        => :new,     as: :sign_up
     post 'sign_up'        => :create
-    get  'confirm/:token' => :confirm, as: :confirm, constraints: { token: Patterns::CONFIRMATION_TOKEN_PATTERN } 
+    get  'confirm/:token' => :confirm, as: :confirm, constraints: { token: Patterns::CONFIRMATION_TOKEN_PATTERN }
   end
 
   get '/auth/:provider/callback' => 'sessions#create'
@@ -34,7 +34,7 @@ EmoticodeRails::Application.routes.draw do
   end
 
   controller :search do
-    get 'search(/:what)' => :search, as: :search
+    get 'search(/:what)' => :search, as: :search, :constraints => {:what => /.*/}
   end
 
   resource :comments
@@ -42,8 +42,8 @@ EmoticodeRails::Application.routes.draw do
 
   resource :passwords, :only => [:new, :create]
   controller :passwords do
-    get  'recovery/:token' => :edit, as: :recovery, constraints: { token: Patterns::CONFIRMATION_TOKEN_PATTERN } 
-    post 'recovery/:token' => :update, constraints: { token: Patterns::CONFIRMATION_TOKEN_PATTERN } 
+    get  'recovery/:token' => :edit, as: :recovery, constraints: { token: Patterns::CONFIRMATION_TOKEN_PATTERN }
+    post 'recovery/:token' => :update, constraints: { token: Patterns::CONFIRMATION_TOKEN_PATTERN }
   end
 
   controller :feeds do
@@ -53,10 +53,10 @@ EmoticodeRails::Application.routes.draw do
     get 'randomfeed'             => :random,   as: :random_feed
   end
 
-  controller :page do 
+  controller :page do
     get ':page.html' => :show, as: :page_show
   end
-  
+
   controller :language do
     get ':name/',    to: :archive, as: :language_archive, constraints: { name: Patterns::ROUTE_PATTERN }
   end
@@ -68,10 +68,10 @@ EmoticodeRails::Application.routes.draw do
     get   'source/destroy/:id' => :destroy, as: :source_delete, constraints: { id: Patterns::ID_PATTERN }
     patch 'source/update/:id'  => :update,  as: :source_update, constraints: { id: Patterns::ID_PATTERN }
 
-    get 'source/:id'                       => :show,  as: :source_shortlink,     constraints: { id: Patterns::ID_PATTERN }    
+    get 'source/:id'                       => :show,  as: :source_shortlink,     constraints: { id: Patterns::ID_PATTERN }
     get ':language_name/:source_name.html' => :show,  as: :source_with_language, constraints: { language_name: Patterns::ROUTE_PATTERN, source_name: Patterns::ROUTE_PATTERN }
     get ':language_name/:source_name.txt'  => :raw,   as: :raw_with_language,    constraints: { language_name: Patterns::ROUTE_PATTERN, source_name: Patterns::ROUTE_PATTERN }
     get ':language_name/:source_name.js'   => :embed, as: :embed_with_language,  constraints: { language_name: Patterns::ROUTE_PATTERN, source_name: Patterns::ROUTE_PATTERN }
   end
-  
+
 end
