@@ -16,17 +16,16 @@
       <h3>Latest Users</h3>
     </div>
   <% end %>
-  <% cache "last_users_#{User.count}" do %>
+
   <ul class="avatars">
     <% @users.each do |user| %>
       <li>
     <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile">
       <%= avatar_tag user %>
     </a>
-    </li> 
+    </li>
     <% end %>
   </ul>
-  <% end %>
 
   <br style="clear:both"/>
 
@@ -58,7 +57,7 @@
   <% end %>
 
   <br style="clear:both"/>
-  
+
   <% if !local_assigns[:source].nil? && source.related %>
     <div class="heading orange">
       <h3>Related Sources</h3>
@@ -79,8 +78,8 @@
   <div class="cloud">
     <% tag_cloud(@cloud).each do |v,cloud| %>
       <% tag,size,count = cloud %>
-      <%= link_to tag.value, search_path(what: tag.name), { :style => "font-size: #{size}px", :title => "The keyword #{tag.value} has #{count} elements." } %> 
+      <%= link_to tag.value, search_path(what: tag.name), { :style => "font-size: #{size}px", :title => "The keyword #{tag.value} has #{count} elements." } %>
     <% end %>
   </div>
   <% end %>
-</div>   
+</div>
