@@ -415,7 +415,6 @@ div.source {
     }
 }
 
-
 body {
     margin:0;
     padding:0;
@@ -459,12 +458,12 @@ body {
 
                 a:hover
                 {
-                    background: #383838;
+                    color: #888888;
                 }
 
                 a:active
                 {
-                    background: #484848;
+                    color: #484848;
                 }
 
                 a.current:after {
@@ -503,6 +502,26 @@ body {
                     }
                 }
             }
+
+            li.home {
+                padding-left: 0.5em;
+                margin-top: -3px;
+
+                a {
+                    display: block;
+                    text-indent: -99999px;
+                    background: url(/home.png) 0 0 no-repeat;
+                    width: 30px;
+                    background-size: 30px auto;
+                    padding-right: 0.01em;
+                }
+
+                a:hover {
+                    background-position-y: -30px;
+                }
+            }
+
+
         }  
     }
 

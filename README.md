@@ -15,7 +15,7 @@ solve someone else problems while developing a project ... you never know :)
 
 ## Future Tasks
 
-- [ ] New Logo
+- [x] New Logo
 - [ ] Per language og:image ?
 - [ ] Everything's needed :P
 - [ ] Custom User Homepage
