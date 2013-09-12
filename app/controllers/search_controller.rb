@@ -3,7 +3,8 @@ class SearchController < ApplicationController
 
   def search
     @phrase  = params[:what]
-    @escaped = Riddle::Query.escape @phrase
+    @escaped = @phrase.gsub(/\//, ' ').strip
+    @escaped = Riddle::Query.escape @escaped
     @sources = Source.search( @escaped, :star => true ).page( params[:page] )
 
     begin
