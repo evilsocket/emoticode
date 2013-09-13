@@ -9,22 +9,25 @@ class UserController < ApplicationController
     params[:user] = params[:user].merge :status => User::STATUSES[:unconfirmed], :level => User::LEVELS[:subscriber]
     params[:user][:username] = params[:user][:username].parameterize
 
-    if params[:antibot].nil? or params[:antibot].empty? == false
+    @user = User.new( user_params )
+
+    valid_captcha = verify_recaptcha( :model => @user, :message => 'Invalid captcha.' )
+
+    # valid catpcha but bot detected
+    if valid_captcha and ( params[:antibot].nil? or params[:antibot].empty? == false )
       AlertMailer.spammer_alert_email( params, request ).deliver
       redirect_to root_url
+    # valid captcha and valid user -> register
+    else if valid_captcha and @user.save
+      Profile.create({ user: @user })
+
+      UserMailer.confirmation_email(@user, params[:user][:password] ).deliver
+
+      flash[:alert] = 'A confirmation email has been sent to your email address.'
+      redirect_to root_url
+    # something's not valid
     else
-      @user = User.new( user_params )
-
-      if verify_recaptcha( :model => @user, :message => 'Invalid captcha.' ) and @user.save
-        Profile.create({ user: @user })
-
-        UserMailer.confirmation_email(@user, params[:user][:password] ).deliver
-
-        flash[:alert] = 'A confirmation email has been sent to your email address.'
-        redirect_to root_url
-      else
-        render :new
-      end
+      render :new
     end
   end
 
