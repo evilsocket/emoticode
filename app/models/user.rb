@@ -255,8 +255,8 @@ class User < ActiveRecord::Base
     if profile.avatar == 0 && auth['info']['image']
       begin
         user.send :set_avatar_file, auth['info']['image']
-      rescue
-        self.logger.info "[USER] set_avatar_file failed."
+      rescue Exception => e
+        self.logger.info "[USER] set_avatar_file failed: #{e.message}"
       end
 
       profile.save!
