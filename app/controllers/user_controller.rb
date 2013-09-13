@@ -18,7 +18,7 @@ class UserController < ApplicationController
       AlertMailer.spammer_alert_email( params, request ).deliver
       redirect_to root_url
     # valid captcha and valid user -> register
-    else if valid_captcha and @user.save
+    elsif valid_captcha and @user.save
       Profile.create({ user: @user })
 
       UserMailer.confirmation_email(@user, params[:user][:password] ).deliver
