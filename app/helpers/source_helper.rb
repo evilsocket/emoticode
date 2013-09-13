@@ -1,13 +1,13 @@
 module SourceHelper
   include SeoHelper
-  
+
   def page_title
     "#{@source.language.title} - #{@source.title} | emoticode" rescue super
   end
 
   def metas
     make_seo do |seo|
-      seo.description = @source.description! page_title 
+      seo.description = @source.description! page_title
       seo.keywords    = @source.tags.map(&:value).join ', '
     end
   end
@@ -23,11 +23,11 @@ module SourceHelper
   end
 
   def highlight(source)
-    Rails.cache.fetch "#{source.id}_highlighted_source", :expires_in => 7.days do
+    Rails.cache.fetch "#{Digest::MD5.hexdigest( source.text )}_highlighted_source", :expires_in => 7.days do
       if source.language.syntax == 'php'
         if source.text[0].strip != '<'
           source.text = "<?php\n" + source.text
-        end 
+        end
       end
       code = Albino.colorize source.text, source.language.syntax
       code.empty? ? "<pre>#{h(source.text)}</pre>" : code
