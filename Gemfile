@@ -32,4 +32,4 @@ gem 'capistrano'
 gem 'rvm-capistrano'
 
 # error monitoring
-gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
+gem "sentry-raven"
