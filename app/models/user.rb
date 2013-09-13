@@ -202,8 +202,6 @@ class User < ActiveRecord::Base
   def set_avatar_file(file)
     path = File.join Dir.pwd, "public/avatars/#{id}.png"
 
-    self.logger.info "[USER] #{username} - set_avatar_file( #{file} ) -> #{path}"
-
     FastImage.resize( file, 50, 50, :outfile => path )
 
     profile.avatar = 1
@@ -244,12 +242,9 @@ class User < ActiveRecord::Base
     begin
       # use default facebook graph avatar if not available from auth info
       if auth['provider'] == 'facebook'
-        self.logger.info "[USER] Setting default image url to http://graph.facebook.com/#{auth['uid']}/picture?type=large"
         auth['info']['image'] ||= "http://graph.facebook.com/#{auth['uid']}/picture?type=large"
       end
     rescue; end
-
-    self.logger.info "[USER] User avatar: #{auth['info']['image']}"
 
     # if user still has no avatar, fetch it from auth info if available
     if profile.avatar == 0 && auth['info']['image']
@@ -260,7 +255,7 @@ class User < ActiveRecord::Base
 
         profile.avatar = 1
       rescue Exception => e
-        self.logger.info "[USER] set_avatar_file failed: #{e.message}"
+        self.logger.info "[USER] Setting avatar failed: #{e.message}"
       end
 
       profile.save!
