@@ -12,7 +12,7 @@
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.emoticode.net/opensearch.xml" title="EmotiCODE Search"/>
 </head>
 <body>
-<% cache "main_navbar_#{Source.public.count}_#{request.fullpath.parameterize}" do %>
+<% cache "main_navbar_#{Source.public.count}_#{request.fullpath.parameterize[0..99]}" do %>
 <nav id="navbar">
   <ul>
     <li class="home">
@@ -21,7 +21,7 @@
     </a>
     </li>
       <% @languages.popular.take(15).each do |language| %>
-          <li> 
+          <li>
               <%= navbar_language_link language %>
           </li>
       <% end %>
@@ -43,7 +43,7 @@
                           <% end %>
                       <% end %>
                       <% left = ( done % 4 )
-                      if left 
+                      if left
                           ( 4 - left ).times { %><td></td><% }
                           %> </tr> <%
                       end
@@ -52,16 +52,16 @@
           </div>
         </li>
       <% end %>
-  </ul> 
+  </ul>
 </nav>
 <% end %>
 <% cache "sub_navbar_#{signed_in? ? @current_user.id : 0}_#{Page.count}" do %>
 <nav id="sub-navbar">
     <div class="inner">
         <ul>
-            <% 
+            <%
                 linkset = if signed_in?
-                [ 
+                [
                     link_to( 'Add Snippet', source_new_path ),
                     link_to( 'Profile',     user_profile_path(username: @current_user.username ) ),
                     link_to( 'Settings',    user_settings_path ),
@@ -104,14 +104,14 @@
     Copyright &copy; EmotiCODE - A collaborative source code snippets aggregator and search engine.
     <br/>
     Powered by <strong><a href="http://gibson-db.in/" title="Gibson Cache Server">Gibson Cache Server</a></strong>
-  </p> 
+  </p>
 </footer>
 
 <% if flash[:alert] %>
   <% error = flash[:alert] # make flash visible inside the yield'ed block %>
   <%= modal_dialog 'flash', 'Alert' do %>
     <%= error %>
-  <% end %> 
+  <% end %>
 
   <script>$(function(){ $('#flash').modal(); });</script>
 <% end %>
@@ -124,7 +124,7 @@
     js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1&appId=541383999216397";
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-  
+
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
 <script type="text/javascript">
@@ -164,7 +164,7 @@
         <td width="50%">
           <div class="g-plus" data-width="230" data-href="//plus.google.com/105672627985088123672" data-rel="publisher"></div>
           <br/>
-          <div class="fb-like-box" data-href="http://www.facebook.com/pages/EmotiCODE/475488679182886" data-width="230" data-show-faces="true" data-stream="false" data-header="false"></div>                    
+          <div class="fb-like-box" data-href="http://www.facebook.com/pages/EmotiCODE/475488679182886" data-width="230" data-show-faces="true" data-stream="false" data-header="false"></div>
         </td>
         <td>
           <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/EmotiCodeDotNet" data-widget-id="376735076983111681">Tweets di @EmotiCodeDotNet</a>
