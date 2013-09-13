@@ -254,7 +254,11 @@ class User < ActiveRecord::Base
     # if user still has no avatar, fetch it from auth info if available
     if profile.avatar == 0 && auth['info']['image']
       begin
-        user.send :set_avatar_file, auth['info']['image']
+        path = File.join Dir.pwd, "public/avatars/#{user.id}.png"
+
+        FastImage.resize( auth['info']['image'], 50, 50, :outfile => path )
+
+        profile.avatar = 1
       rescue Exception => e
         self.logger.info "[USER] set_avatar_file failed: #{e.message}"
       end
