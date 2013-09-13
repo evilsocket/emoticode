@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true,
     format: { with: Patterns::ROUTE_PATTERN },
     uniqueness: { case_sensitive: false },
-    length: { :minimum => 5, :maximum => 255 }
+    length: { :minimum => 4, :maximum => 255 }
 
   validates :password, presence: { :on => :create },
     length: { :minimum => 5, :maximum => 255, :allow_nil => true },
