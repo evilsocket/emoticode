@@ -38,7 +38,7 @@ figure.avatar {
         width: 50px;
         height: 50px;
     }
-}   
+}
 
 p.error {
     color: #b94a48;
@@ -77,7 +77,7 @@ p.error {
 }
 
 .pure-button-blue {
-    background-color: rgb(66, 184, 221) !important; 
+    background-color: rgb(66, 184, 221) !important;
 }
 
 ul.avatars {
@@ -140,10 +140,10 @@ div.social {
             background: #f2f2f2 url() left center no-repeat;
             border-bottom: 2px solid #FFF;
 
-            div, a { 
+            div, a {
                 margin-left: 40px;
             }
-        }       
+        }
 
         li.fb {
             background-image: asset-data-url('hp-ico-fb.png');
@@ -244,7 +244,7 @@ ul.connect {
         border: 1px solid #ddd;
         border-bottom: 1px solid #c5c5c5;
     }
-}    
+}
 
 #simplemodal-container {
     a.modalCloseImg {
@@ -285,7 +285,7 @@ ul.connect {
     margin-right: 0.4em;
 
     div.heading {
-        border-bottom: 2px solid $gradient_to; 
+        border-bottom: 2px solid $gradient_to;
         margin-bottom: 10px;
 
         h3 {
@@ -325,10 +325,10 @@ ul.connect {
     text-align: center;
     padding: 1em;
     margin: 0.5em;
-    cursor: default; 
+    cursor: default;
 
     a, span {
-        padding: 0.2em 0.3em; 
+        padding: 0.2em 0.3em;
     }
 
     a {
@@ -337,11 +337,11 @@ ul.connect {
     }
 
     a:hover, a:focus {
-        text-decoration: underline; 
+        text-decoration: underline;
     }
 
     .disabled {
-        color: #aaaaaa; 
+        color: #aaaaaa;
     }
 
     .current {
@@ -355,7 +355,7 @@ ul.connect {
         -moz-border-radius: 1em;
         -webkit-border-radius: 1em;
         border-radius: 1em;
-        text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px; 
+        text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px;
     }
 }
 
@@ -430,7 +430,7 @@ div.source {
         }
 
         span.meta {
-            font-size: 10px;                    
+            font-size: 10px;
             width: 100%;
 
             span.date {
@@ -498,7 +498,7 @@ body {
                     left: 40%;
                     border-width: 0 10px 10px;
                     border-style: solid;
-                    border-color: white transparent; 
+                    border-color: white transparent;
                 }
 
                 #all-langs {
@@ -506,7 +506,7 @@ body {
                     min-width: 500px;
                     position: absolute;
                     top: 34px;
-                    background-color: #282828; 
+                    background-color: #282828;
                     padding: 10px;
                     font-size: 11px;
                     -webkit-border-radius: 4px;
@@ -539,6 +539,7 @@ body {
                     width: 30px;
                     background-size: 30px auto;
                     padding-right: 0.01em;
+                    padding: 6px;
                 }
 
                 a:hover {
@@ -547,7 +548,7 @@ body {
             }
 
 
-        }  
+        }
     }
 
 
@@ -580,7 +581,7 @@ body {
             margin-right: 0.6em;
 
             li {
-                float: left; 
+                float: left;
                 margin-right: 5px;
                 padding-top: 3px;
 
@@ -589,7 +590,7 @@ body {
                     text-decoration: none;
                 }
             }
-        }  
+        }
     }
 
     #wrapper {
@@ -626,8 +627,8 @@ body {
     padding-top: 20px;
 
     h2 {
-        border-bottom: 2px solid $gradient_to; 
-        padding-bottom: 10px; 
+        border-bottom: 2px solid $gradient_to;
+        padding-bottom: 10px;
         font-size: 14px;
     }
 
@@ -642,7 +643,7 @@ body {
 }
 
 li.comment {
-    clear: both;    
+    clear: both;
     width:  100%;
     margin: 15px;
     padding-top: 15px;
@@ -675,7 +676,7 @@ li.comment {
             display: block;
             font-size: 10px;
             color: #ccc;
-        }   
+        }
     }
 }
 
@@ -710,6 +711,6 @@ div.create {
             float: right;
             margin-top: 5px;
         }
-    }   
+    }
 }
 
