@@ -1,6 +1,6 @@
 class LanguageController < ApplicationController
   def archive
-    @language = @languages.select { |l| l.name == params[:name] }.first
+    @language = Language.find_by_name params[:name]
     if @language
       @sources = @language.sources.with_user_profile.public.page( params[:page] )
       @podium  = @language.most_active_users
