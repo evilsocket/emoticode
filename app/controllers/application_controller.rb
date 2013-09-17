@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # initialize instance variables that are globals to the whole app
   before_filter :create_globals
+  before_filter :coerce_page_number
   # if a RecordNotFound exception is raised, automatically render the 404 page
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
@@ -25,6 +26,15 @@ class ApplicationController < ActionController::Base
       @show_joinus = true
       cookies[:joinus] = { :value => "1", :expires => Time.now + 604800 }
     end
+  end
+
+  def coerce_page_number
+    # a nasty fix for https://github.com/mislav/will_paginate/issues/271
+    params[:page] = if params[:page]
+                      params[:page].to_i > 0 ? params[:page].to_i : 1
+                    else
+                      1
+                    end
   end
 
   # a method to fetch languages by their names without performing a
