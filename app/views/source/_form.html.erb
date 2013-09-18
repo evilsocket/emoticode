@@ -10,7 +10,7 @@
     <% end %>
 
     <div class="head">
-      <%= collection_select( :source, :language_id, Language.order('title DESC'), :id, :title ) %>
+      <%= collection_select( :source, :language_id, Language.order('title ASC'), :id, :title ) %>
       <%= f.text_field :title, :placeholder => 'Title', :class => 'title' %>
       <%= f.check_box(:private) %>
       <%= f.label(:private, "Mark as Private") %>
