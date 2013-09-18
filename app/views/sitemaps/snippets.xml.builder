@@ -3,7 +3,7 @@ cache "sitemap_snippets_#{@page}_#{Page.count}_#{Source.public.count}" do
   xml.urlset(xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9") do
     @pages.each do |page|
       xml.url do
-        xml.loc page_show_url(:page => page.name)
+        xml.loc page_show_url(:name => page.name)
         xml.lastmod '2013-09-01' 
         xml.changefreq("monthly")
         xml.priority(1.0)

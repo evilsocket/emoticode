@@ -81,7 +81,7 @@
             <%=raw linkset.map { |link| "<li>#{link}</li>" }.join '<li>&bull;</li>' %>
         </ul>
         <ul class="right">
-          <%=raw @pages.map { |page| "<li>#{ link_to(page.title, page_show_path(page: page.name) ) }</li>" }.join '<li>&bull;</li>' %>
+          <%=raw @pages.map { |page| "<li>#{ link_to(page.title, page_show_path(name: page.name) ) }</li>" }.join '<li>&bull;</li>' %>
         </ul>
     </div>
 </nav>
