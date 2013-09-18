@@ -131,8 +131,8 @@
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-38685018-1']);
   _gaq.push(['_trackPageview']);
-  _gaq.push(['_trackEvent', 'Channels', 'Controllers', '<%= controller.controller_name %>' ]);
-  _gaq.push(['_trackEvent', 'Channels', 'Actions', '<%= controller.action_name %>' ]);
+
+  _gaq.push(['_trackEvent', 'Actions', 'Action', '<%= controller.controller_name %>#<%= controller.action_name %>' ]);
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
