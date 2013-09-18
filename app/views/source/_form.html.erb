@@ -10,7 +10,7 @@
     <% end %>
 
     <div class="head">
-      <%= collection_select( :source, :language_id, @languages, :id, :title ) %>
+      <%= collection_select( :source, :language_id, Language.order('title DESC'), :id, :title ) %>
       <%= f.text_field :title, :placeholder => 'Title', :class => 'title' %>
       <%= f.check_box(:private) %>
       <%= f.label(:private, "Mark as Private") %>
@@ -19,7 +19,7 @@
     <%= f.text_area :description, :placeholder => 'Description', :class => 'description' %>
 
     <%= f.text_area :text, :placeholder => 'Code', :class => 'code' %>
-     
+
     <%= f.submit "Save", :class => 'pure-button pure-button-primary' %>
   <% end %>
 </div>

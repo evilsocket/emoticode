@@ -25,3 +25,5 @@ db/seeds.rb
 public/assets/
 public/avatars/*.png
 db/sphinx
+
+.c9revisions
