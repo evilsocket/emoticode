@@ -106,15 +106,21 @@ class Source < ActiveRecord::Base
   end
 
   def tokenize
-    analysis = {}
-    base     = 0.5
     # extract meaningful identifiers of at least 4 characters and at most 50, with a css 
     # class starting with a 'n' or a 'v'.
     # ( pygments/token.py )
-    tokens = Albino.colorize( text, language.syntax ).scan( /<span\s+class="[nv][^"]*">([^<]{4,50})<\/span>/im ).map(&:first)
-    # remove tokens when they are formed by a repetition ( ex. 'aaaaaaaaaa' or '___' )
-    tokens.reject! { |token| token.gsub( token[0], '' ).empty? }
-    # build a lower case version
+    Albino
+    .colorize( text, language.syntax )
+    .scan( /<span\s+class="[nv][^"]*">([^<]{4,50})<\/span>/im )
+    .map(&:first)
+    # remove tokens when they are formed by a repetition ( ex. 'aaaaaaaaaa' or '___' )    
+    .reject { |token| token.gsub( token[0], '' ).empty? }
+  end
+
+  def analyze
+    analysis  = {}
+    base      = 0.5
+    tokens    = tokenize
     lowerized = tokens.map { |token| token.downcase }
     # build the analysis map where each token weight
     # is given by the formula:
@@ -129,7 +135,7 @@ class Source < ActiveRecord::Base
 
   def lexical_analysis!    
     # save tokenization db
-    self.send(:tokenize).each do |token,weight|
+    self.send(:analyze).each do |token,weight|
       tag_name = token.parameterize
       # create the tag if it doesn't exist yet
       tag = Tag.find_by_name(tag_name) || Tag.create( :name => tag_name, :value => token )
