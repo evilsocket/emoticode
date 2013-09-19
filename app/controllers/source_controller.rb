@@ -71,7 +71,7 @@ class SourceController < ApplicationController
     if params[:id]
       Source.find params[:id]
     else
-      Source.find_by_name_and_language_name( params[:source_name], params[:language_name] )
+      Source.find_by_name_and_language_name!( params[:source_name], params[:language_name] )
     end
   end
 
