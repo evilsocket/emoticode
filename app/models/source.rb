@@ -107,13 +107,12 @@ class Source < ActiveRecord::Base
 
   def tokenize
     # extract meaningful identifiers of at least 4 characters and at most 50, with a css 
-    # class starting with a 'n' or a 'v'.
-    # ( pygments/token.py )
+    # class starting with a 'n' or a 'v' ( see pygments/token.py ).
+    # Then remove tokens when they are formed by a repetition ( ex. 'aaaaaaaaaa' or '___' )        
     Albino
     .colorize( text, language.syntax )
     .scan( /<span\s+class="[nv][^"]*">([^<]{4,50})<\/span>/im )
     .map(&:first)
-    # remove tokens when they are formed by a repetition ( ex. 'aaaaaaaaaa' or '___' )    
     .reject { |token| token.gsub( token[0], '' ).empty? }
   end
 
