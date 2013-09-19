@@ -7,9 +7,12 @@ class Source < ActiveRecord::Base
   has_one    :rating, -> { where rateable_type: Rating::RATEABLE_TYPES[:source] }, :foreign_key => :rateable_id
 
   default_scope -> { order('created_at DESC') }
-  scope :public, -> { where( :private => false ) }
-  scope :popular, -> { order('views DESC') }
-  scope :by_links, -> { order( '( COUNT(links.id) * links.weight ) DESC' ).group( 'links.source_id, sources.name' ) }
+
+  scope :public,     -> { where( :private => false ) }
+  scope :popular,    -> { order('views DESC') }
+  scope :by_links,   -> { order( '( COUNT(links.id) * links.weight ) DESC' ).group( 'links.source_id, sources.name' ) }
+  scope :by_trend,   -> { select( 'sources.*, ( sources.views / ( ( UNIX_TIMESTAMP() - sources.created_at ) / 86400 ) ) AS trend' ).order('trend DESC') }
+  scope :newer_than, ->(period) { where( 'created_at >= ?', period ) }
 
   scope :with_user_profile, -> { joins(:user => :profile) }
   scope :with_similar_links, ->(source) {
@@ -75,6 +78,14 @@ class Source < ActiveRecord::Base
 
       break if batch.size < limit
     end
+  end
+
+  def self.find_by_name_and_language_name!( name, language_name )
+    Source
+      .joins( :language )
+      .where( :languages => { name: language_name } )
+      .where( :sources   => { name: name } )
+      .first!
   end
 
   private
