@@ -22,9 +22,9 @@ class ApplicationController < ActionController::Base
       @current_user.last_seen_at = Time.now
       @current_user.save(:validate => false)
     # show modal only for not logged users
-    elsif cookies[:joinus].nil?
-      @show_joinus = true
-      cookies[:joinus] = { :value => "1", :expires => Time.now + 604800 }
+    # elsif cookies[:joinus].nil?
+    #   @show_joinus = true
+    #   cookies[:joinus] = { :value => "1", :expires => Time.now + 604800 }
     end
   end
 
