@@ -1,26 +1,17 @@
 class Source < ActiveRecord::Base
+  include Commentable
+  include Rateable
+
   belongs_to :language, :counter_cache => true
   belongs_to :user
   has_many   :links
   has_many   :tags, :through => :links
-  has_many   :comments, -> { where commentable_type: Comment::COMMENTABLE_TYPES[:source] }, :foreign_key => :commentable_id
-  has_one    :rating, -> { where rateable_type: Rating::RATEABLE_TYPES[:source] }, :foreign_key => :rateable_id
 
   default_scope -> { order('created_at DESC') }
 
   scope :public,     -> { where( :private => false ) }
-  scope :popular,    -> { order('views DESC') }
-  scope :by_links,   -> { order( '( COUNT(links.id) * links.weight ) DESC' ).group( 'links.source_id, sources.name' ) }
+  scope :popular,    -> { order( 'views DESC' ) }
   scope :by_trend,   -> { select( 'sources.*, ( sources.views / ( ( UNIX_TIMESTAMP() - sources.created_at ) / 86400 ) ) AS trend' ).order('trend DESC') }
-  scope :newer_than, ->(period) { where( 'created_at >= ?', period ) }
-
-  scope :with_user_profile, -> { joins(:user => :profile) }
-  scope :with_similar_links, ->(source) {
-      where( 'sources.id != ?', source.id )
-      .joins(:links)
-      .where( 'links.tag_id IN ( ? )', source.links.map(&:tag_id) )
-      .by_links
-  }
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { :minimum => 5, :maximum => 255 }
   validates :text, presence: true, length: { :minimum => 25 }
@@ -52,14 +43,21 @@ class Source < ActiveRecord::Base
     end
   end
 
-  def commentable_type
-    Comment::COMMENTABLE_TYPES[:source]
-  end
-
   def related( limit = 5 )
     Rails.cache.fetch "#{limit}_related_sources_of_#{id}", :expires_in => 24.hours do
-      Source.with_similar_links(self).limit( limit ).load
+      Source
+      .where( 'sources.id != ?', id )
+      .joins(:links)
+      .where( 'links.tag_id IN ( ? )', links.map(&:tag_id) )
+      .order( '( COUNT(links.id) * links.weight ) DESC' )
+      .group( 'links.source_id, sources.name' )
+      .limit( limit )
+      .load
     end
+  end
+
+  def self.newer_than(period)
+    where( 'created_at >= ?', period )
   end
 
   # normal find_each does not use given order but uses id asc
@@ -82,10 +80,10 @@ class Source < ActiveRecord::Base
 
   def self.find_by_name_and_language_name!( name, language_name )
     Source
-      .joins( :language )
-      .where( :languages => { name: language_name } )
-      .where( :sources   => { name: name } )
-      .first!
+    .joins( :language )
+    .where( :languages => { name: language_name } )
+    .where( :sources   => { name: name } )
+    .first!
   end
 
   private
@@ -140,7 +138,7 @@ class Source < ActiveRecord::Base
       tag = Tag.find_by_name(tag_name) || Tag.create( :name => tag_name, :value => token )
       # create a link with this source if not already present
       link = Link.find_by_source_id_and_tag_id( id, tag.id ) || 
-             Link.create( :source_id => id, :tag_id => tag.id, :weight => weight )
+        Link.create( :source_id => id, :tag_id => tag.id, :weight => weight )
     end 
   end
 
