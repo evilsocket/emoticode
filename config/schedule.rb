@@ -2,6 +2,10 @@ every 3.days do
   rake 'sources:update_views'
 end
 
+every 60.minutes do
+  rake 'sitemap:submit'
+end
+
 every 30.minutes do
   rake 'social:publish_random'
 end
