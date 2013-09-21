@@ -3,13 +3,16 @@
     <% if signed_in? %>
       <% if !defined?(source) or @current_user != source.user %>
         <%= link_icon_to 'Post a Snippet', 'plus-sign', source_new_path, :class => 'pure-button pure-button-green post-button' %>
+        <p>
+        Build up your personal collection of code snippets with ease and share them with the world!
+        </p>
       <% end %>
     <% else %>
       <%= link_icon_to_function 'Post a Snippet', 'plus-sign', 'showLoginModal()', :class => 'pure-button pure-button-green post-button' %>
+      <p>
+        Build up your personal collection of code snippets with ease and share them with the world!
+      </p>
     <% end %>
-    <p>
-      Build up your personal collection of code snippets with ease and share them with the world!
-    </p>
   <% end %>
 
   <% if defined? source %>
