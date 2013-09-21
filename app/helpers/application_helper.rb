@@ -79,6 +79,19 @@ module ApplicationHelper
     cloud
   end
 
+  def adsense( opts = {} )
+    opts = { :client => 'ca-pub-5373888916618771' }.merge(opts)
+    vars = <<END
+google_ad_client = "#{opts[:client]}";
+google_ad_slot   = "#{opts[:slot]}";
+google_ad_width  = #{opts[:width]};
+google_ad_height = #{opts[:height]};    
+END
+    
+    javascript_tag(vars) +
+    javascript_include_tag("//pagead2.googlesyndication.com/pagead/show_ads.js")
+  end
+
   def signed_in?
     !@current_user.nil?
   end
