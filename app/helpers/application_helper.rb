@@ -87,9 +87,11 @@ google_ad_slot   = "#{opts[:slot]}";
 google_ad_width  = #{opts[:width]};
 google_ad_height = #{opts[:height]};    
 END
-    
-    javascript_tag(vars) +
-    javascript_include_tag("//pagead2.googlesyndication.com/pagead/show_ads.js")
+   
+    content_tag :div, { :style => "width:#{opts[:width]}px;height:#{opts[:height]}px;" } do
+      javascript_tag(vars) +
+      javascript_include_tag("//pagead2.googlesyndication.com/pagead/show_ads.js")
+    end
   end
 
   def signed_in?
