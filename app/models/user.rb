@@ -84,13 +84,7 @@ class User < ActiveRecord::Base
         if info['nickname']
           # generate a temporary password
           tmp_password = self.get_random_password
-
-          counter  = 2
-          nickname = info['nickname'].parameterize
-          while User.find_by_username(nickname).nil? == false
-            nickname = "#{info['nickname']}-#{counter}"
-            counter += 1
-          end
+          nickname     = self.get_unique_nickname
 
           user = User.create({
             username: nickname,
@@ -182,6 +176,17 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def self.get_unique_nickname(base)
+    counter  = 2
+    nickname = base.parameterize
+    while User.find_by_username(nickname).nil? == false
+      nickname = "#{base}-#{counter}"
+      counter += 1
+    end
+    
+    nickname
+  end
 
   def create_salt
     self.salt = (0...5).map{65.+(rand(25)).chr}.join

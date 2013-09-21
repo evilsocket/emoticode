@@ -70,17 +70,21 @@
 
   <br style="clear:both"/>
 
-  <% if !local_assigns[:source].nil? && source.related %>
-    <div class="heading orange">
-      <h3>Related Sources</h3>
-    </div>
-    <ul class="related">
-    <% source.related.each do |related| %>
-      <li>
-        <%= link_to_source related %>
-      </li>
+  <% if !local_assigns[:source].nil? %>
+    <% cache( "source_#{source.id}_related", :expires_in => 24.hours ) do %>
+      <% if source.related %>
+        <div class="heading orange">
+          <h3>Related Sources</h3>
+        </div>
+        <ul class="related">
+        <% source.related.each do |related| %>
+          <li>
+            <%= link_to_source related %>
+          </li>
+        <% end %>
+        </ul>
+      <% end %>
     <% end %>
-    </ul>
   <% end %>
 
   <% unless @cloud.empty? %>
