@@ -65,7 +65,7 @@
     <%= render :partial => 'comments/box', :locals => { object: @source } %>
   </div>
 
-  <%= render :partial => 'layouts/sidebar', :locals => { with_heading: true, source: @source } %>
+  <%= render :partial => 'layouts/sidebar', :locals => { with_heading: false, source: @source } %>
 </section>
 
 <%= modal_dialog 'embed', 'Embed Me!' do %>

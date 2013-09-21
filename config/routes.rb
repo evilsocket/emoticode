@@ -27,6 +27,8 @@ EmoticodeRails::Application.routes.draw do
   end
 
   controller :profile do
+    get   'profile/snippets'    => :snippets,  as: :user_snippets
+    get   'profile/favorites'   => :favorites, as: :user_favorites   
     get   'profile/edit'        => :edit, as: :user_settings
     patch 'profile/update'      => :update
     get   'profile/:username'   => :show, as: :user_profile, constraints: { username: Patterns::USERNAME_PATTERN }

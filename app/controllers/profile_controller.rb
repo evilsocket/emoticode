@@ -9,6 +9,14 @@ class ProfileController < ApplicationController
     @comment = Comment.new
   end
 
+  def snippets
+    @sources = @current_user.sources.page( params[:page] )
+  end
+
+  def favorites
+    @favorites = @current_user.favorites.joins(:source).order('sources.created_at DESC').page( params[:page] )
+  end
+
   def badge
     @user = User.find_by_username!( params[:username] )
     render :layout => false

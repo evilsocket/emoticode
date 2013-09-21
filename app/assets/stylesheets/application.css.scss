@@ -80,6 +80,17 @@ p.error {
     background-color: rgb(66, 184, 221) !important;
 }
 
+.post-button {
+    font-weight: bold;
+    font-size: 20px !important;
+    width: 183px;
+    margin-top: 25px;
+}
+
+a.post-button:hover {
+    text-decoration: none;
+}
+
 ul.avatars {
     margin: 0;
     padding: 0;

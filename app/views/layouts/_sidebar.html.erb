@@ -1,5 +1,18 @@
 <div id="sidebar">
-  <% unless local_assigns[:source].nil? %>
+  <% if [ 'language', 'source' ].include? controller.controller_name %>
+    <% if signed_in? %>
+      <% if !defined?(source) or @current_user != source.user %>
+        <%= link_icon_to 'Post a Snippet', 'plus-sign', source_new_path, :class => 'pure-button pure-button-green post-button' %>
+      <% end %>
+    <% else %>
+      <%= link_icon_to_function 'Post a Snippet', 'plus-sign', 'showLoginModal()', :class => 'pure-button pure-button-green post-button' %>
+    <% end %>
+    <p>
+      Build up your personal collection of code snippets with ease and share them with the world!
+    </p>
+  <% end %>
+
+  <% if defined? source %>
     <div class="heading orange">
       <h3>Share</h3>
     </div>
@@ -17,6 +30,7 @@
     </div>
   <% end %>
 
+  <% unless defined? source %>
   <ul class="avatars">
     <% @users.each do |user| %>
       <li>
@@ -28,8 +42,9 @@
   </ul>
 
   <br style="clear:both"/>
+  <% end %>
 
-  <% if local_assigns[:source].nil? %>
+  <% if defined? source %>
   <div class="heading">
     <h3>Be Social!</h3>
   </div>
@@ -58,7 +73,7 @@
 
   <br style="clear:both"/>
 
-  <% if !local_assigns[:source].nil? %>
+  <% if defined? source %>
     <% cache( "source_#{source.id}_related", :expires_in => 24.hours ) do %>
       <% if source.related %>
         <div class="heading orange">
@@ -75,7 +90,7 @@
     <% end %>
   <% end %>
 
-  <% unless @cloud.empty? %>
+  <% unless @cloud.nil? or @cloud.empty? %>
   <div class="heading red">
     <h3>Cloud</h3>
   </div>
