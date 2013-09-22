@@ -1,11 +1,10 @@
 class Source < ActiveRecord::Base
-  include Commentable
-  include Rateable
-
   belongs_to :language, :counter_cache => true
   belongs_to :user
   has_many   :links
   has_many   :tags, :through => :links
+  has_many   :comments, -> { where :commentable_type => Comment::COMMENTABLE_TYPES[:source] }, :foreign_key => :commentable_id
+  
 
   default_scope -> { order('created_at DESC') }
 
@@ -33,6 +32,10 @@ class Source < ActiveRecord::Base
 
   def short_url
     "http://www.emoticode.net/source/#{id}"    
+  end
+
+  def commentable_type
+    Comment::COMMENTABLE_TYPES[:source]
   end
 
   def description!( default = nil )

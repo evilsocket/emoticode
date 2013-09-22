@@ -56,7 +56,7 @@ class Comment < ActiveRecord::Base
       commentable
 
     rescue ActiveRecord::RecordNotFound
-      errors.add( :commentable_id, " references to an invalid object." )
+      errors.add( :commentable_id, " references to an invalid object ( #{COMMENTABLE_CLASSES[ commentable_type ]} )." )
       false
     end
   end
