@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
         if info['nickname']
           # generate a temporary password
           tmp_password = self.get_random_password
-          nickname     = self.get_unique_nickname
+          nickname     = self.get_unique_nickname info['nickname']
 
           user = User.create({
             username: nickname,
