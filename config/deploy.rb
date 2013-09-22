@@ -1,5 +1,6 @@
 # Load RVM's capistrano plugin.    
 require "rvm/capistrano"
+require 'capistrano-unicorn'
 
 set :rvm_ruby_string, '2.0.0'
 set :rvm_type, :user  # Don't use system-wide RVM
@@ -21,6 +22,7 @@ ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup"
 after "deploy:symlink", "deploy:update_crontab"
+after 'deploy:restart', 'unicorn:duplicate' # before_fork hook implemented (zero downtime deployments)
 
 namespace :deploy do
   secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/development.sphinx.conf', 'public/avatars' ]

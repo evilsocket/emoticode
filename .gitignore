@@ -3,7 +3,7 @@
 *.sql
 *.swp
 *.swo
-*.swn
+.*.swn
 *~
 .bundle
 .sass-cache/
