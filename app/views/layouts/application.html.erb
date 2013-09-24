@@ -143,23 +143,14 @@
   })();
 </script>
 
-<script type="text/javascript">
-  var GoSquared = {};
-  GoSquared.acct = "GSN-175671-J";
-  (function(w){
-    function gs(){
-      w._gstc_lt = +new Date;
-      var d = document, g = d.createElement("script");
-      g.type = "text/javascript";
-      g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
-      var s = d.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(g, s);
-    }
-    w.addEventListener ?
-      w.addEventListener("load", gs, false) :
-      w.attachEvent("onload", gs);
-  })(window);
-</script>
+<!-- Histats.com  START (hidden counter)-->
+<script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
+<a href="http://www.histats.com" target="_blank" title="contatore visitatori online" ><script  type="text/javascript" >
+try {Histats.start(1,2459155,4,0,0,0,"");
+Histats.track_hits();} catch(err){};
+</script></a>
+<noscript><a href="http://www.histats.com" target="_blank"><img  src="http://sstatic1.histats.com/0.gif?2459155&101" alt="contatore visitatori online" border="0"></a></noscript>
+<!-- Histats.com  END  -->
 
 <% if @show_joinus %>
   <%= modal_dialog 'joinus', 'Join Us!', :style => 'width:530px; height: 450px;' do %>
