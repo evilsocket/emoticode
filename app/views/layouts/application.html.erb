@@ -102,11 +102,31 @@
 </div>
 
 <footer id="footer">
-  <p>
-    Copyright &copy; EmotiCODE - A collaborative source code snippets aggregator and search engine.
-    <br/>
-    Powered by <strong><a href="http://gibson-db.in/" title="Gibson Cache Server">Gibson Cache Server</a></strong>
-  </p>
+  <div id="fwrapper">
+    <ul>
+      <li>
+        <h3>Pages</h3>
+        <% @pages.each do |page| %>
+          <%= link_to page.title, page_show_path( :name => page.name ) %><br/>
+        <% end %>
+      </li>
+
+      <li>
+        <h3>Contacts</h3>
+        <a href="http://www.twitter.com/emoticodedotnet" target="_blank" title="EmotiCODE on Twitter">Twitter</a><br/>
+        <a href="http://plus.google.com/105672627985088123672" target="_blank" title="EmotiCODE on Google+">Google+</a><br/>
+        <a href="https://www.facebook.com/pages/EmotiCODE/475488679182886" target="_blank" title="EmotiCODE on Facebook">Facebook</a><br/>
+      </li>
+
+      <li>
+        <h3>Links</h3>
+        <a href="http://www.evilsocket.net" target="_blank" title="The author personal website">evilsocket.net</a><br/>
+        <a href="http://gibson-db.in/" target="_blank" title="Gibson Cache Server">gibson-db.in</a><br/>        
+        <a href="http://www.bisontech.net/" target="_blank" title="BisonTech">bisontech.net</a><br/>
+        <a href="http://www.ajaxdomainfinder.net/" target="_blank" title="Ajax Domain Finder">ajaxdomainfinder.net</a></br/>
+      </li>
+    </ul>
+  </div>
 </footer>
 
 <% if flash[:alert] %>
