@@ -4,15 +4,7 @@ class LanguageController < ApplicationController
     if @language
       @sources = @language.sources.public.page( params[:page] )
       @podium  = @language.most_active_users
-      @cloud   = Rails.cache.fetch 'cloud_with_70_items_for_' + @language.name, :expires_in => 24.hours do 
-        Tag.
-          for_language(@language).
-          longer.
-          popular.
-          limit(70).
-          to_a.
-          shuffle!
-      end
+      @cloud   = Tag.cloud(@language).to_a.shuffle!
     else
       render_404 
     end

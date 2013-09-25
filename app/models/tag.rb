@@ -11,4 +11,21 @@ class Tag < ActiveRecord::Base
   def frequency
     sources_count
   end
+
+  def self.cloud( language = nil, limit = 70, min_length = 4, exclude = [ 'css', 'html', 'javascript', 'actionscript', 'actionscript-3' ] )
+    Rails.cache.fetch "Tag#cloud_#{language.nil? ? 'nil' : language.id}_#{limit}_#{min_length}_#{exclude.join '_'}", :expires_in => 1.week do 
+      query = joins(:sources).
+        group( 'tags.id' ).
+        where( 'LENGTH(tags.value) >= ?', min_length ).
+        order( 'sources_count DESC, weight DESC' ).
+        limit( limit )
+
+      if language.nil? 
+        query.where( 'sources.language_id NOT IN ( SELECT id FROM languages WHERE name IN ( ? ) )', exclude )
+      else
+        query.where( 'sources.language_id = ?', language.id )
+      end
+    end
+  end
+
 end

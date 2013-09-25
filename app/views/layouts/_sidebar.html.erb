@@ -78,7 +78,7 @@
 
   <% if defined? source %>
     <% cache( "source_#{source.id}_related", :expires_in => 24.hours ) do %>
-      <% if source.related %>
+      <% if source.related.load.empty? == false %>
         <div class="heading orange">
           <h3>Related Sources</h3>
         </div>
