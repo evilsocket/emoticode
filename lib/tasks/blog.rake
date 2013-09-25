@@ -24,7 +24,7 @@ namespace :blog do
       post = {
         'title'       => "#{source.language.title} - #{source.title}",
         'description' => source.description!,
-        'mt_keywords' => @source.tags.map(&:value),
+        'mt_keywords' => source.tags.map(&:value),
         'categories'  => post_cats
       }
 
