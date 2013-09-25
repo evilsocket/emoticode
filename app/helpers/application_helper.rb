@@ -100,7 +100,7 @@ END
 
   def avatar_tag(user)
     content_tag :figure, { :class => 'avatar' } do
-      image_tag image_url(user.avatar), :size => '50x50', :onerror => "this.src='#{image_url("/avatars/default.png")}';", :alt => "#{user.username} avatar."
+      image_tag image_url(user.avatar), :height => '50', :width => '50', :alt => "#{user.username} avatar.", :onerror => "this.src='#{image_url("/avatars/default.png")}';"
     end
   end
 
