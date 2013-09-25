@@ -17,7 +17,7 @@ namespace :blog do
         unless categories.map { |c| c['categoryName'] == cat }.include? true
           puts "Creating category #{cat} ..."
 
-          wp.call( 'wp.newTerm', 1, config['username'], config['password'], { 'name' => cat, 'taxonomy' => 'category' } )
+          blog.call( 'wp.newTerm', 1, config['username'], config['password'], { 'name' => cat, 'taxonomy' => 'category' } )
         end
       end
 
@@ -28,7 +28,7 @@ namespace :blog do
         'categories'  => post_cats
       }
 
-      wp.call( 'metaWeblog.newPost', 1, config['username'], config['password'], post, true )
+      blog.call( 'metaWeblog.newPost', 1, config['username'], config['password'], post, true )
     end
 
   end
