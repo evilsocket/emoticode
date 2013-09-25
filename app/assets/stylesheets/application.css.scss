@@ -299,6 +299,10 @@ ul.connect {
         border-bottom: 2px solid $gradient_to;
         margin-bottom: 10px;
 
+        h1 {
+          color: white !important;
+        }
+
         h3 {
             height: 10px;
         }
@@ -769,5 +773,6 @@ h1 {
   margin: .67em 0;
   line-height: 1.3em;
   font-weight: 300;
+  color: #333;
 }
 
