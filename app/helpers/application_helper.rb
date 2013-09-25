@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def navbar_language_link( language )
-    # if we are not under a specific language archive, obtain current 
+    # if we are not under a specific language archive, obtain current
     # language from the current shown source if any
     @language ||= if @source then @source.language else nil end
     attrs = if @language && @language == language
@@ -51,12 +51,12 @@ module ApplicationHelper
       content_tag( :div, :class => 'content' ) do
         yield
       end
-    end 
+    end
   end
 
   def tag_cloud( tags, min_size = 9, max_size = 20 )
     cloud = {}
-    
+
     unless tags.empty?
       min, max = tags.map(&:sources_count).minmax
       log_min = Math.log( min )
@@ -71,7 +71,7 @@ module ApplicationHelper
                else
                  min_size + ( size_delta * weight ).round
                end
-        
+
         cloud[tag.value] = [ tag, size, tag.sources_count ]
       end
     end
@@ -85,9 +85,9 @@ module ApplicationHelper
 google_ad_client = "#{opts[:client]}";
 google_ad_slot   = "#{opts[:slot]}";
 google_ad_width  = #{opts[:width]};
-google_ad_height = #{opts[:height]};    
+google_ad_height = #{opts[:height]};
 END
-   
+
     content_tag :div, { :style => "width:#{opts[:width]}px;height:#{opts[:height]}px;" } do
       javascript_tag(vars) +
       javascript_include_tag("//pagead2.googlesyndication.com/pagead/show_ads.js")
@@ -100,7 +100,7 @@ END
 
   def avatar_tag(user)
     content_tag :figure, { :class => 'avatar' } do
-      image_tag image_url(user.avatar), :onerror => "this.src='#{image_url("/avatars/default.png")}';", :alt => "#{user.username} avatar."
+      image_tag image_url(user.avatar), :size => '50x50', :onerror => "this.src='#{image_url("/avatars/default.png")}';", :alt => "#{user.username} avatar."
     end
   end
 
@@ -113,7 +113,7 @@ END
     nested   = threads.map { |root| group_comments root, comments }
   end
 
-  private 
+  private
 
   def group_comments( parent, comments )
     comments.each do |comment|
