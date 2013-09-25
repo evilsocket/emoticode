@@ -1,6 +1,7 @@
 #language-archive{
     h1 {
         padding-left: 0.4em;
+        color: #333;
     }
 
     #podium {
@@ -67,7 +68,7 @@
             left: 260px;
 
             span {
-                font-size: 39px;                
+                font-size: 39px;
             }
         }
     }
@@ -97,7 +98,7 @@
                 position: absolute;
                 bottom: 0;
                 float:right;
-                font-size: 11px;                    
+                font-size: 11px;
                 text-align: right;
 
                 span.date {
