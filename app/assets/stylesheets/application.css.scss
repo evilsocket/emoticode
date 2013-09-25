@@ -759,3 +759,15 @@ div.create {
     }
 }
 
+h1, h2, h3 {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-size: 2em;
+  margin: .67em 0;
+  line-height: 1.3em;
+  font-weight: 300;
+}
+
