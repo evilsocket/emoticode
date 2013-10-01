@@ -1,0 +1,59 @@
+<section id="page">
+  <h1>Site Map</h1>
+  <p>
+  We've done our best to make the site look great while keeping it easy to navigate, but sometimes you just wanna get somewhere without all the flashiness. 
+  We hope that this page will help you get where you want to go in a hurry.
+  </p>
+
+  <h3>Snippets</h3>
+  <div class="hkv">
+    <div class="k">Contribute</div>
+    <div class="v"><%= link_to 'Post a Snippet', source_new_path %></div>
+  </div>
+  <div class="hkv">
+    <div class="k">By Language</div>
+    <div class="v">
+      <ul>
+      <% @languages.each do |lang| %>
+        <li>
+          <%= link_to lang.title, language_archive_path( :name => lang.name ) %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Users</h3>
+  <div class="hkv">
+    <div class="k">Access</div>
+    <div class="v">
+      <ul>
+        <li><%= link_to 'Login',    sign_in_path %>,</li>
+        <li><%= link_to 'Register', sign_up_path %></li>
+      </ul>  
+    </div>
+  </div>
+  <div class="hkv">
+    <div class="k">Connect</div>
+    <div class="v">
+      <ul>
+        <li><%= link_to( 'Facebook', "/auth/facebook", { :title => "Login with your Facebook account." }) %></li>
+        <li><%= link_to( 'GitHub', "/auth/github", { :title => "Login with your Github account." }) %></li>
+      </ul>  
+    </div>
+  </div>
+
+  <h3>Pages</h3>
+  <div class="hkv">
+    <div class="k">List</div>
+    <div class="v">
+      <ul>
+        <% [ 'about', 'contact', 'sitemap' ].each do |page| %>
+          <li><a href="/<%= page %>.html" title="<%= page.capitalize %>"><%= page.capitalize %></a></li>
+        <% end %>
+      </ul>  
+    </div>
+  </div>
+</section>
+
+

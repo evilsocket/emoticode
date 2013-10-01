@@ -1,3 +1,46 @@
-// Place all the styles related to the page controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#page {
+
+    h3 {
+        border-bottom: 1px solid #EEE;
+        padding-bottom: 10px;
+        font-family: "Open Sans", "Helvetica Neue", sans-serif !important;
+        font-weight: 300;
+        color: #333;
+    }
+
+    div.hkv {
+        width: 100%;
+        display: table;
+        margin-bottom: 20px;
+
+        div.k {
+            float:left;
+            text-transform: uppercase;
+            padding-top: 2px;
+            width: 120px;
+            font-size: 11px;
+            font-weight: 500;
+            text-align: right;
+        }
+
+        div.v {
+            margin-left: 140px;
+
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+
+                li {
+                    float: left;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+
+    #message {
+        width: 100%;
+        height: 200px;
+    }
+}

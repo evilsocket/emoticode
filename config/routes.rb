@@ -59,7 +59,9 @@ EmoticodeRails::Application.routes.draw do
   end
 
   controller :page do
-    get ':name.html' => :show, as: :page_show
+    get  'about.html'   => :about,   as: :about_page
+    get  'sitemap.html' => :sitemap, as: :sitemap_page
+    get  'contact.html' => :contact, as: :contact_page
   end
 
   controller :language do

@@ -56,7 +56,7 @@
   </ul>
 </nav>
 <% end %>
-<% cache "sub_navbar_#{signed_in? ? @current_user.id : 0}_#{Page.count}" do %>
+<% cache "sub_navbar_#{signed_in? ? @current_user.id : 0}" do %>
 <nav id="sub-navbar">
     <div class="inner">
         <ul>
@@ -104,9 +104,9 @@
     <ul>
       <li>
         <h3>Pages</h3>
-        <% @pages.each do |page| %>
-          <%= link_to page.title, page_show_path( :name => page.name ) %><br/>
-        <% end %>
+        <%= link_to 'About',    about_page_path %><br/>
+        <%= link_to 'Site Map', sitemap_page_path %><br/>
+        <%= link_to 'Contact',  contact_page_path %><br/>
       </li>
 
       <li>

@@ -1,0 +1,11 @@
+<section id="page">
+  <h1>Contact</h1>
+  <p>
+  To contact us please send an email to 
+  <% if signed_in? %>
+    <a href="mailto:evilsocket@gmail.com">the admin</a>.
+  <% else %>
+    <em>- please login or register to see this email address - .</em>
+  <% end %>
+  </p>
+</section>

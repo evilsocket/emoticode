@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
 
   def create_globals
     @languages    = Language.all
-    @pages        = Page.all
     @users        = User.where( :status => User::STATUSES[:confirmed] ).joins(:profile).order('created_at DESC').limit(20)
     @show_joinus  = false
     @current_user = session[:id].nil? ? nil : User.find_by_id( session[:id] )
@@ -21,6 +20,7 @@ class ApplicationController < ActionController::Base
     if @current_user.nil? == false
       @current_user.last_seen_at = Time.now
       @current_user.save(:validate => false)
+
     # show modal only for not logged users
     # elsif cookies[:joinus].nil?
     #   @show_joinus = true
