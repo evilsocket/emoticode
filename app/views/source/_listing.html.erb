@@ -1,10 +1,10 @@
-<% 
-  show_views  = false if local_assigns[:show_views].nil?  
-  desc_cut    = 100 if local_assigns[:desc_cut].nil? 
+<%
+  show_views  = false if local_assigns[:show_views].nil?
+  desc_cut    = 100 if local_assigns[:desc_cut].nil?
   with_author = true if local_assigns[:with_author].nil?
 %>
 
-<% cache_if( !signed_in?, "source_listing_#{show_views}_#{desc_cut}_#{with_author}_#{source.id}" ) do %>
+<% cache_expire_if( !signed_in?, "source_listing_#{show_views}_#{desc_cut}_#{with_author}_#{source.id}", 1.hour ) do %>
 <li>
 <div class="source">
     <% if with_author %>
@@ -28,14 +28,14 @@
         <span class="meta">
             Posted into <%= link_to_language source.language, :class => 'language' %>
           <span class="date">
-            &bull; 
+            &bull;
             <% if show_views %>
-                <%= source.views %> views &bull; 
+                <%= source.views %> views &bull;
             <% end %>
-            
+
             <%= time_ago_in_words( Time.at(source.created_at) ) %> ago
           </span>
-          
+
             &bull;
 
             <% if signed_in? %>

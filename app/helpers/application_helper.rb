@@ -23,6 +23,14 @@ module ApplicationHelper
     end
   end
 
+  def cache_expire_if(condition, name = {}, expire, &block)
+    if condition
+      cache( name, :expires_in => expire, &block )
+    else
+      yield
+    end
+  end
+
   def navbar_language_link( language )
     # if we are not under a specific language archive, obtain current
     # language from the current shown source if any
