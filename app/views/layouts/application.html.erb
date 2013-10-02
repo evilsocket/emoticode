@@ -82,7 +82,7 @@
             <%=raw linkset.map { |link| "<li>#{link}</li>" }.join '<li>&bull;</li>' %>
         </ul>
         <% unless signed_in? %>
-        <ul>
+        <ul class="right">
           <li>Connect with</li>
           <li><%= link_icon_to( 'Facebook', 'facebook', "/auth/facebook", { :title => "Login with your Facebook account." }) %></li>
           <li><%= link_icon_to( 'GitHub', 'github', "/auth/github", { :title => "Login with your Github account." }) %></li>
