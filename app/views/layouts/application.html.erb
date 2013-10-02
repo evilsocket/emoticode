@@ -84,8 +84,8 @@
         <% unless signed_in? %>
         <ul class="right">
           <li>Connect with</li>
-          <li><%= link_icon_to( 'Facebook', 'facebook', "/auth/facebook", { :title => "Login with your Facebook account." }) %></li>
-          <li><%= link_icon_to( 'GitHub', 'github', "/auth/github", { :title => "Login with your Github account." }) %></li>
+          <li><%= link_icon_to( 'Facebook', 'facebook', "/auth/facebook", { :title => "Login with your Facebook account.", :class => 'small_facebook_connect' }) %></li>
+          <li><%= link_icon_to( 'GitHub', 'github', "/auth/github", { :title => "Login with your Github account.", :class => 'small_github_connect' }) %></li>
         </ul>
         <% end %>
     </div>

@@ -101,6 +101,25 @@ p.error {
     margin-top: 25px;
 }
 
+.small_facebook_connect {
+  padding: 1px 5px;
+  background-color: #3b5998;
+  color: white;
+}
+
+.small_github_connect {
+  padding: 0px 5px;
+  color: #555;
+  text-shadow: 0 1px 0 #fff;
+  background-color: #eaeaea;
+  background-image: -moz-linear-gradient(#fafafa, #eaeaea);
+  background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+  background-image: linear-gradient(#fafafa, #eaeaea);
+  background-repeat: repeat-x;
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #c5c5c5;
+}
+
 a.post-button:hover {
     text-decoration: none;
 }
