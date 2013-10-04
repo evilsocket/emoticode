@@ -1,12 +1,12 @@
 class CommentsController < ApplicationController
   before_filter :authenticate!
 
-  def create  
+  def create
     respond_to do |format|
       format.js {
         @comment = Comment.new comment_params
         @comment.user_id = @current_user.id
-        if @comment.save
+        if @comment.save and @comment.commentable.user != @current_user
           if @comment.parent_id.nil?
             UserMailer.comment_email( @current_user, @comment.commentable.user, @comment.commentable.url ).deliver
           else
