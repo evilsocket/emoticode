@@ -25,7 +25,7 @@ after "deploy:symlink", "deploy:update_crontab"
 after 'deploy:restart', 'unicorn:duplicate' # before_fork hook implemented (zero downtime deployments)
 
 namespace :deploy do
-  secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/development.sphinx.conf', 'public/avatars' ]
+  secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/newrelic.yml' 'config/development.sphinx.conf', 'public/avatars' ]
 
   desc "Update the crontab file"
   task :update_crontab, :roles => :db do

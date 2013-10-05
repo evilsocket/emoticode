@@ -12,6 +12,7 @@ bench/
 bin/
 config/secrets.yml
 config/database.yml
+config/newrelic.yml
 db/*.sqlite3
 log/*.log
 log/*
