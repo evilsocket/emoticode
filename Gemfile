@@ -32,8 +32,5 @@ gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'capistrano-unicorn', :require => false
 
-# error monitoring
-gem "sentry-raven"
-
 # newrelic
 gem 'newrelic_rpm'
