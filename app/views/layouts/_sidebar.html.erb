@@ -25,6 +25,8 @@
       <%= link_to image_tag("icons/googleplus.png"), "https://plus.google.com/share?url=#{request.original_url}", { :target => '_blank', :title => 'Post to Google+' } %>
       <%= link_to image_tag("icons/reddit.png"),     "http://www.reddit.com/submit?url=#{request.original_url}&title=#{source.language.title} - #{source.title}", { :target => '_blank', :title => 'Post to Reddit' } %>
     </div>
+
+    <%= adsense :slot => '7272041371', :width => 200, :height => 200 %>    
   <% end %>
 
   <% if with_heading %>

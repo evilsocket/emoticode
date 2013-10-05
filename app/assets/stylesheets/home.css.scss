@@ -38,33 +38,23 @@ ul.avatars {
 }
 
 #heading {
-    height: 200px;
+    height: 300px;
     padding: 25px 0 80px;
     font-size: 30px;
-
-    background: #38ae6f;
-    background: -moz-linear-gradient(45deg, $gradient_from 0%, $gradient_to 100%);
-    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,$gradient_from), color-stop(100%,$gradient_to));
-    background: -webkit-linear-gradient(45deg, $gradient_from 0%,$gradient_to 100%);
-    background: -o-linear-gradient(45deg, $gradient_from 0%,$gradient_to 100%);
-    background: -ms-linear-gradient(45deg, $gradient_from 0%,$gradient_to 100%);
-    background: linear-gradient(45deg, $gradient_from 0%,$gradient_to 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#$gradient_from', endColorstr='$gradient_to',GradientType=1 );
-
+    background: url(/collage.png) repeat center center fixed;
     color: white;
     border-bottom: 1px solid #DDDDDD;
     text-align: center;
     box-shadow: inset 0px 1px 0px 0px rgba(0,0,0,0.05), inset 0px 2px 3px 0px rgba(0,0,0,0.1);
-    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
 
     div.motto {
-        margin-top: 45px;
-        font-size: 40px;
+        margin-top: 90px;
+        font-size: 50px;
     }
 
     div.submotto {
         font-size: 20px;
-        color: $gradient_to + 80;
+        color: $gradient_to + 130;
         margin-bottom: 50px;
     }
 
