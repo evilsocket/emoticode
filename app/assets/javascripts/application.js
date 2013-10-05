@@ -15,21 +15,30 @@
 //= require_tree .
 
 $(document).ready(function($) {
-    $button = $('#show-all-langs');
-    $menu = $('#all-langs');
+  $button = $('#showcp');
+  $menu = $('#cp');
 
-    $button.hover( 
-        function(){
-            $menu.css( 'left', $button.offset().left - $menu.outerWidth() + $button.outerWidth() ).show();
-        },
-        function(){
-            $menu.hide();
-        }
-    );
+  $button.hover( 
+    function(){
+      $menu.css( 'left', $button.offset().left - $menu.outerWidth() + $button.outerWidth() ).show();
+    },
+    function(){
+      $menu.hide();
+    }
+  );
+
+  $lbutton = $('#browse_langs');
+  $lmenu = $('#all_langs');
+
+  $lbutton.hover( 
+    function(){
+      $lmenu.show();
+    },
+    function(){
+      $lmenu.hide();
+    }
+  );
 });
-
-Cufon.replace('span#motto', {fontFamily: 'Gabriola', hover:true});
-Cufon.replace('#heading > h1', {fontFamily: 'Copse', hover:true})
 
 function showLoginModal(){
     $('#login').modal(); 

@@ -13,84 +13,8 @@
   <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<% cache "main_navbar_#{Source.public.count}_#{request.fullpath.parameterize[0..99]}" do %>
-<nav id="navbar">
-  <ul>
-    <li class="home">
-    <a href="/" title="Home">
-      Home
-    </a>
-    </li>
-      <% @languages.popular.take(15).each do |language| %>
-          <li>
-              <%= navbar_language_link language %>
-          </li>
-      <% end %>
-      <% cache "all_langs_#{Source.public.count}" do %>
-      <li id="show-all-langs">
-          <a href="#" onclick="return false;">All &raquo;</a>
-          <div id="all-langs">
-              <table width="100%" cellpadding="0" cellspacing="0">
-                  <tr>
-                      <% done = 0 %>
-                      <% @languages.each_with_index do |language,i| %>
-                          <% done += 1 %>
-                          <td>
-                              <%= link_to_language language %>
-                              <span><%= language.sources_count %></span>
-                          </td>
-                          <% if i > 0 && ( i + 1 ) % 4 == 0 %>
-                              </tr>
-                          <% end %>
-                      <% end %>
-                      <% left = ( done % 4 )
-                      if left
-                          ( 4 - left ).times { %><td></td><% }
-                          %> </tr> <%
-                      end
-                      %>
-              </table>
-          </div>
-        </li>
-      <% end %>
-  </ul>
-</nav>
-<% end %>
-<% cache "sub_navbar_#{signed_in? ? @current_user.id : 0}" do %>
-<nav id="sub-navbar">
-    <div class="inner">
-        <ul>
-            <%
-                linkset = if signed_in?
-                [
-                    link_to( 'Add Snippet',  source_new_path ),
-                    link_to( 'Profile',      user_profile_path(username: @current_user.username ) ),
-                    link_to( 'Settings',     user_settings_path ),
-                    link_to( 'My Snippets',  user_snippets_path ),
-                    link_to( 'My Favorites', user_favorites_path ),
-                    link_to( 'Logout',       sign_out_path, :method => :delete )
-                ]
-                          else
-                [
-                    link_to_function( 'Add Snippet', 'showLoginModal()' ),
-                    link_to( 'Login',       sign_in_path ),
-                    link_to( 'Register',    sign_up_path )
-                ]
-                end
-            %>
 
-            <%=raw linkset.map { |link| "<li>#{link}</li>" }.join '<li>&bull;</li>' %>
-        </ul>
-        <% unless signed_in? %>
-        <ul class="right">
-          <li>Connect with</li>
-          <li><%= link_icon_to( 'Facebook', 'facebook', "/auth/facebook", { :title => "Login with your Facebook account.", :class => 'small_facebook_connect' }) %></li>
-          <li><%= link_icon_to( 'GitHub', 'github', "/auth/github", { :title => "Login with your Github account.", :class => 'small_github_connect' }) %></li>
-        </ul>
-        <% end %>
-    </div>
-</nav>
-<% end %>
+<%= render :partial => "layouts/navbar" %>
 
 <% unless signed_in? %>
   <%= render :partial => "sessions/new" %>
