@@ -20,7 +20,7 @@ class UserController < ApplicationController
     # valid captcha and valid user -> register
     elsif valid_captcha and @user.save
       Profile.create({ user: @user })
-
+     
       UserMailer.confirmation_email(@user, params[:user][:password] ).deliver
 
       flash[:alert] = 'A confirmation email has been sent to your email address.'

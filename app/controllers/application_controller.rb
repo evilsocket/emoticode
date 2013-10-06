@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   def create_globals
     @languages    = Language.all
     @users        = User.where( :status => User::STATUSES[:confirmed] ).joins(:profile).order('created_at DESC').limit(20)
+    @events       = Event.order('created_at DESC').limit(25)
     @show_joinus  = false
     @current_user = session[:id].nil? ? nil : User.find_by_id( session[:id] )
    

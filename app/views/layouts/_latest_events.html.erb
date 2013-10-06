@@ -1,0 +1,12 @@
+<% cache( "latest_events_#{Event.count}" ) do %>
+  <div class="heading">
+    <h3>Latest Events</h3>
+  </div>
+  <ul class="events">
+  <% @events.each do |event| %>
+    <li>
+      <%= render :partial => 'events/event', :locals => { event: event } %>     
+    </li>
+  <% end %>
+  </ul>
+<% end %>

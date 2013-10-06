@@ -7,6 +7,8 @@ class FavoriteController < ApplicationController
       format.js { 
         @favorite = Favorite.new( :user => @current_user, :source_id => params[:id] )
         @favorite.save!
+
+        Event.new_favorited( @current_user, @favorite.source )
       }
     end
   end

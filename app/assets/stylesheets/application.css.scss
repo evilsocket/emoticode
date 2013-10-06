@@ -361,6 +361,24 @@ ul.connect {
             margin-right: 5px;
         }
     }
+
+    ul.events {
+        font-size: 12px;
+        li {
+            margin-bottom:10px;
+
+            i {
+                font-size: 27px;
+                margin-right: 3px;
+                float:left;
+                color: #ccc;
+            }
+        }
+
+        span.when {
+            color: #ccc;
+        }
+    }
 }
 
 .pagination {

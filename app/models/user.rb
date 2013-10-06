@@ -63,6 +63,8 @@ class User < ActiveRecord::Base
       if user.status == STATUSES[:unconfirmed]
         user.status = STATUSES[:confirmed]
         user.save!
+
+        Event.new_registered(user)      
       else
         user = nil
       end
@@ -96,6 +98,8 @@ class User < ActiveRecord::Base
           })
 
           profile = Profile.create({ user: user }) unless !user.valid?
+
+          Event.new_registered(user)
         end
         # existing user
       else

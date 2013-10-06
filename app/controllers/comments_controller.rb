@@ -6,11 +6,16 @@ class CommentsController < ApplicationController
       format.js {
         @comment = Comment.new comment_params
         @comment.user_id = @current_user.id
-        if @comment.save and @comment.commentable.user != @current_user
-          if @comment.parent_id.nil?
-            UserMailer.comment_email( @current_user, @comment.commentable.user, @comment.commentable.url ).deliver
-          else
-            UserMailer.comment_reply_email( @current_user, @comment.commentable.user, @comment.commentable.url ).deliver
+
+        if @comment.save
+          Event.new_comment(@current_user,@comment)
+
+          if @comment.commentable.user != @current_user
+            if @comment.parent_id.nil?
+              UserMailer.comment_email( @current_user, @comment.commentable.user, @comment.commentable.url ).deliver
+            else
+              UserMailer.comment_reply_email( @current_user, @comment.commentable.user, @comment.commentable.url ).deliver
+            end
           end
         end
       }

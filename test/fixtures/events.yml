@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 
+  type: 1
+  eventable_type: 1
+  eventable_id: 1
+
+two:
+  user_id: 
+  type: 1
+  eventable_type: 1
+  eventable_id: 1

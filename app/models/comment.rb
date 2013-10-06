@@ -30,6 +30,14 @@ class Comment < ActiveRecord::Base
     Kernel.const_get( COMMENTABLE_CLASSES[ commentable_type ] ).find( commentable_id )
   end
 
+  def event_title
+    if commentable_type == COMMENTABLE_TYPES[:source]
+      Source.find(commentable_id).title
+    else commentable_type == COMMENTABLE_TYPES[:profile]
+      "#{Profile.find(commentable_id).user.username} profile"
+    end
+  end
+
   protected
 
   include ActionView::Helpers::SanitizeHelper
