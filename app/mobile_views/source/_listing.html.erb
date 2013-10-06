@@ -1,0 +1,27 @@
+<article class="underline">
+  <div class="post-preview">
+    <span class="author">
+      <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile">
+          <%= avatar_tag source.user %>
+          <%= truncate source.user.username, :length => 15 %>
+      </a>
+    </span>
+  </div>
+  <div class="post-content">
+    <h2><%= link_to_source source %></h2>
+    <p>
+    <%= if source.description.nil? or source.description.strip.empty?
+        '<em>No description :/</em>'.html_safe
+      else
+        truncate source.description, :length => desc_cut
+      end
+    %>
+    </p>
+
+    <span class="meta"><i class="icon-time"></i>  <%= time_ago_in_words( Time.at(source.created_at) ) %> ago</span>
+    <span class="meta"><i class="icon-info-sign"></i>  <%= link_to_language source.language %></span>
+    <span class="meta"><i class="icon-eye-open"></i> <%= source.views %> views</span>
+    
+  </div>
+  <div class="clear"></div>
+</article>

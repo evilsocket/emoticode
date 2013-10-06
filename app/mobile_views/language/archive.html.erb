@@ -1,0 +1,13 @@
+<h1>
+  <%= link_to image_tag('icons/rss-s.png'), language_feed_path(:language => @language.name ), :title => "#{@language.title} RSS feed." %>
+  <%= paged "#{@language.title} Snippets Archive" %>
+</h1>
+
+<% @sources.each do |source| %>
+  <%= render :partial => "source/listing", :locals => { :source => source, :desc_cut => 300, :show_views => true } %>
+<% end %>
+
+<section class="pager">
+  <%= will_paginate @sources %>
+</section>
+

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= page_title %></title>
+  <link rel="stylesheet" media="all" href="/mobile/style.css" type="text/css">
+  <link rel="stylesheet" media="all" href="/mobile/pygments.css" type="text/css">  
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <% metas.each do |meta| %>
+    <meta <% meta.each { |attr,value| %><%= attr %>="<%= value %>" <% } %>/>
+  <% end %>
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="search" type="application/opensearchdescription+xml" href="http://www.emoticode.net/opensearch.xml" title="EmotiCODE Search"/>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0" /> 
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo"><a href="/">
+      <img src="/mobile/images/logo_black.png" alt="EmotiCODE.net"/></a>
+    </div>
+    <div class="options">
+      <ul>
+        <li>Search</li>
+        <li>Menu</li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="search-box">
+      <form action="#">
+        <input type="text" placeholder="Search Snippets" />
+        <input type="submit" value="Go" />
+      </form>
+      <div class="clear"></div>
+    </div>
+    <nav class="vertical menu">
+      <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="single.html">Single page</a></li>
+            <li><a href="basic_markup.html">Basic Markup Page</a></li>
+            <li><a href="contact.html">Contact Page</a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <div class="content">
+    <%= yield %>
+  </div>
+
+</div>
+<footer>
+  <p>&copy; emoticode.net 2013.</p>
+</footer>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1&appId=541383999216397";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38685018-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<!-- Histats.com  START (hidden counter)-->
+<script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
+<a href="http://www.histats.com" target="_blank" title="contatore visitatori online" ><script  type="text/javascript" >
+try {Histats.start(1,2459155,4,0,0,0,"");
+Histats.track_hits();} catch(err){};
+</script></a>
+<noscript><a href="http://www.histats.com" target="_blank"><img  src="http://sstatic1.histats.com/0.gif?2459155&101" alt="contatore visitatori online" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+   window.addEventListener("load",function() {
+	  // Set a timeout...
+	  setTimeout(function(){
+	    // Hide the address bar!
+	    window.scrollTo(0, 1);
+	  }, 0);
+	});
+   $('.search-box,.menu' ).hide();   
+   $('.options li:first-child').click(function(){	
+   		$(this).toggleClass('active'); 	
+   		$('.search-box').toggle();        			
+   		$('.menu').hide();  		
+   		$('.options li:last-child').removeClass('active'); 
+   });
+   $('.options li:last-child').click(function(){
+   		$(this).toggleClass('active');      			
+   		$('.menu').toggle();  		
+   		$('.search-box').hide(); 
+   		$('.options li:first-child').removeClass('active'); 		
+   });
+   $('.content').click(function(){
+   		$('.search-box,.menu' ).hide();   
+   		$('.options li:last-child, .options li:first-child').removeClass('active');
+   });
+</script>
+</body>
+</html>

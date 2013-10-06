@@ -1,0 +1,17 @@
+<article>
+  <span class="author">
+    <a href="<%= user_profile_path(username:@source.user.username) %>" title="<%= @source.user.username %> profile">
+        <%= avatar_tag @source.user %>
+        <%= truncate @source.user.username, :length => 15 %>
+    </a>
+  </span>
+
+  <h1><%= @source.title %></h1>
+  <span class="meta"><i class="icon-time"></i>  <%= time_ago_in_words( Time.at(@source.created_at) ) %> ago</span>
+  <span class="meta"><i class="icon-info-sign"></i>  <%= link_to_language @source.language %></span>
+  <span class="meta"><i class="icon-eye-open"></i> <%= @source.views %> views</span>
+  <p>
+    <%=raw description(@source) %>
+  </p>
+  <%=raw highlight(@source) %>
+</article>

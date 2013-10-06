@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   # initialize instance variables that are globals to the whole app
   before_filter :create_globals
   before_filter :coerce_page_number
+  # before_filter :check_for_mobile
+
   # if a RecordNotFound exception is raised, automatically render the 404 page
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
@@ -14,7 +16,7 @@ class ApplicationController < ActionController::Base
   def create_globals
     @languages    = Language.all
     @users        = User.where( :status => User::STATUSES[:confirmed] ).joins(:profile).order('created_at DESC').limit(20)
-    @events       = Event.order('created_at DESC').limit(25)
+    @events       = Event.order('created_at DESC').limit(5)
     @show_joinus  = false
     @current_user = session[:id].nil? ? nil : User.find_by_id( session[:id] )
    
@@ -70,5 +72,23 @@ class ApplicationController < ActionController::Base
 
   def not_authenticated!
     redirect_to root_url, error: 'Already authenticated.' unless !@current_user    
+  end
+
+  def check_for_mobile
+    session[:mobile_override] = params[:mobile] if params[:mobile]
+    prepare_for_mobile if mobile_device?
+  end
+
+  def prepare_for_mobile
+    prepend_view_path Rails.root + 'app' + 'mobile_views'
+  end
+
+  def mobile_device?
+    if session[:mobile_override]
+      session[:mobile_override] == "1"
+    else
+      # Season this regexp to taste. I prefer to treat iPad as non-mobile.
+      (request.user_agent =~ /Mobile|webOS/)
+    end
   end
 end
