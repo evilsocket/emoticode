@@ -16,67 +16,17 @@
   <% end %>
 
   <% if defined? source %>
-    <div class="heading orange">
-      <h3>Share</h3>
-    </div>
-    <div class="share">
-      <%= link_to image_tag("icons/facebook.png"),   "http://www.facebook.com/sharer.php?u=#{request.original_url}", { :target => '_blank', :title => 'Share on Facebook' } %>
-      <%= link_to image_tag("icons/twitter.png"),    "http://twitter.com/home?status=#{source.language.title} - #{source.title} #{request.original_url}", { :target => '_blank', :title => 'Post to Twitter' } %>
-      <%= link_to image_tag("icons/googleplus.png"), "https://plus.google.com/share?url=#{request.original_url}", { :target => '_blank', :title => 'Post to Google+' } %>
-      <%= link_to image_tag("icons/reddit.png"),     "http://www.reddit.com/submit?url=#{request.original_url}&title=#{source.language.title} - #{source.title}", { :target => '_blank', :title => 'Post to Reddit' } %>
-    </div>
-
+    <%= render :partial => 'layouts/social_share', :locals => { source: source } %>
     <br/>
     <center>
       <%= adsense :slot => '7272041371', :width => 200, :height => 200 %>    
     </center>
   <% end %>
 
-  <% if with_heading %>
-    <div class="heading blue">
-      <h3>Latest Users</h3>
-    </div>
-  <% end %>
+  <%= render :partial => 'layouts/latest_users', :locals => { with_heading: with_heading } %>
 
   <% unless defined? source %>
-  <ul class="avatars">
-    <% @users.each do |user| %>
-      <li>
-    <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile">
-      <%= avatar_tag user %>
-    </a>
-    </li>
-    <% end %>
-  </ul>
-
-  <br style="clear:both"/>
-  <% end %>
-
-  <% unless defined? source %>
-  <div class="heading">
-    <h3>Be Social!</h3>
-  </div>
-  <div class="social">
-    <ul>
-      <li class="fb">
-        <div class="fb-like" data-href="http://www.facebook.com/pages/EmotiCODE/475488679182886" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
-      </li>
-      <li class="po">
-        <div>
-          <div class="g-follow" data-annotation="bubble" data-height="20" data-href="//plus.google.com/105672627985088123672" data-rel="publisher"></div>
-        </div>
-      </li>
-      <li class="tw">
-        <div>
-          <a href="https://twitter.com/emoticodedotnet" class="twitter-follow-button" data-show-count="true" data-show-screen-name="false" data-lang="en">Follow Us</a>
-          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        </div>
-      </li>
-      <li class="rss">
-        <a href="http://feeds.feedburner.com/emoticode" title="Subscribe to our Feeds!">Subscribe to our Feeds</a>
-      </li>
-    </ul>
-  </div>
+    <%= render :partial => 'layouts/be_social' %>
   <% end %>
 
   <br style="clear:both"/>
@@ -99,14 +49,16 @@
   <% end %>
 
   <% unless @cloud.nil? or @cloud.empty? %>
-  <div class="heading red">
-    <h3>Cloud</h3>
-  </div>
-  <div class="cloud">
-    <% tag_cloud(@cloud).each do |v,cloud| %>
-      <% tag,size,count = cloud %>
-      <%= link_to tag.value, search_path(what: tag.name), { :style => "font-size: #{size}px", :title => "The keyword #{tag.value} has #{count} elements." } %>
+    <% cache( "tag_cloud_for_#{request.original_url}" ) do %>
+    <div class="heading red">
+      <h3>Cloud</h3>
+    </div>
+    <div class="cloud">
+      <% tag_cloud(@cloud).each do |v,cloud| %>
+        <% tag,size,count = cloud %>
+        <%= link_to tag.value, search_path(what: tag.name), { :style => "font-size: #{size}px", :title => "The keyword #{tag.value} has #{count} elements." } %>
+      <% end %>
+    </div>
     <% end %>
-  </div>
   <% end %>
 </div>

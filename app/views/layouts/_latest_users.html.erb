@@ -1,0 +1,21 @@
+<% if with_heading %>
+  <div class="heading blue">
+    <h3>Latest Users</h3>
+  </div>
+<% end %>
+
+<% unless defined? source %>
+  <% cache( "latest_users_#{User.count}" ) do %>
+  <ul class="avatars">
+    <% @users.each do |user| %>
+      <li>
+    <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile">
+      <%= avatar_tag user %>
+    </a>
+    </li>
+    <% end %>
+  </ul>
+  <br style="clear:both"/>
+  <% end %>
+<% end %>
+
