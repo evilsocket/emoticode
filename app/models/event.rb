@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   }
 
   CONTENT_STEP = 5
-  VIEWS_STEP = 20
+  VIEWS_STEP = 3
 
   def type_string
     case eventable_type
