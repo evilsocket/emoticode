@@ -21,11 +21,8 @@
     <center>
       <%= adsense :slot => '7272041371', :width => 200, :height => 200 %>    
     </center>
-  <% end %>
-
-  <%= render :partial => 'layouts/latest_users', :locals => { with_heading: with_heading } %>
-
-  <% unless defined? source %>
+  <% else %>
+    <%= render :partial => 'layouts/latest_users', :locals => { with_heading: with_heading } %>  
     <%= render :partial => 'layouts/be_social' %>
   <% end %>
 
