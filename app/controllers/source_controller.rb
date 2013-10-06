@@ -32,12 +32,10 @@ class SourceController < ApplicationController
 
     @source = Source.create source_params
     if @source.valid?
-      if @source.private == false
-        user_sources = @current_user.sources.count
+      user_sources = @current_user.sources.count
 
-        if user_sources == 1 or ( user_sources != 0 and user_sources % Event::CONTENT_STEP == 0 )
-          Event.new_nth_content( @current_user, @source, user_sources )
-        end
+      if user_sources == 1 or user_sources % Event::CONTENT_STEP == 0
+        Event.new_nth_content( @current_user, @source, user_sources )
       end
 
       redirect_to source_with_language_path(language_name: @source.language.name, source_name: @source.name )
