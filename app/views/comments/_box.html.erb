@@ -22,9 +22,7 @@
 
   <% if object.comments.empty? == false %>
     <ul class="root">
-    <% nested_comments(object).each do |comment| %>
-      <%= render :partial => "comments/listing", :locals => { :comment => comment } %>
-    <% end %>
+      <%= render :partial => "comments/listing", :collection => nested_comments(object), :as => 'comment' %>
     </ul>
   <% end %>
 

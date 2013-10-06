@@ -66,9 +66,7 @@
       <h2><i class="icon-file"></i> Public Sources</h2>
       <% if @sources.any? %>
         <ul>
-          <% @sources.each do |source| %>
-            <%= render :partial => "source/listing", :locals => { :source => source, :with_author => false } %>
-          <% end %>
+          <%= render :partial => "source/listing", :collection => @sources, :as => 'source', :locals => { :with_author => false } %>
         </ul>
 
         <br style="clear:both;"/>

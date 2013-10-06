@@ -33,9 +33,7 @@
     </center>
 
     <ul>
-      <% @sources.each do |source| %>
-        <%= render :partial => "source/listing", :locals => { :source => source, :desc_cut => 300, :show_views => true } %>
-      <% end %>
+      <%= render :partial => "source/listing", :collection => @sources, :as => 'source', :locals => { :desc_cut => 300, :show_views => true } %>
     </ul>
   </div>
 

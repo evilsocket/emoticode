@@ -9,9 +9,7 @@
   </div>
   <div class="big-column">
     <ul>
-      <% @popular.each do |source| %>
-        <%= render :partial => "source/listing", :locals => { :source => source, :show_views => true } %>
-    <% end %>
+      <%= render :partial => "source/listing", :collection => @popular, :as => 'source', :locals => { :show_views => true } %>
     </ul>
   </div>
 
