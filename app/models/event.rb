@@ -10,10 +10,12 @@ class Event < ActiveRecord::Base
     :registered       => 2,
     :sent_nth_content => 3,
     :commented        => 4,
-    :logged_in        => 5
+    :logged_in        => 5,
+    :views_reached    => 6
   }
 
   CONTENT_STEP = 5
+  VIEWS_STEP = 20
 
   def type_string
     case eventable_type
@@ -27,6 +29,8 @@ class Event < ActiveRecord::Base
       "commented"
     when TYPES[:logged_in]
       "logged_in"
+    when TYPES[:views_reached]
+      "views_reached"
     end
   end
 
@@ -70,4 +74,14 @@ class Event < ActiveRecord::Base
       eventable_id: user.id      
     })
   end
+
+  def self.new_views_reached(source,views)
+    Event.create({
+      owner: source.user,
+      eventable_type: TYPES[:views_reached],
+      eventable_id: source.id,
+      data: views
+    })
+  end
+ 
 end

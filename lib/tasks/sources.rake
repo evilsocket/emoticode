@@ -31,6 +31,10 @@ namespace :sources do
 	    ).first
 
 	    unless results.nil?
+        if source.views != results.pageviews and ( results.pageviews.to_i - source.views ) >= Event::VIEWS_STEP == 0
+          Event.new_views_reached(source,results.pageviews) 
+        end
+
         source.views = results.pageviews
         source.save
 		    Rails.logger.info "Updated '#{source.path}' with #{source.views} views."
