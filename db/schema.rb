@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131006122947) do
+ActiveRecord::Schema.define(version: 20131006134444) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20131006122947) do
     t.text     "data"
   end
 
+  add_index "events", ["created_at"], name: "index_events_on_created_at", using: :btree
+  add_index "events", ["eventable_id"], name: "index_events_on_eventable_id", using: :btree
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "favorites", force: true do |t|

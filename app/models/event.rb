@@ -9,7 +9,8 @@ class Event < ActiveRecord::Base
     :favorited        => 1,
     :registered       => 2,
     :sent_nth_content => 3,
-    :commented        => 4
+    :commented        => 4,
+    :logged_in        => 5
   }
 
   CONTENT_STEP = 5
@@ -24,6 +25,8 @@ class Event < ActiveRecord::Base
       "sent_nth_content"
     when TYPES[:commented]
       "commented"
+    when TYPES[:logged_in]
+      "logged_in"
     end
   end
 
@@ -57,6 +60,14 @@ class Event < ActiveRecord::Base
       owner: user,
       eventable_type: TYPES[:commented],
       eventable_id: comment.id      
+    })
+  end
+
+  def self.new_login(user)
+    Event.create({
+      owner: user,
+      eventable_type: TYPES[:logged_in],
+      eventable_id: user.id      
     })
   end
 end

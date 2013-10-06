@@ -29,6 +29,7 @@ class SessionsController < ApplicationController
       flash[:error] = 'Invalid username/password'
       render :template => 'sessions/new', :status => :unauthorized
     else
+      Event.new_login(@user)
       sign_in(@user)
       redirect_to request.referer || root_url
     end
