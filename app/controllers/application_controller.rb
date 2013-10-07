@@ -15,11 +15,11 @@ class ApplicationController < ActionController::Base
 
   def create_globals
     @languages    = Language.all
-    @users        = User.where( :status => User::STATUSES[:confirmed] ).joins(:profile).order('created_at DESC').limit(20)
+    @users        = User.confirmed.order('created_at DESC').limit(20)
     @events       = Event.order('created_at DESC').limit(5)
     @show_joinus  = false
     @current_user = session[:id].nil? ? nil : User.find_by_id( session[:id] )
-   
+
     if @current_user.nil? == false
       @current_user.last_seen_at = Time.now
       @current_user.save(:validate => false)
@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated!
-    redirect_to root_url, error: 'Already authenticated.' unless !@current_user    
+    redirect_to root_url, error: 'Already authenticated.' unless !@current_user
   end
 
   def check_for_mobile
