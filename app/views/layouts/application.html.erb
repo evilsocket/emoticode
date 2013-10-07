@@ -100,6 +100,20 @@ woopra.track();
   })();
 </script>
 
+<% if signed_in? %>
+<script>
+
+
+woopra.identify({
+    email: '{{ <%= @current_user.email %> }}',
+    name: '{{ <%= @current_user.username %> }}',
+    company: '{{ None }}'
+});
+
+woopra.track();
+</script>
+<% end %>
+
 <!-- Histats.com  START (hidden counter)-->
 <script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
 <a href="http://www.histats.com" target="_blank" title="contatore visitatori online" ><script  type="text/javascript" >
