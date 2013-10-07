@@ -12,18 +12,6 @@
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.emoticode.net/opensearch.xml" title="EmotiCODE Search"/>
   <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
 </head>
-
-<script>
-(function(){
-    var t,i,e,n=window,o=document,a=arguments,s="script",r=["config","track","identify","visit","push","call"],c=function(){var t,i=this;for(i._e=[],t=0;r.length>t;t++)(function(t){i[t]=function(){return i._e.push([t].concat(Array.prototype.slice.call(arguments,0))),i}})(r[t])};for(n._w=n._w||{},t=0;a.length>t;t++)n._w[a[t]]=n[a[t]]=n[a[t]]||new c;i=o.createElement(s),i.async=1,i.src="//static.woopra.com/js/w.js",e=o.getElementsByTagName(s)[0],e.parentNode.insertBefore(i,e)
-})("woopra");
-
-woopra.config({
-    domain: 'emoticode.net'
-});
-woopra.track();
-</script>
-
 <body>
 
 <%= render :partial => "layouts/navbar" %>
@@ -99,20 +87,6 @@ woopra.track();
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-
-<% if signed_in? %>
-<script>
-
-
-woopra.identify({
-    email: '{{ <%= @current_user.email %> }}',
-    name: '{{ <%= @current_user.username %> }}',
-    company: '{{ None }}'
-});
-
-woopra.track();
-</script>
-<% end %>
 
 <!-- Histats.com  START (hidden counter)-->
 <script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
