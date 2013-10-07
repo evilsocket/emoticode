@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
                :deleted     => 4
   }
 
+  scope :confirmed, -> { where( :status => User::STATUSES[:confirmed] ) }
+
   validates :email, presence: true,
     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
     uniqueness: { case_sensitive: false }
@@ -64,7 +66,7 @@ class User < ActiveRecord::Base
         user.status = STATUSES[:confirmed]
         user.save!
 
-        Event.new_registered(user)      
+        Event.new_registered(user)
       else
         user = nil
       end
@@ -188,7 +190,7 @@ class User < ActiveRecord::Base
       nickname = "#{base}-#{counter}"
       counter += 1
     end
-    
+
     nickname
   end
 
