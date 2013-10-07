@@ -19,7 +19,7 @@
     <%= render :partial => 'layouts/social_share', :locals => { source: source } %>
     <br/>
     <center>
-      <%= adsense :slot => '7272041371', :width => 200, :height => 200 %>    
+      <%= adsense :slot => '7272041371', :width => 200, :height => 200 %>
     </center>
 
     <% cache( "source_#{source.id}_related", :expires_in => 24.hours ) do %>
@@ -38,15 +38,15 @@
     <% end %>
 
   <% else %>
-    <%= render :partial => 'layouts/latest_users', :locals => { with_heading: with_heading } %> 
+    <%= render :partial => 'layouts/latest_users', :locals => { with_heading: with_heading } %>
   <% end %>
 
-  <%= render :partial => 'layouts/latest_events' %>      
+  <%= render :partial => 'layouts/latest_events' %>
 
   <% unless defined? source %>
     <%= render :partial => 'layouts/be_social' %>
     <br style="clear:both"/>
-  <% end %> 
+  <% end %>
 
   <% unless @cloud.nil? or @cloud.empty? %>
     <% cache( "tag_cloud_for_#{request.original_url}" ) do %>
@@ -62,3 +62,4 @@
     <% end %>
   <% end %>
 </div>
+<br style="clear:both"/>
