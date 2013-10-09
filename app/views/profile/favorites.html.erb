@@ -1,7 +1,7 @@
 <section id="favorites-archive">
   <div class="huge-column">
     <h1>Your Favourite Snippets</h1>
-    <ul>
+    <ul class="listing">
       <% @favorites.each do |favorite| %>
         <%= render :partial => "source/listing", :locals => { :source => favorite.source, :desc_cut => 300, :show_views => true } %>
       <% end %>

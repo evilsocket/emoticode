@@ -32,7 +32,7 @@
       <%= adsense :slot => '2691371377', :width => 728, :height => 90 %>
     </center>
 
-    <ul>
+    <ul class="listing">
       <%= render :partial => "source/listing", :collection => @sources, :as => 'source', :locals => { :desc_cut => 300, :show_views => true } %>
     </ul>
   </div>

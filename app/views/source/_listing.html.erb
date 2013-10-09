@@ -5,50 +5,46 @@
 %>
 
 <% cache_expire_if( !signed_in?, "source_listing_#{show_views}_#{desc_cut}_#{with_author}_#{source.id}", 1.hour ) do %>
-<li>
-<div class="source">
-    <% if with_author %>
-    <span class="author">
-        <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile">
-            <%= avatar_tag source.user %>
-            <%= truncate source.user.username, :length => 15 %>
+<li class="source_container">
+<h4><%= link_to_source source, :class => 'title' %></h4>
+<div class="description">
+  <%= if source.description.nil? or source.description.strip.empty?
+    '<em>No description :/</em>'.html_safe
+    else
+      truncate source.description, :length => desc_cut
+    end
+  %>
+</div>
+<div class="footer">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td class="avatar">
+        <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="avatar">
+          <%= image_tag image_url(source.user.avatar), :height => '40', :width => '40', :alt => "#{source.user.username} avatar.", :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
         </a>
-    </span>
-    <% end %>
-    <span class="info">
-        <%= link_to_source source, :class => 'title' %>
-        <span class="description">
-          <%= if source.description.nil? or source.description.strip.empty?
-                '<em>No description :/</em>'.html_safe
-              else
-                truncate source.description, :length => desc_cut
-              end
-          %>
-        </span>
-        <span class="meta">
-            Posted into <%= link_to_language source.language, :class => 'language' %>
-          <span class="date">
-            &bull;
-            <% if show_views %>
-                <%= source.views %> views &bull;
-            <% end %>
-
-            <%= time_ago_in_words( Time.at(source.created_at) ) %> ago
-          </span>
-
-            &bull;
-
-            <% if signed_in? %>
-              <% if @current_user.favorite?(source) %>
-                <%= link_icon_to 'Unfav', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", method: :post, remote: true  %>
-              <% else %>
-                <%= link_icon_to 'Fav It!', 'thumbs-up', favorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", method: :post, remote: true  %>
-              <% end %>
+      </td>
+      <td class="meta">
+        Posted by <%= link_to truncate( source.user.username, :length => 10 ), user_profile_path(username:source.user.username) %><br/> 
+        As <%= link_to_language source.language, :class => 'language' %> code.<br/>
+        <%= time_ago_in_words( Time.at(source.created_at) ) %> ago
+      </td>
+      <% unless controller.controller_name == 'profile' and controller.action_name == 'show' %>
+        <td class="actions">
+          <% if signed_in? %>
+            <% if @current_user.favorite?(source) %>
+              <%= link_icon_to 'Unfav', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", method: :post, remote: true  %>
             <% else %>
-                <%= link_icon_to_function 'Fav It!', 'thumbs-up', 'showLoginModal()' %>
+              <%= link_icon_to 'Fav It!', 'thumbs-up', favorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", method: :post, remote: true  %>
             <% end %>
-        </span>
-    </span>
+          <% else %>
+            <%= link_icon_to_function 'Fav It!', 'thumbs-up', 'showLoginModal()' %>
+          <% end %>
+          <br/>
+          <i class="icon-eye-open"></i> <%= source.views %>
+        </td>
+      <% end %>
+    </tr>
+  </table>
 </div>
 </li>
 <% end %>

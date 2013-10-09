@@ -9,11 +9,13 @@
 
 <section id="ruler">
   <div class="inner">
-    <div class="big-column">
-      <h3>Recent</h3>
-    </div>
-    <div class="big-column">
-      <h3>Trending</h3>
+    <div class="tabber">
+      <h3 class="tab">
+        <%= link_to 'Trending', root_path, :class => current_page?(root_url) ? 'current' : '' %>
+      </h3>
+      <h3 class="tab">
+        <%= link_to 'New', recent_snippets_path, :class => current_page?(root_url) ? '' : 'current' %>
+      </h3>
     </div>
     <div class="small-column">
       <h3>Latest Users</h3>

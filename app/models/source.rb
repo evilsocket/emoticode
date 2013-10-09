@@ -4,8 +4,7 @@ class Source < ActiveRecord::Base
   has_many   :links
   has_many   :tags, :through => :links
   has_many   :comments, -> { where :commentable_type => Comment::COMMENTABLE_TYPES[:source] }, :foreign_key => :commentable_id
-  
-
+   
   default_scope -> { order('created_at DESC') }
 
   scope :public,     -> { where( :private => false ) }

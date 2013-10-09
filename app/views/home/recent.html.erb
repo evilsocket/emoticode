@@ -1,6 +1,6 @@
 <section id="home">
   <ul class="listing">
-    <%= render :partial => "source/listing", :collection => @popular, :as => 'source' %>
+    <%= render :partial => "source/listing", :collection => @recent, :as => 'source' %>
   </ul>
   <%= render :partial => 'layouts/sidebar', :locals => { with_heading: false } %>
 </section>
@@ -8,5 +8,6 @@
 <br style="clear:both"/>
 
 <section class="pager">
-  <%= will_paginate @popular %>
+  <%= will_paginate @recent %>
 </section>
+

@@ -5,7 +5,7 @@ class ProfileController < ApplicationController
 
   def show
     @user    = User.find_by_username!( params[:username] )
-    @sources = @user.sources.where( :private => false ).paginate(:page => params[:page], :per_page => 5 )
+    @sources = @user.sources.where( :private => false ).paginate(:page => params[:page], :per_page => 8 )
     @comment = Comment.new
   end
 

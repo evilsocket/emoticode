@@ -2,7 +2,7 @@
   <div class="huge-column">
     <h1><%= paged "Search for '#{@phrase}'" %></h1>
     <% if @sources.any? %>
-    <ul>
+    <ul class="listing">
       <%= render :partial => "source/listing", :collection => @sources, :as => 'source', :locals => { :desc_cut => 300, :show_views => true } %>
     </ul>
     <% else %>

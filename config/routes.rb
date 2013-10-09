@@ -1,6 +1,10 @@
 EmoticodeRails::Application.routes.draw do
   root 'home#index'
 
+  controller :home do
+    get 'new' => :recent, as: :recent_snippets
+  end
+
   controller :sitemaps do
     get 'sitemap_index'          => :index,     as: :sitemap_index
     get 'sitemap_snippets-:page' => :snippets,  as: :sitemap_snippets, constraints: { page: Patterns::ID_PATTERN }

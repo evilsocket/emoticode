@@ -458,52 +458,114 @@ div.huge-column {
     }
 }
 
-div.source {
-    height: 75px;
-    margin-bottom: 5px;
+ul.listing {
+    margin: 0;
+    padding: 0;
+}
 
-    span.author {
+li.source_container {
+    position: relative;
+    width: 19%;
+    padding: 2%;
+    margin: 1%;
+    height: 255px;
+    float: left;
+    background: #fff;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px 0px;
+    border-radius: 3px;
+
+    h4 {
+        color: #343131;
         display: block;
-        float: left;
-        width: 70px;
-        height: 75px;
-        text-align: center;
-        font-size: 11px;
-        margin-right: 5px;
+        overflow: hidden;
+        font-weight: 500;
+        font-size: 15px;
+        margin-top: -5px;
 
-        figure.avatar {
-            display: block;
-            margin: 0 auto 5px auto;
+        a.title {
+            color: #343131;        
         }
 
-        a {
-            color: #333;
+        a:hover, a:focus {
+            text-decoration: none;
         }
     }
 
+    div.description {
+        font-size: 12px;
+        text-align: justify;
+        width: 99%;
+        overflow: hidden;
+    }
 
-    span.info {
-        vertical-align: middle;
-        display: table-cell;
+    div.footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 92%;
+        height: 40px;
+        border-top: 1px solid #e7e7e7;
+        padding: 10px;
+        font-size: 11px;
+
+        td.avatar {
+            width: 45px;
+        }
+
+        td.meta {
+            width: 125px;
+        }
+    }
+
+    div.source {
         height: 75px;
+        margin-bottom: 5px;
 
-        a.title {
-            font-size: 12px;
-            margin-top: -10px;
+        span.author {
             display: block;
-        }
-
-        span.description {
-            display: block;
+            float: left;
+            width: 70px;
+            height: 75px;
+            text-align: center;
             font-size: 11px;
+            margin-right: 5px;
+
+            figure.avatar {
+                display: block;
+                margin: 0 auto 5px auto;
+            }
+
+            a {
+                color: #333;
+            }
         }
 
-        span.meta {
-            font-size: 10px;
-            width: 100%;
 
-            span.date {
+        span.info {
+            vertical-align: middle;
+            display: table-cell;
+            height: 75px;
 
+            a.title {
+                font-size: 12px;
+                margin-top: -10px;
+                display: block;
+            }
+
+            span.description {
+                display: block;
+                font-size: 11px;
+            }
+
+            span.meta {
+                font-size: 10px;
+                width: 100%;
+
+                span.date {
+
+                }
             }
         }
     }
@@ -512,7 +574,7 @@ div.source {
 body {
     margin:0;
     padding:0;
-    background: white;
+    background: #f8f8f8;
     color: #888;
     font-weight: 300;
     font-size: 14px;
