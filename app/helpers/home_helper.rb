@@ -1,5 +1,5 @@
 module HomeHelper
   def page_title
-    "#{super} | #{controller.action_name.capitalize}"
+    paged "#{super} | #{controller.action_name.capitalize}"
   end
 end

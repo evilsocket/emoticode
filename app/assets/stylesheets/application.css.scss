@@ -475,7 +475,32 @@ li.source_container {
     border-bottom-right-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px 0px;
     border-radius: 3px;
+    overflow: hidden;
 
+    div.bg {
+        position: absolute;
+        top: 30%;
+        left: 30px;
+        bottom: 0;
+        right: 0;
+        overflow: hidden;
+        font-size: 60px;
+        opacity: 0.04;
+        text-align: center;
+        font-weight: 900;
+        -webkit-transform: rotate(-15deg);
+        -moz-transform: rotate(-15deg);
+    }
+
+    div.bg.ruby { color: red; }
+    div.bg.rails { color: red; }    
+    div.bg.jquery { color: #0769AD; }
+    div.bg.python { color: green; }
+    div.bg.javascript { color: orange; }
+    div.bg.php { color: #9999cc }
+    div.bg.c { color: blue }
+    div.bg.c-plus-plus { color: blue }
+     
     h4 {
         color: #343131;
         display: block;
