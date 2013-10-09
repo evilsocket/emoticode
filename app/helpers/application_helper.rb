@@ -10,7 +10,7 @@ module ApplicationHelper
     Event::TYPES[:registered]       => 'user',
     Event::TYPES[:sent_nth_content] => 'file-text',
     Event::TYPES[:commented]        => 'comments',
-    Event::TYPES[:logged_in]        => 'user',
+    Event::TYPES[:logged_in]        => 'ok-circle',
     Event::TYPES[:views_reached]    => 'eye-open' 
   }
 
