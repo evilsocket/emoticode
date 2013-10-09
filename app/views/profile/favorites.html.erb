@@ -3,7 +3,7 @@
     <h1>Your Favourite Snippets</h1>
     <ul class="listing">
       <% @favorites.each do |favorite| %>
-        <%= render :partial => "source/listing", :locals => { :source => favorite.source, :desc_cut => 300, :show_views => true } %>
+        <%= render :partial => "source/listing", :locals => { :source => favorite.source } %>
       <% end %>
     </ul>
   </div>

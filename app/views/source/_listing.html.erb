@@ -1,17 +1,11 @@
-<%
-  show_views  = false if local_assigns[:show_views].nil?
-  desc_cut    = 100 if local_assigns[:desc_cut].nil?
-  with_author = true if local_assigns[:with_author].nil?
-%>
-
-<% cache_expire_if( !signed_in?, "source_listing_#{show_views}_#{desc_cut}_#{with_author}_#{source.id}", 1.hour ) do %>
+<% cache_expire_if( !signed_in?, "source_listing_#{source.id}", 1.hour ) do %>
 <li class="source_container">
 <h4><%= link_to_source source, :class => 'title' %></h4>
 <div class="description">
   <%= if source.description.nil? or source.description.strip.empty?
     '<em>No description :/</em>'.html_safe
     else
-      truncate source.description, :length => desc_cut
+      truncate source.description, :length => 290
     end
   %>
 </div>
