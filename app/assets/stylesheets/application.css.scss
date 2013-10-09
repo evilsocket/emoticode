@@ -369,11 +369,15 @@ ul.connect {
             float: left;
             width: 100%;
 
-            i {
+            div.icon {
+                width: 20px;
                 font-size: 27px;
-                margin-right: 3px;
                 float:left;
                 color: #ccc;
+            }
+            div.content {
+                width: 210px;
+                float:right;
             }
         }
 

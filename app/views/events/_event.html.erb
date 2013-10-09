@@ -1,6 +1,11 @@
 <li>
-  <%= link_to event.owner.username, user_profile_path(username:event.owner.username) %>
-  <%= render :partial => "events/#{event.type_string}", :locals => { event: event } %>  
-  <br/>
-  <span class="when"><%= time_ago_in_words event.created_at %> ago</span>
+  <div class="icon">
+    <%= event_icon(event) %>
+  </div>
+  <div class="content">
+    <%= link_to event.owner.username, user_profile_path(username:event.owner.username) %>
+    <%= render :partial => "events/#{event.type_string}", :locals => { event: event } %>  
+    <br/>
+    <span class="when"><%= time_ago_in_words event.created_at %> ago</span>
+  </div>
 </li>

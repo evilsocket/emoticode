@@ -5,6 +5,15 @@ module ApplicationHelper
   include SeoHelper
   include LinkHelper
 
+  EVENT_ICONS = {
+    Event::TYPES[:favorited]        => 'thumbs-up',
+    Event::TYPES[:registered]       => 'user',
+    Event::TYPES[:sent_nth_content] => 'file-text',
+    Event::TYPES[:commented]        => 'comments',
+    Event::TYPES[:logged_in]        => 'user',
+    Event::TYPES[:views_reached]    => 'eye-open' 
+  }
+
   def page_title
     paged "emoticode - Snippets and Source Code Search Engine"
   end
@@ -60,6 +69,10 @@ module ApplicationHelper
         yield
       end
     end
+  end
+
+  def event_icon(event)
+    "<i class=\"icon-#{EVENT_ICONS[event.eventable_type]}\"></i>".html_safe
   end
 
   def tag_cloud( tags, min_size = 9, max_size = 20 )
