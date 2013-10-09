@@ -50,12 +50,14 @@ ul.avatars {
     div.motto {
         margin-top: 90px;
         font-size: 50px;
+        text-shadow: #37383a 0 2px;
     }
 
     div.submotto {
         font-size: 20px;
-        color: $gradient_to + 130;
         margin-bottom: 50px;
+        color: #bbb;
+        text-shadow: #37383a 0 2px;
     }
 
     form {

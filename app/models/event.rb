@@ -68,11 +68,15 @@ class Event < ActiveRecord::Base
   end
 
   def self.new_login(user)
-    Event.create({
-      owner: user,
-      eventable_type: TYPES[:logged_in],
-      eventable_id: user.id      
-    })
+    previous = Event.find_last_by_user_id_and_eventable_type( user.id, TYPES[:logged_in] )
+    # save only login events for a given user every 8 hours
+    if previous.nil? or ( Time.now - previous.created_at ) >= 28800
+      Event.create({
+        owner: user,
+        eventable_type: TYPES[:logged_in],
+        eventable_id: user.id      
+      })
+    end
   end
 
   def self.new_views_reached(source,views)
