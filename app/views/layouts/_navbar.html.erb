@@ -8,9 +8,9 @@
       <div id="hiddenmenu" style="display: none;">
         <a class="important orange" href="http://feeds.feedburner.com/emoticode" title="RSS Feed" target="_blank"><i class="icon-rss"></i></a>
         <div id="showalllangs" style="display: inline;">
-          <a class="important" href="#" title="Browse all Languages">Browse <i class="icon-sort-down"></i></a>
+          <a class="important red" href="#" title="Browse all Languages">Browse <i class="icon-sort-down"></i></a>
           <div id="alllangs" style="display: none;">
-              test
+            <%= render :partial => "layouts/language_browser" %>
           </div>
         </div>
       </div>
@@ -45,28 +45,7 @@
     <li id="browse_langs">
       <a href="#" onclick="return false">Browse Languages <i class="icon-sort-down"></i></a>
       <div id="all_langs" style="display:none;">
-        <% cache( 'languages_menu', :expires_in => 1.day ) do %>
-          <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-              <% done = 0 %>
-              <% @languages.each_with_index do |language,i| %>
-                  <% done += 1 %>
-                  <td>
-                      <%= link_to_language language %>
-                      <span><%= language.sources_count %></span>
-                  </td>
-                  <% if i > 0 && ( i + 1 ) % 4 == 0 %>
-                      </tr>
-                  <% end %>
-              <% end %>
-              <% left = ( done % 4 )
-              if left
-                ( 4 - left ).times { %><td></td><% }
-                %> </tr> <%
-              end
-              %>
-          </table>
-        <% end %>
+        <%= render :partial => "layouts/language_browser" %>
       </div>
     </li>
     <% unless signed_in? %>

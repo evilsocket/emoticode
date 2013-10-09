@@ -87,6 +87,14 @@
             a.blue:hover {
                 background-color: #0078e7;
             }
+
+            a.red:hover {
+              background-color: #aa4643;
+            }
+
+            a.orange:hover {
+              background-color: orange;
+            }
         }
     }
 }
@@ -131,7 +139,7 @@
 #hiddenmenu {
   display: none;
   float:left;
-  margin-right:35px;
+  margin-right:5px;
 }
 
 #usermenu {
@@ -144,6 +152,34 @@
 
 #alllangs {
   display: none;
+  z-index: 99999;
+  margin-top: 4px;
+  width: 500px !important;
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  font-size: 11px;
+  background-color: rgb(55, 56, 58);
+  border: 1px solid rgb(49, 50, 51);
+  padding: 10px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+
+  a {
+      margin: 0;
+      padding: 0;
+      float: left;
+      font-size: 12px;
+  }
+
+  span {
+      float: right;
+      margin-right: 5px;
+      color: #CCC;
+  }
 }
 
 #subnav {
