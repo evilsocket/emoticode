@@ -1,7 +1,7 @@
 @import "variables";
 
 #topnav {
-    z-index: 99999;    
+    z-index: 99999;
     position: fixed;
     top: 0;
     left: 0;
@@ -80,7 +80,7 @@
                 transition: all ease-in-out 0.1s;
             }
 
-            a.important:hover { 
+            a.important:hover {
                 background-color: $gradient_to;
             }
 
@@ -126,16 +126,16 @@
             margin-bottom: 10px;
         }
     }
-}   
+}
 
 #subnav {
     margin-top: 59px;
     width: 100%;
     height: 25px;
     box-shadow: inset 0px 1px 0px 0px rgba(0,0,0,0.05),inset 0px 2px 3px 0px rgba(0,0,0,0.1);
-    background: white;
+    background: #32a266;
     width: 100%;
-    border-bottom: 1px solid #DDDDDD;
+    border-bottom: 1px solid #10693A;
 
     ul {
         margin: 0 auto;
@@ -152,7 +152,8 @@
             font-size: 13px;
 
             a {
-                color: #333;
+                color: white;
+                text-shadow: #10693A 0 1px;
             }
 
             a:hover {
@@ -173,18 +174,18 @@
     min-width: 500px;
     margin-top: 4px;
     position: absolute;
-    background-color: white;
+    background-color: #32a266;
+    width: 100%;
     padding: 10px;
     font-size: 11px;
-    border-left: 1px solid #DDDDDD;
-    border-bottom: 1px solid #DDDDDD;
-    border-right: 1px solid #DDDDDD;
+    border-left: 1px solid #10693A;
+    border-bottom: 1px solid #10693A;
+    border-right: 1px solid #10693A;
 
     a {
         margin: 0;
         padding: 0;
         float: left;
-        color: #333 !important;
         font-size: 12px;
     }
 
