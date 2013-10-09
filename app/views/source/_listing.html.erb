@@ -1,6 +1,6 @@
 <% cache_expire_if( !signed_in?, "source_listing_#{source.id}", 1.hour ) do %>
 <li class="source_container">
-  <div class="bg <%= source.language.name %>"><%= source.language.title %></div>
+  <!-- <div class="bg <%= source.language.name %>"><%= source.language.title %></div> -->
   <h4><%= link_to_source source, :class => 'title' %></h4>
   <div class="description">
     <%= if source.description.nil? or source.description.strip.empty?
