@@ -107,7 +107,6 @@
     position: absolute;
     width: 200px;
     background-color: rgb(55, 56, 58);
-    border: 1px solid rgb(49, 50, 51);
     padding: 10px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -153,14 +152,12 @@
 #alllangs {
   display: none;
   z-index: 99999;
-  margin-top: 4px;
   width: 500px !important;
   position: absolute;
   width: 100%;
   padding: 10px;
   font-size: 11px;
   background-color: rgb(55, 56, 58);
-  border: 1px solid rgb(49, 50, 51);
   padding: 10px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -178,7 +175,7 @@
   span {
       float: right;
       margin-right: 5px;
-      color: #CCC;
+      color: #555;
   }
 }
 
