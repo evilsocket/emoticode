@@ -128,6 +128,24 @@
     }
 }
 
+#hiddenmenu {
+  display: none;
+  float:left;
+  margin-right:35px;
+}
+
+#usermenu {
+  float: right;
+}
+
+#showalllangs {
+  display: inline;
+}
+
+#alllangs {
+  display: none;
+}
+
 #subnav {
     margin-top: 59px;
     width: 100%;

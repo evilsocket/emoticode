@@ -4,25 +4,38 @@
       <a href="/" title="emoticode.net">emoticode.net</a>
     </li>
     <li class="user">
-      <% if signed_in? %>
-        <%= link_icon_to( 'Add a Snippet', 'plus', source_new_path, :class => 'important' ) %>
-        <div id="showcp">
-          <a href="#" onclick="return false;" class="important blue"><i class="icon-gear"></i></a>
-          <div id="cp" style="display:none">
-            <ul>
-              <li><%= link_to( 'Profile', user_profile_path(username: @current_user.username ) ) %></li>
-              <li><%= link_to( 'Settings',  user_settings_path ) %></li>
-              <li class="divider"></li>
-              <li><%= link_to( 'My Snippets', user_snippets_path ) %></li>
-              <li><%= link_to( 'My Favorites', user_favorites_path ) %></li>
-              <li class="divider"></li>
-              <li><%= link_to( 'Logout', sign_out_path, :method => :delete ) %></li>
-            </ul>
+
+      <div id="hiddenmenu" style="display: none;">
+        <a class="important orange" href="http://feeds.feedburner.com/emoticode" title="RSS Feed" target="_blank"><i class="icon-rss"></i></a>
+        <div id="showalllangs" style="display: inline;">
+          <a class="important" href="#" title="Browse all Languages">Browse <i class="icon-sort-down"></i></a>
+          <div id="alllangs" style="display: none;">
+              test
           </div>
         </div>
-      <% else %>
-        <%= link_to( 'Create a Profile', sign_up_path, :class => 'important' ) %> or <%= link_to( 'Login', sign_in_path ) %>
-      <% end %>
+      </div>
+
+      <div id="usermenu">
+        <% if signed_in? %>
+          <%= link_icon_to( 'Add a Snippet', 'plus', source_new_path, :class => 'important' ) %>
+          <div id="showcp">
+            <a href="#" onclick="return false;" class="important blue"><i class="icon-gear"></i></a>
+            <div id="cp" style="display:none">
+              <ul>
+                <li><%= link_to( 'Profile', user_profile_path(username: @current_user.username ) ) %></li>
+                <li><%= link_to( 'Settings',  user_settings_path ) %></li>
+                <li class="divider"></li>
+                <li><%= link_to( 'My Snippets', user_snippets_path ) %></li>
+                <li><%= link_to( 'My Favorites', user_favorites_path ) %></li>
+                <li class="divider"></li>
+                <li><%= link_to( 'Logout', sign_out_path, :method => :delete ) %></li>
+              </ul>
+            </div>
+          </div>
+        <% else %>
+          <%= link_to( 'Create a Profile', sign_up_path, :class => 'important' ) %> or <%= link_to( 'Login', sign_in_path ) %>
+        <% end %>
+      </div>
     </li>
   </ul>
 </nav>
@@ -58,7 +71,7 @@
     </li>
     <% unless signed_in? %>
     <li class="right">
-      Connect with 
+      Connect with
       <%= link_icon_to( 'Facebook', 'facebook', "/auth/facebook", { :title => "Login with your Facebook account.", :class => 'small_facebook_connect' }) %>
       <%= link_icon_to( 'GitHub', 'github', "/auth/github", { :title => "Login with your Github account.", :class => 'small_github_connect' }) %></li>
     <% end %>

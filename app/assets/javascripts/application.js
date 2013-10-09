@@ -15,10 +15,10 @@
 //= require_tree .
 
 $(document).ready(function($) {
-  $button = $('#showcp');
-  $menu = $('#cp');
+  var $button = $('#showcp');
+  var $menu = $('#cp');
 
-  $button.hover( 
+  $button.hover(
     function(){
       $menu.css( 'left', $button.offset().left - $menu.outerWidth() + $button.outerWidth() ).show();
     },
@@ -27,10 +27,22 @@ $(document).ready(function($) {
     }
   );
 
-  $lbutton = $('#browse_langs');
-  $lmenu = $('#all_langs');
+  var $tbutton = $('#showalllangs');
+  var $tmenu = $('#alllangs');
 
-  $lbutton.hover( 
+  $tbutton.hover(
+    function(){
+      $tmenu.css( 'left', $tbutton.offset().left - $tmenu.outerWidth() + $tbutton.outerWidth() ).show();
+    },
+    function(){
+      $tmenu.hide();
+    }
+  );
+
+  var $lbutton = $('#browse_langs');
+  var $lmenu = $('#all_langs');
+
+  $lbutton.hover(
     function(){
       $lmenu.show();
     },
@@ -38,14 +50,33 @@ $(document).ready(function($) {
       $lmenu.hide();
     }
   );
+
+  $(window).scroll( function()
+  {
+    var $elem = $('#subnav');
+    if( isScrolledIntoView( $elem ) )
+      $('#hiddenmenu').fadeOut('fast');
+    else
+      $('#hiddenmenu').fadeIn('fast');
+  });
 });
 
 function showLoginModal(){
-    $('#login').modal(); 
+    $('#login').modal();
 }
 
 function replyToComment( id, username ){
     $('#comments form #comment_parent_id').val(id);
     $('#comments form input[type="submit"]').val('Reply');
     $('#comments form textarea').attr( 'placeholder', 'Leave a reply to ' + username + ' ...' ).focus();
+}
+
+function isScrolledIntoView(elem){
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
+
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 }
