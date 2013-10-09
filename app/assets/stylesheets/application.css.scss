@@ -109,8 +109,8 @@ p.error {
 
 .small_github_connect {
   padding: 0px 5px;
-  color: #555;
-  text-shadow: 0 1px 0 #fff;
+  color: #555 !important;
+  text-shadow: 0 1px 0 #fff !important;
   background-color: #eaeaea;
   background-image: -moz-linear-gradient(#fafafa, #eaeaea);
   background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
