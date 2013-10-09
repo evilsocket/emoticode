@@ -8,7 +8,15 @@ end
 namespace :sources do
   desc "Update sources views using Analytics API"
   task update_views: :environment do
+    do_update Source.order('created_at DESC')
+  end
 
+  desc "Update latest 50 sources views using Analytics API"
+  task update_latest_views: :environment do
+    do_update Source.order('created_at DESC').limit(50)
+  end
+
+  def do_update(sources)
     Rails.logger.level = 1
     Rails.logger.info "********* GOOGLE ANALYTICS PAGE VIEWS UPDATER STARTED *********"
     Rails.logger.info "Logging into Analytics account ..."
@@ -22,7 +30,7 @@ namespace :sources do
 
     Rails.logger.info "Start updating."
 
-    Source.order('created_at DESC').find_each_with_order do |source|
+    sources.find_each_with_order do |source|
     	results = PageViews.results( profile, :filters => {
 	        :page_path.eql => source.path
 	      }, 
