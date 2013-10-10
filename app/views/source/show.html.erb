@@ -14,8 +14,20 @@
         <br/>
         <i class="icon-eye-open"></i> <%= @source.views %>
       </span>
+    </div>
 
-      <!--
+  </div>
+
+  <div class="medium-column">
+    <div class="headblock">
+      <h1><%= @source.title %></h1>
+      <center>
+        <%= adsense :slot => '2691371377', :width => 728, :height => 90 %>
+      </center>
+      <p class="description">
+        <%=raw description(@source) %>
+      </p>
+
       <ul class="buttons">
         <% if signed_in? %>
           <% if @current_user == @source.user or @current_user.is_admin? %>
@@ -48,21 +60,6 @@
           <%= link_icon_to_function "Embed", "expand", "$('#embed').modal();" %>
         </li>
       </ul>
-
-      -->
-    </div>
-
-  </div>
-
-  <div class="medium-column">
-    <div class="headblock">
-      <h1><%= @source.title %></h1>
-      <center>
-        <%= adsense :slot => '2691371377', :width => 728, :height => 90 %>
-      </center>
-      <p class="description">
-        <%=raw description(@source) %>
-      </p>
 
       <%=raw highlight(@source) %>
     </div>

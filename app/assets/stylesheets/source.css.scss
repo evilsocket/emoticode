@@ -78,38 +78,6 @@ div.medium-column {
           line-height: 20px;
         }
 
-        ul.buttons {
-            display: block;
-            margin: 15px 0;
-            padding: 0;
-            width: 100%;
-
-            li {
-                a {
-                    display: block;
-                    color: #333;
-                    font-size: 11px;
-                    padding: .5em 1.5em;
-                    color: #444;
-                    color: rgba(0,0,0,.8);
-
-                    text-decoration: none;
-                    -webkit-font-smoothing: antialiased;
-                    -webkit-transition: .1s linear -webkit-box-shadow;
-                    -moz-transition: .1s linear -moz-box-shadow;
-                    -ms-transition: .1s linear box-shadow;
-                    -o-transition: .1s linear box-shadow;
-                    transition: .1s linear box-shadow;
-                }
-
-                a:hover {
-                    text-decoration: none;
-                }
-
-                margin-bottom: 3px;
-            }
-        }
-
         #share {
             text-align: center;
             position: absolute;
@@ -123,6 +91,22 @@ div.medium-column {
             top: 0;
             margin-top: 60px;
         }
+    }
+
+    ul.buttons {
+      margin: 0;
+      padding: 5px 0 5px 0;
+      border-top: 2px dotted #eee;
+      width: 100%;
+
+      li {
+        float: right;
+        margin-right: 15px;
+
+        a {
+          color: #aaa;
+        }
+      }
     }
 
     div.highlight {
