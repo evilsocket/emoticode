@@ -19,7 +19,7 @@ class Comment < ActiveRecord::Base
   validate               :parent_null_or_exists
 
   before_save            :parse_content
-  
+
   # this is needed for nesting comments in ApplicationHelper
   def children
     @children ||= []
@@ -45,6 +45,9 @@ class Comment < ActiveRecord::Base
   def parse_content
     # trim, remove tags and encode entities
     self.content = sanitize( self.content.strip )
+    # replace newlines with brs and urls with anchors
+    self.content = self.content.gsub( /\n/, '<br/>' )
+                               .gsub( /(https?:\/\/[A-z0-9~@$%&*_\-\.+\/'=#\?]+)/i, '<a href="\1" target="_blank" rel="nofollow">\1</a>' )
     # replace valid @username with profile links :)
     self.content = self.content.gsub /\@([a-z0-9\-_\.]+)/i do |m|
       m[0] = '' # remove @
@@ -57,7 +60,7 @@ class Comment < ActiveRecord::Base
   end
 
   # custom validators
-  
+
   def commentable_exists
     begin
 
