@@ -327,6 +327,7 @@ ul.connect {
     width: 19%;
     float: right;
     margin-right: 0.4em;
+    color: #333;
 
     div.heading {
         border-bottom: 2px solid $gradient_to;
@@ -382,7 +383,7 @@ ul.connect {
         }
 
         span.when {
-            color: #ccc;
+            color: #aaa;
             font-size: 11px;
         }
     }
@@ -483,7 +484,7 @@ li.source_container {
         margin-top: -5px;
 
         a.title {
-            color: #343131;        
+            color: #343131;
         }
 
         a:hover, a:focus {
@@ -493,9 +494,9 @@ li.source_container {
 
     div.description {
         font-size: 12px;
-        text-align: justify;
         width: 99%;
         overflow: hidden;
+        color: #777;
     }
 
     div.footer {
@@ -572,7 +573,7 @@ li.source_container {
 body {
     margin:0;
     padding:0;
-    background: #f8f8f8;
+    background: #e8e8e8;
     color: #888;
     font-weight: 300;
     font-size: 14px;
