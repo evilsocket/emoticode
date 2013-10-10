@@ -70,6 +70,11 @@
         }
 
         ul {
+          li.source_container {
+            div.footer {
+              width:90%;
+            }
+          }
             margin: 0;
             padding: 0;
             display: block;
