@@ -503,11 +503,13 @@ li.source_container {
         position: absolute;
         bottom: 0;
         left: 0;
-        width: 92%;
+        width: 91.6%;
         height: 40px;
         border-top: 1px solid #e7e7e7;
         padding: 10px;
         font-size: 11px;
+        background: #f5f5f5;
+        box-shadow: inset 0px 1px 0px 0px rgba(0,0,0,0.05),inset 0px 2px 3px 0px rgba(0,0,0,0.07);
 
         td.avatar {
             width: 45px;
