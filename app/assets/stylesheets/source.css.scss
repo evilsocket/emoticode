@@ -116,6 +116,12 @@ div.medium-column {
     div.highlight {
         min-height: 500px;
     }
+
+    div.headblock {
+      h1 {
+        padding-top: 10px;
+      }
+    }
 }
 
 #source-create,
