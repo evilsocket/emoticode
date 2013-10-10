@@ -43,7 +43,11 @@ module SeoHelper
     }
     .merge(attrs)
 
-    title = lang_in_title ? "#{source.language.title} - #{source.title}" : source.title
+    title = if lang_in_title
+              "<strong>#{source.language.title}</strong> <span style=\"color: #bbb;\">&#8250;</span> #{source.title}".html_safe
+            else
+              source.title
+            end
 
     link_to title, source_with_language_url(language_name: source.language.name, source_name: source.name), attrs
   end
