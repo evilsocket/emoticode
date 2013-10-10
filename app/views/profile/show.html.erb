@@ -25,7 +25,6 @@
           <em>Nothing to see here :/</em>
         <% end %>
       </div>
-      <% cache( "profile_#{@user.id}_counters", :expires_in => 1.hour ) do %>       
         <ul class="icons">
           <li>
             <%= link_icon_to 'Feed', 'rss', user_feed_path(:username=>@user.username), :title => "#{@user.username} RSS feed." %>
@@ -56,7 +55,6 @@
             </span>
           </li>
         </ul>
-      <% end %>
     </div>
 
     <div id="sources">
