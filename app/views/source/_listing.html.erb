@@ -5,7 +5,7 @@
     <%= if source.description.nil? or source.description.strip.empty?
       '<em>No description :/</em>'.html_safe
       else
-        truncate source.description, :length => 290
+        truncate source.description, :length => 250
       end
     %>
   </div>
