@@ -9,13 +9,12 @@
       </span>
 
       <span class="info">
-        Posted into <%= link_to_language @source.language, :class => 'language' %>
+        <i class="icon-quote-left"></i> <%= link_to_language @source.language, :class => 'language' %> <i class="icon-quote-right"></i>
         <br/>
-        <%= time_ago_in_words( Time.at(@source.created_at) ) %> ago
-        <br/>
-        <%= @source.views %> views
+        <i class="icon-eye-open"></i> <%= @source.views %>
       </span>
 
+      <!--
       <ul class="buttons">
         <% if signed_in? %>
           <% if @current_user == @source.user or @current_user.is_admin? %>
@@ -48,6 +47,8 @@
           <%= link_icon_to_function "Embed", "expand", "$('#embed').modal();" %>
         </li>
       </ul>
+
+      -->
     </div>
 
   </div>
