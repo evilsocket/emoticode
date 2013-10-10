@@ -40,27 +40,29 @@
           <br/>
           <br/>
           <% if @user.is_banned? %>
-            <%= link_icon_to 'Unban', 'ban-circle', user_unban_path(@user), :class => 'pure-button pure-button-green', :style => 'width: 60%', :data => { :confirm => 'Are you sure?' } %>               
+            <%= link_icon_to 'Unban', 'ban-circle', user_unban_path(@user), :class => 'pure-button pure-button-green', :style => 'width: 60%', :data => { :confirm => 'Are you sure?' } %>
           <% else %>
-            <%= link_icon_to 'Ban', 'ban-circle', user_ban_path(@user), :class => 'pure-button pure-button-blue', :style => 'width: 60%', :data => { :confirm => 'Are you sure?' } %>   
+            <%= link_icon_to 'Ban', 'ban-circle', user_ban_path(@user), :class => 'pure-button pure-button-blue', :style => 'width: 60%', :data => { :confirm => 'Are you sure?' } %>
           <% end %>
         </center>
       <% end %>
     </div>
-  </div>  
+  </div>
 
   <div class="medium-column">
-    <h1><%= paged @user.username %></h1>
-    <p>
-      <% unless @user.profile.aboutme.nil? or @user.profile.aboutme.empty? %>
-        <%= @user.profile.aboutme %>
-      <% else %>
-        <em>Nothing to see here :/</em>
+    <div class="headblock">
+      <h1><%= paged @user.username %></h1>
+      <p>
+        <% unless @user.profile.aboutme.nil? or @user.profile.aboutme.empty? %>
+          <%= @user.profile.aboutme %>
+        <% else %>
+          <em>Nothing to see here :/</em>
+        <% end %>
+      </p>
+      <% unless @user.profile.website.nil? or @user.profile.website.strip.empty? %>
+        <p><%= link_to @user.profile.website, @user.profile.website, :target => '_blank', :rel => 'nofollow' %></p>
       <% end %>
-    </p>  
-    <% unless @user.profile.website.nil? or @user.profile.website.strip.empty? %>
-      <p><%= link_to @user.profile.website, @user.profile.website, :target => '_blank', :rel => 'nofollow' %></p>
-    <% end %>
+    </div>
 
     <div id="sources">
       <h2><i class="icon-file"></i> Public Sources</h2>
@@ -98,7 +100,7 @@
             <%= link_to_function star.html_safe, "$('#submit_#{n}').click(); return false;" %>
           <% end %>
           <% else %>
-            <%= link_to_function star.html_safe, 'showLoginModal()' %>            
+            <%= link_to_function star.html_safe, 'showLoginModal()' %>
           <% end %>
         <% end %>
       </div>
@@ -107,10 +109,10 @@
     <% if signed_in? and @user == @current_user %>
       <div class="heading">
         <h3>Get Your Badge!</h3>
-      </div>        
-      
+      </div>
+
       <span class="badge">
-       <%= link_to_function "Show Embed Code", "$('#badge').modal();" %> 
+       <%= link_to_function "Show Embed Code", "$('#badge').modal();" %>
       </span>
       <%= modal_dialog 'badge', 'Get Your Badge!' do %>
         <textarea><iframe src="<%= user_badge_url(:username => @user.username) %>" height="350" frameborder="0" ></iframe></textarea>
@@ -119,7 +121,7 @@
     <% end %>
 
     <div class="heading orange">
-      <h3>Languages</h3>  
+      <h3>Languages</h3>
     </div>
     <div class="languages">
       <% stats = @user.language_statistics %>
@@ -140,6 +142,6 @@
       <% end %>
     </div>
 
-  </div>   
-  
+  </div>
+
 </section>
