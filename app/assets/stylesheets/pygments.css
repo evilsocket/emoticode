@@ -1,10 +1,8 @@
 .highlight {
-    font-size: 12px;
-    padding: 1em 1.5em;
-    background: #fff;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    box-shadow: rgba(0,0,0,0.15) 0px 1px 3px 0px;
+  font-size: 12px;
+  background: #fff;
+  border-top: 2px dotted #eee;
+  padding: 10px;
 }
 
 .highlight .hll { background-color: #ffffcc }

@@ -58,9 +58,12 @@
       <center>
         <%= adsense :slot => '2691371377', :width => 728, :height => 90 %>
       </center>
-      <p class="description"><%=raw description(@source) %></p>
+      <p class="description">
+        <%=raw description(@source) %>
+      </p>
+
+      <%=raw highlight(@source) %>
     </div>
-    <%=raw highlight(@source) %>
 
     <%= render :partial => 'comments/box', :locals => { object: @source } %>
   </div>
