@@ -17,7 +17,6 @@
             </li>
         </ul>
       <% end %>
-
       </h1>
       <div class="aboutme">
         <% unless @user.profile.aboutme.nil? or @user.profile.aboutme.empty? %>
@@ -26,36 +25,38 @@
           <em>Nothing to see here :/</em>
         <% end %>
       </div>
-      <ul class="icons">
-        <li>
-          <%= link_icon_to 'Feed', 'rss', user_feed_path(:username=>@user.username), :title => "#{@user.username} RSS feed." %>
-        </li>        
-        <% unless @user.profile.website.nil? or @user.profile.website.strip.empty? %>
+      <% cache( "profile_#{@user.id}_counters", :expires_in => 1.hour ) do %>       
+        <ul class="icons">
           <li>
-            <%= link_icon_to 'Website', 'globe', @user.profile.website, :target => '_blank', :rel => 'nofollow' %>
+            <%= link_icon_to 'Feed', 'rss', user_feed_path(:username=>@user.username), :title => "#{@user.username} RSS feed." %>
+          </li>        
+          <% unless @user.profile.website.nil? or @user.profile.website.strip.empty? %>
+            <li>
+              <%= link_icon_to 'Website', 'globe', @user.profile.website, :target => '_blank', :rel => 'nofollow' %>
+            </li>
+          <% end %>
+          <% @user.authorizations.each do |auth| %>
+            <li>
+              <%= link_icon_to auth.provider.capitalize, auth.provider, auth.url, :target => '_blank', :title => "Visit #{@user.username} #{auth.provider.capitalize} profile." %>
+            </li>
+          <% end %>
+          <% unless @user.profile.gplus.nil? or @user.profile.gplus.strip.empty? %>
+            <li>
+             <%= link_icon_to 'Google+', 'google-plus', "#{@user.profile.gplus}?rel=author", :title => "Visit #{@user.username} Google+ profile." %>
+            </li>
+          <% end %>
+          <li class="r">
+            <span>
+              <i class="icon-eye-open"></i> <%= @user.sources.sum :views %>
+            </span>
+          </li>        
+          <li class="r">
+            <span>
+              <i class="icon-file-text"></i> <%= @user.sources.count %>
+            </span>
           </li>
-        <% end %>
-        <% @user.authorizations.each do |auth| %>
-          <li>
-            <%= link_icon_to auth.provider.capitalize, auth.provider, auth.url, :target => '_blank', :title => "Visit #{@user.username} #{auth.provider.capitalize} profile." %>
-          </li>
-        <% end %>
-        <% unless @user.profile.gplus.nil? or @user.profile.gplus.strip.empty? %>
-          <li>
-           <%= link_icon_to 'Google+', 'google-plus', "#{@user.profile.gplus}?rel=author", :title => "Visit #{@user.username} Google+ profile." %>
-          </li>
-        <% end %>
-        <li class="r">
-          <span>
-            <i class="icon-eye-open"></i> <%= @user.sources.sum :views %>
-          </span>
-        </li>        
-        <li class="r">
-          <span>
-            <i class="icon-file-text"></i> <%= @user.sources.count %>
-          </span>
-        </li>
-      </ul>
+        </ul>
+      <% end %>
     </div>
 
     <div id="sources">
@@ -105,7 +106,7 @@
       </div>
 
       <span class="badge">
-       <%= link_to_function "Show Embed Code", "$('#badge').modal();" %>
+        <%= link_to_function "Show Embed Code", "$('#badge').modal();", :class => 'pure-button pure-button-green' %>
       </span>
       <%= modal_dialog 'badge', 'Get Your Badge!' do %>
         <textarea><iframe src="<%= user_badge_url(:username => @user.username) %>" height="350" frameborder="0" ></iframe></textarea>
