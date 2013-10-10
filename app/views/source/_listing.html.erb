@@ -1,6 +1,6 @@
 <% cache_expire_if( !signed_in?, "source_listing_#{source.id}", 1.hour ) do %>
 <li class="source_container">
-  <h4><%= link_to_source source, :class => 'title' %></h4>
+  <h4><%= link_to_source source, { :class => 'title' }, true %></h4>
   <div class="description">
     <%= if source.description.nil? or source.description.strip.empty?
       '<em>No description :/</em>'.html_safe
@@ -18,7 +18,7 @@
           </a>
         </td>
         <td class="meta">
-          Posted by <%= link_to truncate( source.user.username, :length => 10 ), user_profile_path(username:source.user.username) %><br/> 
+          Posted by <%= link_to truncate( source.user.username, :length => 10 ), user_profile_path(username:source.user.username) %><br/>
           As <%= link_to_language source.language, :class => 'language' %> code.<br/>
           <%= time_ago_in_words( Time.at(source.created_at) ) %> ago
         </td>

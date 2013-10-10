@@ -24,7 +24,7 @@ module SeoHelper
   def make_seo
     seo = self.default_seo
 
-    # let the caller put custom data 
+    # let the caller put custom data
     yield seo
 
     # return compiled list of meta tags
@@ -37,20 +37,22 @@ module SeoHelper
     ] + seo.metas
   end
 
-  def link_to_source(source, attrs = {})
-    attrs =  { 
-      :title => "#{source.language.title} - #{source.title}" 
+  def link_to_source(source, attrs = {}, lang_in_title = false)
+    attrs =  {
+      :title => "#{source.language.title} - #{source.title}"
     }
-    .merge(attrs) 
+    .merge(attrs)
 
-    link_to source.title, source_with_language_url(language_name: source.language.name, source_name: source.name), attrs
+    title = lang_in_title ? "#{source.language.title} - #{source.title}" : source.title
+
+    link_to title, source_with_language_url(language_name: source.language.name, source_name: source.name), attrs
   end
 
   def link_to_language(language, attrs = {})
-    attrs =  { 
-      :title => "#{language.title} code snippets." 
+    attrs =  {
+      :title => "#{language.title} code snippets."
     }
-    .merge(attrs) 
+    .merge(attrs)
 
     link_to language.title, language_archive_url(language.name), attrs
   end
