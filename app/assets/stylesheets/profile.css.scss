@@ -15,47 +15,71 @@
 }
 
 #profile {
-    #publisher {
-        margin: 20px 10px 0;
-        background: #fff;
-        border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px;
-        box-shadow: rgba(0,0,0,0.15) 0px 1px 3px 0px;
-        border-radius: 3px;
-        padding: 5px;
+    #userpanel {
+        padding: 0 10px 5px 10px;
 
-        span.user {
-            display: block;
-            text-align: center;
+        h1 {
+            background-color: #37383a;
+            border: 1px solid #313233;
+
+            color: #fefefe;
+            padding: 5px;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            font-weight: 800;
+            padding-left: 15px;
+
+            ul.admin {
+                margin: 0;
+                padding: 0;
+                float: right;
+
+                li {
+                    float: left;
+                    margin-right: 5px;
+                    font-size: 11px;
+                }
+            }
+        }
+
+        div.aboutme {
+            background-color: #545659;
+            color: #fefefe;
+            padding: 20px;
+            margin-top: 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid rgb(46, 47, 49);
+        }
+
+        ul.icons {
+            background-color: #727479;
+            border-color: #707070;
+            padding: 10px 20px;
+            height: 20px;
+            margin-top: 0;
+            border-top: 1px solid rgb(112, 112, 112);
+            box-shadow: inset 0px 1px 0px 0px rgba(0, 0, 0, 0.05), inset 0px 2px 3px 0px rgba(0, 0, 0, 0.07);
+            text-transform: uppercase;
             font-size: 12px;
 
-            figure.avatar {
-                display: block;
-                margin: 0 auto 5px auto;
+            li {
+                float: left;
+                margin-right: 20px;
+                padding-top: 2px;
+                
+                a, span {
+                    color: #FEFEFF;
+                }
             }
 
-            a {
-                color: #333;
-            }
-        }
+            li.r {
+                float: right;
+                margin-right: 0;
+                margin-left: 20px;
 
-        span.info {
-            display: block;
-            width: 100%;
-            margin-top: 10px;
-            text-align: center;
-            font-size: 11px;
-        }
-
-        span.auths {
-            display: block;
-            width: 100%;
-            margin-top: 5px;
-            text-align: center;
-            font-size: 11px;
-
-            img {
-                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+                a, span {
+                    color: #727479 + 70;
+                }
             }
         }
     }
@@ -70,18 +94,8 @@
         }
 
         ul {
-          li.source_container {
-            div.footer {
-              width:90%;
-            }
-          }
             margin: 0;
             padding: 0;
-            display: block;
-
-            div.source {
-                height: 55px;
-            }
         }
     }
 

@@ -1,71 +1,64 @@
 <section id="profile">
-  <div class="small-column">
-    <div id="publisher">
-      <span class="user">
-        <%= avatar_tag @user %>
-      </a>
-      </span>
-      <span class="info">
-        <% if @user.created_at.nil? or @user.created_at == 0 %>
-          Registered from day one<br/>
-        <% else %>
-          Registered <%= time_ago_in_words( Time.at(@user.created_at) ) %> ago<br/>
-        <% end %>
-        <% if @user.last_seen_at.nil? %>
-          Never logged in :(<br/>
-        <% else %>
-          Logged <%= time_ago_in_words( Time.at(@user.last_seen_at) ) %> ago<br/>
-        <% end %>
-        Published <%= @user.sources.count %> <%= 'source'.pluralize( @user.sources.count ) %>
-        <% if @user.is_banned? %>
-          <p style="color: red;">
-            <strong>- BANNED -</strong>
-          </p>
-        <% end %>
-      </span>
-      <span class="auths">
-        <%= link_to image_tag("icons/rss-s.png"), user_feed_path(:username=>@user.username), :title => "#{@user.username} RSS feed." %>
-        <% @user.authorizations.each do |auth| %>
-          <%= link_to image_tag("icons/#{auth.provider}-s.png"), auth.url, :target => '_blank', :title => "Visit #{@user.username} #{auth.provider.capitalize} profile." %>
-        <% end %>
-        <% unless @user.profile.gplus.nil? or @user.profile.gplus.strip.empty? %>
-          <%= link_to image_tag("icons/googleplus-s.png"), "#{@user.profile.gplus}?rel=author", :title => "Visit #{@user.username} Google+ profile." %>
-        <% end %>
-      </span>
-
-      <% if signed_in? and @current_user.is_admin? %>
-        <br/>
-        <center>
-          <%= link_icon_to 'Delete', 'trash', user_delete_path(@user), :class => 'pure-button pure-button-red', :style => 'width: 60%', :data => { :confirm => 'Are you sure?' } %>
-          <br/>
-          <br/>
-          <% if @user.is_banned? %>
-            <%= link_icon_to 'Unban', 'ban-circle', user_unban_path(@user), :class => 'pure-button pure-button-green', :style => 'width: 60%', :data => { :confirm => 'Are you sure?' } %>
-          <% else %>
-            <%= link_icon_to 'Ban', 'ban-circle', user_ban_path(@user), :class => 'pure-button pure-button-blue', :style => 'width: 60%', :data => { :confirm => 'Are you sure?' } %>
-          <% end %>
-        </center>
+  <div class="huge-column">
+    <div id="userpanel">
+      <h1>
+        <%= paged @user.username %>
+        <% if signed_in? and @current_user.is_admin? %>
+          <ul class="admin">
+            <li>
+              <%= link_icon_to 'Delete', 'trash', user_delete_path(@user), :class => 'pure-button pure-button-red', :data => { :confirm => 'Are you sure?' } %>
+            </li>
+            <li>
+              <% if @user.is_banned? %>
+                <%= link_icon_to 'Unban', 'ban-circle', user_unban_path(@user), :class => 'pure-button pure-button-green', :data => { :confirm => 'Are you sure?' } %>
+              <% else %>
+                <%= link_icon_to 'Ban', 'ban-circle', user_ban_path(@user), :class => 'pure-button pure-button-blue', :data => { :confirm => 'Are you sure?' } %>
+              <% end %>
+            </li>
+        </ul>
       <% end %>
-    </div>
-  </div>
 
-  <div class="medium-column">
-    <div class="headblock">
-      <h1><%= paged @user.username %></h1>
-      <p>
+      </h1>
+      <div class="aboutme">
         <% unless @user.profile.aboutme.nil? or @user.profile.aboutme.empty? %>
           <%= @user.profile.aboutme %>
         <% else %>
           <em>Nothing to see here :/</em>
         <% end %>
-      </p>
-      <% unless @user.profile.website.nil? or @user.profile.website.strip.empty? %>
-        <p><%= link_to @user.profile.website, @user.profile.website, :target => '_blank', :rel => 'nofollow' %></p>
-      <% end %>
+      </div>
+      <ul class="icons">
+        <li>
+          <%= link_icon_to 'Feed', 'rss', user_feed_path(:username=>@user.username), :title => "#{@user.username} RSS feed." %>
+        </li>        
+        <% unless @user.profile.website.nil? or @user.profile.website.strip.empty? %>
+          <li>
+            <%= link_icon_to 'Website', 'globe', @user.profile.website, :target => '_blank', :rel => 'nofollow' %>
+          </li>
+        <% end %>
+        <% @user.authorizations.each do |auth| %>
+          <li>
+            <%= link_icon_to auth.provider.capitalize, auth.provider, auth.url, :target => '_blank', :title => "Visit #{@user.username} #{auth.provider.capitalize} profile." %>
+          </li>
+        <% end %>
+        <% unless @user.profile.gplus.nil? or @user.profile.gplus.strip.empty? %>
+          <li>
+           <%= link_icon_to 'Google+', 'google-plus', "#{@user.profile.gplus}?rel=author", :title => "Visit #{@user.username} Google+ profile." %>
+          </li>
+        <% end %>
+        <li class="r">
+          <span>
+            <i class="icon-eye-open"></i> <%= @user.sources.sum :views %>
+          </span>
+        </li>        
+        <li class="r">
+          <span>
+            <i class="icon-file-text"></i> <%= @user.sources.count %>
+          </span>
+        </li>
+      </ul>
     </div>
 
     <div id="sources">
-      <h2><i class="icon-file"></i> Public Sources</h2>
       <% if @sources.any? %>
         <ul>
           <%= render :partial => "source/listing", :collection => @sources, :as => 'source', :locals => { :with_author => false } %>

@@ -54,6 +54,10 @@ figure.avatar {
     }
 }
 
+img.imgavatar {
+    border-radius: 3px;
+}
+
 p.error {
     color: #b94a48;
     background-color: #f2dede;
@@ -461,7 +465,7 @@ ul.listing {
     padding: 0;
 }
 
-li.source_container {
+li.source {
     position: relative;
     width: 19%;
     padding: 2%;
@@ -516,54 +520,35 @@ li.source_container {
         td.meta {
             width: 125px;
         }
-    }
 
-    div.source {
-        height: 75px;
-        margin-bottom: 5px;
+        td.actions {
+            ul {
+                margin: 0;
+                padding: 0;
+                height: 55px;
+                margin-top: -10px !important;
 
-        span.author {
-            display: block;
-            float: left;
-            width: 70px;
-            height: 75px;
-            text-align: center;
-            font-size: 11px;
-            margin-right: 5px;
+                li {
+                    height: 27px;
+                    text-align: right;
+                    padding-top: 5px;
 
-            figure.avatar {
-                display: block;
-                margin: 0 auto 5px auto;
-            }
+                    a, span {
+                        padding-top: 5px;
+                        display: block;
+                        color: #aaa;
+                        font-weight: 500;
+                        text-shadow: 1px 0 white;
+                    }
+                }
 
-            a {
-                color: #333;
-            }
-        }
+                li.fav {
+                    border-bottom: 1px solid #ddd;
+                }
 
-
-        span.info {
-            vertical-align: middle;
-            display: table-cell;
-            height: 75px;
-
-            a.title {
-                font-size: 12px;
-                margin-top: -10px;
-                display: block;
-            }
-
-            span.description {
-                display: block;
-                font-size: 11px;
-            }
-
-            span.meta {
-                font-size: 10px;
-                width: 100%;
-
-                span.date {
-
+                li.views {
+                    border-top: 1px solid white;
+                    padding: 0;
                 }
             }
         }
