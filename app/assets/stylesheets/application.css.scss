@@ -640,6 +640,16 @@ body {
     }
 }
 
+div.headblock {
+  background: #fff;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-shadow: rgba(0,0,0,0.15) 0px 1px 3px 0px;
+  padding: 0 10px 5px 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
 #comments {
     width: 100%;
     margin-bottom: 150px;

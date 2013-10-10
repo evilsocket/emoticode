@@ -9,13 +9,13 @@
       </span>
 
       <span class="info">
-        Posted into <%= link_to_language @source.language, :class => 'language' %> 
+        Posted into <%= link_to_language @source.language, :class => 'language' %>
         <br/>
         <%= time_ago_in_words( Time.at(@source.created_at) ) %> ago
-        <br/> 
-        <%= @source.views %> views 
+        <br/>
+        <%= @source.views %> views
       </span>
-      
+
       <ul class="buttons">
         <% if signed_in? %>
           <% if @current_user == @source.user or @current_user.is_admin? %>
@@ -41,7 +41,7 @@
         <% end %>
         </li>
         <li>
-          <%= link_icon_to 'Raw', 'file-text', raw_with_language_path( :language_name => @source.language.name, :source_name => @source.name ) %> 
+          <%= link_icon_to 'Raw', 'file-text', raw_with_language_path( :language_name => @source.language.name, :source_name => @source.name ) %>
         </li>
 
         <li>
@@ -50,14 +50,16 @@
       </ul>
     </div>
 
-  </div>  
+  </div>
 
   <div class="medium-column">
-    <h1><%= @source.title %></h1>
-    <center>
-      <%= adsense :slot => '2691371377', :width => 728, :height => 90 %>
-    </center>
-    <p class="description"><%=raw description(@source) %></p>
+    <div class="headblock"></div>
+      <h1><%= @source.title %></h1>
+      <center>
+        <%= adsense :slot => '2691371377', :width => 728, :height => 90 %>
+      </center>
+      <p class="description"><%=raw description(@source) %></p>
+    </div>
     <%=raw highlight(@source) %>
 
     <%= render :partial => 'comments/box', :locals => { object: @source } %>

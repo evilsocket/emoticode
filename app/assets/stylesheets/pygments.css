@@ -1,8 +1,10 @@
 .highlight {
     font-size: 12px;
-    background: white;
     padding: 1em 1.5em;
-    border: 1px solid #eee;
+    background: #fff;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: rgba(0,0,0,0.15) 0px 1px 3px 0px;
 }
 
 .highlight .hll { background-color: #ffffcc }
