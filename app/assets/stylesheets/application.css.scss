@@ -637,9 +637,10 @@ div.headblock {
 }
 
 #comments {
-    width: 100%;
+    padding-top: 1px;
+    padding-right: 15px;
+    margin-top: 20px;
     margin-bottom: 150px;
-    padding-top: 20px;
 
     h2 {
         border-bottom: 2px solid $gradient_to;

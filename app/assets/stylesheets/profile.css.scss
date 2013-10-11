@@ -57,6 +57,11 @@
             margin-top: 0;
             margin-bottom: 0;
             border-bottom: 1px solid rgb(46, 47, 49);
+
+            em {
+                color: #999;
+                text-shadow: 1px 0 #555;
+            }
         }
 
         ul.icons {
@@ -105,6 +110,14 @@
             margin: 0;
             padding: 0;
         }
+    }
+
+    #comments {
+        margin: 7px;
+        padding-top: 1px;
+        padding-right: 15px;
+        margin-top: 20px;
+        margin-bottom: 150px;
     }
 
     #sidebar {
@@ -162,6 +175,9 @@
         }
 
         div.languages {
+            padding-top: 10px;
+            margin-top: 15px;
+
             ul {
                 margin: 0;
                 padding: 0;

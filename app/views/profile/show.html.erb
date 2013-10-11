@@ -116,11 +116,12 @@
     <div class="heading orange">
       <h3>Languages</h3>
     </div>
-    <div class="languages">
+    <div class="languages headblock">
       <% stats = @user.language_statistics %>
       <% unless stats.empty? %>
         <ul>
           <% stats.each do |language,perc| %>
+            <% if perc >= 0.3 %>
             <li>
               <div class="bar">
                 <div class="percentage" style="width: <%= perc %>%">
@@ -128,6 +129,7 @@
                 </div>
               </div>
             </li>
+            <% end %>
           <% end %>
         </ul>
       <% else %>
