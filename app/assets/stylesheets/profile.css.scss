@@ -29,6 +29,14 @@
             font-weight: 800;
             padding-left: 15px;
 
+            img.imgavatar {
+              float: left;
+              margin-right: 3px;
+              margin-top: -3px;
+              margin-left: -12px;
+              border: 1px solid #555;
+            }
+
             ul.admin {
                 margin: 0;
                 padding: 0;
@@ -66,7 +74,7 @@
                 float: left;
                 margin-right: 20px;
                 padding-top: 2px;
-                
+
                 a, span {
                     color: #FEFEFF;
                 }

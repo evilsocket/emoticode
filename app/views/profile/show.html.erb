@@ -2,7 +2,8 @@
   <div class="huge-column">
     <div id="userpanel">
       <h1>
-        <%= paged @user.username %>
+        <%= image_tag image_url(source.user.avatar), :height => '40', :width => '40', :alt => "#{source.user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
+        <%= @user.username %>
         <% if signed_in? and @current_user.is_admin? %>
           <ul class="admin">
             <li>
@@ -28,7 +29,7 @@
         <ul class="icons">
           <li>
             <%= link_icon_to 'Feed', 'rss', user_feed_path(:username=>@user.username), :title => "#{@user.username} RSS feed." %>
-          </li>        
+          </li>
           <% unless @user.profile.website.nil? or @user.profile.website.strip.empty? %>
             <li>
               <%= link_icon_to 'Website', 'globe', @user.profile.website, :target => '_blank', :rel => 'nofollow' %>
@@ -48,7 +49,7 @@
             <span>
               <i class="icon-eye-open"></i> <%= @user.sources.sum :views %>
             </span>
-          </li>        
+          </li>
           <li class="r">
             <span>
               <i class="icon-file-text"></i> <%= @user.sources.count %>
