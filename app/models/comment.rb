@@ -44,7 +44,7 @@ class Comment < ActiveRecord::Base
 
   def parse_content
     # trim, remove tags and encode entities
-    self.content = sanitize( self.content.strip )
+    self.content = HTMLEntities.new.encode( self.content.strip )
     # replace newlines with brs and urls with anchors
     self.content = self.content.gsub( /\n/, '<br/>' )
                                .gsub( /(https?:\/\/[A-z0-9~@$%&*_\-\.+\/'=#\?]+)/i, '<a href="\1" target="_blank" rel="nofollow">\1</a>' )

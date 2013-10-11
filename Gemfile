@@ -19,6 +19,7 @@ gem "garb", :git => 'git://github.com/Sija/garb.git'            # google analyti
 gem 'whenever', :require => false # cron jobs with ease
 gem 'thinking-sphinx', '~> 3.0.2' # sphinx ftw
 gem "charon", "~> 1.0.0"          # check for spammers
+gem "htmlentities"
 
 # social features
 gem "koala", "~> 1.7.0rc1"
