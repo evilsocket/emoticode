@@ -11,9 +11,9 @@ namespace :sources do
     do_update Source.order('created_at DESC')
   end
 
-  desc "Update latest 50 sources views using Analytics API"
+  desc "Update latest 10 sources views using Analytics API"
   task update_latest_views: :environment do
-    do_update Source.order('created_at DESC').limit(50)
+    do_update Source.order('created_at DESC').limit(10)
   end
 
   def do_update(sources)
@@ -24,7 +24,7 @@ namespace :sources do
     google = Rails.application.config.secrets['Google']
 
     Garb::Session.api_key = google['api_key']
-    Garb::Session.login google['username'], google['password'] 
+    Garb::Session.login google['username'], google['password']
 
     profile = Garb::Management::Profile.all.detect {|p| p.web_property_id == google['profile'] }
 
@@ -33,14 +33,14 @@ namespace :sources do
     sources.find_each_with_order do |source|
     	results = PageViews.results( profile, :filters => {
 	        :page_path.eql => source.path
-	      }, 
-	      :start_date => Time.at( source.created_at ), 
-	      :end_date => Time.now 
+	      },
+	      :start_date => Time.at( source.created_at ),
+	      :end_date => Time.now
 	    ).first
 
 	    unless results.nil?
         if source.views != results.pageviews and ( results.pageviews.to_i - source.views ) >= Event::VIEWS_STEP == 0
-          Event.new_views_reached(source,results.pageviews) 
+          Event.new_views_reached(source,results.pageviews)
         end
 
         source.views = results.pageviews
