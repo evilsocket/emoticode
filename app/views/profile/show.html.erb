@@ -2,7 +2,7 @@
   <div class="huge-column">
     <div id="userpanel">
       <h1>
-        <%= image_tag image_url(source.user.avatar), :height => '40', :width => '40', :alt => "#{source.user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
+        <%= image_tag image_url(@user.avatar), :height => '40', :width => '40', :alt => "#{@user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
         <%= @user.username %>
         <% if signed_in? and @current_user.is_admin? %>
           <ul class="admin">
