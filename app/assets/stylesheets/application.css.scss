@@ -577,13 +577,13 @@ body {
 
     #footer {
         position: absolute;
-        width: 100%;
         left: 0;
+        right: 0;
         bottom: 0;
         background-color: #37383a;
         font-size: 10px;
         padding-bottom: 20px;
-
+        
         a, a:active {
             color: #777;
             text-decoration: none;
@@ -603,7 +603,8 @@ body {
                 width: 100%;
                 margin: 0;
                 padding: 0;
-
+                padding-left: 15px;
+                
                 li {
                     text-align:left;
                     width: 32%;

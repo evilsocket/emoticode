@@ -40,6 +40,7 @@
         color: #999;
 
         li.home {
+            margin-left: 15px;
             padding: 17px 0;
             float: left;
 
@@ -53,6 +54,7 @@
         }
 
         li.user {
+            margin-right: 15px;            
             display: block;
             float: right;
             margin-top: 15px;
@@ -214,9 +216,14 @@
             }
         }
 
+        li.left {
+            margin-left: 15px;
+        }
+
         li.right {
+            margin: 0;       
+            margin-right: 15px;            
             float:right;
-            margin:0;
         }
     }
 }
