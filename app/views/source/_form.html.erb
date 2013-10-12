@@ -1,4 +1,4 @@
-<div id="source-<%= action %>">
+<div id="source-<%= action %>" class="headblock">
   <%= form_for source, :url => {:controller => 'source', :action => action }, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
     <% source.errors.full_messages.each do |msg| %>
       <p class="error"><%= msg %></p>

@@ -4,7 +4,7 @@
     helper, args, logos_size = if modal
                                  [ method( :modal_dialog ), [ 'login', 'Sign In' ], '-m' ]
                                else
-                                 [ method( :content_tag ), [ :div, :class => 'login' ], '' ]
+                                 [ method( :content_tag ), [ :div, :class => 'login headblock' ], '' ]
                                end
 %>
 <%= helper.call *args do %>
