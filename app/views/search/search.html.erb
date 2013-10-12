@@ -1,6 +1,11 @@
 <section id="search-archive">
   <div class="huge-column">
     <h1><%= paged "Search for '#{@phrase}'" %></h1>
+
+    <center>
+      <%= adsense :slot => '5320643374', :width => 970, :height => 90 %>      
+    </center>
+
     <% if @sources.any? %>
     <ul class="listing">
       <%= render :partial => "source/listing", :collection => @sources, :as => 'source' %>
