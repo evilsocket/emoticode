@@ -4,7 +4,7 @@ class LanguageController < ApplicationController
     if @language
       @sources = @language.sources.public.paginate( :page => params[:page], :per_page => 16 )
       @podium  = @language.most_active_users
-      @cloud   = Tag.cloud(@language).to_a.shuffle!
+      @cloud   = Tag.cloud(@language).shuffle!
     else
       render_404 
     end

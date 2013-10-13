@@ -21,9 +21,9 @@ class Tag < ActiveRecord::Base
         limit( limit )
 
       if language.nil? 
-        query.where( 'sources.language_id NOT IN ( SELECT id FROM languages WHERE name IN ( ? ) )', exclude )
+        query.where( 'sources.language_id NOT IN ( SELECT id FROM languages WHERE name IN ( ? ) )', exclude ).to_a
       else
-        query.where( 'sources.language_id = ?', language.id )
+        query.where( 'sources.language_id = ?', language.id ).to_a
       end
     end
   end
