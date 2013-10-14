@@ -583,7 +583,7 @@ body {
         background-color: #37383a;
         font-size: 10px;
         padding-bottom: 20px;
-        
+
         a, a:active {
             color: #777;
             text-decoration: none;
@@ -604,7 +604,7 @@ body {
                 margin: 0;
                 padding: 0;
                 padding-left: 15px;
-                
+
                 li {
                     text-align:left;
                     width: 32%;
@@ -686,8 +686,9 @@ li.comment {
     }
 
     span.content {
-        display:block;
-        margin-left: 15px;
+        display: block;
+        margin-left: 10px;
+        width: 95%;
 
         .meta {
             display: block;
