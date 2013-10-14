@@ -42,7 +42,7 @@
   <% end %>
 
   <% unless @cloud.nil? or @cloud.empty? %>
-    <% cache( "tag_cloud_for_#{request.original_url}" ) do %>
+    <% cache( "tag_cloud_for_#{request.original_url}", :expire => 3.days ) do %>
     <div class="heading red">
       <h3>Cloud</h3>
     </div>

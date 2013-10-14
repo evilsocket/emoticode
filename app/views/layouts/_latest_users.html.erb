@@ -4,7 +4,7 @@
   </div>
 <% end %>
 
-<% cache( "latest_users_widget_#{User.confirmed.count}" ) do %>
+<% cache( "latest_users_widget_#{User.confirmed.count}", :expire => 1.hour ) do %>
 <ul class="avatars">
   <% @users.each do |user| %>
   <li>
