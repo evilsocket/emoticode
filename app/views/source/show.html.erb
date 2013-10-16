@@ -1,4 +1,5 @@
 <section id="source">
+  <!--
   <div class="small-column">
     <div id="publisher">
       <div class="pointer"></div>
@@ -15,33 +16,17 @@
         <i class="icon-eye-open"></i> <%= @source.views %>
       </span>
     </div>
-
   </div>
-
+  -->
   <div class="medium-column">
     <div class="headblock">
-      <h1><%= @source.title %></h1>
-      <div style="width:728px;height:90px;margin:0 auto;">
-        <script type='text/javascript'>
-        <!--//<![CDATA[
-          document.MAX_ct0 ='';
-          var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
-          var m3_r = Math.floor(Math.random()*99999999999);
-          document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
-          document.write ("zoneid=109548");document.write("&amp;nodis=1");
-          document.write ('&amp;cb=' + m3_r);
-          if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
-          document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
-          document.write ("&amp;loc=" + escape(window.location));
-          if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
-          if (document.context) document.write ("&context=" + escape(document.context));
-          if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
-              document.write ("&amp;ct0=" + escape(document.MAX_ct0));
-          }
-          if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
-          document.write ("'></scr"+"ipt>");
-        //]]>--></script>
+      <div id="author">
+        <a href="<%= user_profile_path(username:@source.user.username) %>" title="<%= @source.user.username %> profile">
+          <%= avatar_tag @source.user %>
+        </a>
       </div>
+      <h1><%= @source.title %></h1>
+      <%= render :partial => "adv/criteo728x90" %>
       <p class="description">
         <%=raw description(@source) %>
       </p>
@@ -77,6 +62,15 @@
         <li>
           <%= link_icon_to_function "Embed", "expand", "$('#embed').modal();" %>
         </li>
+
+        <li>
+          <i class="icon-eye-open"></i> <%= @source.views %>
+        </li>
+
+        <li>
+          <i class="icon-thumbs-up"></i> <%= @source.favorites.count %>
+        </li>
+
       </ul>
 
       <br style="clear:both"/>

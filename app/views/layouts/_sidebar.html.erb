@@ -11,10 +11,8 @@
   <% if defined? source %>
     <%= render :partial => 'layouts/social_share', :locals => { source: source } %>
     <br/>
-    <center>
-      <%= adsense :slot => '7272041371', :width => 200, :height => 200 %>
-    </center>
-
+    <%= render :partial => "adv/criteo300x250" %>
+    
     <% cache( "source_#{source.id}_related", :expires_in => 24.hours ) do %>
       <% if source.related.load.empty? == false %>
         <div class="heading orange">

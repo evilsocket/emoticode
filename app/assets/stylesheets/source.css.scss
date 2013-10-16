@@ -27,13 +27,31 @@ div.medium-column {
 }
 
 #source {
-    // div.medium-column {
-    //     width: 65%;
-    // }
+    div.medium-column {
+        width: 75%;
+    }
+    
+    #sidebar {
+        width: 300px;
 
-    // #sidebar {
-    //     width: 305px;
-    // }
+        .post-button {
+            width: 240px;
+        }
+
+        ul.events {
+            li {
+                div.content {
+                    width: 270px;
+                }
+            }
+        }
+    }
+
+    #author {
+        float: left;
+        margin-right: 10px;
+        margin-top: 5px;
+    }
 
     #publisher {
         margin: 20px 20px 0;
@@ -120,7 +138,7 @@ div.medium-column {
 
     div.headblock {
       h1 {
-        padding-top: 10px;
+        padding-top: 12px;
       }
     }
 }
