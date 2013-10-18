@@ -127,7 +127,7 @@ END
 
   def nested_comments(object)
     # select every comment for this object
-    comments = object.comments.order('created_at DESC')
+    comments = object.comments.order('created_at ASC')
     # get root objects ( with no parent )
     threads  = comments.select { |c| c.parent_id.nil? }
     # recurse every thread and group comments by their parents
