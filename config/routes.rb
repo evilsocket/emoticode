@@ -1,6 +1,14 @@
 EmoticodeRails::Application.routes.draw do
   root 'home#index'
 
+  namespace :api do
+    namespace :v1 do
+      resources :languages, :only => [ :index, :show ]
+      resources :sources,   :only => [ :index, :show ]
+      resources :users,     :only => [ :index, :show ]
+    end
+  end
+
   controller :home do
     get 'new' => :recent, as: :recent_snippets
   end

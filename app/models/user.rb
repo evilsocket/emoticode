@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
     self.where( 'MD5( CONCAT( id, email, username, salt, password_hash ) )  = ?', token ).first
   end
 
+  def self.find_by_api_key( token )
+    self.where( 'MD5( CONCAT( id, email, username, salt, password_hash, created_at ) )  = ?', token ).first
+  end
+
   def self.get_random_password( length = 8 )
     (0...length).map{65.+(rand(25)).chr}.join
   end
@@ -116,6 +120,10 @@ class User < ActiveRecord::Base
 
       [ user, tmp_password ]
     end
+  end
+
+  def api_key
+    Digest::MD5.hexdigest( "#{id}#{email}#{username}#{salt}#{password_hash}#{created_at}" )    
   end
 
   def favorite_by_others

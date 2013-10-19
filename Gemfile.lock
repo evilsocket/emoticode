@@ -126,6 +126,8 @@ GEM
       omniauth (~> 1.0)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
+    rabl (0.9.0)
+      activesupport (>= 2.3.14)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -214,6 +216,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   omniauth-github (~> 1.1.1)
+  rabl
   rails (= 4.0.0)
   recaptcha
   rvm-capistrano
