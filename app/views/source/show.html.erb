@@ -1,30 +1,6 @@
 <section id="source">
-  <!--
-  <div class="small-column">
-    <div id="publisher">
-      <div class="pointer"></div>
-      <span class="author">
-        <a href="<%= user_profile_path(username:@source.user.username) %>" title="<%= @source.user.username %> profile">
-          <%= avatar_tag @source.user %>
-          <%= truncate @source.user.username, :length => 15 %>
-        </a>
-      </span>
-
-      <span class="info">
-        <%= link_to_language @source.language, :class => 'language' %>
-        <br/>
-        <i class="icon-eye-open"></i> <%= @source.views %>
-      </span>
-    </div>
-  </div>
-  -->
   <div class="medium-column">
     <div class="headblock">
-      <div id="author">
-        <a href="<%= user_profile_path(username:@source.user.username) %>" title="<%= @source.user.username %> profile">
-          <%= avatar_tag @source.user %>
-        </a>
-      </div>
       <h1><%= @source.title %></h1>
       <%= render :partial => "adv/criteo728x90" %>
       <p class="description">
@@ -62,15 +38,6 @@
         <li>
           <%= link_icon_to_function "Embed", "expand", "$('#embed').modal();" %>
         </li>
-
-        <li>
-          <i class="icon-eye-open"></i> <%= @source.views %>
-        </li>
-
-        <li>
-          <i class="icon-thumbs-up"></i> <%= @source.favorites.count %>
-        </li>
-
       </ul>
 
       <br style="clear:both"/>

@@ -181,3 +181,25 @@ div.medium-column {
     }
 
 }
+
+.ssummary {
+    color: #555;
+    font-size: 12px;
+    padding: 5px 20px !important;
+    margin-bottom: 5px !important;
+    text-align: justify;
+    
+    ul {
+        margin: 0;
+        padding: 0;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+
+        li {
+            display: table-cell;
+            text-align: center;
+            color: #999;
+        }       
+    }
+}
