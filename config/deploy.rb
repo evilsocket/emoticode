@@ -1,5 +1,6 @@
 # Load RVM's capistrano plugin.    
 require "rvm/capistrano"
+require "bundler/capistrano"
 require 'capistrano-unicorn'
 
 set :rvm_ruby_string, '2.0.0'
