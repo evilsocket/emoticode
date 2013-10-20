@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>EmotiCODE Weekly</title>
+  <style type="text/css">
+  body, td { color:#000000; font-size:14px; font-family:Verdana,Helvetica,Arial; }
+  #header { background: #37383a; height: 40px; padding: 10px;}
+  .divider { background-color:#555555; height:2px; }
+  .source h2 { margin-top:0; margin-bottom:0; font-size:14px; font-weight: normal; }
+  .source p { margin:0; margin-top: 3px; font-size:12px; }
+  .source img { border:solid 1px #777777; }
+  #footer { font-size:11px; color:#555555; }
+  #footer a { color:#555555;}
+  </style>
+</head>
+<body>
+  <table width="100%" id="background" border="0" cellpadding="0" cellspacing="0">
+    <tr><td align="center" valign="top">
+      <table width="800" id="main" border="0" cellpadding="0" cellspacing="20">
+        <tr>
+          <td id="header" colspan="2">
+            <a href="http://www.emoticode.net/"><img src="http://www.emoticode.net/logo_navbar.png" alt="EmotiCODE"></a>
+          </td>
+        </tr>
+        
+        <% @sources.each do |source| %>
+        <tr class="source">
+          <td>
+            <a href="http://www.emoticode.net<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="avatar">
+              <%= image_tag image_url(source.user.avatar), :height => '50', :width => '50', :alt => "#{source.user.username} avatar." %>
+            </a>
+          </td>
+          <td valign="top">
+            <h2>
+              <%= link_to "<strong>#{source.language.title}</strong> <span style=\"color: #bbb;\">&#8250;</span> #{source.title}".html_safe, 
+              "http://www.emoticode.net#{source_with_language_path(language_name: source.language.name, source_name: source.name)}".html_safe %>
+            </h2>
+            <p>
+            <%= if source.description.nil? or source.description.strip.empty?
+              '<em>No description :/</em>'.html_safe
+              else
+                truncate source.description, :length => 250
+              end
+            %>
+            </p>
+          </td>
+        </tr>
+        <% end %>
+
+        <tr>
+          <td class="divider" colspan="2" bgcolor="#555555" height="2"></td>
+        </tr>
+        <tr>
+          <td id="footer" colspan="2" align="center">
+            <p>If you do not wish to receive these emails in the future, <a href="http://www.emoticode.net/profile/edit">unsubscribe</a> from your profile settings page.</p>
+            <p>&copy;2013 EmotiCODE</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

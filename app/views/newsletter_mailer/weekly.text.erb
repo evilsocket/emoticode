@@ -1,0 +1,19 @@
+EmotiCODE Weekly
+---------------------
+
+<% @sources.each do |source| %>
+<%= source.language.title %> - <%= source.title %>
+----
+<%= if source.description.nil? or source.description.strip.empty?
+    'No description :/'
+  else
+    truncate source.description, :length => 250
+  end
+%>
+----
+<%= "http://www.emoticode.net#{source_with_language_path(language_name: source.language.name, source_name: source.name)}" %>
+<% end %>
+
+
+---------------------
+If you do not wish to receive these emails in the future, unsubscribe from your profile settings page located at http://www.emoticode.net/profile/edit
