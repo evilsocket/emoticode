@@ -9,7 +9,41 @@
       end
     %>
   </div>
+  <div class="author">
+    <div class="avatar">
+      <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="avatar">
+        <%= image_tag image_url(source.user.avatar), :height => '40', :width => '40', :alt => "#{source.user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
+      </a>
+      Posted by
+      <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="username">
+        <%= truncate( source.user.username, :length => 20 ) %>
+      </a>
+    </div>
+  </div>
   <div class="footer">
+    <ul>
+      <li>
+        <span id="favcount-<%= source.id %>" class="count"><%= source.favorites.count %></span>
+        <% if signed_in? %>
+          <% if @current_user.favorite?(source) %>
+            <%= link_icon_to '', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext", method: :post, remote: true  %>
+          <% else %>
+            <%= link_icon_to '', 'thumbs-up', favorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext", method: :post, remote: true  %>
+          <% end %>
+        <% else %>
+          <%= link_icon_to_function '', 'thumbs-up', 'showLoginModal()' %>
+        <% end %>
+      </li>
+      <li>
+        <span class="count"><%= source.views %></span>
+        <i class="icon-eye-open"></i>
+      </li>
+      <li>
+        <span class="count"><%= source.comments.count %></span>
+        <i class="icon-comments"></i>
+      </li>
+    </ul>
+    <!--
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td class="avatar">
@@ -44,6 +78,7 @@
         </td>
       </tr>
     </table>
+    -->
   </div>
 </li>
 <% end %>

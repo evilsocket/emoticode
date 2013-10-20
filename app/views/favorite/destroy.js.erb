@@ -1,5 +1,15 @@
-$('#fav-<%= @favorite.source_id %>')
-.attr( 'href', "<%= favorite_path( id: @favorite.source_id, format: :js ) %>" )
-.html( '<i class="icon-thumbs-up"></i> Fav It!' );
+$fav = $('#fav-<%= @favorite.source_id %>');
+$count = $('#favcount-<%= @favorite.source_id %>');
+
+$fav.attr( 'href', "<%= favorite_path( id: @favorite.source_id, format: :js ) %>" )
+
+
+if( $fav.hasClass('notext') )
+  $fav.html( '<i class="icon-thumbs-up"></i>' );
+else
+  $fav.html( '<i class="icon-thumbs-down"></i> Fav It!' );
+
+if( $count )
+  $count.html( parseInt($count.html()) - 1 );
 
 

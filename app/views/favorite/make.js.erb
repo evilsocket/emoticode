@@ -1,4 +1,12 @@
-$('#fav-<%= @favorite.source_id %>')
-.attr( 'href', "<%= unfavorite_path( id: @favorite.source_id, format: :js ) %>" )
-.html( '<i class="icon-thumbs-down"></i> Unfav' );
+$fav = $('#fav-<%= @favorite.source_id %>');
+$count = $('#favcount-<%= @favorite.source_id %>');
 
+$fav.attr( 'href', "<%= unfavorite_path( id: @favorite.source_id, format: :js ) %>" );
+
+if( $fav.hasClass('notext') )
+  $fav.html( '<i class="icon-thumbs-down"></i>' );
+else
+  $fav.html( '<i class="icon-thumbs-down"></i> Unfav' );
+
+if( $count )
+  $count.html( parseInt($count.html()) + 1 );
