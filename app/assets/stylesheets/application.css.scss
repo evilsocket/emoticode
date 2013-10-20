@@ -543,7 +543,7 @@ li.source {
         border-top: 1px solid #eeeeee;
 
         ul {
-            margin: -5px 0 !important;
+            margin: -4px 0 !important;
             padding: 0 !important;
             display: table;
             table-layout: fixed;
@@ -555,12 +555,11 @@ li.source {
                 text-align: center;
                 border-right: 1px solid #eee;
                 color: #aaa;
-                text-shadow: 1px 0 #eee;
+                text-shadow: 1px 0 white;
 
                 span.count {
                     display: block;
-                    font-weight: bold;
-                    font-size: 12px;
+                    font-size: 10px;
                 }
 
                 a {
@@ -572,47 +571,6 @@ li.source {
                 }
             }
         }
-/*
-        td.avatar {
-            width: 45px;
-        }
-
-        td.meta {
-            width: 125px;
-        }
-
-        td.actions {
-            ul {
-                margin: 0;
-                padding: 0;
-                height: 55px;
-                margin-top: -10px !important;
-
-                li {
-                    height: 27px;
-                    text-align: right;
-                    padding-top: 5px;
-
-                    a, span {
-                        padding-top: 5px;
-                        display: block;
-                        color: #aaa;
-                        font-weight: 500;
-                        text-shadow: 1px 0 white;
-                    }
-                }
-
-                li.fav {
-                    border-bottom: 1px solid #ddd;
-                }
-
-                li.views {
-                    border-top: 1px solid white;
-                    padding: 0;
-                }
-            }
-        }
-*/
     }
 }
 

@@ -43,42 +43,6 @@
         <i class="icon-comments"></i>
       </li>
     </ul>
-    <!--
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-      <tr>
-        <td class="avatar">
-          <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="avatar">
-            <%= image_tag image_url(source.user.avatar), :height => '40', :width => '40', :alt => "#{source.user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
-          </a>
-        </td>
-        <td class="meta">
-          Posted by <%= link_to truncate( source.user.username, :length => 10 ), user_profile_path(username:source.user.username) %><br/>
-          As <%= link_to_language source.language, :class => 'language' %> code.<br/>
-          <%= Time.at(source.created_at).strftime( '%b %d, %Y' ) %>
-        </td>
-        <td class="actions">
-          <ul>
-            <li class="fav">
-              <% if signed_in? %>
-                <% if @current_user.favorite?(source) %>
-                  <%= link_icon_to 'Unfav', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", method: :post, remote: true  %>
-                <% else %>
-                  <%= link_icon_to 'Fav It!', 'thumbs-up', favorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", method: :post, remote: true  %>
-                <% end %>
-              <% else %>
-                <%= link_icon_to_function 'Fav It!', 'thumbs-up', 'showLoginModal()' %>
-              <% end %>
-            </li>
-            <li class="views">
-              <span>
-                <i class="icon-eye-open"></i> <%= source.views %>
-              </span>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    </table>
-    -->
   </div>
 </li>
 <% end %>
