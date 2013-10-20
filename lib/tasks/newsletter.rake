@@ -3,7 +3,9 @@ namespace :newsletter do
   task weekly: :environment do
     users   = User.joins(:profile).where(:profiles => {:weekly_newsletter => 1})
     sources = Source.public.where( 'created_at >= UNIX_TIMESTAMP() - 604800' )
-    NewsletterMailer.weekly(users,sources).deliver
+    users.each do |user|
+      NewsletterMailer.weekly(user,sources).deliver
+    end
   end
 end
 
