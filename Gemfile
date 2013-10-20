@@ -21,6 +21,7 @@ gem 'thinking-sphinx', '~> 3.0.2' # sphinx ftw
 gem "charon", "~> 1.0.0"          # check for spammers
 gem "htmlentities"
 gem "rabl"
+gem 'roadie'
 
 # social features
 gem "koala", "~> 1.7.0rc1"
