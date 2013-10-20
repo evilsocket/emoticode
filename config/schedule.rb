@@ -22,6 +22,6 @@ every 2.days do
   rake 'ts:rebuild'
 end
 
-every :sunday, :at => '12pm' do
+every :saturday, :at => '12pm' do
   rake "newsletter:weekly"
 end
