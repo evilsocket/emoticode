@@ -1,10 +1,12 @@
-every 60.minutes do
-  rake 'sources:update_latest_views'
-end
-
-every 3.days do
-  rake 'sources:update_views'
-end
+# Using impressionist now to track unique views
+#
+# every 60.minutes do
+#   rake 'sources:update_latest_views'
+# end
+# 
+# every 3.days do
+#   rake 'sources:update_views'
+# end
 
 every 60.minutes do
   rake 'sitemap:submit'
