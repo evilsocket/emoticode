@@ -1,4 +1,6 @@
 class Source < ActiveRecord::Base
+  is_impressionable :counter_cache => true, :column_name => :views
+
   belongs_to :language, :counter_cache => true
   belongs_to :user
   has_many   :links

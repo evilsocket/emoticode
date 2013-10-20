@@ -7,6 +7,8 @@ class SourceController < ApplicationController
     if params[:id]
       redirect_to source_with_language_url( :language_name => @source.language.name, :source_name => @source.name )
     else      
+      impressionist(@source)
+
       @cloud = @source.tags.to_a.shuffle
       @comment = Comment.new
     end
@@ -19,6 +21,9 @@ class SourceController < ApplicationController
 
   def embed
     @source = source_by_params
+    
+    impressionist(@source)
+    
     @hash   = Digest::MD5.hexdigest( @source.name )
     render :partial => 'source/embed.js'
   end

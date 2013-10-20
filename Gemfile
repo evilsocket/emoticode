@@ -22,6 +22,7 @@ gem "charon", "~> 1.0.0"          # check for spammers
 gem "htmlentities"
 gem "rabl"
 gem 'roadie'
+gem 'impressionist'
 
 # social features
 gem "koala", "~> 1.7.0rc1"

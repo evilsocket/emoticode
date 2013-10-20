@@ -74,7 +74,11 @@ GEM
     hike (1.2.3)
     htmlentities (4.3.1)
     httpauth (0.2.0)
+    httpclient (2.3.4.1)
     i18n (0.6.5)
+    impressionist (1.4.11)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.6.0)
     innertube (1.1.0)
     jbuilder (1.5.1)
       activesupport (>= 3.0.0)
@@ -214,6 +218,7 @@ DEPENDENCIES
   fastimage_resize
   garb!
   htmlentities
+  impressionist
   jbuilder (~> 1.2)
   jquery-rails
   koala (~> 1.7.0rc1)
