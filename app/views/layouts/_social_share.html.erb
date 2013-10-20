@@ -1,6 +1,6 @@
 <div class="share">
   <%= link_to image_tag("icons/facebook.png"),   "http://www.facebook.com/sharer.php?u=#{request.original_url}", { :target => '_blank', :title => 'Share on Facebook' } %>
-  <%= link_to image_tag("icons/twitter.png"),    "http://twitter.com/home?status=#{source.language.title} - #{source.title} #{request.original_url}", { :target => '_blank', :title => 'Post to Twitter' } %>
+  <%= link_to image_tag("icons/twitter.png"),    "http://twitter.com/home?status=#{source.language.title.gsub(/#/, '%23')} - #{source.title} #{request.original_url}", { :target => '_blank', :title => 'Post to Twitter' } %>
   <%= link_to image_tag("icons/googleplus.png"), "https://plus.google.com/share?url=#{request.original_url}", { :target => '_blank', :title => 'Post to Google+' } %>
   <%= link_to image_tag("icons/reddit.png"),     "http://www.reddit.com/submit?url=#{request.original_url}&title=#{source.language.title} - #{source.title}", { :target => '_blank', :title => 'Post to Reddit' } %>
 </div>

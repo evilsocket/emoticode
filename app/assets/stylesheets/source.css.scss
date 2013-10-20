@@ -189,6 +189,24 @@ div.medium-column {
     padding: 5px 20px !important;
     margin-bottom: 5px !important;
     text-align: justify;
+    position: relative;
+    font-size: 13px;
+
+    div.larrow {
+        width: 0;
+        height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-right: 15px solid white;
+        position: absolute;
+        top: 80px;
+        left: -9px;
+    }
+
+    a {
+        color: #555;
+        font-weight: bold;
+    }
     
     ul {
         margin: 0;
@@ -201,6 +219,38 @@ div.medium-column {
             display: table-cell;
             text-align: center;
             color: #999;
+            text-shadow: 1px 0 #eee;
+            font-size: 15px;
+            
+            span.count {
+                display: block;
+                font-size: 12px;
+                border: 1px solid #eee;
+                width: 50px;
+                height: 25px;
+                margin: 0 auto;
+                padding-top: 10px;
+                margin-bottom: 3px;
+                border-radius: 3px;
+                background: #fcfcfc;
+            }
+
+            a {
+                color: #999;
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
         }       
+    }
+
+    div.share {
+        a {
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
     }
 }

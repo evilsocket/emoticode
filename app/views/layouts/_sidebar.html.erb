@@ -2,17 +2,29 @@
   <% if defined? source %>
     <div class="headblock ssummary">
       <p>
-      "<strong><%= source.title %></strong>" has been posted by <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= @source.user.username %> profile"><%= source.user.username %></a>
+      This snippet has been posted by <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= @source.user.username %> profile"><%= source.user.username %></a>
       <%= time_ago_in_words Time.at(source.created_at) %> ago in the <%= link_to_language source.language, :class => 'language' %> section.
       </p>
       <br style="clear:both;"/>
       <ul>
-        <li><i class="icon-eye-open"></i> <%= source.views %></li>
-        <li><i class="icon-thumbs-up"></i> <%= source.favorites.count %></li>
-        <li><i class="icon-comments"></i> <%= source.comments.count %></li>
+        <li><span class="count"><%= source.views %></span><i class="icon-eye-open"></i></li>
+        <li>
+          <span id="favcount-<%= source.id %>" class="count"><%= source.favorites.count %></span>
+          <% if signed_in? %>
+            <% if @current_user.favorite?(source) %>
+              <%= link_icon_to '', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext", method: :post, remote: true  %>
+            <% else %>
+              <%= link_icon_to '', 'thumbs-up', favorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext", method: :post, remote: true  %>
+            <% end %>
+          <% else %>
+            <%= link_icon_to_function '', 'thumbs-up', 'showLoginModal()' %>
+          <% end %>
+        </li>
+        <li><span class="count"><%= source.comments.count %></span><i class="icon-comments"></i></li>
       </ul>
       <br style="clear:both;"/>    
-      <%= render :partial => 'layouts/social_share', :locals => { source: source } %>      
+      <%= render :partial => 'layouts/social_share', :locals => { source: source } %>   
+      <div class="larrow"></div>      
     </div>    
     <%= render :partial => "adv/criteo300x250" %>    
   <% end %>

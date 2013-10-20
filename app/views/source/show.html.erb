@@ -17,15 +17,7 @@
               <%= link_icon_to 'Delete', 'trash', source_delete_path(@source), :data => { :confirm => 'Are you sure?' } %>
             </li>
           <% end %>
-
-          <li>
-            <% if @current_user.favorite? @source %>
-              <%= link_icon_to 'Unfav', 'thumbs-down', unfavorite_path( id:@source.id, format: :js ), id: "fav-#{@source.id}", method: :post, remote: true  %>
-            <% else %>
-              <%= link_icon_to 'Fav It!', 'thumbs-up', favorite_path( id:@source.id, format: :js ), id: "fav-#{@source.id}", method: :post, remote: true  %>
-            <% end %>
-          </li>
-          <% else %>
+        <% else %>
           <li>
             <%= link_icon_to_function "Fav It!", 'thumbs-up', 'showLoginModal()' %>
           </li>
