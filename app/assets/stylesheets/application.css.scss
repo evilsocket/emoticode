@@ -543,8 +543,8 @@ li.source {
         border-top: 1px solid #eeeeee;
 
         ul {
-            margin: -5px 0;            
-            padding: 0;
+            margin: -5px 0 !important;
+            padding: 0 !important;
             display: table;
             table-layout: fixed;
             width: 100%;
