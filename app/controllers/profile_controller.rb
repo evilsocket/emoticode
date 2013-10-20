@@ -47,7 +47,13 @@ class ProfileController < ApplicationController
   end
 
   def destroy
+    # destroy all user content
+    @user.sources.destroy_all
+    # destroy all user events
+    @user.events.destroy_all 
+    # finally destroy the user
     @user.destroy
+
     redirect_to root_url
   end
 

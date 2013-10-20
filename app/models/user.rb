@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :sources
   has_many :favorites
   has_many :authorizations
+  has_many :events
   has_one  :profile
 
   LEVELS   = { :admin => 1,
