@@ -69,7 +69,7 @@ class ProfileController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :avatar_upload, :password, :password_confirmation, :profile_attributes => [ :aboutme, :website, :gplus ])
+    params.require(:user).permit(:username, :avatar_upload, :password, :password_confirmation, :profile_attributes => [ :aboutme, :website, :gplus, :weekly_newsletter ])
   end
 
   def skip_password_attribute

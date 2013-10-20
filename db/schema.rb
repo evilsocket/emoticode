@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131006134444) do
+ActiveRecord::Schema.define(version: 20131020184559) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -79,11 +79,12 @@ ActiveRecord::Schema.define(version: 20131006134444) do
   add_index "links", ["tag_id"], name: "entity_value_id", using: :btree
 
   create_table "profiles", force: true do |t|
-    t.integer "user_id",                              null: false
-    t.text    "aboutme", limit: 16777215
+    t.integer "user_id",                                           null: false
+    t.text    "aboutme",           limit: 16777215
     t.string  "website"
     t.string  "gplus"
-    t.integer "avatar",  limit: 1,        default: 0, null: false
+    t.integer "avatar",            limit: 1,        default: 0,    null: false
+    t.boolean "weekly_newsletter",                  default: true
   end
 
   add_index "profiles", ["user_id"], name: "user_id", using: :btree

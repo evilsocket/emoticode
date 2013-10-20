@@ -1,11 +1,11 @@
 class NewsletterMailer < ActionMailer::Base
   default from: "weekly@emoticode.net"
 
-  def weekly( sources )
+  def weekly( users, sources )
     @sources = sources
 
-   # User.confirmed.each do |u|
-      mail( to: 'evilsocket@gmail.com', subject: 'EmotiCODE Weekly Newsletter' ) 
-   # end
+    users.each do |u|
+      mail( to: u.email, subject: 'EmotiCODE Weekly Newsletter' ) 
+    end
   end
 end
