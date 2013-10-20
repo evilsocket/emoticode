@@ -28,7 +28,7 @@
         <tr class="source">
           <td>
             <a href="http://www.emoticode.net<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="avatar">
-              <%= image_tag image_url(source.user.avatar), :height => '50', :width => '50', :alt => "#{source.user.username} avatar." %>
+              <%= image_tag "http://www.emoticode.net/#{source.user.avatar}".html_safe, :height => '50', :width => '50', :alt => "#{source.user.username} avatar." %>
             </a>
           </td>
           <td valign="top">
