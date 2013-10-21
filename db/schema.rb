@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131020234109) do
+ActiveRecord::Schema.define(version: 20131021194714) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(version: 20131020234109) do
 
   add_index "favorites", ["source_id"], name: "source_id", using: :btree
   add_index "favorites", ["user_id", "source_id"], name: "user_id", using: :btree
+
+  create_table "follows", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "follow_type"
+    t.integer  "follow_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "follows", ["user_id"], name: "index_follows_on_user_id", using: :btree
 
   create_table "impressions", force: true do |t|
     t.string   "impressionable_type"

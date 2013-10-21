@@ -1,9 +1,10 @@
 class Event < ActiveRecord::Base
   belongs_to :owner, :class_name => 'User', :foreign_key => :user_id
 
-  belongs_to :source,  :foreign_key => :eventable_id
-  belongs_to :user,    :foreign_key => :eventable_id  
-  belongs_to :comment, :foreign_key => :eventable_id
+  belongs_to :source,   :foreign_key => :eventable_id
+  belongs_to :user,     :foreign_key => :eventable_id  
+  belongs_to :language, :foreign_key => :eventable_id    
+  belongs_to :comment,  :foreign_key => :eventable_id
 
   TYPES = {
     :favorited        => 1,
@@ -11,7 +12,9 @@ class Event < ActiveRecord::Base
     :sent_nth_content => 3,
     :commented        => 4,
     :logged_in        => 5,
-    :views_reached    => 6
+    :views_reached    => 6,
+    :follow_user      => 7,
+    :follow_language  => 8
   }
 
   CONTENT_STEP = 5
@@ -31,6 +34,10 @@ class Event < ActiveRecord::Base
       "logged_in"
     when TYPES[:views_reached]
       "views_reached"
+    when TYPES[:follow_user]
+      "follow_user"
+    when TYPES[:follow_language]
+      "follow_language"
     end
   end
 
@@ -88,4 +95,28 @@ class Event < ActiveRecord::Base
     })
   end
  
+  def self.new_follow_user(user,who_id)
+    Event.create({
+      owner: user,
+      eventable_type: TYPES[:follow_user],
+      eventable_id: who_id
+    })
+  end
+
+  def self.new_follow_language(user,language_id)
+    Event.create({
+      owner: user,
+      eventable_type: TYPES[:follow_language],
+      eventable_id: language_id
+    })
+  end
+
+  def self.new_follow(user,type,subject_id)
+    if type == Follow::TYPES[:user] 
+      self.new_follow_user(user,subject_id)
+    elsif type == Follow::TYPES[:language]
+      self.new_follow_language(user,subject_id)
+    end
+  end
+
 end

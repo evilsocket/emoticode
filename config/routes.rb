@@ -38,6 +38,11 @@ EmoticodeRails::Application.routes.draw do
     post 'unfav/:id' => :destroy, as: :unfavorite, constraints: { id: Patterns::ID_PATTERN }
   end
 
+  controller :follows do
+    post 'follow/:type/:id'   => :follow,   as: :follow,   constraints: { type: Patterns::ID_PATTERN, id: Patterns::ID_PATTERN }
+    post 'unfollow/:type/:id' => :unfollow, as: :unfollow, constraints: { type: Patterns::ID_PATTERN, id: Patterns::ID_PATTERN }    
+  end
+
   controller :profile do
     get   'profile/snippets'    => :snippets,  as: :user_snippets
     get   'profile/favorites'   => :favorites, as: :user_favorites   

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :authorizations
   has_many :events
   has_one  :profile
+  has_many :follows
 
   LEVELS   = { :admin => 1,
                :editor => 2,
@@ -153,6 +154,14 @@ class User < ActiveRecord::Base
 
   def favorite?(source)
     Favorite.where( :user_id => self.id, :source_id => source.id ).any?
+  end
+
+  def follows?(object)
+    if object.is_a? User
+      Follow.where( :user_id => self.id, :follow_type => Follow::TYPES[:user], :follow_id => object.id ).any?
+    elsif object.is_a? Language
+      Follow.where( :user_id => self.id, :follow_type => Follow::TYPES[:language], :follow_id => object.id ).any?
+    end
   end
 
   def avatar
