@@ -114,20 +114,33 @@ div.medium-column {
     ul.buttons {
       margin: 0;
       padding: 5px 0 3px 0;
-      border-top: 2px dotted #eee;
-      width: 100%;
+      width: 960px;
       font-size: 12px;
+      text-align: left;
+      color: #333;
+      text-shadow: 0 1px 0 #fff;
+      background-color: #eaeaea;
+      background-image: -moz-linear-gradient(#fafafa, #eaeaea);
+      background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+      background-image: linear-gradient(#fafafa, #eaeaea);
+      background-repeat: repeat-x;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      height: 27px;
+      border: 1px solid #eee;
+      margin-left: -10px;
 
       li {
         float: right;
         margin-right: 15px;
 
         a {
-          color: #aaa;
+          color: #888;
+          font-weight: 100px;
         }
 
         a:hover {
-          color: #555;
+          color: #666;
         }
       }
     }

@@ -1,8 +1,7 @@
 .highlight {
   font-size: 12px;
   background: #fff;
-  border-top: 2px dotted #eee;
-  padding: 10px;
+  padding: 0 10px;
 }
 
 .highlight .hll { background-color: #ffffcc }
