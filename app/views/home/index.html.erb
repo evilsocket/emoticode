@@ -1,12 +1,31 @@
 <section id="home">
-  <ul class="listing">
-    <%= render :partial => "source/listing", :collection => @popular, :as => 'source' %>
-  </ul>
+  <% if @sources.empty? %>
+    <div id="startfollowing">
+      Welcome to your personal stream, start following your favorite users or a whole language channel using the <span class="follow"><a href="#" onclick="return false;" class="follow">Follow</a></span> 
+      buttons you will find around the website.<br/><br/>
+      <center>
+        Wanna give it a try?
+        <span class="follow">
+          <% user = User.find_by_username 'evilsocket' %>
+          <% if @current_user.follows?(user) %>
+            <%= link_to "Following #{user.username}", unfollow_path( type: Follow::TYPES[:user], id: user.id, format: :js ), :'data-subject' => user.username, class: "follow-#{Follow::TYPES[:user]}-#{user.id} following", method: :post, remote: true  %>
+          <% else %>
+            <%= link_to "Follow #{user.username}", follow_path( type: Follow::TYPES[:user], id: user.id, format: :js ), :'data-subject' => user.username, class: "follow-#{Follow::TYPES[:user]}-#{user.id} follow", method: :post, remote: true  %>
+          <% end %>
+        </span> and <%= link_to 'refresh', root_url %> this page, you can edit your followings anytime in your profile <%= link_to( 'settings', user_settings_path ) %>.
+    </center> 
+    </div>
+  <% else %>
+    <ul class="listing">
+      <%= render :partial => "source/listing", :collection => @sources, :as => 'source' %>
+    </ul>
+  <% end %>
+
   <%= render :partial => 'layouts/sidebar', :locals => { with_heading: false } %>
 </section>
 
 <br style="clear:both"/>
 
 <section class="pager">
-  <%= will_paginate @popular %>
+  <%= will_paginate @sources %>
 </section>

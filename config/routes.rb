@@ -10,7 +10,8 @@ EmoticodeRails::Application.routes.draw do
   end
 
   controller :home do
-    get 'new' => :recent, as: :recent_snippets
+    get 'new'      => :recent,   as: :recent_snippets
+    get 'trending' => :trending, as: :trending_snippets
   end
 
   controller :sitemaps do

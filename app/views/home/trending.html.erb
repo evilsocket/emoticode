@@ -1,0 +1,12 @@
+<section id="home">
+  <ul class="listing">
+    <%= render :partial => "source/listing", :collection => @sources, :as => 'source' %>
+  </ul>
+  <%= render :partial => 'layouts/sidebar', :locals => { with_heading: false } %>
+</section>
+
+<br style="clear:both"/>
+
+<section class="pager">
+  <%= will_paginate @sources %>
+</section>

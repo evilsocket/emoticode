@@ -19,6 +19,7 @@
         </ul>
       <% end %>
       </h1>
+
       <div class="aboutme">
         <% unless @user.profile.aboutme.nil? or @user.profile.aboutme.empty? %>
           <%= @user.profile.aboutme %>
@@ -53,6 +54,21 @@
           <li class="r">
             <span>
               <i class="icon-file-text"></i> <%= @user.sources.count %>
+            </span>
+          </li>
+          <li class="r">
+            <span class="follow">
+              <% if signed_in? %>
+                <% if @current_user != @user %>
+                  <% if @current_user.follows?(@user) %>
+                    <%= link_to 'Following', unfollow_path( type: Follow::TYPES[:user], id: @user.id, format: :js ), class: "follow-#{Follow::TYPES[:user]}-#{@user.id} following", method: :post, remote: true  %>
+                  <% else %>
+                    <%= link_to 'Follow', follow_path( type: Follow::TYPES[:user], id: @user.id, format: :js ), class: "follow-#{Follow::TYPES[:user]}-#{@user.id} follow", method: :post, remote: true  %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to_function 'Follow', 'showLoginModal()' %>
+              <% end %>
             </span>
           </li>
         </ul>

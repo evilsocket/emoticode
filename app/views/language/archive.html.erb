@@ -5,6 +5,18 @@
       <%= paged "#{@language.title} Snippets Archive" %>
     </h1>
 
+    <span class="follow">
+      <% if signed_in? %>
+        <% if @current_user.follows?(@language) %>
+          <%= link_to "Following", unfollow_path( type: Follow::TYPES[:language], id: @language.id, format: :js ), class: "follow-#{Follow::TYPES[:language]}-#{@language.id} following", method: :post, remote: true  %>
+        <% else %>
+          <%= link_to "Follow", follow_path( type: Follow::TYPES[:language], id: @language.id, format: :js ), class: "follow-#{Follow::TYPES[:language]}-#{@language.id} follow", method: :post, remote: true  %>
+        <% end %>
+      <% else %>
+        <%= link_to_function 'Follow', 'showLoginModal()' %>
+      <% end %>
+    </span>
+
     <%= adsense :slot => '2367176978', :width => 728, :height => 15 %>
     
     <% if @podium and @podium.count > 0 %>

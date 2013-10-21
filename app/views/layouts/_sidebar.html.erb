@@ -5,6 +5,37 @@
       This snippet has been posted by <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= @source.user.username %> profile"><%= source.user.username %></a>
       <%= time_ago_in_words Time.at(source.created_at) %> ago in the <%= link_to_language source.language, :class => 'language' %> section.
       </p>
+
+      <p>
+        <span class="follow">
+          <% if signed_in? %>
+            <% if @current_user != source.user %>
+              <% if @current_user.follows?(source.user) %>
+                <%= link_to "Following #{source.user.username}", unfollow_path( type: Follow::TYPES[:user], id: source.user.id, format: :js ), :'data-subject' => source.user.username, class: "follow-#{Follow::TYPES[:user]}-#{source.user.id} following", method: :post, remote: true  %>
+              <% else %>
+                <%= link_to "Follow #{source.user.username}", follow_path( type: Follow::TYPES[:user], id: source.user.id, format: :js ), :'data-subject' => source.user.username, class: "follow-#{Follow::TYPES[:user]}-#{source.user.id} follow", method: :post, remote: true  %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to_function 'Follow', 'showLoginModal()' %>
+          <% end %>
+        </span>
+      </p>
+
+      <p>
+        <span class="follow">
+          <% if signed_in? %>
+            <% if @current_user.follows?(source.language) %>
+              <%= link_to "Following #{source.language.title}", unfollow_path( type: Follow::TYPES[:language], id: source.language.id, format: :js ), :'data-subject' => source.language.title, class: "follow-#{Follow::TYPES[:language]}-#{source.language.id} following", method: :post, remote: true  %>
+            <% else %>
+              <%= link_to "Follow #{source.language.title}", follow_path( type: Follow::TYPES[:language], id: source.language.id, format: :js ), :'data-subject' => source.language.title, class: "follow-#{Follow::TYPES[:language]}-#{source.language.id} follow", method: :post, remote: true  %>
+            <% end %>
+          <% else %>
+            <%= link_to_function 'Follow', 'showLoginModal()' %>
+          <% end %>
+        </span>
+      </p>
+
       <br style="clear:both;"/>
       <ul>
         <li><span class="count"><%= source.views %></span><i class="icon-eye-open"></i></li>

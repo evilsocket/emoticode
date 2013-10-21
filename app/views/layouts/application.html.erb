@@ -20,7 +20,7 @@
   <%= render :partial => "sessions/new" %>
 <% end %>
 
-<% if current_page? root_url or current_page? recent_snippets_url %>
+<% if current_page? root_url or current_page? recent_snippets_url or current_page? trending_snippets_url %>
   <%= render :partial => 'home/heading' %>
 <% end %>
 

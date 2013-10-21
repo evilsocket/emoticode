@@ -83,6 +83,18 @@
                 a, span {
                     color: #FEFEFF;
                 }
+
+                
+                span.follow {
+                    a {
+                        color: #888;
+                        text-transform: none;
+                    }
+
+                    a.following {
+                        color: white;
+                    }
+                }
             }
 
             li.r {
@@ -218,6 +230,14 @@
             a:hover {
                 text-decoration: none;
             }
+        }
+    }
+}
+
+#settings {
+    span.follow { 
+        a {
+            line-height: 25px;
         }
     }
 }

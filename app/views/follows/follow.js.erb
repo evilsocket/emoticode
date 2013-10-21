@@ -1,0 +1,7 @@
+$('.follow-<%= "#{@follow.follow_type}-#{@follow.follow_id}" %>').each( function(){
+  var text = 'Following';
+  if( $(this).attr('data-subject') )
+    text += ' ' + $(this).attr('data-subject');
+
+  $(this).attr( 'href', "<%= unfollow_path( type: @follow.follow_type, id: @follow.follow_id, format: :js ) %>" ).html(text).removeClass('follow').addClass('following');
+});

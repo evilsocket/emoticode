@@ -111,10 +111,11 @@ class Event < ActiveRecord::Base
     })
   end
 
-  def self.new_follow(user,type,subject_id)
-    if type == Follow::TYPES[:user] 
+  def self.new_follow(user,follow_type,subject_id)
+    if follow_type == Follow::TYPES[:user] 
       self.new_follow_user(user,subject_id)
-    elsif type == Follow::TYPES[:language]
+
+    elsif follow_type == Follow::TYPES[:language]
       self.new_follow_language(user,subject_id)
     end
   end

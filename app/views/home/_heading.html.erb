@@ -10,11 +10,20 @@
 <section id="ruler">
   <div class="inner">
     <div class="tabber">
+      <% if signed_in? %>
+        <h3 class="tab">
+          <%= link_to 'Stream', root_path, :class => current_page?(root_url) ? 'current' : '' %>
+        </h3>
+        <h3 class="tab">
+          <%= link_to 'Trending', trending_snippets_path, :class => current_page?(trending_snippets_url) ? 'current' : '' %>
+        </h3>
+      <% else %>
+        <h3 class="tab">
+          <%= link_to 'Trending', root_path, :class => current_page?(root_url) ? 'current' : '' %>
+        </h3>
+      <% end %>
       <h3 class="tab">
-        <%= link_to 'Trending', root_path, :class => current_page?(root_url) ? 'current' : '' %>
-      </h3>
-      <h3 class="tab">
-        <%= link_to 'New', recent_snippets_path, :class => current_page?(root_url) ? '' : 'current' %>
+        <%= link_to 'New', recent_snippets_path, :class => current_page?(recent_snippets_url) ? 'current' : '' %>
       </h3>
     </div>
     <div class="small-column">

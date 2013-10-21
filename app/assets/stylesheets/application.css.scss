@@ -512,6 +512,7 @@ li.source {
         font-size: 12px;
         
         div.avatar {
+            float: left;
             a {
                 display: inline-block;
                 vertical-align: middle;
@@ -528,6 +529,12 @@ li.source {
             a:hover {
                 text-decoration: none;
             }
+        }
+
+        span.follow {
+            float: right;
+            margin-right: 30px;
+            margin-top: 4px;
         }
     }   
 
@@ -751,4 +758,52 @@ div.create {
     }
 }
 
+span.follow {
+    a {
+        display: initial !important;
+        color: #888;
+        padding: 3px 4px;
+        font-size: 11px;
+        font-weight: 800;
+        text-shadow: 0 1px 0 #fff;
+
+        background-color: #eaeaea;
+        background-image: -moz-linear-gradient(#fafafa, #eaeaea);
+        background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+        background-image: linear-gradient(#fafafa, #eaeaea);
+
+        background-repeat: repeat-x;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        height: 27px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    a.following {
+        color: #fff;
+        text-shadow: 0 -1px 1px rgba(0,0,0,.25);
+        background-color: #019ad2;
+        background-repeat: repeat-x;
+        background-image: -moz-linear-gradient(#33bcef,#019ad2);
+        background-image: -ms-linear-gradient(#33bcef,#019ad2);
+        background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#33bcef),color-stop(100%,#019ad2));
+        background-image: -webkit-linear-gradient(#33bcef,#019ad2);
+        background-image: -o-linear-gradient(#33bcef,#019ad2);
+        background-image: linear-gradient(#33bcef,#019ad2);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bcef',endColorstr='#019ad2',GradientType=0);
+        border-color: #057ed0;
+    }
+}
+
+#startfollowing {
+    width: 78%;
+    float: left;
+    padding: 30px 10px;
+    text-shadow: 1px 0 white;
+}
 

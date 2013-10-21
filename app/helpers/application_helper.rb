@@ -11,7 +11,9 @@ module ApplicationHelper
     Event::TYPES[:sent_nth_content] => 'file-text',
     Event::TYPES[:commented]        => 'comments',
     Event::TYPES[:logged_in]        => 'ok-circle',
-    Event::TYPES[:views_reached]    => 'eye-open' 
+    Event::TYPES[:views_reached]    => 'eye-open',
+    Event::TYPES[:follow_user]      => 'chevron-sign-right',
+    Event::TYPES[:follow_language]  => 'chevron-sign-right'
   }
 
   def page_title
