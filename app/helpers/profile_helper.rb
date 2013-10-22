@@ -14,7 +14,7 @@ module ProfileHelper
       else
         seo.description = u.profile.aboutme
       end
-
+=begin      
       if u.profile.avatar?
         seo.metas.each_with_index do |meta,i|
           if meta.values.first == 'og:image'
@@ -23,6 +23,7 @@ module ProfileHelper
           end
         end
       end
+=end
     end
   end
 
