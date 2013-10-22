@@ -9,7 +9,7 @@ module ProfileHelper
     make_seo do |seo|
       u = @user || @current_user
 
-      if u.profile.aboutme.empty?      
+      if u.profile.aboutme.nil?      
         seo.description = paged seo.user.description % u.username
       else
         seo.description = u.profile.aboutme
