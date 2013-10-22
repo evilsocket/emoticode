@@ -13,6 +13,13 @@ class FollowsController < ApplicationController
         @follow.save!
 
         Event.new_follow( @current_user, params[:type].to_i, params[:id].to_i ) 
+
+        if params[:type].to_i == Follow::TYPES[:user]
+          followed = User.find( params[:id] )
+          if followed.profile.follow_mail?
+            FollowMailer.follow( followed, @current_user ).deliver     
+          end
+        end
       }
     end
   end

@@ -31,15 +31,19 @@
     <%= f.fields_for :profile do |fp| %>
       <%= fp.label :aboutme, 'About Me' %>
       <%= fp.text_area :aboutme, :rows => 10, :placeholder => 'About Me' %>
-
-      <%= fp.label "Receive weekly newsletter." %> 
-      <%= fp.check_box :weekly_newsletter %>
       
       <%= fp.label :website, 'Website' %>
       <%= fp.text_field :website, :placeholder => 'Website' %>
 
       <%= fp.label :gplus, 'Google+ Profile' %>
       <%= fp.text_field :gplus, :placeholder => 'Google+ Profile' %>
+
+      <%= fp.label "Receive the weekly newsletter." %> 
+      <%= fp.check_box :weekly_newsletter %>
+
+      <%= fp.label "Receive an email notification when a user starts following you." %> 
+      <%= fp.check_box :follow_mail %>
+
     <% end %>
 
     <fieldset class="pure-group">    

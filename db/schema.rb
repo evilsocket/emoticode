@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131021194714) do
+ActiveRecord::Schema.define(version: 20131022193241) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20131021194714) do
     t.string  "gplus"
     t.integer "avatar",            limit: 1,        default: 0,    null: false
     t.boolean "weekly_newsletter",                  default: true
+    t.boolean "follow_mail",                        default: true
   end
 
   add_index "profiles", ["user_id"], name: "user_id", using: :btree
