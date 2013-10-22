@@ -6,7 +6,7 @@
         <%= paged "#{@language.title} Snippets Archive" %>
       </h1>
 
-      <span class="follow">
+      <span class="follow followlang">
         <% if signed_in? %>
           <% if @current_user.follows?(@language) %>
             <%= link_to "Following", unfollow_path( type: Follow::TYPES[:language], id: @language.id, format: :js ), class: "follow-#{Follow::TYPES[:language]}-#{@language.id} following", method: :post, remote: true  %>
