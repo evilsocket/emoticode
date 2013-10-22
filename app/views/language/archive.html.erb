@@ -1,46 +1,46 @@
 <section id="language-archive">
   <div class="huge-column">
-    <h1>
-      <%= link_to image_tag('icons/rss-s.png'), language_feed_path(:language => @language.name ), :title => "#{@language.title} RSS feed." %>
-      <%= paged "#{@language.title} Snippets Archive" %>
-    </h1>
+    <div class="headblock">
+      <h1>
+        <%= link_to image_tag('icons/rss-s.png'), language_feed_path(:language => @language.name ), :title => "#{@language.title} RSS feed." %>
+        <%= paged "#{@language.title} Snippets Archive" %>
+      </h1>
 
-    <span class="follow">
-      <% if signed_in? %>
-        <% if @current_user.follows?(@language) %>
-          <%= link_to "Following", unfollow_path( type: Follow::TYPES[:language], id: @language.id, format: :js ), class: "follow-#{Follow::TYPES[:language]}-#{@language.id} following", method: :post, remote: true  %>
+      <span class="follow">
+        <% if signed_in? %>
+          <% if @current_user.follows?(@language) %>
+            <%= link_to "Following", unfollow_path( type: Follow::TYPES[:language], id: @language.id, format: :js ), class: "follow-#{Follow::TYPES[:language]}-#{@language.id} following", method: :post, remote: true  %>
+          <% else %>
+            <%= link_to "Follow", follow_path( type: Follow::TYPES[:language], id: @language.id, format: :js ), class: "follow-#{Follow::TYPES[:language]}-#{@language.id} follow", method: :post, remote: true  %>
+          <% end %>
         <% else %>
-          <%= link_to "Follow", follow_path( type: Follow::TYPES[:language], id: @language.id, format: :js ), class: "follow-#{Follow::TYPES[:language]}-#{@language.id} follow", method: :post, remote: true  %>
+          <%= link_to_function 'Follow', 'showLoginModal()' %>
         <% end %>
-      <% else %>
-        <%= link_to_function 'Follow', 'showLoginModal()' %>
-      <% end %>
-    </span>
-
-    <%= adsense :slot => '2367176978', :width => 728, :height => 15 %>
-    
-    <% if @podium and @podium.count > 0 %>
-      <%
-        first, second, third = @podium
-        @podium = { :second => [ second, 2 ], :first => [ first, 1 ], :third => [ third, 3 ] }
-      %>
-      <div id="podium">
-        <h3>Most Active Users</h3>
-        <% @podium.each do |position,(user,number)| %>
-          <div class="bar <%= position %>">
-          <% if user %>
-          <div class="user">
-            <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile">
-              <%= avatar_tag user %>
-              <%= truncate user.username, :length => 15 %>
-            </a>
+      </span>
+ 
+      <% if @podium and @podium.count > 0 %>
+        <%
+          first, second, third = @podium
+          @podium = { :second => [ second, 2 ], :first => [ first, 1 ], :third => [ third, 3 ] }
+        %>
+        <div id="podium">
+          <h3>Most Active Users</h3>
+          <% @podium.each do |position,(user,number)| %>
+            <div class="bar <%= position %>">
+            <% if user %>
+            <div class="user">
+              <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile">
+                <%= avatar_tag user %>
+                <%= truncate user.username, :length => 15 %>
+              </a>              
+            </div>
+            <% end %>
+            <span><%= number %></span>
           </div>
           <% end %>
-          <span><%= number %></span>
         </div>
-        <% end %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
 
     <center>
       <%= adsense :slot => '9597895776', :width => 728, :height => 90 %>

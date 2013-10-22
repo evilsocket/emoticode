@@ -4,9 +4,12 @@
     }
 
     span.follow {
-        display: block;
-        margin-left: 10px;
-        margin-bottom: 15px;
+        float: right;
+        margin-top: -45px;
+
+        a {
+            font-size: 14px;
+        }
     }   
 
     #podium {
