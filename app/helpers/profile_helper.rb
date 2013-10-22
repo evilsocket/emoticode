@@ -7,7 +7,22 @@ module ProfileHelper
 
   def metas
     make_seo do |seo|
-      seo.description = paged seo.user.description % (@user || @current_user).username
+      u = @user || @current_user
+
+      if u.profile.aboutme.empty?      
+        seo.description = paged seo.user.description % u.username
+      else
+        seo.description = u.profile.aboutme
+      end
+
+      if u.profile.avatar?
+        seo.metas.each_with_index do |meta,i|
+          if meta.values.first == 'og:image'
+            seo.metas[i][:content] = image_url(u.avatar)
+            break
+          end
+        end
+      end
     end
   end
 
