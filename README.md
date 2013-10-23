@@ -15,13 +15,10 @@ solve someone else problems while developing a project ... you never know :)
 
 ## Future Tasks
 
-- [x] New Logo
-- [ ] Per language og:image ?
-- [ ] Everything's needed :P
-- [ ] Custom User Homepage
-- [ ] Postable tutorials ( markdown + multiple attached sources )  
-- [ ] Language Discussion Groups
-- [ ] Group feed
+- [x] Custom User Homepage
+- [ ] Markdown descriptions
+- [ ] Custom homepage feed
+- [ ] Implement first time introduction with https://github.com/usablica/intro.js
 
 ## License
 
