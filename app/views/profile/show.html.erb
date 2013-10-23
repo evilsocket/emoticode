@@ -57,19 +57,9 @@
             </span>
           </li>
           <li class="r">
-            <span class="follow">
-              <% if signed_in? %>
-                <% if @current_user != @user %>
-                  <% if @current_user.follows?(@user) %>
-                    <%= link_to 'Following', unfollow_path( type: Follow::TYPES[:user], id: @user.id, format: :js ), class: "follow-#{Follow::TYPES[:user]}-#{@user.id} following", method: :post, remote: true  %>
-                  <% else %>
-                    <%= link_to 'Follow', follow_path( type: Follow::TYPES[:user], id: @user.id, format: :js ), class: "follow-#{Follow::TYPES[:user]}-#{@user.id} follow", method: :post, remote: true  %>
-                  <% end %>
-                <% end %>
-              <% else %>
-                <%= link_to_function 'Follow', 'showLoginModal()' %>
-              <% end %>
-            </span>
+            <% if !signed_in? or @current_user != @user %>
+              <%= render :partial => "follows/follow", :locals => { :type => :user, :object => @user } %> 
+            <% end %>
           </li>
         </ul>
     </div>

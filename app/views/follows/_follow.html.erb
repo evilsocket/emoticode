@@ -1,0 +1,23 @@
+<%
+  custom_class = defined?(clazz) ? " #{clazz}" : ""
+  if defined? text
+    following = "Following #{text}"
+    follow    = "Follow #{text}"
+    subject   = text
+  else
+    following = "Following"
+    follow    = "Follow"
+    subject   = nil
+  end
+%>
+<span class="follow<%= defined?(clazz) ? " #{clazz}" : "" %>">
+  <% if signed_in? %>
+      <% if @current_user.follows?(object) %>
+        <%= link_to following, unfollow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, class: "follow-#{Follow::TYPES[type]}-#{object.id} following", method: :post, remote: true  %>
+      <% else %>
+        <%= link_to follow, follow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, class: "follow-#{Follow::TYPES[type]}-#{object.id} follow", method: :post, remote: true  %>
+      <% end %>
+  <% else %>
+    <%= link_to_function 'Follow', 'showLoginModal()' %>
+  <% end %>
+</span>

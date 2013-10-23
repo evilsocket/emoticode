@@ -6,18 +6,8 @@
         <%= paged "#{@language.title} Snippets Archive" %>
       </h1>
 
-      <span class="follow followlang">
-        <% if signed_in? %>
-          <% if @current_user.follows?(@language) %>
-            <%= link_to "Following", unfollow_path( type: Follow::TYPES[:language], id: @language.id, format: :js ), class: "follow-#{Follow::TYPES[:language]}-#{@language.id} following", method: :post, remote: true  %>
-          <% else %>
-            <%= link_to "Follow", follow_path( type: Follow::TYPES[:language], id: @language.id, format: :js ), class: "follow-#{Follow::TYPES[:language]}-#{@language.id} follow", method: :post, remote: true  %>
-          <% end %>
-        <% else %>
-          <%= link_to_function 'Follow', 'showLoginModal()' %>
-        <% end %>
-      </span>
- 
+      <%= render :partial => "follows/follow", :locals => { :type => :language, :object => @language, :clazz => 'followlang' }%>       
+
       <% if @podium and @podium.count > 0 %>
         <%
           first, second, third = @podium
