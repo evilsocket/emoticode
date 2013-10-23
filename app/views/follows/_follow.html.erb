@@ -1,5 +1,5 @@
 <%
-  is_following = @current_user.follows?(object)
+  is_following = signed_in? ? @current_user.follows?(object) : false
   custom_class = defined?(clazz) ? " #{clazz}" : ""
   if defined? text
     following = "Following #{text}"
@@ -13,7 +13,7 @@
     subject   = nil
   end
 %>
-<span class="follow ttip<%= defined?(clazz) ? " #{clazz}" : "" %>" title="<%= ttip %>">
+<span class="follow<%= defined?(clazz) ? " #{clazz}" : "" %>">
   <% if signed_in? %>
       <% if is_following %>
         <%= link_to following, unfollow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, class: "follow-#{Follow::TYPES[type]}-#{object.id} following", method: :post, remote: true  %>
