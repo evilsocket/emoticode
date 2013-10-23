@@ -59,6 +59,8 @@ $(document).ready(function($) {
     else
       $('#hiddenmenu').fadeIn('fast');
   });
+
+  $(".ttip").tipTip({'maxWidth': 300});
 });
 
 function showLoginModal(){
