@@ -16,11 +16,11 @@
 <span class="follow<%= defined?(clazz) ? " #{clazz}" : "" %>">
   <% if signed_in? %>
       <% if is_following %>
-        <%= link_to following, unfollow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, class: "follow-#{Follow::TYPES[type]}-#{object.id} following", method: :post, remote: true  %>
+        <%= link_to following, unfollow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, :title => ttip, class: "ttip follow-#{Follow::TYPES[type]}-#{object.id} following", method: :post, remote: true  %>
       <% else %>
-        <%= link_to follow, follow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, class: "follow-#{Follow::TYPES[type]}-#{object.id} follow", method: :post, remote: true  %>
+        <%= link_to follow, follow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, :title => ttip, class: "ttip follow-#{Follow::TYPES[type]}-#{object.id} follow", method: :post, remote: true  %>
       <% end %>
   <% else %>
-    <%= link_to_function follow, 'showLoginModal()' %>
+    <%= link_to_function follow, 'showLoginModal()', :class => 'ttip', :title => ttip %>
   <% end %>
 </span>
