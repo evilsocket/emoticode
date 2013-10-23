@@ -14,6 +14,8 @@ class SessionsController < ApplicationController
       @user = User.authenticate( params[:session][:who], params[:session][:password] )
     end
 
+    # TODO: if first login, set show_intro cookie
+    
     process_user
   end
 

@@ -25,7 +25,7 @@ class UserController < ApplicationController
 
       flash[:alert] = 'A confirmation email has been sent to your email address.'
       redirect_to root_url
-    # something's not valid
+      # something's not valid
     else
       render :new
     end
@@ -33,15 +33,15 @@ class UserController < ApplicationController
 
   def confirm
     token = params[:token]
-
     @user = User.activate( params[:token] )
     if @user.nil?
       flash[:alert] = 'Invalid confirmation token.'
-      redirect_to root_url
     else
       sign_in(@user)
-      redirect_to user_settings_url
     end
+
+    # TODO: Set show_intro cookie
+    redirect_to root_url    
   end
 
   private
