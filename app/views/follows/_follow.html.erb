@@ -18,6 +18,6 @@
         <%= link_to follow, follow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, class: "follow-#{Follow::TYPES[type]}-#{object.id} follow", method: :post, remote: true  %>
       <% end %>
   <% else %>
-    <%= link_to_function 'Follow', 'showLoginModal()' %>
+    <%= link_to_function follow, 'showLoginModal()' %>
   <% end %>
 </span>
