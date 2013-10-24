@@ -16,9 +16,13 @@ module SourceHelper
     if source.description.nil? or source.description.strip.empty?
       '<em>No description :/</em>'.html_safe
     else
-      encoder.encode( source.description )
-      .gsub( /\n/, '<br/>' )
-      .gsub( /(https?:\/\/[A-z0-9~@$%&*_\-\.+\/'=#\?]+)/i, '<a href="\1" target="_blank" rel="nofollow">\1</a>' )
+      require 'redcarpet'
+
+      renderer   = Redcarpet::Render::HTML.new
+      extensions = {fenced_code_blocks: true}
+      redcarpet  = Redcarpet::Markdown.new(renderer, extensions)
+
+      redcarpet.render encoder.encode( source.description )
     end
   end
 

@@ -17,9 +17,16 @@
     </div>
 
     <%= f.text_area :description, :placeholder => 'Description', :class => 'description' %>
+    <div id="epiceditor"></div>
 
     <%= f.text_area :text, :placeholder => 'Code', :class => 'code' %>
 
     <%= f.submit "Save", :class => 'pure-button pure-button-primary' %>
   <% end %>
 </div>
+<script>
+  $('#source_description').hide();
+  var editor = new EpicEditor({
+    textarea: 'source_description'
+  }).load();
+</script>

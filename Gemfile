@@ -23,6 +23,7 @@ gem "htmlentities"
 gem "rabl"
 gem 'roadie'
 gem 'impressionist'
+gem 'redcarpet'
 
 # social features
 gem "koala", "~> 1.7.0rc1"

@@ -7,7 +7,7 @@ class Source < ActiveRecord::Base
   has_many   :tags, :through => :links
   has_many   :comments, -> { where :commentable_type => Comment::COMMENTABLE_TYPES[:source] }, :foreign_key => :commentable_id
   has_many   :favorites
-   
+
   default_scope -> { order('created_at DESC') }
 
   scope :public,     -> { where( :private => false ) }
@@ -33,7 +33,7 @@ class Source < ActiveRecord::Base
   end
 
   def short_url
-    "http://www.emoticode.net/source/#{id}"    
+    "http://www.emoticode.net/source/#{id}"
   end
 
   def commentable_type
@@ -105,9 +105,9 @@ class Source < ActiveRecord::Base
   end
 
   def tokenize
-    # extract meaningful identifiers of at least 4 characters and at most 50, with a css 
+    # extract meaningful identifiers of at least 4 characters and at most 50, with a css
     # class starting with a 'n' or a 'v' ( see pygments/token.py ).
-    # Then remove tokens when they are formed by a repetition ( ex. 'aaaaaaaaaa' or '___' )        
+    # Then remove tokens when they are formed by a repetition ( ex. 'aaaaaaaaaa' or '___' )
     Albino
     .colorize( text, language.syntax )
     .scan( /<span\s+class="[nv][^"]*">([^<]{4,50})<\/span>/im )
@@ -125,22 +125,22 @@ class Source < ActiveRecord::Base
     #
     #   base_weight + 0.3 * ( occurrences(token) - 1 )
     tokens.each do |token|
-      analysis[token] ||= base * 0.3 * lowerized.count( token.downcase ) 
+      analysis[token] ||= base * 0.3 * lowerized.count( token.downcase )
     end
 
     analysis
   end
 
-  def lexical_analysis!    
+  def lexical_analysis!
     # save tokenization db
     self.send(:analyze).each do |token,weight|
       tag_name = token.parameterize
       # create the tag if it doesn't exist yet
       tag = Tag.find_by_name(tag_name) || Tag.create( :name => tag_name, :value => token )
       # create a link with this source if not already present
-      link = Link.find_by_source_id_and_tag_id( id, tag.id ) || 
+      link = Link.find_by_source_id_and_tag_id( id, tag.id ) ||
         Link.create( :source_id => id, :tag_id => tag.id, :weight => weight )
-    end 
+    end
   end
 
   def invalidate_highlight_cache!
