@@ -3,9 +3,9 @@
     <div class="headblock">
       <h1><%= @source.title %></h1>
       <%= render :partial => "adv/criteo728x90" %>
-      <p class="description">
+      <div class="description">
         <%=raw description(@source) %>
-      </p>
+      </div>
 
       <ul class="buttons">
         <% if signed_in? %>
