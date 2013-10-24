@@ -2,12 +2,7 @@
 <li class="source">
   <h4><%= link_to_source source, { :class => 'title' }, true %></h4>
   <div class="description">
-    <%= if source.description.nil? or source.description.strip.empty?
-      '<em>No description :/</em>'.html_safe
-      else
-        truncate source.description, :length => 250
-      end
-    %>
+    <%= truncate source.description!( '<em>No description :/</em>'.html_safe, false ), :length => 250 %>
   </div>
   <div class="author">
     <div class="avatar">

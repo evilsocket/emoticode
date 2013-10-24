@@ -40,11 +40,37 @@ class Source < ActiveRecord::Base
     Comment::COMMENTABLE_TYPES[:source]
   end
 
-  def description!( default = nil )
-    if !description.nil? && !description.empty?
-      description
-    else
-      default || title
+  include ActionView::Helpers::SanitizeHelper
+  
+  def description!( default = nil, html = false )
+    Rails.cache.fetch "source_#{id}_description!_#{default}_#{html}_#{description}_#{title}" do
+      text = if !description.nil? && !description.empty?
+               description
+             else
+               default || title
+             end
+
+      require 'redcarpet'
+
+      renderer   = Redcarpet::Render::HTML.new
+      encoder    = HTMLEntities.new
+
+      extensions = {
+        :fenced_code_blocks => true,
+        :autolink => true,
+        :underline => true,
+        :quote => true,
+        :footnotes => true
+      }
+      redcarpet  = Redcarpet::Markdown.new(renderer, extensions)
+
+      text = redcarpet.render encoder.encode( text )
+
+      if html
+        text
+      else
+        strip_tags text
+      end
     end
   end
 

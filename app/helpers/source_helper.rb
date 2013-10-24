@@ -13,17 +13,7 @@ module SourceHelper
   end
 
   def description(source)
-    if source.description.nil? or source.description.strip.empty?
-      '<em>No description :/</em>'.html_safe
-    else
-      require 'redcarpet'
-
-      renderer   = Redcarpet::Render::HTML.new
-      extensions = {fenced_code_blocks: true}
-      redcarpet  = Redcarpet::Markdown.new(renderer, extensions)
-
-      redcarpet.render encoder.encode( source.description )
-    end
+    source.description! '<em>No description :/</em>'.html_safe, true
   end
 
   def highlight(source)
@@ -36,11 +26,5 @@ module SourceHelper
       code = Albino.colorize source.text, source.language.syntax
       code.empty? ? "<pre>#{h(source.text)}</pre>" : code
     end
-  end
-
-  private
-
-  def encoder
-    @encoder ||= HTMLEntities.new
   end
 end
