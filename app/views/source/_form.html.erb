@@ -19,7 +19,6 @@
     <%= f.label(:description, "Description ( markdown powered )") %>
     <%= f.text_area :description, :placeholder => 'Description', :class => 'description' %>
     <div id="epiceditor"></div>
-    <br/>
     <%= f.text_area :text, :placeholder => 'Code', :class => 'code' %>
 
     <%= f.submit "Save", :class => 'pure-button pure-button-primary' %>
@@ -30,6 +29,13 @@
   var editor = new EpicEditor({
     textarea: 'source_description',
     basePath: '/epiceditor',
-    clientSideStorage: false
+    clientSideStorage: false,
+    autogrow: true,
+
+    theme: {
+      base: '/themes/base/epiceditor.css',
+      preview: '/themes/preview/github.css',
+      editor: '/themes/editor/emoticode.css'
+    }
   }).load();
 </script>
