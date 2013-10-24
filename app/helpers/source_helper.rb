@@ -13,7 +13,7 @@ module SourceHelper
   end
 
   def description(source)
-    source.description! '<em>No description :/</em>'.html_safe, true
+    source.description! '*No description :/*', true
   end
 
   def highlight(source)

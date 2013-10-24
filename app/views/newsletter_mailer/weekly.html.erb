@@ -39,12 +39,7 @@
               "http://www.emoticode.net#{source_with_language_path(language_name: source.language.name, source_name: source.name)}".html_safe %>
             </h2>
             <p>
-            <%= if source.description.nil? or source.description.strip.empty?
-              '<em>No description :/</em>'.html_safe
-              else
-                truncate source.description, :length => 250
-              end
-            %>
+            <%= source.description!( '*No description :/*', true ).html_safe %>
             </p>
           </td>
         </tr>
