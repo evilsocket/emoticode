@@ -11,7 +11,7 @@ class UserController < ApplicationController
 
     @user = User.new( user_params )
 
-    valid_captcha = verify_recaptcha( :model => @user, :message => 'Invalid captcha.' )
+    valid_captcha = verify_recaptcha( :model => @user )
 
     # valid catpcha but bot detected
     if valid_captcha and ( params[:antibot].nil? or params[:antibot].empty? == false )
