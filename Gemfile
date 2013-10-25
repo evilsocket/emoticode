@@ -4,7 +4,7 @@ gem 'rails', '4.0.0'
 gem 'mysql2'                      # mysql adapter
 gem 'sass-rails', '~> 4.0.0'      # scss
 gem 'uglifier', '>= 1.3.0'        # uglify js in production
-gem 'coffee-rails', '~> 4.0.0'    # cofee script
+gem 'coffee-rails', '~> 4.0.0'    # coffee-script
 gem 'jquery-rails'                # jquery
 gem 'jbuilder', '~> 1.2'          # json api
 gem "albino"                      # syntax highlight
