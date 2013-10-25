@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def create_globals
-    @languages    = Language.all
+    @languages    = Language.order('name ASC').all
     @users        = User.confirmed.order('created_at DESC').limit(20)
     @events       = Event.order('created_at DESC').limit(8)
     @show_joinus  = false
