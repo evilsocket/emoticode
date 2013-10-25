@@ -11,7 +11,7 @@ class UserController < ApplicationController
 
     @user = User.new( user_params )
 
-    valid_captcha = verify_recaptcha( :model => @user )
+    valid_captcha = verify_recaptcha( :model => @user, :timeout => 15 )
 
     # valid catpcha but bot detected
     if valid_captcha and ( params[:antibot].nil? or params[:antibot].empty? == false )
@@ -20,7 +20,7 @@ class UserController < ApplicationController
     # valid captcha and valid user -> register
     elsif valid_captcha and @user.save
       Profile.create({ user: @user })
-     
+
       UserMailer.confirmation_email(@user, params[:user][:password] ).deliver
 
       flash[:alert] = 'A confirmation email has been sent to your email address.'
@@ -41,7 +41,7 @@ class UserController < ApplicationController
     end
 
     # TODO: Set show_intro cookie
-    redirect_to root_url    
+    redirect_to root_url
   end
 
   private
