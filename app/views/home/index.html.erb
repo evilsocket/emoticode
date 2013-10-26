@@ -12,7 +12,7 @@
           <% else %>
             <%= link_to "Follow #{user.username}", follow_path( type: Follow::TYPES[:user], id: user.id, format: :js ), :'data-subject' => user.username, class: "follow-#{Follow::TYPES[:user]}-#{user.id} follow", method: :post, remote: true  %>
           <% end %>
-        </span> and <%= link_to 'refresh', root_url %> this page, you can edit your followings anytime in your profile <%= link_to( 'settings', user_settings_path ) %>.
+        </span> and <%= link_to 'refresh', root_url %> this page, you can edit your followings anytime in your <%= link_to( 'profile', user_following_path(username:@current_user.username) ) %> page.
     </center> 
     </div>
   <% else %>

@@ -1,26 +1,29 @@
 <%
-  is_following = signed_in? ? @current_user.follows?(object) : false
-  custom_class = defined?(clazz) ? " #{clazz}" : ""
-  if defined? text
-    following = "Following #{text}"
-    follow    = "Follow #{text}"
-    ttip      = "#{is_following ? 'Stop' : 'Start'} following the #{text} stream!"
-    subject   = text
-  else
-    following = "Following"
-    follow    = "Follow"
-    ttip      = "#{is_following ? 'Stop' : 'Start'} following!"
-    subject   = nil
-  end
+  unless type == :user and signed_in? and @current_user == object
+  
+    is_following = signed_in? ? @current_user.follows?(object) : false
+    custom_class = defined?(clazz) ? " #{clazz}" : ""
+    if defined? text
+      following = "Following #{text}"
+      follow    = "Follow #{text}"
+      ttip      = "#{is_following ? 'Stop' : 'Start'} following the #{text} stream!"
+      subject   = text
+    else
+      following = "Following"
+      follow    = "Follow"
+      ttip      = "#{is_following ? 'Stop' : 'Start'} following!"
+      subject   = nil
+    end
 %>
-<span class="follow<%= defined?(clazz) ? " #{clazz}" : "" %>">
-  <% if signed_in? %>
-      <% if is_following %>
-        <%= link_to following, unfollow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, :title => ttip, class: "ttip follow-#{Follow::TYPES[type]}-#{object.id} following", method: :post, remote: true  %>
-      <% else %>
-        <%= link_to follow, follow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, :title => ttip, class: "ttip follow-#{Follow::TYPES[type]}-#{object.id} follow", method: :post, remote: true  %>
-      <% end %>
-  <% else %>
-    <%= link_to_function follow, 'showLoginModal()', :class => 'ttip', :title => ttip %>
-  <% end %>
-</span>
+  <span class="follow<%= defined?(clazz) ? " #{clazz}" : "" %>">
+    <% if signed_in? %>
+        <% if is_following %>
+          <%= link_to following, unfollow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, :title => ttip, class: "ttip follow-#{Follow::TYPES[type]}-#{object.id} following", method: :post, remote: true  %>
+        <% else %>
+          <%= link_to follow, follow_path( type: Follow::TYPES[type], id: object.id, format: :js ), :'data-subject' => subject, :title => ttip, class: "ttip follow-#{Follow::TYPES[type]}-#{object.id} follow", method: :post, remote: true  %>
+        <% end %>
+    <% else %>
+      <%= link_to_function follow, 'showLoginModal()', :class => 'ttip', :title => ttip %>
+    <% end %>
+  </span>
+<% end %>

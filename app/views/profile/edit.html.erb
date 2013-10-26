@@ -15,12 +15,6 @@
       <% end %>
     <% end %>
 
-    <% @current_user.follows.each do |follow| %>      
-      <span class="follow">
-        <%= link_to "Following #{follow.text}", unfollow_path( type: follow.follow_type, id: follow.follow_id, format: :js ), :'data-subject' => follow.text, class: "follow-#{follow.follow_type}-#{follow.follow_id} following", method: :post, remote: true  %>           
-      </span>
-    <% end %>
-
     <fieldset> 
     <%= f.label :username, 'Username' %>  
     <%= f.text_field :username, :placeholder => 'Username' %>

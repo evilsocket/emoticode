@@ -47,12 +47,12 @@
             </li>
           <% end %>
           <li class="r">
-            <span>
+            <span class="ttip" title="This user's snippets total views.">
               <i class="icon-eye-open"></i> <%= @user.sources.sum :views %>
             </span>
           </li>
           <li class="r">
-            <span>
+            <span class="ttip" title="This user's snippets total count.">
               <i class="icon-file-text"></i> <%= @user.sources.count %>
             </span>
           </li>
@@ -65,15 +65,24 @@
     </div>
 
     <ul id="profile_tabs">
-      <li>
-      <%= link_to 'Snippets', user_profile_path(username:@user.username), :title => 'View user latest snippets.', :class => @box == 'sources' ? 'ttip current' : 'ttip' %>
-      </li>
-      <li>
-      <%= link_to 'Following', user_following_path(username:@user.username), :title => 'View what this user is following.', :class => @box == 'following' ? 'ttip current' : 'ttip' %>
-      </li>
-      <li>
-      <%= link_to 'Followers', user_followers_path(username:@user.username), :title => 'View who is following this user.', :class => @box == 'followers' ? 'ttip current' : 'ttip' %>
-      </li>
+      <%
+        tabs = [
+          { :text => 'Snippets',  :link => user_profile_path(username:@user.username),   :title => 'View user latest snippets.',        :current => @box == 'sources'   },
+          { :text => 'Following', :link => user_following_path(username:@user.username), :title => 'View what this user is following.', :current => @box == 'following' },
+          { :text => 'Followers', :link => user_followers_path(username:@user.username), :title => 'View who is following this user.',  :current => @box == 'followers' }          
+        ]
+
+        tabs.each do |tab|
+        %>
+        <li>
+          <%= link_to tab[:text], tab[:link], :title => tab[:title], :class => tab[:current] ? 'ttip current' : 'ttip' %>      
+          <% if tab[:current] %>
+            <div class="darrow"></div>
+          <% end %>
+        </li>
+        <%
+        end
+      %>
     </ul>
     <br style="clear: both;"/>
 
