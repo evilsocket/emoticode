@@ -19,9 +19,18 @@ class ProfileController < ApplicationController
   end
 
   def followers
-    @followers = Follow.where( :follow_id => @user.id ).where( :follow_type => Follow::TYPES[:user] ) 
-    @comment   = Comment.new   
-    @box       = 'followers'  
+    tmp = Follow.where( :follow_id => @user.id ).where( :follow_type => Follow::TYPES[:user] ) 
+    @followers = []
+
+    tmp.each do |f|
+      @followers << Follow.new({
+        :follow_type => Follow::TYPES[:user],
+        :follow_id   => f.owner.id
+      })      
+    end
+
+    @comment = Comment.new   
+    @box    = 'followers'  
 
     render 'profile/show'    
   end
