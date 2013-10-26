@@ -581,6 +581,51 @@ li.source {
     }
 }
 
+li.followbox {
+    height: 20px;
+
+    h4 {
+        float: left;
+        a {
+            color: #343131;
+            font-weight: 500;
+            font-size: 13px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        div.avatar {
+            float: left;
+            a {
+                display: inline-block;
+                vertical-align: middle;
+                color: #343131;
+                font-weight: 100;
+                font-size: 13px;
+                line-height: 10px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 2px;                
+                }
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+        }
+
+        a.language {
+            margin-top: 7px;
+        }
+    }
+
+    span.follow {
+        float: right;
+    }
+}
+
 body {
     margin:0;
     padding:0;

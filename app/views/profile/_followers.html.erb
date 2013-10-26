@@ -1,0 +1,12 @@
+<div id="sources">
+  <% if @followers.any? %>
+    <ul class="listing">
+      <%= render :partial => "follows/listing", :collection => @followers, :as => 'follow' %>
+    </ul>
+  <% else %>
+    <center>
+      <h3><%= @user.username %> isn't followed by anyone yet :/</h3>
+    </center>
+  <% end %>
+  <br style="clear:both;"/>
+</div>

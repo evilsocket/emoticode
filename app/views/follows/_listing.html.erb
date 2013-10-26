@@ -1,0 +1,24 @@
+<li class="source followbox">
+  <h4>
+    <%
+      o = follow.object
+      if o.is_a? User
+      %>
+        <div class="avatar">
+          <a href="<%= user_profile_path(username:o.username) %>" title="<%= o.username %> profile" class="avatar">
+            <%= image_tag image_url(o.avatar), :height => '40', :width => '40', :alt => "#{o.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
+          </a>
+          <a href="<%= user_profile_path(username:o.username) %>" title="<%= o.username %> profile" class="username">
+            <%= truncate( o.username, :length => 17 ) %>
+          </a>
+        </div>
+      <%
+      elsif o.is_a? Language
+      %>
+        <%= link_to_language o, :class => 'language' %>
+      <%
+      end
+    %>
+  </h4>
+  <%= render :partial => "follows/follow", :locals => { :type => follow.type_key, :object => o }%>       
+</li>

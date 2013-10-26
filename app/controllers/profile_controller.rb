@@ -1,12 +1,29 @@
 class ProfileController < ApplicationController
-  before_filter :authenticate!, :except => [:show, :badge]
-  before_filter :admin!, only: [ :destroy, :ban, :unban ]  
-  before_filter :skip_password_attribute, only: :update
+  before_filter :authenticate!,           :except => [ :show, :following, :followers, :badge]
+  before_filter :admin!,                  :only   => [ :destroy, :ban, :unban ]  
+  before_filter :skip_password_attribute, :only   => :update
+  before_filter :get_user,                :only   => [ :show, :following, :followers, :badge ]
 
   def show
-    @user    = User.find_by_username!( params[:username] )
     @sources = @user.sources.where( :private => false ).paginate(:page => params[:page], :per_page => 8 )
     @comment = Comment.new
+    @box     = 'sources' 
+  end
+
+  def following
+    @following = @user.follows 
+    @comment   = Comment.new    
+    @box       = 'following' 
+
+    render 'profile/show'    
+  end
+
+  def followers
+    @followers = Follow.where( :follow_id => @user.id ).where( :follow_type => Follow::TYPES[:user] ) 
+    @comment   = Comment.new   
+    @box       = 'followers'  
+
+    render 'profile/show'    
   end
 
   def snippets
@@ -18,7 +35,6 @@ class ProfileController < ApplicationController
   end
 
   def badge
-    @user = User.find_by_username!( params[:username] )
     render :layout => false
   end
 
@@ -58,6 +74,10 @@ class ProfileController < ApplicationController
   end
 
   private
+
+  def get_user
+    @user = User.find_by_username!( params[:username] )    
+  end
 
   def admin!
     @user = User.find( params[:id] )

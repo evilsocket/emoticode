@@ -64,22 +64,20 @@
         </ul>
     </div>
 
-    <div id="sources">
-      <% if @sources.any? %>
-        <ul>
-          <%= render :partial => "source/listing", :collection => @sources, :as => 'source', :locals => { :with_author => false } %>
-        </ul>
+    <ul id="profile_tabs">
+      <li>
+      <%= link_to 'Snippets', user_profile_path(username:@user.username), :title => 'View user latest snippets.', :class => @box == 'sources' ? 'ttip current' : 'ttip' %>
+      </li>
+      <li>
+      <%= link_to 'Following', user_following_path(username:@user.username), :title => 'View what this user is following.', :class => @box == 'following' ? 'ttip current' : 'ttip' %>
+      </li>
+      <li>
+      <%= link_to 'Followers', user_followers_path(username:@user.username), :title => 'View who is following this user.', :class => @box == 'followers' ? 'ttip current' : 'ttip' %>
+      </li>
+    </ul>
+    <br style="clear: both;"/>
 
-        <br style="clear:both;"/>
-        <section class="pager">
-          <%= will_paginate @sources %>
-        </section>
-      <% else %>
-        <center>
-          <h3>Nothing posted yet :/</h3>
-        </center>
-      <% end %>
-    </div>
+    <%= render :partial => "profile/#{@box}" %>
 
     <%= render :partial => 'comments/box', :locals => { object: @user.profile, heading: "Leave a message to #{@user.username}" } %>
 

@@ -1,0 +1,16 @@
+<div id="sources">
+  <% if @sources.any? %>
+    <ul>
+      <%= render :partial => "source/listing", :collection => @sources, :as => 'source', :locals => { :with_author => false } %>
+    </ul>
+
+    <br style="clear:both;"/>
+    <section class="pager">
+      <%= will_paginate @sources %>
+    </section>
+  <% else %>
+    <center>
+      <h3>Nothing posted yet :/</h3>
+    </center>
+  <% end %>
+</div>

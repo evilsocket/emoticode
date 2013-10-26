@@ -241,3 +241,25 @@
         }
     }
 }
+
+#profile_tabs {
+    margin: 0 15px;
+    padding: 0;
+    display: block;
+
+    li {
+        float: left;
+        margin-right: 10px;
+
+        a {
+            color: #343131;
+            font-weight: 100;
+            font-size: 12px; 
+            text-transform: uppercase;
+        }
+
+        a.current {
+            font-weight: 800;
+        }
+    }
+}

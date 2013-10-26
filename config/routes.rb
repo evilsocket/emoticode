@@ -50,6 +50,8 @@ EmoticodeRails::Application.routes.draw do
     get   'profile/edit'        => :edit, as: :user_settings
     patch 'profile/update'      => :update
     get   'profile/:username'   => :show, as: :user_profile, constraints: { username: Patterns::USERNAME_PATTERN }
+    get   'profile/:username/following' => :following, as: :user_following, constraints: { username: Patterns::USERNAME_PATTERN }
+    get   'profile/:username/followers' => :followers, as: :user_followers, constraints: { username: Patterns::USERNAME_PATTERN }    
     get   'profile/destroy/:id' => :destroy, as: :user_delete, constraints: { id: Patterns::ID_PATTERN }
     get   'profile/ban/:id'     => :ban, as: :user_ban, constraints: { id: Patterns::ID_PATTERN }    
     get   'profile/unban/:id'   => :unban, as: :user_unban, constraints: { id: Patterns::ID_PATTERN }        
