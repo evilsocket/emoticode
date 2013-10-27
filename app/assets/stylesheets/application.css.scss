@@ -379,10 +379,18 @@ ul.connect {
                 font-size: 27px;
                 float:left;
                 color: #ccc;
+
+                a.avatar {
+                }
             }
             div.content {
                 width: 210px;
                 float:right;
+                
+                a {
+                    color: #313131;
+                    font-weight: 500;
+                }
             }
         }
 
@@ -851,4 +859,71 @@ span.follow {
     float: left;
     padding: 30px 10px;
     text-shadow: 1px 0 white;
+}
+
+#social {
+    background: #fff;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    width: 100%;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        
+        li {
+            display: block;
+            float: left;
+            width: 33.33%;
+            height: 88px;
+            
+            a {
+                display: block;
+                float: left;
+                text-decoration: none;
+                padding: 17px 0;
+                width: 100%;
+                height: 88px;
+                text-align: center;
+                border-right: 1px solid #ddd;
+                        
+                i {
+                    float: none;
+                    margin-bottom: 5px;
+                    font-size: 20px;
+                }
+
+                i.icon-twitter {
+                    color: #4099FF;
+                }
+
+                i.icon-facebook {
+                    color: #3B5998;
+                }
+
+                i.icon-google-plus {
+                    color: #d34836;
+                }
+
+                large {
+                    display: block;
+                    text-align: center;
+                    margin: 0 auto;
+                    width: 100%;
+                    color: #343131;                
+                    font-weight: 500;
+                    font-size: 20px;
+                }
+
+                small {
+                    display: block;
+                    text-align: center;
+                    margin: 0 auto;
+                    width: 100%;
+                    color: #777;
+                }
+            }
+        }
+    }
 }

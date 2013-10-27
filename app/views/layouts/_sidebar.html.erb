@@ -66,15 +66,10 @@
     <% end %>
 
   <% else %>
-    <%= render :partial => 'layouts/latest_users', :locals => { with_heading: with_heading } %>
+    <%= render :partial => 'layouts/social' %>
   <% end %>
 
   <%= render :partial => 'layouts/latest_events' %>
-
-  <% unless defined? source %>
-    <%= render :partial => 'layouts/be_social' %>
-    <br style="clear:both"/>
-  <% end %>
 
   <% unless @cloud.nil? or @cloud.empty? %>
     <% cache( "tag_cloud_for_#{request.original_url}", :expire => 3.days ) do %>

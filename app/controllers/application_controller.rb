@@ -1,3 +1,7 @@
+require 'twitter_client'
+require 'facebook_client'
+require 'gplus_client'
+
 class ApplicationController < ActionController::Base
   # protect from CSRF attacks
   protect_from_forgery with: :exception
@@ -16,7 +20,7 @@ class ApplicationController < ActionController::Base
   def create_globals
     @languages    = Language.order('name ASC').all
     @users        = User.confirmed.order('created_at DESC').limit(20)
-    @events       = Event.order('created_at DESC').limit(8)
+    @events       = Event.order('created_at DESC').limit(15)
     @show_joinus  = false
     @current_user = session[:id].nil? ? nil : User.find_by_id( session[:id] )
 
@@ -29,6 +33,12 @@ class ApplicationController < ActionController::Base
     #   @show_joinus = true
     #   cookies[:joinus] = { :value => "1", :expires => Time.now + 604800 }
     end
+
+    @followers = {
+      :twitter  => TwitterClient.new.followers,
+      :facebook => FacebookClient.new.followers,
+      :gplus    => GooglePlusClient.new.followers
+    }
   end
 
   def coerce_page_number

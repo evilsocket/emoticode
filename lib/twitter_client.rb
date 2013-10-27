@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'json'
+
 class TwitterClient
   def initialize
     @config = Rails.application.config.secrets['Twitter']
@@ -18,5 +21,13 @@ class TwitterClient
     end
 
     @client.update message
+  end
+
+  def followers
+    Rails.cache.fetch "TwitterClient#followers", :expire => 60.minutes do
+      data = open("http://query.yahooapis.com/v1/public/yql?q=SELECT%20*%20from%20html%20where%20url=%22http://twitter.com/EmotiCodeDotNet%22%20AND%20xpath=%22(//a[@class=\'js-nav\']/strong)[3]%22&format=json").read    
+      obj = JSON.parse(data)
+      obj['query']['results']['strong'].to_i
+    end
   end
 end

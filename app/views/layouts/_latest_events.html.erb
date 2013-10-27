@@ -1,4 +1,4 @@
-<% cache "events_#{Event.count}", :expire => 1.hour do %>
+<% cache "events#{Event.count}", :expire => 1.hour do %>
   <div class="heading">
     <h3>Latest Events</h3>
   </div>

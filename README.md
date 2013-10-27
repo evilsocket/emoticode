@@ -18,7 +18,7 @@ solve someone else problems while developing a project ... you never know :)
 - [x] Custom User Homepage
 - [x] Markdown descriptions
 - [ ] Custom homepage feed
-- [ ] Implement first time introduction with https://github.com/usablica/intro.js
+- [ ] Markdown in comments
 
 ## License
 

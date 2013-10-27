@@ -1,6 +1,8 @@
 <li>
   <div class="icon">
-    <%= event_icon(event) %>
+    <a href="<%= user_profile_path(username:event.owner.username) %>" title="<%= event.owner.username %> profile" class="avatar">
+      <%= image_tag image_url(event.owner.avatar), :height => '25', :width => '25', :alt => "#{event.owner.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
+    </a>
   </div>
   <div class="content">
     <%= link_to event.owner.username, user_profile_path(username:event.owner.username) %>
