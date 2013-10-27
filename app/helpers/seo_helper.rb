@@ -58,6 +58,6 @@ module SeoHelper
     }
     .merge(attrs)
 
-    link_to language.title, language_archive_url(language.name), attrs
+    link_to language.title, "http://www.emoticode.net/#{language.name}", attrs
   end
 end
