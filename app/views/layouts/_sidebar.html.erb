@@ -67,9 +67,8 @@
 
   <% else %>
     <%= render :partial => 'layouts/social' %>
+    <%= render :partial => 'layouts/latest_events' %>      
   <% end %>
-
-  <%= render :partial => 'layouts/latest_events' %>
 
   <% unless @cloud.nil? or @cloud.empty? %>
     <% cache( "tag_cloud_for_#{request.original_url}", :expire => 3.days ) do %>
