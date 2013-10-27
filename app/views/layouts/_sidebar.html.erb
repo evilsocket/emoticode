@@ -69,6 +69,11 @@
 
   <% else %>
     <%= render :partial => 'layouts/social' %>
+
+    <% if controller.class.name.start_with? 'Blog::' %>
+      <%= render :partial => 'layouts/blog_categories' %>    
+    <% end %>
+
     <%= render :partial => 'layouts/latest_events' %>      
   <% end %>
 

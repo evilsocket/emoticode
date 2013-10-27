@@ -1,0 +1,9 @@
+<div class="heading orange">
+  <h3>Blog Categories</h3>
+</div>
+<ul id="blog_categories">
+<% @blog_categories.each do |c| %>
+  <li><%= link_to "#{c.title} <span class=\"bccount\">( #{c.posts.count} )</span>".html_safe, blog_archive_path(:category => c.name), :title => c.title %></li>    
+<% end %>
+</ul>
+

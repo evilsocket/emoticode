@@ -50,6 +50,7 @@ div.post {
     p {
         margin: 10px 0;
         font-size: 13px;
+        word-wrap: break-word;
     }
 
     p.body {
@@ -77,4 +78,25 @@ div.post-show {
             }
         }
     }
+}
+
+#blog_categories {
+    margin: 0;
+    padding: 0;
+
+    li {
+        a {
+            color: #313131;
+            font-weight: 500;
+
+            span.bccount {
+                font-size: 10px;
+                color: #888;
+            }
+        }
+    }
+}
+
+div.blog_archive {
+    min-height: 500px;
 }
