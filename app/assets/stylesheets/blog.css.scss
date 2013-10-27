@@ -35,8 +35,6 @@ div.post {
     margin-bottom: 20px;
 
     h1, h5 {
-        margin: 0;
-
         a {
             color: #313131;
             font-size: 20px;
@@ -45,6 +43,14 @@ div.post {
         a:hover {
             text-decoration: none;
         }
+    }
+
+    h5 {
+        margin: 0;        
+    }
+
+    h1 {
+        margin-bottom: 0;
     }
 
     p {
