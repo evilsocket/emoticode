@@ -2,6 +2,14 @@
   <div class="medium-column">
     <div class="headblock post post-show">
       <h1><%= @post.title %></h1>
+      <div class="meta">
+        <a href="<%= user_profile_path(username:@post.user.username) %>" title="<%= @post.user.username %> profile" class="avatar">
+          <%= image_tag image_url(@post.user.avatar), :height => '30', :width => '30', :alt => "#{@post.user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
+        </a>
+        <small>Posted <%= time_ago_in_words @post.created_at %> ago inside the <%= link_to @post.category.title, blog_archive_path(:category => @post.category.name ) %> category.</small><br/>
+        <small>Written by <%= link_to @post.user.username, user_profile_path(username:@post.user.username) %></small>
+
+      <!--
       <small>
         Posted by <%= link_to @post.user.username, user_profile_path(username:@post.user.username) %> inside <%= link_to @post.category.title, blog_archive_path(:category => @post.category.name ) %> <%= time_ago_in_words @post.created_at %> ago
       <% if signed_in? and @current_user.is_admin? %>
@@ -9,7 +17,9 @@
         <%= link_to 'Edit',   blog_post_edit_path(:id => @post.id) %> - 
         <%= link_to 'Delete', blog_post_destroy_path(:id => @post.id), :data => { :confirm => 'Are you sure?' } %>      
       <% end %>
-      </small> 
+    </small> 
+    -->
+      </div>
       
       <p class="body">
         <%=raw @post.parse! %>

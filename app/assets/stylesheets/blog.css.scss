@@ -62,6 +62,17 @@ div.post {
 div.post-show {
     min-height: 500px;
     position: relative;
+    color: #555;
+
+    div.meta {
+        margin-top: 5px;
+
+        a.avatar {
+            float: left;
+            margin-right: 5px;
+            margin-top: 1px;
+        }
+    }
 
     div.share {
         margin-top: 50px;
