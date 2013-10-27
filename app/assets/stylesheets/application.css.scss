@@ -863,9 +863,10 @@ span.follow {
 
 #social {
     background: #fff;
-    border: 1px solid #ddd;
     margin-top: 20px;
     width: 100%;
+    box-shadow: rgba(0,0,0,0.15) 0px 1px 3px 0px;
+    border-radius: 3px;
 
     ul {
         margin: 0;
