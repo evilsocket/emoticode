@@ -61,10 +61,13 @@ div.post {
 
 div.post-show {
     min-height: 500px;
+    position: relative;
 
     div.share {
         margin-top: 50px;
         padding-bottom: 20px;
+        position: absolute;
+        bottom: 0;
 
         h2 {
             color: #313131;
