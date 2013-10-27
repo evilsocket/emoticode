@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   scope :latest, -> { order('created_at DESC') }
 
+  has_many :posts
   has_many :sources
   has_many :favorites
   has_many :authorizations

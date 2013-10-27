@@ -18,11 +18,12 @@ class ApplicationController < ActionController::Base
   end
 
   def create_globals
-    @languages    = Language.order('name ASC').all
-    @users        = User.confirmed.order('created_at DESC').limit(20)
-    @events       = Event.order('created_at DESC').limit(15)
-    @show_joinus  = false
-    @current_user = session[:id].nil? ? nil : User.find_by_id( session[:id] )
+    @languages       = Language.order('name ASC').all
+    @users           = User.confirmed.order('created_at DESC').limit(20)
+    @events          = Event.order('created_at DESC').limit(15)
+    @blog_categories = Category.order('name ASC').all
+    @show_joinus     = false
+    @current_user    = session[:id].nil? ? nil : User.find_by_id( session[:id] )
 
     if @current_user.nil? == false
       @current_user.last_seen_at = Time.now

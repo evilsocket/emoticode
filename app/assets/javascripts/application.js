@@ -51,6 +51,19 @@ $(document).ready(function($) {
     }
   );
 
+  var $bbutton = $('#browse_blog');
+  var $bmenu = $('#blog_cats');
+
+  $bbutton.hover(
+    function(){
+      $bmenu.show();
+    },
+    function(){
+      $bmenu.hide();
+    }
+  );
+
+
   $(window).scroll( function()
   {
     var $elem = $('#subnav');

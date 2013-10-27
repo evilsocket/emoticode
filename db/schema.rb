@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022193241) do
+ActiveRecord::Schema.define(version: 20131027132359) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 20131022193241) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "handle"
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "title"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "comments", force: true do |t|
@@ -38,6 +45,17 @@ ActiveRecord::Schema.define(version: 20131022193241) do
   add_index "comments", ["parent_id"], name: "parent_id", using: :btree
   add_index "comments", ["parent_id"], name: "parent_id_2", using: :btree
   add_index "comments", ["user_id"], name: "user_id", using: :btree
+
+  create_table "database_connections", force: true do |t|
+    t.string  "adapter",  null: false
+    t.string  "database", null: false
+    t.string  "password"
+    t.string  "username"
+    t.string  "host"
+    t.string  "encoding"
+    t.integer "port"
+    t.string  "title"
+  end
 
   create_table "events", force: true do |t|
     t.integer  "user_id"
@@ -112,6 +130,19 @@ ActiveRecord::Schema.define(version: 20131022193241) do
 
   add_index "links", ["source_id", "tag_id"], name: "source_id", using: :btree
   add_index "links", ["tag_id"], name: "entity_value_id", using: :btree
+
+  create_table "posts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.string   "title"
+    t.string   "name"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["category_id"], name: "index_posts_on_category_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "profiles", force: true do |t|
     t.integer "user_id",                                           null: false

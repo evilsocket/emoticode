@@ -1,0 +1,32 @@
+<section id="blog">
+  <div class="medium-column">
+    <div class="headblock post post-show">
+      <h1><%= @post.title %></h1>
+      <small>
+        Posted by <%= link_to @post.user.username, user_profile_path(username:@post.user.username) %> inside <%= link_to @post.category.title, blog_archive_path(:category => @post.category.name ) %> <%= time_ago_in_words @post.created_at %> ago
+      <% if signed_in? and @current_user.is_admin? %>
+        |
+        <%= link_to 'Edit',   blog_post_edit_path(:id => @post.id) %> - 
+        <%= link_to 'Delete', blog_post_destroy_path(:id => @post.id), :data => { :confirm => 'Are you sure?' } %>      
+      <% end %>
+      </small> 
+      
+      <p class="body">
+        <%=raw @post.parse! %>
+      </p>
+
+      <div class="share">
+        <h2>Share</h2>
+        <%= link_to image_tag("icons/facebook.png"),   "http://www.facebook.com/sharer.php?u=#{request.original_url}", { :target => '_blank', :title => 'Share on Facebook' } %>
+        <%= link_to image_tag("icons/twitter.png"),    "http://twitter.com/home?status=#{@post.category.title.gsub(/#/, '%23')} - #{@post.title} #{request.original_url}", { :target => '_blank', :title => 'Post to Twitter' } %>
+        <%= link_to image_tag("icons/googleplus.png"), "https://plus.google.com/share?url=#{request.original_url}", { :target => '_blank', :title => 'Post to Google+' } %>
+        <%= link_to image_tag("icons/reddit.png"),     "http://www.reddit.com/submit?url=#{request.original_url}&title=#{@post.category.title} - #{@post.title}", { :target => '_blank', :title => 'Post to Reddit' } %>
+      </div>
+    </div>
+
+    <%= render :partial => 'comments/box', :locals => { object: @post } %>
+    
+  </div>
+  <%= render :partial => 'layouts/sidebar' %>  
+</section>
+

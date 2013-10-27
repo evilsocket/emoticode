@@ -9,6 +9,24 @@ EmoticodeRails::Application.routes.draw do
     end
   end
 
+  namespace :blog do
+    root 'index#show'
+
+    controller :categories do
+      get ':category' => :archive, as: :archive, constraints: { category: Patterns::ROUTE_PATTERN }
+    end
+
+    controller :posts do
+      get  ':category/:name.html' => :show, as: :show_post, constraints: { category: Patterns::ROUTE_PATTERN, name: Patterns::ROUTE_PATTERN }      
+      get  ':category/new'        => :new,  as: :new_post, constraints: { category: Patterns::ROUTE_PATTERN }
+      post ':category/create'     => :create,  as: :create_post, constraints: { category: Patterns::ROUTE_PATTERN }
+
+      get   'post/edit/:id'    => :edit,    as: :post_edit,    constraints: { id: Patterns::ID_PATTERN }
+      get   'post/destroy/:id' => :destroy, as: :post_destroy, constraints: { id: Patterns::ID_PATTERN }
+      patch 'post/update/:id'  => :update,  as: :post_update,  constraints: { id: Patterns::ID_PATTERN }
+    end
+  end
+
   controller :home do
     get 'new'      => :recent,   as: :recent_snippets
     get 'trending' => :trending, as: :trending_snippets
@@ -18,6 +36,7 @@ EmoticodeRails::Application.routes.draw do
     get 'sitemap_index'          => :index,     as: :sitemap_index
     get 'sitemap_snippets-:page' => :snippets,  as: :sitemap_snippets, constraints: { page: Patterns::ID_PATTERN }
     get 'sitemap_languages'      => :languages, as: :sitemap_languages
+    get 'sitemap_posts'          => :posts,     as: :sitemap_posts
   end
 
   controller :sessions do

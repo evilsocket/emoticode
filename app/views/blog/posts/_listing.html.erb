@@ -1,0 +1,11 @@
+<li>
+<div class="post">
+  <h5><%= link_to post.title, blog_show_post_path( :category => post.category.name, :name => post.name ) %></h5>
+  <small>
+    Posted by <%= link_to post.user.username, user_profile_path(username:post.user.username) %> inside <%= link_to post.category.title, blog_archive_path(:category => post.category.name ) %> <%= time_ago_in_words post.created_at %> ago
+  </small>
+  <p>
+  <%= truncate post.description!, :length => 405 %>
+  </p>
+</div>
+</li>

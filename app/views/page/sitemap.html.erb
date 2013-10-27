@@ -23,6 +23,18 @@
     </div>
   </div>
 
+  <h3>Blog</h3>
+  <div class="hkv">
+    <div class="k">Categories</div>
+    <div class="v">
+      <ul>
+        <% @blog_categories.each do |c| %>
+          <li><%= link_to c.title, blog_archive_path(:category => c.name) %></li>
+        <% end %>
+      </ul>  
+    </div>
+  </div>
+  
   <h3>Users</h3>
   <div class="hkv">
     <div class="k">Access</div>

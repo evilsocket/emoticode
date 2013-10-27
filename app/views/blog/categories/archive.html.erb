@@ -1,0 +1,20 @@
+<section id="blog">
+  <div class="medium-column">
+    <div class="headblock">
+      <h1>
+        <% if signed_in? and @current_user.is_admin? %>
+          <%= link_to '<i class="icon-plus-sign"></i>'.html_safe, blog_new_post_path(:category => @category.name), :title => 'Add new post' %>
+        <% end %>
+        Blog - <%= @category.title %>
+      </h1>
+      <% if @posts.any? %>
+        <ul id="blog_archive">
+          <%= render :partial => "blog/posts/listing", :collection => @posts, :as => 'post' %>      
+        </ul>
+      <% else %>
+        Nothing posted yet.
+      <% end %>
+    </div>
+  </div>
+  <%= render :partial => 'layouts/sidebar' %>  
+</section>

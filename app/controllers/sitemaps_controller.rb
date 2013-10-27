@@ -5,6 +5,7 @@ class SitemapsController < ApplicationController
     respond_to do |format|
       format.xml {
         @last_snippet = Source.where(:private => false).order('created_at DESC').limit(1).first
+        @last_post    = Post.order('created_at DESC').limit(1).first
         @total = Source.where(:private => false).count
         @pages = ( @total / ITEMS_PER_PAGE ).round
 
@@ -27,6 +28,14 @@ class SitemapsController < ApplicationController
       format.xml {
         @page    = params[:page]
         @sources = Source.where(:private => false).joins(:language).paginate( :page => params[:page], :per_page => ITEMS_PER_PAGE )
+      }
+    end
+  end
+
+  def posts
+    respond_to do |format|
+      format.xml {
+        @posts = Post.order('created_at DESC').all
       }
     end
   end

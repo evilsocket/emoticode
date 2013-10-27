@@ -41,7 +41,17 @@
 </nav>
 <nav id="subnav">
   <ul>
-    <li class="left"><a href="http://feeds.feedburner.com/emoticode" target="_blank" title="RSS Feed">Feed</a></li>
+    <li class="left">
+      <a href="http://feeds.feedburner.com/emoticode" target="_blank" title="RSS Feed">Feed</a>
+    </li>
+    <% if Post.count > 0 %>
+    <li id="browse_blog">
+      <%= link_to 'Blog <i class="icon-sort-down"></i>'.html_safe, '/blog/', :title => 'Browse the Blog' %> 
+      <div id="blog_cats" style="display:none;">
+        <%= render :partial => "layouts/blog_browser" %>        
+      </div>
+    </li>
+    <% end %>
     <li id="browse_langs">
       <a href="#" onclick="return false">Browse Languages <i class="icon-sort-down"></i></a>
       <div id="all_langs" style="display:none;">

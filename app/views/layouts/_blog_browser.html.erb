@@ -1,0 +1,5 @@
+<ul>
+<% @blog_categories.each do |c| %>
+  <li><%= link_to c.title, blog_archive_path(:category => c.name) %></li>
+<% end %>
+</ul>

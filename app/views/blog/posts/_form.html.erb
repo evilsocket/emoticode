@@ -1,0 +1,36 @@
+<div id="post-<%= action %>" class="headblock">
+  <%= form_for @post, :url => {:controller => 'posts', :action => action }, :html => { :class => 'pure-form pure-form-aligned' } do |f| %>
+    <% @post.errors.full_messages.each do |msg| %>
+      <p class="error"><%= msg %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <% flash[:error].each do |error| %>
+        <p class="error"><%= error %></p>
+      <% end %>
+    <% end %>
+
+    <div class="head">
+      <%= f.text_field :title, :placeholder => 'Title', :class => 'title' %>
+    </div>
+
+    <%= f.text_area :body, :placeholder => 'Text', :id => 'post_text', :style => 'display:none' %>
+    <div id="epiceditor"></div>
+    <%= f.submit "Save", :class => 'pure-button pure-button-primary' %>
+  <% end %>
+</div>
+<script>
+  $('#source_description').hide();
+  var editor = new EpicEditor({
+    textarea: 'post_text',
+    basePath: '/epiceditor',
+    clientSideStorage: false,
+    autogrow: true,
+
+    theme: {
+      base: '/themes/base/epiceditor.css',
+      preview: '/themes/preview/github.css',
+      editor: '/themes/editor/emoticode.css'
+    }
+  }).load();
+</script>
+

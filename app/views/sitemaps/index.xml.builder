@@ -8,9 +8,13 @@ cache "sitemap_index_#{@pages}_#{Source.public.count}" do
     end
 
     xml.sitemap do
+      xml.loc sitemap_posts_url(:format => 'xml')
+      xml.lastmod Time.at(@last_post.created_at).strftime("%F")
+    end
+
+    xml.sitemap do
       xml.loc sitemap_languages_url(:format => 'xml')
       xml.lastmod Time.at(@last_snippet.created_at).strftime("%F")
     end
-
   end
 end

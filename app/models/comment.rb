@@ -1,18 +1,21 @@
 class Comment < ActiveRecord::Base
   COMMENTABLE_TYPES = {
     :source  => 1,
-    :profile => 2
+    :profile => 2,
+    :post    => 3,
     # more to come :)
   }
 
   COMMENTABLE_CLASSES = {
     1 => 'Source',
-    2 => 'Profile'
+    2 => 'Profile',
+    3 => 'Post'
   }
 
   belongs_to :user
   belongs_to :source, -> { where commentable_type: COMMENTABLE_TYPES[:source] }, :foreign_key => :commentable_id
-
+  belongs_to :post,   -> { where commentable_type: COMMENTABLE_TYPES[:post] }, :foreign_key => :commentable_id
+  
   validates_presence_of  :commentable_id,   :user_id, :content
   validates_inclusion_of :commentable_type, :in => COMMENTABLE_TYPES.values.freeze
   validate               :commentable_exists
@@ -33,8 +36,10 @@ class Comment < ActiveRecord::Base
   def event_title
     if commentable_type == COMMENTABLE_TYPES[:source]
       Source.find(commentable_id).title
-    else commentable_type == COMMENTABLE_TYPES[:profile]
+    elsif commentable_type == COMMENTABLE_TYPES[:profile]
       "#{Profile.find(commentable_id).user.username} profile"
+    elsif commentable_type == COMMENTABLE_TYPES[:post]
+      Post.find(commentable_id).title
     end
   end
 
