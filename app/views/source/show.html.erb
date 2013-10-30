@@ -35,6 +35,17 @@
       <%=raw highlight(@source) %>
     </div>
 
+    <% related = @source.related(4) %>
+    <% if related.any? %>
+      <div class="related">
+        <h3>You might also like</h3>
+        <ul class="listing">
+          <%= render :partial => "source/listing", :collection => @source.related(4), :as => 'source' %>
+        </ul>
+      </div>
+      <br style="clear:both"/>
+    <% end %>
+
     <%= render :partial => 'comments/box', :locals => { object: @source } %>
   </div>
 

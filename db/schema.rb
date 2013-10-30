@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131027132359) do
+ActiveRecord::Schema.define(version: 20131030222107) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 20131027132359) do
     t.text    "text",        limit: 2147483647,                 null: false
     t.integer "views",                          default: 0
     t.boolean "socialized",                     default: false
+    t.integer "updated_at",                     default: 0
   end
 
   add_index "sources", ["description"], name: "search_index_2", type: :fulltext

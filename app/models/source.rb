@@ -43,7 +43,7 @@ class Source < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
   
   def description!( default = nil, html = false )
-    Rails.cache.fetch "source_#{id}_description!_#{default}_#{html}_#{description}_#{title}" do
+    Rails.cache.fetch "source_#{id}_description!_#{default}_#{html}_#{updated_at}" do
       text = if !description.nil? && !description.empty?
                description
              else
@@ -75,12 +75,15 @@ class Source < ActiveRecord::Base
   end
 
   def related( limit = 5 )
-    Source
-    .where( 'sources.id != ?', id )
-    .joins( :links )
-    .where( 'links.tag_id' => links.map(&:tag_id) )
-    .group( :id )
-    .limit( limit )
+    Rails.cache.fetch "source_#{id}#related_#{limit}", :expires_in => 24.hours do
+      Source
+      .where( 'sources.id != ?', id )
+      .joins( :links )
+      .where( 'links.tag_id' => links.map(&:tag_id) )
+      .group( :id )
+      .limit( limit )
+      .load
+    end
   end
 
   def self.newer_than(period)

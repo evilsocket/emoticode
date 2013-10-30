@@ -1,42 +1,8 @@
+<% is_source_defined = defined?(source) %>
 <div id="sidebar">
-  <% if defined? source %>
-    <div class="headblock ssummary">
-      <p>
-      This snippet has been posted by <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= @source.user.username %> profile"><%= source.user.username %></a>
-      <%= time_ago_in_words Time.at(source.created_at) %> ago in the <%= link_to_language source.language, :class => 'language' %> section.
-      </p>
-
-      <p>
-        <% if !signed_in? or @current_user != source.user %>
-          <%= render :partial => "follows/follow", :locals => { :type => :user, :object => source.user, :text => source.user.username } %> 
-        <% end %>
-      </p>
-
-      <p>
-        <%= render :partial => "follows/follow", :locals => { :type => :language, :object => source.language, :text => source.language.title } %> 
-      </p>
-
-      <br style="clear:both;"/>
-      <ul>
-        <li><span class="count"><%= source.views %></span><i class="icon-eye-open"></i></li>
-        <li>
-          <span id="favcount-<%= source.id %>" class="count"><%= source.favorites.count %></span>
-          <% if signed_in? %>
-            <% if @current_user.favorite?(source) %>
-              <%= link_icon_to '', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext", method: :post, remote: true  %>
-            <% else %>
-              <%= link_icon_to '', 'thumbs-up', favorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext", method: :post, remote: true  %>
-            <% end %>
-          <% else %>
-            <%= link_icon_to_function '', 'thumbs-up', 'showLoginModal()' %>
-          <% end %>
-        </li>
-        <li><span class="count"><%= source.comments.count %></span><i class="icon-comments"></i></li>
-      </ul>
-      <br style="clear:both;"/>    
-      <%= render :partial => 'layouts/social_share', :locals => { source: source } %>   
-      <div class="larrow"></div>      
-    </div>    
+  <% if is_source_defined %>
+    <%= render :partial => 'source/sidebox', :locals => { source: source } %>   
+    
     <%= render :partial => "adv/criteo300x250" %>    
   <% end %>
 
@@ -49,27 +15,9 @@
     <% end %>
   <% end %>
 
-  <% if defined? source %>  
-    <%= render :partial => 'layouts/social' %>
-    
-    <% cache( "source_#{source.id}_related", :expires_in => 24.hours ) do %>
-      <% if source.related.load.empty? == false %>
-        <div class="heading orange">
-          <h3>Related Sources</h3>
-        </div>
-        <ul class="related">
-        <% source.related.each do |related| %>
-          <li>
-            <%= link_to_source related %>
-          </li>
-        <% end %>
-        </ul>
-      <% end %>
-    <% end %>
-
-  <% else %>
-    <%= render :partial => 'layouts/social' %>
-
+  <%= render :partial => 'layouts/social' %>
+  
+  <% unless is_source_defined %>  
     <% if controller.class.name.start_with? 'Blog::' %>
       <%= render :partial => 'layouts/blog_categories' %>    
     <% end %>
