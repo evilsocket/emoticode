@@ -43,6 +43,11 @@ class FeedsController < ApplicationController
     end
   end
 
+  def blog
+    @sources = Post.order('created_at DESC').limit(50) 
+    render_feed
+  end
+
   private
 
   # DRY !

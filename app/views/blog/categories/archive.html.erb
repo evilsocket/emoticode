@@ -2,6 +2,7 @@
   <div class="medium-column">
     <div class="headblock blog_archive">
       <h1>
+        <%= link_to '<i class="icon-rss"></i>'.html_safe, blog_feed_path, :title => "Blog RSS feed.", :class => 'rss-big' %>                        
         <% if signed_in? and @current_user.is_admin? %>
           <%= link_to '<i class="icon-plus-sign"></i>'.html_safe, blog_new_post_path(:category => @category.name), :title => 'Add new post' %>
         <% end %>
