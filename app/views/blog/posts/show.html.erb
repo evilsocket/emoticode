@@ -9,21 +9,19 @@
         <small>Posted <%= time_ago_in_words @post.created_at %> ago inside the <%= link_to @post.category.title, blog_archive_path(:category => @post.category.name ) %> category.</small><br/>
         <small>Written by <%= link_to @post.user.username, user_profile_path(username:@post.user.username) %></small>
 
-      <!--
-      <small>
-        Posted by <%= link_to @post.user.username, user_profile_path(username:@post.user.username) %> inside <%= link_to @post.category.title, blog_archive_path(:category => @post.category.name ) %> <%= time_ago_in_words @post.created_at %> ago
+
       <% if signed_in? and @current_user.is_admin? %>
+        <small>
         |
         <%= link_to 'Edit',   blog_post_edit_path(:id => @post.id) %> - 
-        <%= link_to 'Delete', blog_post_destroy_path(:id => @post.id), :data => { :confirm => 'Are you sure?' } %>      
+        <%= link_to 'Delete', blog_post_destroy_path(:id => @post.id), :data => { :confirm => 'Are you sure?' } %>
+        </small>
       <% end %>
-    </small> 
-    -->
       </div>
       
-      <p class="body">
+      <div class="body">
         <%=raw @post.parse! %>
-      </p>
+      </div>
 
       <div class="share">
         <h2>Share</h2>
