@@ -2,7 +2,11 @@ module ProfileHelper
   include SeoHelper
   
   def page_title
-    paged "#{@user.username} | emoticode" rescue super
+    if controller.action_name == 'show'
+      paged "#{@user.username} | emoticode" rescue super
+    else
+      paged "#{@user.username} ( #{controller.action_name.capitalize} ) | emoticode" rescue super
+    end
   end
 
   def metas

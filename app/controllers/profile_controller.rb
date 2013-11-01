@@ -11,7 +11,7 @@ class ProfileController < ApplicationController
   end
 
   def following
-    @following = @user.follows 
+    @following = @user.follows.paginate(:page => params[:page], :per_page => 24 )
     @comment   = Comment.new    
     @box       = 'following' 
 
@@ -19,7 +19,7 @@ class ProfileController < ApplicationController
   end
 
   def followers
-    tmp = Follow.where( :follow_id => @user.id ).where( :follow_type => Follow::TYPES[:user] ) 
+    tmp = Follow.where( :follow_id => @user.id ).where( :follow_type => Follow::TYPES[:user] ).paginate(:page => params[:page], :per_page => 24 ) 
     @followers = []
 
     tmp.each do |f|

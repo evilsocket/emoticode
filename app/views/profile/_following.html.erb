@@ -3,6 +3,10 @@
     <ul class="listing">
       <%= render :partial => "follows/listing", :collection => @following, :as => 'follow' %>
     </ul>
+    <br style="clear:both;"/>
+    <section class="pager">
+      <%= will_paginate @following %>
+    </section>
   <% else %>
     <center>
       <h3><%= @user.username %> doesn't follow any channel yet :/</h3>
