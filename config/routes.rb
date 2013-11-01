@@ -92,6 +92,7 @@ EmoticodeRails::Application.routes.draw do
 
   controller :feeds do
     get 'feed'                   => :feed,     as: :feed
+    get '/stream/:username'      => :stream,   as: :stream_feed, constraints: { username: Patterns::USERNAME_PATTERN }
     get 'feed/:language'         => :language, as: :language_feed, constraints: { language: Patterns::ROUTE_PATTERN }
     get 'profile/:username/feed' => :user,     as: :user_feed, constraints: { username: Patterns::USERNAME_PATTERN }
     get 'randomfeed'             => :random,   as: :random_feed

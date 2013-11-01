@@ -17,7 +17,7 @@ solve someone else problems while developing a project ... you never know :)
 
 - [x] Custom User Homepage
 - [x] Markdown descriptions
-- [ ] Custom homepage feed
+- [x] Custom homepage feed
 - [ ] Markdown in comments
 
 ## License

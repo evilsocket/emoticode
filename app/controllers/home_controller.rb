@@ -3,19 +3,7 @@ class HomeController < ApplicationController
     if !@current_user.nil?
       pager_params = { :page => params[:page], :per_page => 16 }
 
-      follows      = @current_user.follows.by_type
-      language_ids = []
-      user_ids     = []
-      
-      follows.each do |follow|
-        if follow.follow_type.to_i == Follow::TYPES[:user]
-          user_ids << follow.user.id
-        elsif follow.follow_type.to_i == Follow::TYPES[:language]
-          language_ids << follow.language.id
-        end
-      end
-
-      @sources = Source.public.where(['user_id IN ( ? ) OR language_id IN ( ? )', user_ids, language_ids]).paginate pager_params
+      @sources = @current_user.stream.paginate pager_params
       @cloud   = Tag.cloud.shuffle!
     else
       pager_params = { :page => params[:page], :per_page => 16 }

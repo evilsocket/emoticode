@@ -2,7 +2,7 @@
   <div class="huge-column">
     <div class="headblock">
       <h1>
-        <%= link_to image_tag('icons/rss-s.png'), language_feed_path(:language => @language.name ), :title => "#{@language.title} RSS feed." %>
+        <%= link_to '<i class="icon-rss"></i>'.html_safe, language_feed_path(:language => @language.name ), :title => "#{@language.title} RSS feed.", :class => 'rss-big' %>        
         <%= paged "#{@language.title} Snippets Archive" %>
       </h1>
 

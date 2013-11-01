@@ -928,3 +928,19 @@ span.follow {
         }
     }
 }
+
+a.rss {
+    color: #FF6600;
+    font-size: 18px;
+}
+
+a.rss-big {
+    color: #FF6600;
+    font-size: 25px;
+}
+
+a.rss-big:hover,
+a.rss:hover {
+    text-decoration: none;
+}
+

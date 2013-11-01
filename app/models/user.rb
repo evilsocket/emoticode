@@ -165,6 +165,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def stream
+    follows      = self.follows.by_type
+    language_ids = []
+    user_ids     = []
+
+    follows.each do |follow|
+      if follow.follow_type.to_i == Follow::TYPES[:user]
+        user_ids << follow.user.id
+      elsif follow.follow_type.to_i == Follow::TYPES[:language]
+        language_ids << follow.language.id
+      end
+    end
+
+    Source.public.where(['user_id IN ( ? ) OR language_id IN ( ? )', user_ids, language_ids])
+  end
+
   def avatar
     if profile.avatar?
       "/avatars/#{id}.png"
