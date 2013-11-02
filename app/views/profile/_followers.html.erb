@@ -1,11 +1,11 @@
 <div id="sources">
   <% if @followers.any? %>
     <ul class="listing">
-      <%= render :partial => "follows/listing", :collection => @followers, :as => 'follow' %>
+      <%= render :partial => "user/follower", :collection => @followers, :as => 'user' %>
     </ul>
     <br style="clear:both;"/>
     <section class="pager">
-      <%= will_paginate @following %>
+      <%= will_paginate @followers %>
     </section>
   <% else %>
     <center>

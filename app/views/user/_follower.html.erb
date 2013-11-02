@@ -1,0 +1,14 @@
+<li class="source followbox">
+  <h4>
+    <div class="avatar">
+      <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile" class="avatar">
+        <%= image_tag image_url(user.avatar), :height => '40', :width => '40', :alt => "#{user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
+      </a>
+      <a href="<%= user_profile_path(username:user.username) %>" title="<%= user.username %> profile" class="username">
+        <%= truncate( user.username, :length => 17 ) %>
+      </a>
+    </div>
+  </h4>
+  <%= render :partial => "follows/follow", :locals => { :type => :user, :object => user }%>       
+</li>
+

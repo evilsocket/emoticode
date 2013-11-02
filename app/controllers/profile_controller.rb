@@ -19,18 +19,9 @@ class ProfileController < ApplicationController
   end
 
   def followers
-    tmp = Follow.where( :follow_id => @user.id ).where( :follow_type => Follow::TYPES[:user] ).paginate(:page => params[:page], :per_page => 24 ) 
-    @followers = []
-
-    tmp.each do |f|
-      @followers << Follow.new({
-        :follow_type => Follow::TYPES[:user],
-        :follow_id   => f.owner.id
-      })      
-    end
-
-    @comment = Comment.new   
-    @box    = 'followers'  
+    @followers = User.joins(:follows).where(['follows.follow_id = ?', @user.id]).paginate( :page => params[:page], :per_page => 8 ).to_a
+    @comment   = Comment.new   
+    @box       = 'followers'  
 
     render 'profile/show'    
   end
