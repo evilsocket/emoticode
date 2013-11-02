@@ -21,12 +21,23 @@
   <div class="footer">
     <ul>
       <li>
-        <span id="favcount-<%= source.id %>" class="count"><%= source.favorites.count %></span>
+        <%
+          fav_count = 0
+          users     = []
+
+          source.favorites.each do |fav|
+            users << ( signed_in? and @current_user == fav.user ? 'you' : fav.user.username ) 
+            fav_count += 1
+          end
+
+          ttip = fav_count > 0 ? "#{users.to_sentence} favorited this snippet." : "Still no one favorited this snippet, be the first!"
+        %>
+        <span id="favcount-<%= source.id %>" class="count"><%= fav_count %></span>
         <% if signed_in? %>
           <% if @current_user.favorite?(source) %>
-            <%= link_icon_to '', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext", method: :post, remote: true  %>
+            <%= link_icon_to '', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext ttip", :title => ttip, method: :post, remote: true  %>
           <% else %>
-            <%= link_icon_to '', 'thumbs-up', favorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext", method: :post, remote: true  %>
+            <%= link_icon_to '', 'thumbs-up', favorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext ttip", :title => ttip, method: :post, remote: true  %>
           <% end %>
         <% else %>
           <%= link_icon_to_function '', 'thumbs-up', 'showLoginModal()' %>
