@@ -165,6 +165,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def followers
+    User.joins(:follows).where(['follows.follow_id = ?', id]).order('follows.created_at DESC')
+  end
+
   def stream
     follows      = self.follows.by_type
     language_ids = []

@@ -19,7 +19,7 @@ class ProfileController < ApplicationController
   end
 
   def followers
-    @followers = User.joins(:follows).where(['follows.follow_id = ?', @user.id]).paginate( :page => params[:page], :per_page => 24 ).to_a
+    @followers = @user.followers.paginate( :page => params[:page], :per_page => 24 ).to_a
     @comment   = Comment.new   
     @box       = 'followers'  
 
