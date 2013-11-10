@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   # initialize instance variables that are globals to the whole app
   before_filter :create_globals
   before_filter :coerce_page_number
+  before_filter :allow_iframes
   # before_filter :check_for_mobile
 
   # if a RecordNotFound exception is raised, automatically render the 404 page
@@ -79,6 +80,10 @@ class ApplicationController < ActionController::Base
 
   def authenticate!
     redirect_to sign_in_url, error: 'You dont have enough permissions to be here' unless @current_user
+  end
+
+  def allow_iframes
+    response.headers.delete('X-Frame-Options')
   end
 
   def not_authenticated!
