@@ -24,8 +24,7 @@ class SourceController < ApplicationController
     
     impressionist(@source)
     
-    @hash   = Digest::MD5.hexdigest( @source.name )
-    render :partial => 'source/embed.js'
+    render :layout => false
   end
 
   def new

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= page_title %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <% metas.each do |meta| %>
+    <meta <% meta.each { |attr,value| %><%= attr %>="<%= value %>" <% } %>/>
+  <% end %>
+  <link href="/embed.css" rel="stylesheet">
+  <base target="_parent" />
+</head>
+<body>
+<%
+    with_head = params[:h] == "0" ? false : true
+    with_desc = params[:d] == "0" ? false : true
+%>
+<div id="source">
+  <% if with_head %>
+  <div id="head">
+    <div class="author">
+      <div class="avatar">
+        <a href="<%= user_profile_url(username:@source.user.username) %>" title="<%= @source.user.username %> profile" class="avatar">
+          <%= image_tag image_url(@source.user.avatar), :height => '30', :width => '30', :alt => "#{@source.user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
+          <br/>
+          <%= truncate( @source.user.username, :length => 20 ) %>
+        </a>
+      </div>
+    </div> 
+    <div id="title">
+      <h1><%= link_to_source @source, { :class => 'title' }, false %></h1>
+      <p>Posted <%= time_ago_in_words Time.at(@source.created_at) %> ago as a <%= link_to_language @source.language, :class => 'language' %> snippet.</p>
+    </div>
+  </div>
+  <% end %>
+  <% if with_desc %>
+  <div id="description">
+    <%=raw description(@source) %>
+  </div>
+  <% end %>
+  <%=raw highlight(@source) %>
+  <small>Code hosted by <a href="http://www.emoticode.net/">emoticode</a></small>
+</div>
+</body>
+</html>

@@ -116,10 +116,10 @@ EmoticodeRails::Application.routes.draw do
     get   'source/destroy/:id' => :destroy, as: :source_delete, constraints: { id: Patterns::ID_PATTERN }
     patch 'source/update/:id'  => :update,  as: :source_update, constraints: { id: Patterns::ID_PATTERN }
 
-    get 'source/:id'                       => :show,  as: :source_shortlink,     constraints: { id: Patterns::ID_PATTERN }
-    get ':language_name/:source_name.html' => :show,  as: :source_with_language, constraints: { language_name: Patterns::ROUTE_PATTERN, source_name: Patterns::ROUTE_PATTERN }
-    get ':language_name/:source_name.txt'  => :raw,   as: :raw_with_language,    constraints: { language_name: Patterns::ROUTE_PATTERN, source_name: Patterns::ROUTE_PATTERN }
-    get ':language_name/:source_name.js'   => :embed, as: :embed_with_language,  constraints: { language_name: Patterns::ROUTE_PATTERN, source_name: Patterns::ROUTE_PATTERN }
+    get 'source/:id'                             => :show,  as: :source_shortlink,     constraints: { id: Patterns::ID_PATTERN }
+    get ':language_name/:source_name.html'       => :show,  as: :source_with_language, constraints: { language_name: Patterns::ROUTE_PATTERN, source_name: Patterns::ROUTE_PATTERN }
+    get ':language_name/:source_name.txt'        => :raw,   as: :raw_with_language,    constraints: { language_name: Patterns::ROUTE_PATTERN, source_name: Patterns::ROUTE_PATTERN }
+    get 'embed/:language_name/:source_name.html' => :embed, as: :source_embed,         constraints: { language_name: Patterns::ROUTE_PATTERN, source_name: Patterns::ROUTE_PATTERN }    
   end
 
 end

@@ -53,5 +53,15 @@
 </section>
 
 <%= modal_dialog 'embed', 'Embed Me!' do %>
-  <textarea><script type="text/javascript" src="<%= @source.url.gsub /\.html$/, '.js' %>"></script></textarea>
+  <p>Feel free to adjust iframe width and height according to your needs.</p>
+  <% 
+      iframe = "<iframe width=\"800px\" \n" +
+               "        src=\"#{source_embed_url( :language_name => @source.language.name, :source_name => @source.name )}\" \n" +
+               "        height=\"400px\" \n" +
+               "        frameborder=\"0\"> \n" +
+               "</iframe>"
+  %>
+  <%=raw Albino.colorize iframe, 'html' %>
+  <p>Here's how it will look like.</p>
+  <%=raw iframe %>
 <% end %>
