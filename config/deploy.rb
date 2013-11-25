@@ -69,7 +69,8 @@ namespace :deploy do
   desc "Link cache folder to my /home partition"
   task :link_cache_folder, :roles => :app do
     run "mkdir -p #{real_cache_path}"
-    run "ln -s #{release_path}/tmp/cache #{real_cache_path}"  
+    run "rm -rf #{release_path}/tmp/cache"
+    run "ln -s #{real_cache_path} #{release_path}/tmp/cache"  
   end
   after "deploy:finalize_update", "deploy:link_cache_folder"
    
