@@ -26,6 +26,7 @@ after 'deploy:restart', 'unicorn:duplicate' # before_fork hook implemented (zero
 
 namespace :deploy do
   secrets = [ 'config/database.yml', 'config/secrets.yml', 'config/newrelic.yml', 'config/development.sphinx.conf', 'public/avatars' ]
+  real_cache_path = "/home/evilsocket/emoticode_cache"
 
   desc "Update the crontab file"
   task :update_crontab, :roles => :db do
@@ -64,7 +65,14 @@ namespace :deploy do
     run "cd #{release_path} && rake rails:update:bin"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
- 
+
+  desc "Link cache folder to my /home partition"
+  task :link_cache_folder, :roles => :app do
+    run "mkdir -p #{real_cache_path}"
+    run "ln -s #{release_path}/tmp/cache #{real_cache_path}"  
+  end
+  after "deploy:finalize_update", "deploy:link_cache_folder"
+   
   desc "Make sure local git is in sync with remote."
   task :check_revision, roles: :web do
     unless `git rev-parse HEAD` == `git rev-parse origin/master`
