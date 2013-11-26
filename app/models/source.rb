@@ -14,9 +14,10 @@ class Source < ActiveRecord::Base
   scope :popular,    -> { order( 'views DESC' ) }
   scope :by_trend,   -> { select( 'sources.*, ( sources.views / ( ( UNIX_TIMESTAMP() - sources.created_at ) / 86400 ) ) AS trend' ).order('trend DESC') }
 
-  validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { :minimum => 5, :maximum => 255 }
+  validates :title, presence: true, length: { :minimum => 5, :maximum => 255 }
   validates :text, presence: true, length: { :minimum => 25 }
   validate :language_id_exists
+  validate :user_is_not_flooding
 
   before_create :create_name       # create unique cached slug
   after_save    :lexical_analysis! # extract keywords and their weights
@@ -185,5 +186,15 @@ class Source < ActiveRecord::Base
       errors.add( :language_id, "is not a valid language id." )
       false
     end
+  end
+
+  def user_is_not_flooding
+    last = User.find( user_id ).last_source( self )
+    elapsed = last.nil? ? 60 : ( Time.now - Time.at( last.created_at ) ).to_i 
+    if elapsed < 60
+      errors.add( :base, "Flooding detected, you can post new content within #{60 - elapsed} seconds." )
+      false
+    end
+    true
   end
 end

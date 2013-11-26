@@ -3,9 +3,13 @@ EmoticodeRails::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :languages, :only => [ :index, :show ]
-      resources :sources,   :only => [ :index, :show ]
-      resources :users,     :only => [ :index, :show ]
+      
+      controller :sources do
+        post 'sources/new' => :create, as: :create_source
+      end
+      # resources :languages, :only => [ :index, :show ]
+      # resources :sources
+      # resources :users,     :only => [ :index, :show ]
     end
   end
 

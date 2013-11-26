@@ -133,6 +133,14 @@ class User < ActiveRecord::Base
     Favorite.joins(:source).where('sources.user_id = ?', self.id ).count
   end
 
+  def last_source( not_as = nil )
+    if not_as.nil?
+      sources.limit(1).first
+    else
+      sources.where(['id != ?',not_as.id]).limit(1).first
+    end
+  end
+
   def is_admin?
     level == LEVELS[:admin]
   end
