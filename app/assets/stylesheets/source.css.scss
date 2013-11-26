@@ -225,8 +225,22 @@ div.medium-column {
         border-bottom: 15px solid transparent;
         border-right: 15px solid white;
         position: absolute;
-        top: 80px;
+        top: 40px;
         left: -9px;
+    }
+
+    div.avatar {
+        float: left;
+        margin-top: 14px;
+        margin-right: 5px;
+    }
+
+    div.hseparator {
+        clear: both;
+        border-top: 1px solid #efefef;
+        margin: 15px 0;
+        width: 300px;
+        margin-left: -20px;
     }
 
     a {

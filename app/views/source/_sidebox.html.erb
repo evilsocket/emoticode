@@ -1,20 +1,23 @@
 <div class="headblock ssummary">
+  <div class="avatar">
+    <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="avatar">
+      <%= image_tag image_url(source.user.avatar), :height => '40', :width => '40', :alt => "#{source.user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
+    </a>
+  </div>
+
   <p>
   This snippet has been posted by <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= @source.user.username %> profile"><%= source.user.username %></a>
   <%= time_ago_in_words Time.at(source.created_at) %> ago in the <%= link_to_language source.language, :class => 'language' %> section.
   </p>
 
-  <p>
     <% if !signed_in? or @current_user != source.user %>
       <%= render :partial => "follows/follow", :locals => { :type => :user, :object => source.user, :text => source.user.username } %> 
     <% end %>
-  </p>
 
-  <p>
     <%= render :partial => "follows/follow", :locals => { :type => :language, :object => source.language, :text => source.language.title } %> 
-  </p>
 
-  <br style="clear:both;"/>
+  <div class="hseparator"></div>
+
   <ul>
     <li><span class="count"><%= source.views %></span><i class="icon-eye-open"></i></li>
     <li>
