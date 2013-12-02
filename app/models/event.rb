@@ -42,11 +42,13 @@ class Event < ActiveRecord::Base
   end
 
   def self.new_favorited(user,source)
-    Event.create({
-      owner: user,
-      eventable_type: TYPES[:favorited],
-      eventable_id: source.id
-    })
+    unless source.private?  
+      Event.create({
+        owner: user,
+        eventable_type: TYPES[:favorited],
+        eventable_id: source.id
+      })
+    end
   end
 
   def self.new_registered(user)
@@ -58,12 +60,14 @@ class Event < ActiveRecord::Base
   end
 
   def self.new_nth_content(user,source,counter)
-    Event.create({
-      owner: user,
-      eventable_type: TYPES[:sent_nth_content],
-      eventable_id: source.id,
-      data: counter
-    })
+    unless source.private?      
+      Event.create({
+        owner: user,
+        eventable_type: TYPES[:sent_nth_content],
+        eventable_id: source.id,
+        data: counter
+      })
+    end
   end
 
   def self.new_comment(user,comment)
@@ -87,14 +91,16 @@ class Event < ActiveRecord::Base
   end
 
   def self.new_views_reached(source,views)
-    Event.create({
-      owner: source.user,
-      eventable_type: TYPES[:views_reached],
-      eventable_id: source.id,
-      data: views
-    })
+    unless source.private?      
+      Event.create({
+        owner: source.user,
+        eventable_type: TYPES[:views_reached],
+        eventable_id: source.id,
+        data: views
+      })
+    end
   end
- 
+
   def self.new_follow_user(user,who_id)
     Event.create({
       owner: user,
