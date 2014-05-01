@@ -639,10 +639,11 @@ body {
     margin:0;
     padding:0;
     background: #f0f0f0;
-    color: #888;
+    color: rgb(44, 43, 43);
     font-weight: 300;
     font-size: 14px;
-
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    
     #wrapper {
         width: $wrapper-width;
         height: 100%;
