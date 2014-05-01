@@ -42,9 +42,22 @@ class Source < ActiveRecord::Base
   end
 
   include ActionView::Helpers::SanitizeHelper
+
+  def unescape(content)
+    content.gsub!(/(&quot;|&#39;|&amp;|&lt;|&gt;)/) do
+      case $1
+        when "&quot;"
+          '"'
+        when "&#39;"
+          "'"
+        when "&amp;"
+          "&"
+      end
+    end
+  end
   
   def description!( default = nil, html = false )
-    Rails.cache.fetch "source_#{id}_description!_#{default}_#{html}_#{updated_at}" do
+    Rails.cache.fetch "source_#{id}#description!_#{default}_#{html}_#{updated_at}" do
       text = if !description.nil? && !description.empty?
                description
              else
@@ -59,7 +72,7 @@ class Source < ActiveRecord::Base
       extensions = {
         :fenced_code_blocks => true,
         :autolink => true,
-        :underline => true,
+        :underline => false,
         :quote => true,
         :footnotes => true
       }
@@ -68,7 +81,8 @@ class Source < ActiveRecord::Base
       text = redcarpet.render encoder.encode( text )
 
       if html
-        text
+        # handle redcarpet quotes bug ( http://stackoverflow.com/questions/9969206/rails-double-quotes-always-escaped )
+        unescape( text )
       else
         strip_tags text
       end
