@@ -1,8 +1,8 @@
-<% cache_expire_if( !signed_in?, "source_#{controller.controller_name}_#{source.id}", 1.hour ) do %>
+<% #cache_expire_if( !signed_in?, "source_#{controller.controller_name}_#{source.id}", 1.hour ) do %>
 <li class="source">
   <h4><%= link_to_source source, { :class => 'title' }, true %></h4>
   <div class="description">
-    <%= truncate source.description!( '*No description :/*', false ), :length => 200 %>
+    <%= source.description!( '*No description :/*', false ).truncate( 200 ).html_safe %>
   </div>
   <div class="author">
     <div class="avatar">
@@ -54,4 +54,4 @@
     </ul>
   </div>
 </li>
-<% end %>
+<% #end %>

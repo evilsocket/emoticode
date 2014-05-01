@@ -1,5 +1,5 @@
 <section id="home">
-  <% if @sources.empty? %>
+  <% if signed_in? and @sources.empty? %>
     <div id="startfollowing">
       Welcome to your personal stream, start following your favorite users or a whole language channel using the <span class="follow"><a href="#" onclick="return false;" class="follow">Follow</a></span> 
       buttons you will find around the website.<br/><br/>
