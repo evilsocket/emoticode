@@ -17,14 +17,14 @@ module SourceHelper
   end
 
   def highlight(source)
-    Rails.cache.fetch "#{Digest::MD5.hexdigest( source.text )}_highlighted_source", :expires_in => 7.days do
+    #Rails.cache.fetch "#{Digest::MD5.hexdigest( source.text )}_highlighted_source", :expires_in => 7.days do
       if source.language.syntax == 'php'
         if source.text[0].strip != '<'
           source.text = "<?php\n" + source.text
         end
       end
-      code = Albino.colorize source.text, source.language.syntax
+      code = Albino.new( source.text, source.language.syntax).to_s('O' => 'linenos=inline')
       code.empty? ? "<pre>#{h(source.text)}</pre>" : code
-    end
+    #end
   end
 end

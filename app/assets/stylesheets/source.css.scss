@@ -147,6 +147,12 @@ div.medium-column {
 
     div.highlight {
         min-height: 500px;
+
+        span.lineno {
+            color: #aaa;
+            border-right: 1px solid #eee;
+            padding-right: 5px;
+        }
     }
 
     div.headblock {
