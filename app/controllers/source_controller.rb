@@ -3,14 +3,20 @@ class SourceController < ApplicationController
   before_filter :owner_or_admin!, only: [ :edit, :update, :destroy ]
 
   def show
-    @source = source_by_params
-    if params[:id]
-      redirect_to source_with_language_url( :language_name => @source.language.name, :source_name => @source.name )
-    else      
-      impressionist(@source)
+    begin
+      @source = source_by_params
 
-      @cloud = @source.tags.to_a.shuffle
-      @comment = Comment.new
+      if params[:id]
+        redirect_to source_with_language_url( :language_name => @source.language.name, :source_name => @source.name )
+      else      
+        impressionist(@source)
+
+        @cloud = @source.tags.to_a.shuffle
+        @comment = Comment.new
+      end
+
+    rescue
+      redirect_to language_archive_url( :name => params[:language_name] ), :status => 301
     end
   end
 
