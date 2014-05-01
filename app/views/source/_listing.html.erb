@@ -1,4 +1,4 @@
-<% #cache_expire_if( !signed_in?, "source_#{controller.controller_name}_#{source.id}", 1.hour ) do %>
+<% cache_expire_if( !signed_in?, "source_#{controller.controller_name}_#{source.id}", 1.hour ) do %>
 <li class="source">
   <h4><%= link_to_source source, { :class => 'title' }, true %></h4>
   <div class="description">
@@ -54,4 +54,4 @@
     </ul>
   </div>
 </li>
-<% #end %>
+<% end %>
