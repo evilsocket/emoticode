@@ -19,6 +19,7 @@ solve someone else problems while developing a project ... you never know :)
 - [x] Markdown descriptions
 - [x] Custom homepage feed
 - [ ] Markdown in comments
+- [ ] **Responsive Layout**
 
 ## License
 
