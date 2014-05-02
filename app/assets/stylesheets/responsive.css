@@ -1,0 +1,89 @@
+/* width < 1280px */
+@media screen and (max-width: 1279px) 
+{
+    #wrapper,
+    #topnav,
+    #fwrapper,
+    #topnav ul {
+        width: 100% !important;
+    }
+
+    #ruler .inner {
+        width: 1009px !important;
+    }
+
+    #fwrapper ul li {
+        margin-right: 5px !important;
+    }
+
+    #home ul.listing,
+    div.huge-column {
+        width: 75% !important;
+    }
+
+    div.huge-column > h1 {
+        margin-left: 0.3em;
+    }
+
+    #blog div.medium-column {
+        width: 74% !important;
+    }
+
+    li.source {
+        width: 27% !important;
+    }
+
+    #sidebar {
+        width: 24% !important;
+    }
+
+    #source-create form div.head input.title, 
+    #source-update form div.head input.title {
+        width: 720px !important;
+    }
+
+    #source ul.buttons {
+        width: 102.2% !important;
+    }
+}
+
+/* width < 1024px */
+@media screen and (max-width: 1023px)
+{
+    #home ul.listing,
+    div.huge-column,
+    div.medium-column,
+    #blog div.medium-column {
+        width: 100% !important;
+    }
+
+    #wrapper #settings {
+        width: 95% !important;
+    }
+
+    #profile #sources {
+        width: 99% !important;
+    }
+
+    #source div.related {
+        margin: 0 !important;
+    }
+
+    #source div.related > ul.listing {
+        width: 99% !important;
+    }
+
+    #source-create form div.head input.title, 
+    #source-update form div.head input.title {
+        width: 480px !important;
+    }
+
+    #sidebar {
+        display: none;
+    }
+
+    #alllangs {
+        width: 95% !important;
+        left: 0.8% !important;
+    }
+}
