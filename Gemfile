@@ -24,6 +24,7 @@ gem "rabl"
 gem 'roadie'
 gem 'impressionist'
 gem 'redcarpet'
+gem 'query_diet'
 
 # social features
 gem "koala", "~> 1.7.0rc1"

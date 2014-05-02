@@ -944,3 +944,7 @@ a.rss-big:hover,
 a.rss:hover {
     text-decoration: none;
 }
+
+div#query_diet {
+    z-index: 100000 !important;
+}

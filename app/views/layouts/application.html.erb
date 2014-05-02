@@ -8,7 +8,7 @@
   <% metas.each do |meta| %>
     <meta <% meta.each { |attr,value| %><%= attr %>="<%= value %>" <% } %>/>
   <% end %>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+
   <link rel="shortcut icon" href="/favicon.png">
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.emoticode.net/opensearch.xml" title="EmotiCODE Search"/>
   <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
@@ -26,7 +26,14 @@
 <% end %>
 
 <div id="wrapper">
-<%= yield %>
+  <%= yield %>
+
+  <% if params[:show_stats] == "1" %>
+    <center>
+      <small>Page loaded in <%= ( Time.now - @time_start ) * 1000 %> ms</small> 
+      <%= query_diet_widget %>
+    </center>
+  <% end %>
 </div>
 
 <footer id="footer">
