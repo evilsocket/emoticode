@@ -22,17 +22,9 @@
     <li><span class="count"><%= source.views %></span><i class="icon-eye-open"></i></li>
     <li>
       <%
-        fav_count = 0
-        users     = []
-
-        source.favorites.each do |fav|
-          users << ( signed_in? and @current_user == fav.user ? 'you' : fav.user.username ) 
-          fav_count += 1
-        end
-
-        ttip = fav_count > 0 ? "#{users.to_sentence} favorited this snippet." : "Still no one favorited this snippet, be the first!"
+        ttip = source.favorites_count.to_i > 0 ? "#{source.favorites_count} users favorited this snippet." : "Still no one favorited this snippet, be the first!"
       %>
-      <span id="favcount-<%= source.id %>" class="count"><%= source.favorites.count %></span>
+      <span id="favcount-<%= source.id %>" class="count"><%= source.favorites_count %></span>
       <% if signed_in? %>
         <% if @current_user.favorite?(source) %>
           <%= link_icon_to '', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext ttip", :title => ttip, method: :post, remote: true  %>
@@ -43,7 +35,7 @@
         <%= link_icon_to_function '', 'thumbs-up', 'showLoginModal()' %>
       <% end %>
     </li>
-    <li><span class="count"><%= source.comments.count %></span><i class="icon-comments"></i></li>
+    <li><span class="count"><%= source.comments_count %></span><i class="icon-comments"></i></li>
   </ul>
   <br style="clear:both;"/>    
   <%= render :partial => 'layouts/social_share', :locals => { source: source } %>   

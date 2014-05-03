@@ -29,10 +29,13 @@
   <%= yield %>
 
   <% if params[:show_stats] == "1" %>
-    <center>
       <small>Page loaded in <%= ( Time.now - @time_start ) * 1000 %> ms</small> 
       <%= query_diet_widget %>
-    </center>
+      <ul>
+        <% QueryDiet::Logger.queries.each do |query,time| %>
+          <li><small><%= query %> : <strong><%= time * 1000 %> ms</strong></small></li>
+        <% end %>
+      </ul>
   <% end %>
 </div>
 

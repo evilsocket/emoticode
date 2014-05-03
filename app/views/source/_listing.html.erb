@@ -1,18 +1,23 @@
 <% cache_expire_if( !signed_in?, "source_#{controller.controller_name}_#{source.id}", 1.hour ) do %>
 <li class="source">
+
   <h4><%= link_to_source source, { :class => 'title' }, true %></h4>
+
   <div class="description">
     <%= source.description!( '*No description :/*', false ).truncate( 150 ).html_safe %>
   </div>
   <div class="author">
-    <div class="avatar">
-      <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="avatar">
-        <%= image_tag image_url(source.user.avatar), :height => '40', :width => '40', :alt => "#{source.user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
-      </a>
-      <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="username">
-        <%= truncate( source.user.username, :length => 20 ) %>
-      </a>
-    </div>
+
+    <% cache( "source_#{source.id}_author_footer", :expires_in => 1.hour ) do %>
+      <div class="avatar">
+        <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="avatar">
+          <%= image_tag image_url(source.user.avatar), :height => '40', :width => '40', :alt => "#{source.user.username} avatar.", :class => 'imgavatar', :onerror => "this.src='#{image_url("/avatars/default.png")}';" %>
+        </a>
+        <a href="<%= user_profile_path(username:source.user.username) %>" title="<%= source.user.username %> profile" class="username">
+          <%= truncate( source.user.username, :length => 20 ) %>
+        </a>
+      </div>
+    <% end %>
 
     <% if !signed_in? or @current_user != source.user %>
       <%= render :partial => "follows/follow", :locals => { :type => :user, :object => source.user }%>       
@@ -22,17 +27,9 @@
     <ul>
       <li>
         <%
-          fav_count = 0
-          users     = []
-
-          source.favorites.each do |fav|
-            users << ( signed_in? and @current_user == fav.user ? 'you' : fav.user.username ) 
-            fav_count += 1
-          end
-
-          ttip = fav_count > 0 ? "#{users.to_sentence} favorited this snippet." : "Still no one favorited this snippet, be the first!"
+          ttip = source.favorites_count.to_i > 0 ? "#{source.favorites_count} users favorited this snippet." : "Still no one favorited this snippet, be the first!"
         %>
-        <span id="favcount-<%= source.id %>" class="count"><%= fav_count %></span>
+        <span id="favcount-<%= source.id %>" class="count"><%= source.favorites_count %></span>
         <% if signed_in? %>
           <% if @current_user.favorite?(source) %>
             <%= link_icon_to '', 'thumbs-down', unfavorite_path( id: source.id, format: :js ), id: "fav-#{source.id}", class: "notext ttip", :title => ttip, method: :post, remote: true  %>
@@ -48,7 +45,7 @@
         <i class="icon-eye-open"></i>
       </li>
       <li>
-        <span class="count"><%= source.comments.count %></span>
+        <span class="count"><%= source.comments_count %></span>
         <i class="icon-comments"></i>
       </li>
     </ul>

@@ -20,17 +20,16 @@ class ApplicationController < ActionController::Base
 
   def create_globals
     @time_start      = Time.now
-    @languages       = Language.order('name ASC').all
+    
+    @languages       = Language.cached
+    @blog_categories = Category.cached
+    
     @users           = User.confirmed.order('created_at DESC').limit(20)
     @events          = Event.order('created_at DESC').limit(15)
-    @blog_categories = Category.order('name ASC').all
     @show_joinus     = false
     @current_user    = session[:id].nil? ? nil : User.find_by_id( session[:id] )
 
     if @current_user.nil? == false
-      @current_user.last_seen_at = Time.now
-      @current_user.save(:validate => false)
-
     # show modal only for not logged users
     # elsif cookies[:joinus].nil?
     #   @show_joinus = true

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030222107) do
+ActiveRecord::Schema.define(version: 20140502235410) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 20131030222107) do
     t.datetime "updated_at"
   end
 
+  add_index "follows", ["follow_id"], name: "index_follows_on_follow_id", using: :btree
+  add_index "follows", ["follow_type"], name: "index_follows_on_follow_type", using: :btree
   add_index "follows", ["user_id"], name: "index_follows_on_user_id", using: :btree
 
   create_table "impressions", force: true do |t|
@@ -182,24 +184,30 @@ ActiveRecord::Schema.define(version: 20131030222107) do
   create_table "sources", force: true do |t|
     t.integer "user_id"
     t.integer "language_id"
-    t.integer "private",     limit: 1,          default: 0,     null: false
-    t.string  "name",                                           null: false
-    t.string  "title",                                          null: false
+    t.integer "private",         limit: 1,          default: 0,     null: false
+    t.string  "name",                                               null: false
+    t.string  "title",                                              null: false
     t.text    "description"
-    t.integer "created_at",                                     null: false
-    t.text    "text",        limit: 2147483647,                 null: false
-    t.integer "views",                          default: 0
-    t.boolean "socialized",                     default: false
-    t.integer "updated_at",                     default: 0
+    t.integer "created_at",                                         null: false
+    t.text    "text",            limit: 2147483647,                 null: false
+    t.integer "views",                              default: 0
+    t.boolean "socialized",                         default: false
+    t.integer "updated_at",                         default: 0
+    t.integer "favorites_count",                    default: 0
+    t.integer "comments_count",                     default: 0
   end
 
+  add_index "sources", ["created_at"], name: "index_sources_on_created_at", using: :btree
   add_index "sources", ["description"], name: "search_index_2", type: :fulltext
   add_index "sources", ["language_id"], name: "language_id", using: :btree
   add_index "sources", ["language_id"], name: "type_id", using: :btree
   add_index "sources", ["name"], name: "name", using: :btree
+  add_index "sources", ["private"], name: "index_sources_on_private", using: :btree
   add_index "sources", ["private"], name: "private", using: :btree
   add_index "sources", ["title"], name: "search_index_1", type: :fulltext
   add_index "sources", ["user_id"], name: "author_id", using: :btree
+  add_index "sources", ["user_id"], name: "index_sources_on_user_id", using: :btree
+  add_index "sources", ["views"], name: "index_sources_on_views", using: :btree
 
   create_table "tags", force: true do |t|
     t.string  "name",                      null: false
@@ -220,7 +228,6 @@ ActiveRecord::Schema.define(version: 20131030222107) do
     t.integer "status",                               null: false
     t.integer "created_at",                           null: false
     t.integer "updated_at"
-    t.integer "last_seen_at"
     t.integer "is_bot",                   default: 0
   end
 
@@ -228,7 +235,6 @@ ActiveRecord::Schema.define(version: 20131030222107) do
   add_index "users", ["email"], name: "email", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["last_login"], name: "last_login", using: :btree
-  add_index "users", ["last_seen_at"], name: "last_seen_at", using: :btree
   add_index "users", ["level"], name: "level", using: :btree
   add_index "users", ["password_hash"], name: "hash", using: :btree
   add_index "users", ["status"], name: "status", using: :btree

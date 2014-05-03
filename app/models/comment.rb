@@ -23,6 +23,9 @@ class Comment < ActiveRecord::Base
 
   before_save            :parse_content
 
+  after_create :increment_counter_cache
+  after_destroy :decrement_counter_cache
+
   # this is needed for nesting comments in ApplicationHelper
   def children
     @children ||= []
@@ -85,5 +88,18 @@ class Comment < ActiveRecord::Base
       false
     end
   end
+
+  def increment_counter_cache
+    if commentable_type == COMMENTABLE_TYPES[:source]
+      Source.increment_counter( 'comments_count', commentable_id )
+    end
+  end
+
+  def decrement_counter_cache
+    if commentable_type == COMMENTABLE_TYPES[:source]
+      Source.decrement_counter( 'comments_count', commentable_id )
+    end
+  end
+
 
 end

@@ -18,4 +18,10 @@ class Language < ActiveRecord::Base
         to_a
     end
   end
+
+  def self.cached
+    Rails.cache.fetch "Language#cached", :expires_in => 24.hours do
+      Language.order('name ASC').all
+    end
+  end
 end

@@ -17,6 +17,9 @@ class Follow < ActiveRecord::Base
   validate               :not_already_followed
   validate               :object_exists
 
+  after_create  :invalidate_user_stream_cache
+  after_destroy :invalidate_user_stream_cache
+
   def type_key
     if follow_type == TYPES[:user]
       :user
@@ -71,5 +74,8 @@ class Follow < ActiveRecord::Base
       false
     end
   end
-
+  
+  def invalidate_user_stream_cache
+    Rails.cache.delete "user_#{user_id}_stream"
+  end
 end

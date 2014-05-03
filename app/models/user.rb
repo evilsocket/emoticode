@@ -178,19 +178,21 @@ class User < ActiveRecord::Base
   end
 
   def stream
-    follows      = self.follows.by_type
-    language_ids = []
-    user_ids     = []
+    Rails.cache.fetch "user_#{self.id}_stream" do
+      follows      = self.follows.by_type
+      language_ids = []
+      user_ids     = []
 
-    follows.each do |follow|
-      if follow.follow_type.to_i == Follow::TYPES[:user]
-        user_ids << follow.user.id
-      elsif follow.follow_type.to_i == Follow::TYPES[:language]
-        language_ids << follow.language.id
+      follows.each do |follow|
+        if follow.follow_type.to_i == Follow::TYPES[:user]
+          user_ids << follow.user.id
+        elsif follow.follow_type.to_i == Follow::TYPES[:language]
+          language_ids << follow.language.id
+        end
       end
-    end
 
-    Source.public.where(['user_id IN ( ? ) OR language_id IN ( ? )', user_ids, language_ids])
+      Source.public.where(['user_id IN ( ? ) OR language_id IN ( ? )', user_ids, language_ids])
+    end
   end
 
   def avatar

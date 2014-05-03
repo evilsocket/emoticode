@@ -6,6 +6,9 @@ class Favorite < ActiveRecord::Base
   validate              :not_already_favorite
   validate              :source_exists
 
+  after_create :increment_counter_cache
+  after_destroy :decrement_counter_cache
+
   protected
 
   def not_already_favorite
@@ -27,6 +30,14 @@ class Favorite < ActiveRecord::Base
       errors.add( :source_id, "is not a valid source id." )
       false
     end
+  end
+
+  def increment_counter_cache
+    Source.increment_counter( 'favorites_count', source_id )
+  end
+
+  def decrement_counter_cache
+    Source.decrement_counter( 'favorites_count', source_id )
   end
 
 end
