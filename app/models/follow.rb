@@ -76,6 +76,8 @@ class Follow < ActiveRecord::Base
   end
   
   def invalidate_user_stream_cache
-    Rails.cache.delete "user_#{user_id}_stream"
+    (1..1000).each do |p|
+      Rails.cache.delete "user_#{user_id}_stream_page_#{p}"
+    end
   end
 end

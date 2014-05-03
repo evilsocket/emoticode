@@ -177,8 +177,8 @@ class User < ActiveRecord::Base
     User.joins(:follows).where(['follows.follow_id = ?', id]).order('follows.created_at DESC')
   end
 
-  def stream
-    Rails.cache.fetch "user_#{self.id}_stream" do
+  def stream( page )
+    Rails.cache.fetch "user_#{self.id}_stream_page_#{page}" do
       follows      = self.follows.by_type
       language_ids = []
       user_ids     = []
@@ -191,7 +191,7 @@ class User < ActiveRecord::Base
         end
       end
 
-      Source.public.where(['user_id IN ( ? ) OR language_id IN ( ? )', user_ids, language_ids])
+      Source.public.where(['user_id IN ( ? ) OR language_id IN ( ? )', user_ids, language_ids]).paginate( :page => page, :per_page => 16, :include => :language )
     end
   end
 

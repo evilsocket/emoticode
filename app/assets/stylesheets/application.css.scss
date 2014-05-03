@@ -946,5 +946,14 @@ a.rss:hover {
 }
 
 div#query_diet {
+    position: fixed !important;
     z-index: 100000 !important;
+}
+
+ul.query_diet_list {
+    margin: 0;
+    padding: 0;
+    margin-top: 20px;
+    list-style-type: square;
+    color: black;
 }

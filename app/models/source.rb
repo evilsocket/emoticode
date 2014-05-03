@@ -21,7 +21,7 @@ class Source < ActiveRecord::Base
 
   before_create :create_name       # create unique cached slug
   after_save    :lexical_analysis! # extract keywords and their weights
-  after_save    :invalidate_highlight_cache!
+  after_save    :invalidate_cache!
 
   self.per_page = 10
 
@@ -100,6 +100,12 @@ class Source < ActiveRecord::Base
       .load
     end
   end
+  
+  def cloud
+    Rails.cache.fetch "source_#{id}_cloud" do
+      tags.to_a.shuffle
+    end
+  end
 
   def self.newer_than(period)
     where( 'created_at >= ?', period )
@@ -124,11 +130,13 @@ class Source < ActiveRecord::Base
   end
 
   def self.find_by_name_and_language_name!( name, language_name )
-    Source
-    .joins( :language )
-    .where( :languages => { name: language_name } )
-    .where( :sources   => { name: name } )
-    .first!
+    Rails.cache.fetch "Source#find_by_name_and_language_name_#{name}_#{language_name}" do 
+      Source
+      .joins( :language )
+      .where( :languages => { name: language_name } )
+      .where( :sources   => { name: name } )
+      .first!
+    end
   end
 
   private
@@ -187,8 +195,10 @@ class Source < ActiveRecord::Base
     end
   end
 
-  def invalidate_highlight_cache!
+  def invalidate_cache!
     Rails.cache.delete "highlighted_source_#{id}"
+    Rails.cache.delete "Source#find_by_name_and_language_name_#{name}_#{language.name}"
+    Rails.cache.delete "source_#{id}_cloud"
   end
 
   # validators

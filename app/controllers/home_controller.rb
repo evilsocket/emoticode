@@ -1,9 +1,7 @@
 class HomeController < ApplicationController
   def index
     if !@current_user.nil?
-      pager_params = { :page => params[:page], :per_page => 16, :include => :language }
-
-      @sources = @current_user.stream.paginate pager_params
+      @sources = @current_user.stream params[:page]
       @cloud   = Tag.cloud.shuffle!
     else
       pager_params = { :page => params[:page], :per_page => 16, :include => :language }

@@ -11,7 +11,7 @@ class SourceController < ApplicationController
       else      
         impressionist(@source)
 
-        @cloud = @source.tags.to_a.shuffle
+        @cloud = @source.cloud
         @comment = Comment.new
       end
 

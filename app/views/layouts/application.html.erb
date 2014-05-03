@@ -28,11 +28,15 @@
 <div id="wrapper">
   <%= yield %>
 
-  <% if params[:show_stats] == "1" %>
+  <% if params[:show_stats] == "1" or ( signed_in? and @current_user.is_admin? ) %>
       <small>Page loaded in <%= ( Time.now - @time_start ) * 1000 %> ms</small> 
       <%= query_diet_widget %>
-      <ul>
-        <% QueryDiet::Logger.queries.each do |query,time| %>
+      <ul class="query_diet_list">
+        <%
+          # sort queries by execution time desc
+          sorted = QueryDiet::Logger.queries.sort { |a,b| a[1] < b[1] ? 1 : (a[1] > b[1] ? -1 : (a[1] <=> b[1])) }
+        %>
+        <% sorted.each do |query,time| %>
           <li><small><%= query %> : <strong><%= time * 1000 %> ms</strong></small></li>
         <% end %>
       </ul>
