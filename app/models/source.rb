@@ -54,8 +54,9 @@ class Source < ActiveRecord::Base
           "&"
       end
     end
+    content
   end
-  
+
   def description!( default = nil, html = false )
     Rails.cache.fetch "source_#{id}#description!_#{default}_#{html}_#{updated_at}" do
       text = if !description.nil? && !description.empty?
@@ -100,7 +101,7 @@ class Source < ActiveRecord::Base
       .load
     end
   end
-  
+
   def cloud
     Rails.cache.fetch "source_#{id}_cloud" do
       tags.to_a.shuffle
@@ -130,7 +131,7 @@ class Source < ActiveRecord::Base
   end
 
   def self.find_by_name_and_language_name!( name, language_name )
-    Rails.cache.fetch "Source#find_by_name_and_language_name_#{name}_#{language_name}" do 
+    Rails.cache.fetch "Source#find_by_name_and_language_name_#{name}_#{language_name}" do
       Source
       .joins( :language )
       .where( :languages => { name: language_name } )
@@ -214,7 +215,7 @@ class Source < ActiveRecord::Base
 
   def user_is_not_flooding
     last = User.find( user_id ).last_source( self )
-    elapsed = last.nil? ? 60 : ( Time.now - Time.at( last.created_at ) ).to_i 
+    elapsed = last.nil? ? 60 : ( Time.now - Time.at( last.created_at ) ).to_i
     if elapsed < 60
       errors.add( :base, "Flooding detected, you can post new content within #{60 - elapsed} seconds." )
       false
