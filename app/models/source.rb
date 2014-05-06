@@ -58,7 +58,9 @@ class Source < ActiveRecord::Base
   end
 
   def description!( default = nil, html = false )
-    Rails.cache.fetch "source_#{id}#description!_#{default}_#{html}_#{updated_at}" do
+    key = "source(#{id}).description!" + Digest::MD5.hexdigest( "#{default}_#{html}_#{updated_at}" )
+
+    Rails.cache.fetch key do
       text = if !description.nil? && !description.empty?
                description
              else
