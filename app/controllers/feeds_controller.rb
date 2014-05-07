@@ -36,7 +36,7 @@ class FeedsController < ApplicationController
   def stream
     @user = User.find_by_username( params[:username] )
     if @user
-      @sources = @user.stream.order('created_at DESC').limit(50) 
+      @sources = @user.stream(1) 
       render_feed
     else
       render_404
