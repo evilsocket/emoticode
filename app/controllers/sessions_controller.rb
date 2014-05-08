@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   before_filter :not_authenticated!, :except => [:destroy]
-  
+
   def create
     omniauth = request.env['omniauth.auth']
     if omniauth
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     end
 
     # TODO: if first login, set show_intro cookie
-    
+
     process_user
   end
 
@@ -33,6 +33,11 @@ class SessionsController < ApplicationController
     else
       Event.new_login(@user)
       sign_in(@user)
+
+      response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+      response.headers["Pragma"] = "no-cache"
+      response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+
       redirect_to request.referer || root_url
     end
   end
