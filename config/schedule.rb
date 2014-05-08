@@ -12,7 +12,7 @@ every 60.minutes do
   rake 'sitemap:submit'
 end
 
-every 30.minutes do
+every 120.minutes do
   rake 'social:publish_random'
 end
 
