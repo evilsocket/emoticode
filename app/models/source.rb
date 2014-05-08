@@ -146,13 +146,13 @@ class Source < ActiveRecord::Base
   end
 
   def self.find_by_name_and_language_name!( name, language_name )
-    Rails.cache.fetch "Source#find_by_name_and_language_name_#{name}_#{language_name}" do
+    # Rails.cache.fetch "Source#find_by_name_and_language_name_#{name}_#{language_name}" do
       Source
       .joins( :language )
       .where( :languages => { name: language_name } )
       .where( :sources   => { name: name } )
       .first!
-    end
+    # end
   end
 
   private
