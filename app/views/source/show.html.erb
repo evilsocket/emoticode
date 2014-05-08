@@ -34,7 +34,7 @@
         </li>
       </ul>
 
-      <%=raw highlight(@source) %>
+      <%=raw @source.highlight %>
     </div>
 
     <% related = @source.related(4) %>

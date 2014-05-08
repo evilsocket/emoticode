@@ -110,6 +110,19 @@ class Source < ActiveRecord::Base
     end
   end
 
+  def highlight
+    Rails.cache.fetch "source_#{id}_highlight" do
+      if self.language.syntax == 'php'
+        if self.text[0].strip != '<'
+          self.text = "<?php\n" + self.text
+        end
+      end
+
+      code = Albino.new( self.text, self.language.syntax ).to_s( 'O' => 'linenos=inline' )
+      code.empty? ? "<pre>#{self.text}</pre>" : code
+    end
+  end
+
   def self.newer_than(period)
     where( 'created_at >= ?', period )
   end
@@ -199,9 +212,9 @@ class Source < ActiveRecord::Base
   end
 
   def invalidate_cache!
-    Rails.cache.delete "highlighted_source_#{id}"
     Rails.cache.delete "Source#find_by_name_and_language_name_#{name}_#{language.name}"
     Rails.cache.delete "source_#{id}_cloud"
+    Rails.cache.delete "source_#{id}_highlight"
   end
 
   # validators
