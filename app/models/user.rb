@@ -48,6 +48,9 @@ class User < ActiveRecord::Base
   before_update :update_hashed_password
   before_update :update_avatar
 
+  after_save :invalidate_cache!
+  after_create :invalidate_cache!
+
   def self.authenticate(who, password)
     find_by_sql([ 'SELECT * FROM users WHERE ( username = ? OR email = ? ) AND MD5( CONCAT( salt, ? ) ) = password_hash AND status = ? ', who, who, password, STATUSES[:confirmed] ]).first
   end
@@ -320,6 +323,12 @@ class User < ActiveRecord::Base
 
       profile.save!
     end
+  end
+
+  protected
+
+  def invalidate_cache!
+    expire_fragment( "latest_users_view" )
   end
 
 end

@@ -6,6 +6,9 @@ class Event < ActiveRecord::Base
   belongs_to :language, :foreign_key => :eventable_id    
   belongs_to :comment,  :foreign_key => :eventable_id
 
+  after_save :invalidate_cache!
+  after_create :invalidate_cache!
+
   TYPES = {
     :favorited        => 1,
     :registered       => 2,
@@ -124,6 +127,12 @@ class Event < ActiveRecord::Base
     elsif follow_type == Follow::TYPES[:language]
       self.new_follow_language(user,subject_id)
     end
+  end
+
+  protected
+
+  def invalidate_cache!
+    expire_fragment( "latest_events_view" )
   end
 
 end

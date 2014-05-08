@@ -1,4 +1,4 @@
-<% cache "events#{Event.count}", :expire => 1.hour do %>
+<% cache "latest_events_view", skip_digest: true do %>
   <div class="heading">
     <h3>Latest Events</h3>
   </div>
