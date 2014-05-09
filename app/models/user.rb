@@ -172,9 +172,13 @@ class User < ActiveRecord::Base
 
   def follows?(object)
     if object.is_a? User
-      Follow.where( :user_id => self.id, :follow_type => Follow::TYPES[:user], :follow_id => object.id ).any?
+      type = Follow::TYPES[:user]
     elsif object.is_a? Language
-      Follow.where( :user_id => self.id, :follow_type => Follow::TYPES[:language], :follow_id => object.id ).any?
+      type = Follow::TYPES[:language]
+    end
+
+    Rails.cache.fetch "user_#{id}_follows?_#{type}_#{object.id}" do
+      Follow.where( :user_id => self.id, :follow_type => type, :follow_id => object.id ).any?      
     end
   end
 

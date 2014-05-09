@@ -17,8 +17,8 @@ class Follow < ActiveRecord::Base
   validate               :not_already_followed
   validate               :object_exists
 
-  after_create  :invalidate_user_stream_cache
-  after_destroy :invalidate_user_stream_cache
+  after_create  :invalidate_cache
+  after_destroy :invalidate_cache
 
   def type_key
     if follow_type == TYPES[:user]
@@ -75,7 +75,9 @@ class Follow < ActiveRecord::Base
     end
   end
   
-  def invalidate_user_stream_cache
+  def invalidate_cache
+    Rails.cache.delete "user_#{user_id}_follows?_#{follow_type}_#{follow_id}"
+
     (1..1000).each do |p|
       Rails.cache.delete "user_#{user_id}_stream_page_#{p}"
     end
