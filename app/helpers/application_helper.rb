@@ -17,7 +17,7 @@ module ApplicationHelper
 
   def cache_if(condition, name = {}, &block)
     if condition
-      cache(name, &block)
+      cache(name, skip_digest: true, &block)
     else
       yield
     end
@@ -25,7 +25,7 @@ module ApplicationHelper
 
   def cache_expire_if(condition, name = {}, expire, &block)
     if condition
-      cache( name, :expires_in => expire, &block )
+      cache( name, :expires_in => expire, skip_digest: true, &block )
     else
       yield
     end

@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
   def feed
-    @cached  = "feed_#{Source.public.count}"
+    @cached  = "main_feed"
     @sources = Source.public.limit(50) 
     render_feed
   end
@@ -8,7 +8,7 @@ class FeedsController < ApplicationController
   def language
     @language = @languages.select { |l| l.name == params[:language] }.first
     if @language 
-      @cached  = "language_feed_#{@language.sources.public.count}"        
+      @cached  = "language_#{@language.id}_feed"        
       @sources = @language.sources.public.limit(50) 
       render_feed
     else
@@ -19,7 +19,7 @@ class FeedsController < ApplicationController
   def user
     @user = User.find_by_username( params[:username] )
     if @user
-      @cached  = "user_feed_#{@user.sources.public.count}"
+      @cached  = "user_#{@user.id}_feed"
       @sources = @user.sources.public.order('created_at DESC').limit(50) 
       render_feed
     else

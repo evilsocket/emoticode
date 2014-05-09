@@ -215,6 +215,10 @@ class Source < ActiveRecord::Base
     Rails.cache.delete "Source#find_by_name_and_language_name_#{name}_#{language.name}"
     Rails.cache.delete "source_#{id}_cloud"
     Rails.cache.delete "source_#{id}_highlight"
+
+    expire_fragment( "user_#{self.user.id}_feed" )
+    expire_fragment( "language_#{self.language.id}_feed" )
+    expire_fragment( "main_feed" )
   end
 
   # validators
