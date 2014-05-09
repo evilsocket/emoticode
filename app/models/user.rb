@@ -165,7 +165,9 @@ class User < ActiveRecord::Base
   end
 
   def favorite?(source)
-    Favorite.where( :user_id => self.id, :source_id => source.id ).any?
+    Rails.cache.fetch "user_#{id}_favorite?_#{source.id}" do 
+      Favorite.where( :user_id => self.id, :source_id => source.id ).any?
+    end
   end
 
   def follows?(object)

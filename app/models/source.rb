@@ -123,6 +123,24 @@ class Source < ActiveRecord::Base
     end
   end
 
+  def seo_title
+    Rails.cache.fetch "source_#{id}_seo_title" do
+      "#{language.title} - #{title}"
+    end
+  end
+
+  def seo_description( alt_title )
+    Rails.cache.fetch "source_#{id}_seo_description_#{alt_title}" do
+      description! alt_title
+    end
+  end 
+
+  def seo_keywords
+    Rails.cache.fetch "source_#{id}_seo_keywords" do
+      tags.map(&:value).join ', '
+    end
+  end
+
   def self.newer_than(period)
     where( 'created_at >= ?', period )
   end

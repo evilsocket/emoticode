@@ -9,6 +9,9 @@ class Favorite < ActiveRecord::Base
   after_create :increment_counter_cache
   after_destroy :decrement_counter_cache
 
+  after_create  :invalidate_user_favorite_cache
+  after_destroy :invalidate_user_favorite_cache
+
   protected
 
   def not_already_favorite
@@ -38,6 +41,10 @@ class Favorite < ActiveRecord::Base
 
   def decrement_counter_cache
     Source.decrement_counter( 'favorites_count', source_id )
+  end
+
+  def invalidate_user_favorite_cache
+    Rails.cache.delete "user_#{user_id}_favorite?_#{source_id}"
   end
 
 end
