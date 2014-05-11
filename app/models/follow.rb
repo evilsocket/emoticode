@@ -78,8 +78,11 @@ class Follow < ActiveRecord::Base
   def invalidate_cache
     Rails.cache.delete "user_#{user_id}_follows?_#{follow_type}_#{follow_id}"
 
-    (1..1000).each do |p|
-      Rails.cache.delete "user_#{user_id}_stream_page_#{p}"
-    end
+    # tnx to Gibson ^^
+    Rails.cache.delete_matched "user_#{user_id}_stream_page_"
+      
+    # (1..1000).each do |p|
+    #   Rails.cache.delete "user_#{user_id}_stream_page_#{p}"
+    # end
   end
 end

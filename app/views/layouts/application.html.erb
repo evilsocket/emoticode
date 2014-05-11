@@ -29,8 +29,10 @@
   <%= yield %>
 
   <% if params[:show_stats] == "1" and signed_in? and @current_user.is_admin? %>
+      <%= modal_dialog 'stats', 'Statistics' do %>
       <small>Page loaded in <%= ( Time.now - @time_start ) * 1000 %> ms</small> 
       <%= query_diet_widget %>
+      <h4>Queries</h4>
       <ul class="query_diet_list">
         <%
           # sort queries by execution time desc
@@ -40,6 +42,15 @@
           <li><small><%= query %> : <strong><%= time * 1000 %> ms</strong></small></li>
         <% end %>
       </ul>
+
+      <h4>Cache Stats</h4>
+      <ul class="query_diet_list">
+        <% Rails.cache.stats.each do |key,value| %>
+        <li><strong><%= key %></strong> : <%= key.start_with?('memory_') ? number_to_human_size(value) : value %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <script>$(function(){ $('#stats').modal(); });</script>
   <% end %>
 </div>
 

@@ -231,8 +231,8 @@ class Source < ActiveRecord::Base
 
   def invalidate_cache!
     Rails.cache.delete "Source#find_by_name_and_language_name_#{name}_#{language.name}"
-    Rails.cache.delete "source_#{id}_cloud"
-    Rails.cache.delete "source_#{id}_highlight"
+
+    Rails.cache.delete_matched "source_#{id}_"
 
     expire_fragment( "user_#{self.user.id}_feed" )
     expire_fragment( "language_#{self.language.id}_feed" )
