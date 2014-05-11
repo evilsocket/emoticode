@@ -91,4 +91,7 @@ EmoticodeRails::Application.configure do
   config.action_view.logger = nil
   # and cache store too
   ActiveSupport::Cache::Store.logger = nil
+
+  config.cache_store = :gibson_store, 'emoticode', {}
+  
 end

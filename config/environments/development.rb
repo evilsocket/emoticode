@@ -32,4 +32,6 @@ EmoticodeRails::Application.configure do
   # Make unicorn log to STDOUT in dev mode
   config.logger = Logger.new(STDOUT)
   config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
+
+  config.cache_store = :gibson_store, 'emoticode', {}
 end

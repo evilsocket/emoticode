@@ -26,6 +26,8 @@ gem 'impressionist'
 gem 'redcarpet'
 gem 'query_diet'
 
+gem 'gibson', '~> 1.2.1'
+
 # social features
 gem "koala", "~> 1.7.0rc1"
 gem "twitter", "~> 4.8.1"
