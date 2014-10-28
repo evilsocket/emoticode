@@ -25,7 +25,7 @@ class TwitterClient
 
   def followers
     Rails.cache.fetch "TwitterClient#followers", :expire => 60.minutes do
-      data = open("http://query.yahooapis.com/v1/public/yql?q=SELECT%20*%20from%20html%20where%20url=%22http://twitter.com/EmotiCodeDotNet%22%20AND%20xpath=%22(//span[@class=\%27ProfileNav-value\%27])[4]%22&format=json").read
+      data = open("http://query.yahooapis.com/v1/public/yql?q=SELECT%20*%20from%20html%20where%20url=%22http://twitter.com/EmotiCodeDotNet%22%20AND%20xpath=%22(//span[@class=\%27ProfileNav-value\%27])[3]%22&format=json").read
       obj = JSON.parse(data)
       obj['query']['results']['span']['content'].to_i
     end
